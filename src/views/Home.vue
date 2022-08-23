@@ -10,7 +10,24 @@
       :loop="true"
     >
       <slide>
-        <img src="@/assets/home/1.jpg" class="relative" style="width: 100%" />
+        <img src="@/assets/home/1.png" class="relative" style="width: 100%" />
+
+        <div class="centered">
+          <svg id="more-arrows" @click="goto('div1')">
+            <polygon
+              class="arrow-top"
+              points="37.6,27.9 1.8,1.3 3.3,0 37.6,25.3 71.9,0 73.7,1.3 "
+            ></polygon>
+            <polygon
+              class="arrow-middle"
+              points="37.6,45.8 0.8,18.7 4.4,16.4 37.6,41.2 71.2,16.4 74.5,18.7 "
+            ></polygon>
+            <polygon
+              class="arrow-bottom"
+              points="37.6,64 0,36.1 5.1,32.8 37.6,56.8 70.4,32.8 75.5,36.1 "
+            ></polygon>
+          </svg>
+        </div>
 
         <div class="first">
           <div class="main">
@@ -47,7 +64,9 @@
                       educational institutes and countries and keep in touch
                       with your students.
                     </p>
-                    <button class="btn btn-outline border-color2">Explore Our Society</button>
+                    <button class="btn btn-outline border-color2">
+                      Explore Our Society
+                    </button>
                   </div>
                 </div>
 
@@ -58,7 +77,9 @@
                       Introduce your institute worldwide, share your
                       announcements and meet your students and instructors.
                     </p>
-                    <button class="btn btn-outline border-color3">Resgister Now</button>
+                    <button class="btn btn-outline border-color3">
+                      Resgister Now
+                    </button>
                   </div>
                 </div>
               </div>
@@ -68,8 +89,28 @@
       </slide>
 
       <slide>
-        <img src="@/assets/home/2.jpg" class="relative" style="width: 100%" />
-       <div class="first">
+        <div class="relative">
+        <img src="@/assets/home/2.jpg"  style="width: 100%" />
+             <div class="centered">
+          <svg id="more-arrows" @click="goto('div1')">
+            <polygon
+              class="arrow-top"
+              points="37.6,27.9 1.8,1.3 3.3,0 37.6,25.3 71.9,0 73.7,1.3 "
+            ></polygon>
+            <polygon
+              class="arrow-middle"
+              points="37.6,45.8 0.8,18.7 4.4,16.4 37.6,41.2 71.2,16.4 74.5,18.7 "
+            ></polygon>
+            <polygon
+              class="arrow-bottom"
+              points="37.6,64 0,36.1 5.1,32.8 37.6,56.8 70.4,32.8 75.5,36.1 "
+            ></polygon>
+          </svg>
+        </div>
+        </div>
+
+     
+        <div class="first">
           <div class="main">
             <div class="heading">
               <h3>
@@ -104,7 +145,9 @@
                       educational institutes and countries and keep in touch
                       with your students.
                     </p>
-                    <button class="btn btn-outline border-color2">Explore Our Society</button>
+                    <button class="btn btn-outline border-color2">
+                      Explore Our Society
+                    </button>
                   </div>
                 </div>
 
@@ -115,7 +158,9 @@
                       Introduce your institute worldwide, share your
                       announcements and meet your students and instructors.
                     </p>
-                    <button class="btn btn-outline border-color3">Resgister Now</button>
+                    <button class="btn btn-outline border-color3">
+                      Resgister Now
+                    </button>
                   </div>
                 </div>
               </div>
@@ -187,7 +232,7 @@
         </div>
       </div>
 
-      <div class="section3 mt-4">
+      <div class="section3 mt-4 "  ref="div1">
         <div class="row" style="background-color: #f6f6f6">
           <h2 class="txt-blue text-center mt-4">Explore latest Materials</h2>
           <div class="row">
@@ -205,7 +250,7 @@
                 <div class="card-body">
                   <img src="@/assets/home/noimg.png" style="width: 100%" />
                 </div>
-                <div class="card-footer">
+                <div class="card-footer p-4">
                   <p>
                     Maybe you've been eyeing a sweet Udemy course about photo
                     retouching, or perhaps digital painting, NOTHING about
@@ -234,7 +279,7 @@
                 <div class="card-body">
                   <img src="@/assets/home/noimg.png" style="width: 100%" />
                 </div>
-                <div class="card-footer">
+                <div class="card-footer p-4">
                   <p>
                     Maybe you've been eyeing a sweet Udemy course about photo
                     retouching, or perhaps digital painting, NOTHING about
@@ -262,7 +307,7 @@
                 <div class="card-body">
                   <img src="@/assets/home/noimg.png" style="width: 100%" />
                 </div>
-                <div class="card-footer">
+                <div class="card-footer p-4">
                   <p>
                     Maybe you've been eyeing a sweet Udemy course about photo
                     retouching, or perhaps digital painting, NOTHING about
@@ -360,7 +405,17 @@ export default {
     Carousel,
     Slide,
   },
-};
+    mounted() {
+    window.addEventListener("scroll", this.handleScroll);
+  },
+  methods:{
+     goto(div1) {
+      var element = this.$refs[div1];
+      var top = element.offsetTop;
+      window.scrollTo(0, top);
+    },
+  }
+}
 </script>
 
 <style scoped>
@@ -381,7 +436,6 @@ export default {
   transition: all 0.5s ease;
 }
 
-
 .border-color2 {
   background-color: transparent;
   color: #fff;
@@ -399,8 +453,6 @@ export default {
   transition: all 0.5s ease;
 }
 
-
-
 .border-color3 {
   background-color: transparent;
   color: #fff;
@@ -410,20 +462,20 @@ export default {
 }
 
 .border-color3:hover {
-  border-color: #957BFF;
-  background: linear-gradient(to right, transparent 50%, #957BFF 50%);
+  border-color: #957bff;
+  background: linear-gradient(to right, transparent 50%, #957bff 50%);
   background-size: 200% 100%;
   background-position: right bottom;
   margin-right: 10px;
   transition: all 0.5s ease;
 }
 
-
 .main {
   padding-left: 100px;
 }
 .heading h3 {
   color: white;
+  
 }
 .heading h4 {
   color: white;
@@ -433,6 +485,53 @@ export default {
   width: 100%;
   position: relative;
 }
+
+.centered {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.centr {
+  position: absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#more-arrows {
+  width: 75px;
+  height: 65px;
+}
+#more-arrows:hover polygon {
+  fill: #fff;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+#more-arrows:hover polygon.arrow-bottom {
+  -webkit-transform: translateY(-18px);
+  transform: translateY(-18px);
+}
+#more-arrows:hover polygon.arrow-top {
+  -webkit-transform: translateY(18px);
+  transform: translateY(18px);
+}
+
+polygon {
+  fill: #fff;
+  -webkit-transition: all 0.2s ease-out;
+  transition: all 0.2s ease-out;
+}
+polygon.arrow-middle {
+  opacity: 0.75;
+}
+polygon.arrow-top {
+  opacity: 0.5;
+}
+
+
+
 .student h1 {
   color: #2fa7f3;
 }
@@ -580,8 +679,6 @@ export default {
   filter: grayscale(0);
 }
 
-
-
 @media only screen and (max-width: 768px) {
   .main {
     background-color: #365160;
@@ -598,6 +695,7 @@ export default {
   }
   .heading h3 {
     font-size: 32px;
+ 
   }
 
   .heading h4 {

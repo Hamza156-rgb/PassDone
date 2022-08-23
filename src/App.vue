@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-     <router-view />
+    <router-view />
   </div>
 </template>
 
@@ -9,14 +9,17 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import "jquery/dist/jquery.min.js";
 export default {
-  name: 'App',
-  setup() {
-    
-  },
-}
+  name: "App",
+  setup() {},
+};
 </script>
 
 <style scoped>
-/* body{font-family: 'Oxygen', sans-serif; } */
-
+@font-face {
+  font-family: "Oxygen";
+  src: url(./assets/fonts/Oxygen-Regular.ttf);
+}
+html{
+ font-family: 'Oxygen', sans-serif;
+}
 </style>

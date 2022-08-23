@@ -19,7 +19,7 @@
         id="navbarSupportedContent"
         v-bind:class="{ show: show }"
       >
-        <div class="col-md-9 forms">
+        <div class="col-sm-8 col-md-8 forms">
           <form>
             <div class="row mt-4">
               <div class="form-group col-md-4">
@@ -57,26 +57,12 @@
             </div>
           </form>
         </div>
-        <div class="col-md-1 col-xs-12">
-          <div class="dropdown show">
-            <a
-              class="btn btn-light dropdown-toggle"
-              href="#"
-              role="button"
-              id="dropdownMenuLink"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              Dropdown link
-            </a>
 
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </div>
+        <div class="col-sm-2 col-md-2 col-xs-12 px-4">
+          <select class="form-select">
+            <option>English</option>
+            <option>Arabic</option>
+          </select>
         </div>
       </div>
     </nav>
@@ -141,6 +127,7 @@ a {
   font-size: 1.5rem;
   text-align: left;
 }
+
 @media only screen and (max-width: 768px) {
   .forms {
     margin-top: 15px;
