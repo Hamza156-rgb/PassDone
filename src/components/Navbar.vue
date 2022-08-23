@@ -19,7 +19,7 @@
         id="navbarSupportedContent"
         v-bind:class="{ show: show }"
       >
-        <div class="col-sm-8 col-md-8 forms">
+        <div class=" col-md-8 forms">
           <form>
             <div class="row mt-4">
               <div class="form-group col-md-4">
@@ -58,11 +58,13 @@
           </form>
         </div>
 
-        <div class="col-sm-2 col-md-2 col-xs-12 px-4">
+        <div class=" col-md-2 col-xs-12 px-4  last" >
+       
           <select class="form-select">
             <option>English</option>
             <option>Arabic</option>
           </select>
+          
         </div>
       </div>
     </nav>
@@ -127,6 +129,9 @@ a {
   font-size: 1.5rem;
   text-align: left;
 }
+.last{
+  margin-left:160px;
+}
 
 @media only screen and (max-width: 768px) {
   .forms {
@@ -146,5 +151,8 @@ a {
   .signup {
     width: 50%;
   }
+  .last{
+  margin-left:0px;
+}
 }
 </style>

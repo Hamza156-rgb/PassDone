@@ -233,8 +233,8 @@
       </div>
 
       <div class="section3 mt-4 "  ref="div1">
-        <div class="row" style="background-color: #f6f6f6">
-          <h2 class="txt-blue text-center mt-4">Explore latest Materials</h2>
+        <div  style="background-color: #f6f6f6">
+          <h2 class="txt-blue text-center pt-4">Explore latest Materials</h2>
           <div class="row">
             <div class="col-md-4 p-4">
               <div class="card">
