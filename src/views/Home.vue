@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Navbar />
+    <LoginNav />
     <carousel
       ref="myCarousel"
       :per-page="1"
@@ -90,26 +90,25 @@
 
       <slide>
         <div class="relative">
-        <img src="@/assets/home/2.jpg"  style="width: 100%" />
-             <div class="centered">
-          <svg id="more-arrows" @click="goto('div1')">
-            <polygon
-              class="arrow-top"
-              points="37.6,27.9 1.8,1.3 3.3,0 37.6,25.3 71.9,0 73.7,1.3 "
-            ></polygon>
-            <polygon
-              class="arrow-middle"
-              points="37.6,45.8 0.8,18.7 4.4,16.4 37.6,41.2 71.2,16.4 74.5,18.7 "
-            ></polygon>
-            <polygon
-              class="arrow-bottom"
-              points="37.6,64 0,36.1 5.1,32.8 37.6,56.8 70.4,32.8 75.5,36.1 "
-            ></polygon>
-          </svg>
-        </div>
+          <img src="@/assets/home/2.jpg" style="width: 100%" />
+          <div class="centered">
+            <svg id="more-arrows" @click="goto('div1')">
+              <polygon
+                class="arrow-top"
+                points="37.6,27.9 1.8,1.3 3.3,0 37.6,25.3 71.9,0 73.7,1.3 "
+              ></polygon>
+              <polygon
+                class="arrow-middle"
+                points="37.6,45.8 0.8,18.7 4.4,16.4 37.6,41.2 71.2,16.4 74.5,18.7 "
+              ></polygon>
+              <polygon
+                class="arrow-bottom"
+                points="37.6,64 0,36.1 5.1,32.8 37.6,56.8 70.4,32.8 75.5,36.1 "
+              ></polygon>
+            </svg>
+          </div>
         </div>
 
-     
         <div class="first">
           <div class="main">
             <div class="heading">
@@ -171,7 +170,7 @@
     </carousel>
 
     <div class="container-fluid mb-5">
-      <div class="row mt-3">
+      <div class="row mt-4">
         <h2 class="txt-blue text-center mb-4">
           Here is a look into what we do
         </h2>
@@ -203,9 +202,8 @@
 
           <div class="text-center">
             <a
-              href=""
               class="btn btn-lg btn-primary mt-5"
-              data-sr="wait 0.2s, ease-in-out 10px"
+      
             >
               Start now — Join our community</a
             >
@@ -232,9 +230,14 @@
         </div>
       </div>
 
-      <div class="section3 mt-4 "  ref="div1">
-        <div  style="background-color: #f6f6f6">
-          <h2 class="txt-blue text-center pt-4">Explore latest Materials</h2>
+      <div class="section3 mt-4" ref="div1">
+        <div style="background-color: #f6f6f6">
+          <h2
+            class="txt-blue text-center pt-4"
+            
+          >
+            Explore latest Materials
+          </h2>
           <div class="row">
             <div class="col-md-4 p-4">
               <div class="card">
@@ -393,29 +396,29 @@
 </template>
 
 <script>
-import Navbar from "../components/Navbar.vue";
+import LoginNav from "../components/LoginNav.vue";
 import Footer from "../components/Footer.vue";
 
 import { Carousel, Slide } from "vue-carousel";
 export default {
   name: "Home",
   components: {
-    Navbar,
+    LoginNav,
     Footer,
     Carousel,
     Slide,
   },
-    mounted() {
+  mounted() {
     window.addEventListener("scroll", this.handleScroll);
   },
-  methods:{
-     goto(div1) {
+  methods: {
+    goto(div1) {
       var element = this.$refs[div1];
       var top = element.offsetTop;
       window.scrollTo(0, top);
     },
-  }
-}
+  },
+};
 </script>
 
 <style scoped>
@@ -475,7 +478,6 @@ export default {
 }
 .heading h3 {
   color: white;
-  
 }
 .heading h4 {
   color: white;
@@ -529,8 +531,6 @@ polygon.arrow-middle {
 polygon.arrow-top {
   opacity: 0.5;
 }
-
-
 
 .student h1 {
   color: #2fa7f3;
@@ -695,7 +695,6 @@ polygon.arrow-top {
   }
   .heading h3 {
     font-size: 32px;
- 
   }
 
   .heading h4 {
