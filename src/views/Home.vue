@@ -43,7 +43,7 @@
 
             <div class="information">
               <div class="row">
-                <div class="col-md-4 col-xs-12">
+                <div class="col-xs-12 col-sm-12 col-md-4  col-lg-4">
                   <div class="student">
                     <h1>Student?</h1>
                     <p>
@@ -56,7 +56,7 @@
                   </div>
                 </div>
 
-                <div class="col-md-4 col-xs-12">
+                <div class="col-xs-12 col-sm-12 col-md-4  col-lg-4">
                   <div class="Instructor">
                     <h1>Instructor?</h1>
                     <p>
@@ -70,7 +70,7 @@
                   </div>
                 </div>
 
-                <div class="col-md-4 col-xs-12">
+                <div class="col-xs-12 col-sm-12 col-md-4  col-lg-4">
                   <div class="Institutes">
                     <h1>Institutes?</h1>
                     <p>
@@ -505,6 +505,7 @@ export default {
 #more-arrows {
   width: 75px;
   height: 65px;
+  /* margin-top: 100%; */
 }
 #more-arrows:hover polygon {
   fill: #fff;
@@ -679,6 +680,14 @@ polygon.arrow-top {
   filter: grayscale(0);
 }
 
+.relative{
+  height: 100vh;
+}
+
+.relative img{
+   height: 100vh;
+}
+
 @media only screen and (max-width: 768px) {
   .main {
     background-color: #365160;
@@ -723,5 +732,28 @@ polygon.arrow-top {
   .Institutes p {
     font-size: 14px;
   }
+
 }
+
+@media only screen and (min-width: 992px) {
+ .relative{
+  height: 70vh;
+}
+
+.relative img{
+   height: 70vh;
+}
+}
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+ .relative{
+  height: 100vh;
+}
+
+.relative img{
+   height: 100vh;
+}
+}
+
+
 </style>

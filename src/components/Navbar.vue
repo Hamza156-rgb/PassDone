@@ -1,7 +1,7 @@
 <template >
   <div class="container-fluid" style="background-color: #0776bd">
     <nav class="navbar navbar-expand-lg" v-bind:class="{ navbarOpen: show }">
-      <div class="col-md-2">
+      <div class="col-2">
         <div class="row">
           <div class="col-2">
             <button
@@ -24,9 +24,44 @@
         id="navbarSupportedContent"
         v-bind:class="{ show: show }"
       >
-        <div class="col-md-8">sadasdsadsad</div>
+        <div class="col-1"></div>
+        <div class="col-7">
+          <div class="row menuImage">
+            <div class="col-3">
+              <img src="../assets/main/home.png" />
+              <p>Home</p>
+            </div>
 
-        <div class="col-md-2 col-xs-12 px-4"></div>
+            <div class="col-3 pt-1">
+              <img src="../assets/main/classroom.png" />
+              <p>ClassRoom</p>
+            </div>
+
+            <div class="col-3 pt-1">
+              <img src="../assets/main/library.png" />
+              <p>Library</p>
+            </div>
+
+            <div class="col-3 pt-1">
+              <img src="../assets/main/institute.png" />
+              <p>Institute</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-2">
+          <div class="row">
+            <div class="col-4">
+              <i class="fa fa-user" aria-hidden="true"></i>
+            </div>
+            <div class="col-4">
+              <i class="fa fa-bell"></i>
+            </div>
+            <div class="col-4">
+              <i class="fa fa-bars"></i>
+            </div>
+          </div>
+        </div>
       </div>
     </nav>
   </div>
@@ -51,4 +86,18 @@ export default {
 </script>
 
 <style scoped>
+.fa {
+  color: white;
+  font-size: 30px;
+  cursor: pointer;
+}
+
+.menuImage p {
+  font-size: 12px;
+  color: white;
+  cursor: pointer;
+}
+img {
+  cursor: pointer;
+}
 </style>
