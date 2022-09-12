@@ -8,13 +8,9 @@
           <div class="card">
             <div class="card-header">
               <div class="profile">
-                <img
-                  src="../assets/main/user.png"
-                  class="rounded-circle"
-                  style="width: 20%"
-                />
+                <img src="../assets/main/user.png" class="rounded-circle" />
 
-                <p class="m-3 name">Arsal Mahmood</p>
+                <p class="name">Arsal Mahmood</p>
               </div>
             </div>
 
@@ -64,25 +60,25 @@
 
             <div class="card-body">
               <div class="row firstSelect">
-                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 mt-2">
-                  <label>Select Course</label>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 mt-2">
+                  <label class="lablefirst">Select Course</label>
                   <select class="mt-2">
                     <option value="">choose One</option>
                   </select>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 mt-2">
-                  <label>Select Type</label>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 mt-2">
+                  <label class="lablefirst">Select Type</label>
                   <select class="mt-2">
                     <option value="">choose One</option>
                   </select>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 mt-2">
-                  <label>Who Can See?</label>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 mt-2">
+                  <label class="lablefirst">Who Can See?</label>
                   <select class="mt-2">
                     <option value="">choose One</option>
                   </select>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 mt-4">
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-4">
                   <button class="btn post">POST</button>
                 </div>
               </div>
@@ -115,7 +111,7 @@
                 </select>
               </div>
 
-              <div class="mt-4" align="right">
+              <div class="mt-4 buttons" align="right">
                 <button class="btn clear">Clear</button>
                 <button class="btn filterBtn">Filter</button>
               </div>
@@ -140,7 +136,7 @@
                   </div>
 
                   <div class="col-9">
-                    <div class="post-information">
+                    <div class="post-information mt-1">
                       <h5>Name Here</h5>
                       <h6>
                         Professor
@@ -149,7 +145,7 @@
                         >
                         Jordan
                       </h6>
-                      <span>Notes- </span>
+                      <span class="notes">Notes- </span>
                     </div>
                   </div>
                 </div>
@@ -161,7 +157,110 @@
                   <span style="color: #0776bd"> Name Here</span>
                 </p>
 
-                <div class="post-data mt-4">
+                <div class="post-data">
+                  <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Curabitur scelerisque eros in feugiat feugiat. Curabitur
+                    sollicitudin rutrum sollicitudin. Fusce tincidunt semper
+                    mauris sed ultrices. Vivamus consectetur velit tincidunt
+                    orci rutrum, sed faucibus quam elementum. Sed venenatis
+                    tortor tortor, at viverra lorem gravida in. Vivamus rutrum,
+                    ex ut congue ultricies, arcu justo auctor est, vitae auctor
+                    nulla urna quis dui. Aenean faucibus, turpis eget eleifend
+                    rhoncus, quam nisl ornare nulla, consectetur malesuada massa
+                    erat eget lectus. Nulla pharetra ultrices velit, ut tempor
+                    ligula suscipit non. Praesent eleifend est nunc, in dictum
+                    orci bibendum eget. Nulla quis mauris quis eros gravida
+                    finibus eget a mauris. Ut auctor suscipit dui non sodales.
+                    Phasellus luctus dolor sit amet fringilla venenatis.
+                    Vestibulum euismod risus eget lorem semper gravida. Mauris
+                    nunc nulla, pellentesque vitae condimentum rhoncus, euismod
+                    vel enim.
+                  </p>
+                </div>
+
+                <div class="post-image">
+                  <img
+                    src="../assets/main/post.png"
+                    class="img-fluid"
+                    alt="Responsive image"
+                  />
+
+                  <div class="d-flex post-condition mt-3">
+                    <p class="p-1">
+                      <span style="color: #05d134">1</span> TRUE
+                    </p>
+                    <p class="p-1">
+                      <span style="color: #f75555">1</span> FALSE
+                    </p>
+                    <p class="p-1">
+                      <span style="color: #ffcc00">1</span> HIGHLIGHT
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-footer" style="background: #f9f9f9">
+                <div class="d-flex mt-2 mb-2" style="float: left">
+                  <i class="fa fa-check true"></i>
+                  <i class="fa fa-times false"></i>
+                  <i class="fa fa-lightbulb bulb"></i>
+                </div>
+
+                <div class="d-flex mb-2 mt-2" style="float: right">
+                  <span class="last">
+                    <img src="../assets/main/restore.png" />
+                    Reply 0
+                  </span>
+                  <span class="last" style="margin-left: 10px">
+                    <img src="../assets/main/share.png" />
+                    Share
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card mt-4" style="background: #f9f9f9">
+            <div class="container-fluid">
+              <div class="row mt-2">
+                <div align="right">
+                  <i class="fa fa-times" style="color: red"></i>
+                </div>
+              </div>
+              <div class="card-header" style="background: #f9f9f9">
+                <div class="row">
+                  <div class="col-3">
+                    <img
+                      src="../assets/main/user.png"
+                      class="rounded-circle"
+                      style="width: 100%"
+                    />
+                  </div>
+
+                  <div class="col-9">
+                    <div class="post-information mt-1">
+                      <h5>Name Here</h5>
+                      <h6>
+                        Professor
+                        <span style="color: #0776bd"
+                          >- Al Al-Bayt University -</span
+                        >
+                        Jordan
+                      </h6>
+                      <span class="notes">Notes- </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-body">
+                <p class="postedBy">
+                  <b>posted by:</b>
+                  <span style="color: #0776bd"> Name Here</span>
+                </p>
+
+                <div class="post-data">
                   <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
                     Curabitur scelerisque eros in feugiat feugiat. Curabitur
@@ -212,11 +311,11 @@
                 </div>
 
                 <div class="d-flex" style="float: right">
-                  <span>
+                  <span class="last">
                     <img src="../assets/main/restore.png" />
                     Reply 0
                   </span>
-                  <span style="margin-left: 10px">
+                  <span class="last" style="margin-left: 10px">
                     <img src="../assets/main/share.png" />
                     Share
                   </span>
@@ -228,141 +327,117 @@
         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 mt-2">
           <div class="card">
             <div class="card-body">
-              <span> Top Active Students</span>
+              <span class="active"> Top Active Students</span>
               <hr />
               <div class="profile">
-                <img
-                  src="../assets/main/user.png"
-                  class="rounded-circle"
-                  style="width: 20%"
-                />
+                <img src="../assets/main/user.png" class="rounded-circle" />
 
-                <p class="m-3 name">Student 1</p>
+                <p class="name">Student 1</p>
               </div>
 
               <div class="profile mt-2">
-                <img
-                  src="../assets/main/user.png"
-                  class="rounded-circle"
-                  style="width: 20%"
-                />
+                <img src="../assets/main/user.png" class="rounded-circle" />
 
-                <p class="m-3 name">Student 2</p>
+                <p class="name">Student 2</p>
               </div>
 
               <div class="profile mt-2">
-                <img
-                  src="../assets/main/user.png"
-                  class="rounded-circle"
-                  style="width: 20%"
-                />
+                <img src="../assets/main/user.png" class="rounded-circle" />
 
-                <p class="m-3 name">Student 3</p>
+                <p class="name">Student 3</p>
               </div>
 
               <div class="profile mt-2">
-                <img
-                  src="../assets/main/user.png"
-                  class="rounded-circle"
-                  style="width: 20%"
-                />
+                <img src="../assets/main/user.png" class="rounded-circle" />
 
-                <p class="m-3 name">Student 4</p>
+                <p class="name">Student 4</p>
               </div>
 
-              <span style="float: right; color: #0776bd">See More... </span>
+              <span class="seeMore">See More... </span>
             </div>
           </div>
           <div class="card mt-4">
             <div class="card-body">
-              <span>Top Active Instructors</span>
+              <span class="active">Top Active Instructors</span>
               <hr />
               <div class="profile mt-2">
                 <img
                   src="../assets/main/instructor.png"
                   class="rounded-circle"
-                  style="width: 20%"
                 />
 
-                <p class="m-3 name">Instructor 1</p>
+                <p class="name">Instructor 1</p>
               </div>
 
               <div class="profile mt-2">
                 <img
                   src="../assets/main/instructor.png"
                   class="rounded-circle"
-                  style="width: 20%"
                 />
 
-                <p class="m-3 name">Instructor 2</p>
+                <p class="name">Instructor 2</p>
               </div>
 
               <div class="profile mt-2">
                 <img
                   src="../assets/main/instructor.png"
                   class="rounded-circle"
-                  style="width: 20%"
                 />
 
-                <p class="m-3 name">Instructor 3</p>
+                <p class="name">Instructor 3</p>
               </div>
 
               <div class="profile mt-2">
                 <img
                   src="../assets/main/instructor.png"
                   class="rounded-circle"
-                  style="width: 20%"
                 />
 
-                <p class="m-3 name">Instructor 4</p>
+                <p class="name">Instructor 4</p>
               </div>
-              <span style="float: right; color: #0776bd">See More... </span>
+              <span class="seeMore">See More... </span>
             </div>
           </div>
           <div class="card mt-4">
             <div class="card-body">
-              <span>Top Active Universities</span>
+              <span class="active">Top Active Universities</span>
               <hr />
               <div class="profile">
                 <img
                   src="../assets/main/university.png"
                   class="rounded-circle"
-                  style="width: 20%"
                 />
 
-                <p class="m-3 name">University 1</p>
+                <p class="name">University 1</p>
               </div>
 
               <div class="profile mt-3">
                 <img
                   src="../assets/main/university.png"
                   class="rounded-circle"
-                  style="width: 20%"
                 />
 
-                <p class="m-3 name">University 2</p>
+                <p class="name">University 2</p>
               </div>
 
               <div class="profile mt-2">
                 <img
                   src="../assets/main/university.png"
                   class="rounded-circle"
-                  style="width: 20%"
                 />
 
-                <p class="m-3 name">University 3</p>
+                <p class="name">University 3</p>
               </div>
 
               <div class="profile mt-2">
                 <img
                   src="../assets/main/university.png"
                   class="rounded-circle"
-                  style="width: 20%"
                 />
 
-                <p class="m-3 name">University 4</p>
+                <p class="name">University 4</p>
               </div>
-              <span style="float: right; color: #0776bd">See More... </span>
+              <span class="seeMore">See More... </span>
             </div>
           </div>
         </div>
@@ -385,6 +460,7 @@ export default {
 .profile {
   display: flex;
 }
+
 .info-card.card {
   background-color: white;
   border: 1px solid #e1e6f1;
@@ -403,21 +479,20 @@ export default {
 }
 .information h5 {
   color: #0776bd;
-  font-size: 15px;
 }
 .value h5 {
   color: #0776bd;
-  font-size: 12px;
 }
 .second h5 {
   color: black;
-  font-size: 12px;
 }
 
-.second h5 {
-  font-size: 12px;
-}
 .second #uni {
+  color: #0776bd;
+}
+
+.seeMore {
+  float: right;
   color: #0776bd;
 }
 input {
@@ -434,7 +509,6 @@ input {
   vertical-align: middle;
   user-select: none;
   background-color: #ff9900;
-  font-size: 16px;
   outline: none;
   cursor: pointer;
   width: 100%;
@@ -486,7 +560,7 @@ input {
   vertical-align: middle;
   user-select: none;
   background-color: #d6d6d6;
-  font-size: 14px;
+
   line-height: 1.5;
   outline: none;
   cursor: pointer;
@@ -503,7 +577,7 @@ input {
   vertical-align: middle;
   user-select: none;
   background-color: #ff9900;
-  font-size: 14px;
+
   line-height: 1.5;
   outline: none;
   cursor: pointer;
@@ -511,19 +585,12 @@ input {
 
 .post-information h5 {
   color: #0776bd;
-  font-size: 18px;
 }
-.post-information h6 {
-  font-size: 15px;
-}
+
 .post-data {
-  font-size: 12px;
-  font-family: Segoe UI;
   color: #707070;
 }
-.postedBy {
-  font-size: 12px;
-}
+
 .post-image img {
   border: 1px solid black;
 }
@@ -532,11 +599,9 @@ input {
   cursor: pointer;
 }
 .post-condition {
-  font-size: 12px;
   color: #707070;
 }
 .card-footer .fa {
-  font-size: 2em;
   cursor: pointer;
   color: #777777;
 }
@@ -558,5 +623,372 @@ input {
 }
 .bulb:hover {
   color: #ffc210;
+}
+
+@media only screen and (max-width: 600px) {
+  .profile img {
+    width: 12%;
+  }
+  .name {
+    font-size: 12px;
+    margin: 12px 0px 0px 5px;
+  }
+
+  .information h5 {
+    font-size: 10px;
+  }
+  .value h5 {
+    font-size: 10px;
+  }
+  .second h5 {
+    font-size: 10px;
+  }
+  .active {
+    font-size: 10px;
+  }
+  .seeMore {
+    font-size: 10px;
+  }
+
+  .lablefirst {
+    font-size: 10px;
+  }
+  .firstSelect select {
+    font-size: 10px;
+  }
+  .filter select {
+    font-size: 10px;
+  }
+  .filter label {
+    font-size: 10px;
+  }
+  .buttons button {
+    font-size: 10px;
+  }
+  .post-information h5 {
+    font-size: 10px;
+  }
+  .post-information h6 {
+    font-size: 10px;
+  }
+  .notes {
+    font-size: 10px;
+  }
+  .postedBy {
+    font-size: 10px;
+  }
+  .post-data p {
+    font-size: 10px;
+  }
+  .post-condition p {
+    font-size: 10px;
+  }
+  .fa {
+    font-size: 15px;
+  }
+  .card-footer img {
+    width: 30%;
+  }
+  .last {
+    font-size: 10px;
+  }
+  .btn.post {
+    font-size: 10px;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .profile img {
+    width: 10%;
+  }
+  .name {
+    font-size: 13px;
+
+    margin: 25px 0px 0px 5px;
+  }
+  .information h5 {
+    font-size: 10px;
+  }
+  .value h5 {
+    font-size: 10px;
+  }
+  .second h5 {
+    font-size: 10px;
+  }
+  .active {
+    font-size: 10px;
+  }
+  .seeMore {
+    font-size: 10px;
+  }
+  .lablefirst {
+    font-size: 10px;
+  }
+  .firstSelect select {
+    font-size: 10px;
+  }
+  .filter select {
+    font-size: 10px;
+  }
+  .filter label {
+    font-size: 10px;
+  }
+  .buttons button {
+    font-size: 10px;
+  }
+  .post-information h5 {
+    font-size: 10px;
+  }
+  .post-information h6 {
+    font-size: 10px;
+  }
+  .notes {
+    font-size: 10px;
+  }
+  .postedBy {
+    font-size: 10px;
+  }
+  .post-data p {
+    font-size: 10px;
+  }
+  .post-condition p {
+    font-size: 10px;
+  }
+  .fa {
+    font-size: 16px;
+  }
+
+  .card-footer img {
+    width: 30%;
+  }
+  .last {
+    font-size: 10px;
+  }
+   .btn.post {
+    font-size: 10px;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .profile img {
+    width: 30%;
+  }
+  .name {
+    font-size: 12px;
+    margin: 13px 0px 0px 5px;
+  }
+
+  .information h5 {
+    font-size: 10px;
+  }
+  .value h5 {
+    font-size: 10px;
+  }
+  .second h5 {
+    font-size: 10px;
+  }
+  .active {
+    font-size: 10px;
+  }
+  .seeMore {
+    font-size: 10px;
+  }
+  .lablefirst {
+    font-size: 10px;
+  }
+  .firstSelect select {
+    font-size: 10px;
+  }
+  .filter select {
+    font-size: 10px;
+  }
+  .filter label {
+    font-size: 10px;
+  }
+  .buttons button {
+    font-size: 10px;
+  }
+  .post-information h5 {
+    font-size: 10px;
+  }
+  .post-information h6 {
+    font-size: 10px;
+  }
+  .notes {
+    font-size: 10px;
+  }
+  .postedBy {
+    font-size: 10px;
+  }
+  .post-data p {
+    font-size: 10px;
+  }
+  .post-condition p {
+    font-size: 10px;
+  }
+  .fa {
+    font-size: 10px;
+  }
+  .fa {
+    font-size: 16px;
+  }
+
+  .card-footer img {
+    width: 30%;
+  }
+  .last {
+    font-size: 10px;
+  }
+   .btn.post {
+    font-size: 10px;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .profile img {
+    width: 30%;
+  }
+  .name {
+    font-size: 13px;
+    margin: 20px 0px 0px 7px;
+  }
+
+  .information h5 {
+    font-size: 13px;
+  }
+  .value h5 {
+    font-size: 13px;
+  }
+  .second h5 {
+    font-size: 13px;
+  }
+  .active {
+    font-size: 13px;
+  }
+  .seeMore {
+    font-size: 13px;
+  }
+  .lablefirst {
+    font-size: 13px;
+  }
+  .firstSelect select {
+    font-size: 13px;
+  }
+
+  .filter select {
+    font-size: 13px;
+  }
+  .filter label {
+    font-size: 13px;
+  }
+  .buttons button {
+    font-size: 13px;
+  }
+  .post-information h5 {
+    font-size: 13px;
+  }
+  .post-information h6 {
+    font-size: 13px;
+  }
+  .notes {
+    font-size: 13px;
+  }
+  .postedBy {
+    font-size: 13px;
+  }
+  .post-data p {
+    font-size: 13px;
+  }
+  .post-condition p {
+    font-size: 13px;
+  }
+  .fa {
+    font-size: 13px;
+  }
+
+  .card-footer img {
+    width: 30%;
+  }
+  .last {
+    font-size: 13px;
+  }
+   .btn.post {
+    font-size: 13px;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .profile img {
+    width: 30%;
+  }
+  .name {
+    font-size: 15px;
+    margin: 30px 0px 0px 10px;
+  }
+  .information h5 {
+    font-size: 15px;
+  }
+  .value h5 {
+    font-size: 15px;
+  }
+  .second h5 {
+    font-size: 15px;
+  }
+  .active {
+    font-size: 15px;
+  }
+  .seeMore {
+    font-size: 15px;
+  }
+  .lablefirst {
+    font-size: 15px;
+  }
+  .firstSelect select {
+    font-size: 15px;
+  }
+  .filter select {
+    font-size: 15px;
+  }
+  .filter label {
+    font-size: 15px;
+  }
+  .buttons button {
+    font-size: 15px;
+  }
+  .post-information h5 {
+    font-size: 15px;
+  }
+  .post-information h6 {
+    font-size: 15px;
+  }
+  .notes {
+    font-size: 15px;
+  }
+  .postedBy {
+    font-size: 15px;
+  }
+  .post-data p {
+    font-size: 15px;
+  }
+  .post-condition p {
+    font-size: 15px;
+  }
+  .fa {
+    font-size: 25px;
+  }
+
+  .card-footer img {
+    width: 20%;
+  }
+  .last {
+    font-size: 20px;
+  }
+   .btn.post {
+    font-size: 15px;
+  }
 }
 </style>
