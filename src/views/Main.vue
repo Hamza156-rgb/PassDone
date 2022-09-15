@@ -123,6 +123,8 @@
               <div class="row mt-2">
                 <div align="right">
                   <i class="fa fa-times" style="color: red"></i>
+                  <br />
+                  <span class="date"> 31-01-2020</span>
                 </div>
               </div>
               <div class="card-header" style="background: #f9f9f9">
@@ -226,6 +228,8 @@
               <div class="row mt-2">
                 <div align="right">
                   <i class="fa fa-times" style="color: red"></i>
+                  <br />
+                  <span class="date"> 31-01-2020</span>
                 </div>
               </div>
               <div class="card-header" style="background: #f9f9f9">
@@ -282,24 +286,38 @@
                   </p>
                 </div>
 
-                <div class="post-image">
-                  <img
-                    src="../assets/main/post.png"
-                    class="img-fluid"
-                    alt="Responsive image"
-                  />
-
-                  <div class="d-flex post-condition mt-3">
-                    <p class="p-1">
-                      <span style="color: #05d134">1</span> TRUE
-                    </p>
-                    <p class="p-1">
-                      <span style="color: #f75555">1</span> FALSE
-                    </p>
-                    <p class="p-1">
-                      <span style="color: #ffcc00">1</span> HIGHLIGHT
-                    </p>
+                <div class="post-media">
+                  <div class="entry">
+                    <img
+                      src="../assets/main/post.png"
+                      class="img-fluid"
+                      alt="Responsive image"
+                    />
+                    <div class="magnifier">
+                      <div class="magni-desc">
+                        <a
+                          class="secondicon example-image-link"
+                          data-lightbox="example-set"
+                        >
+                          <span
+                            class="fa fa-search-plus"
+                            data-glyph="zoom-in"
+                            title="Read More"
+                            aria-hidden="false"
+                            id="search-plus"
+                          ></span
+                        ></a>
+                      </div>
+                    </div>
                   </div>
+                </div>
+
+                <div class="d-flex post-condition mt-3">
+                  <p class="p-1"><span style="color: #05d134">1</span> TRUE</p>
+                  <p class="p-1"><span style="color: #f75555">1</span> FALSE</p>
+                  <p class="p-1">
+                    <span style="color: #ffcc00">1</span> HIGHLIGHT
+                  </p>
                 </div>
               </div>
 
@@ -526,7 +544,9 @@ input {
   box-shadow: none;
   outline: none !important;
 }
-
+.date {
+  color: #707070;
+}
 .firstSelect label {
   color: #bdbdbd;
 }
@@ -624,10 +644,120 @@ input {
 .bulb:hover {
   color: #ffc210;
 }
+.post-image img {
+  margin-bottom: 15px;
+  padding: 8px 3px;
+  border: 1px solid #d6d6d6;
+  border-radius: 8px;
+  background: #fff;
+  position: relative;
+}
+
+.entry {
+  position: relative;
+}
+
+.magnifier {
+  position: absolute;
+  top: 0;
+  cursor: pointer;
+  background-color: rgba(39, 41, 61, 0.8);
+  bottom: 0;
+  right: 0;
+  z-index: 0;
+  zoom: 1;
+  cursor: crosshair;
+  filter: alpha(opacity=0);
+  opacity: 0;
+  -webkit-transition: all 0.3s ease-in-out;
+  -moz-transition: all 0.3s ease-in-out;
+  -ms-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.entry:hover .magnifier {
+  zoom: 1;
+  left: 0 !important;
+  filter: alpha(opacity=100);
+  opacity: 1;
+}
+
+.magnifier .magni-desc {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  text-align: center;
+  /* bottom: 10px; */
+  opacity: 0;
+  width: 100%;
+  /* margin: -20px auto; */
+  display: block;
+}
+
+.entry:hover .magnifier .magni-desc {
+  zoom: 1;
+  filter: alpha(opacity=100);
+  opacity: 1;
+}
+
+.magnifier .magni-desc h4 a,
+.magnifier .magni-desc h4 {
+  font-size: 14px;
+  letter-spacing: 2px;
+  font-weight: 400;
+  text-decoration: none !important;
+  text-transform: uppercase;
+}
+
+.magnifier .magni-desc p,
+.magnifier .magni-desc a {
+  color: #ffffff !important;
+  cursor: pointer;
+}
+
+.magnifier .magni-desc p {
+  letter-spacing: 1px;
+  color: #aaa !important;
+  font-size: 11px;
+}
+
+.magnifier .magni-desc .secondicon,
+.magnifier .magni-desc .firsticon {
+  position: absolute;
+  margin: 0 !important;
+  text-align: center;
+  font-size: 25px !important;
+  width: 35px;
+  height: 35px;
+  left: 10px;
+  bottom: 20px;
+  color: #ffffff !important;
+  line-height: 35px;
+  background-color: #000;
+  display: inline-block;
+  -webkit-transition: all 0.7s ease-in-out;
+  -moz-transition: all 0.7s ease-in-out;
+  -ms-transition: all 0.7s ease-in-out;
+  -o-transition: all 0.7s ease-in-out;
+  transition: all 0.7s ease-in-out;
+  border-radius: 5px;
+}
+
+.blog-wrapper .magnifier .magni-desc .secondicon {
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 20% !important;
+  margin: -20px auto !important;
+}
 
 @media only screen and (max-width: 600px) {
   .profile img {
     width: 12%;
+  }
+  .date {
+    font-size: 10px;
   }
   .name {
     font-size: 12px;
@@ -686,6 +816,9 @@ input {
   .fa {
     font-size: 15px;
   }
+  #search-plus {
+    font-size: 20px;
+  }
   .card-footer img {
     width: 30%;
   }
@@ -695,12 +828,20 @@ input {
   .btn.post {
     font-size: 10px;
   }
+  .magnifier .magni-desc .secondicon {
+    right: 10px;
+    left: auto;
+    top: 30px;
+  }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
   .profile img {
     width: 10%;
+  }
+  .date {
+    font-size: 10px;
   }
   .name {
     font-size: 13px;
@@ -759,14 +900,23 @@ input {
     font-size: 16px;
   }
 
+  #search-plus {
+    font-size: 20px;
+  }
+
   .card-footer img {
     width: 30%;
   }
   .last {
     font-size: 10px;
   }
-   .btn.post {
+  .btn.post {
     font-size: 10px;
+  }
+  .magnifier .magni-desc .secondicon {
+    right: 10px;
+    left: auto;
+    top: 120px;
   }
 }
 
@@ -774,6 +924,9 @@ input {
 @media only screen and (min-width: 768px) {
   .profile img {
     width: 30%;
+  }
+  .date {
+    font-size: 10px;
   }
   .name {
     font-size: 12px;
@@ -828,11 +981,13 @@ input {
   .post-condition p {
     font-size: 10px;
   }
-  .fa {
-    font-size: 10px;
-  }
+
   .fa {
     font-size: 16px;
+  }
+
+  #search-plus {
+    font-size: 20px;
   }
 
   .card-footer img {
@@ -841,8 +996,13 @@ input {
   .last {
     font-size: 10px;
   }
-   .btn.post {
+  .btn.post {
     font-size: 10px;
+  }
+  .magnifier .magni-desc .secondicon {
+    right: 10px;
+    left: auto;
+    top: 60px;
   }
 }
 
@@ -850,6 +1010,9 @@ input {
 @media only screen and (min-width: 992px) {
   .profile img {
     width: 30%;
+  }
+  .date {
+    font-size: 13px;
   }
   .name {
     font-size: 13px;
@@ -909,14 +1072,23 @@ input {
     font-size: 13px;
   }
 
+  #search-plus {
+    font-size: 20px;
+  }
+
   .card-footer img {
     width: 30%;
   }
   .last {
     font-size: 13px;
   }
-   .btn.post {
+  .btn.post {
     font-size: 13px;
+  }
+  .magnifier .magni-desc .secondicon {
+    right: 10px;
+    left: auto;
+    top: 100px;
   }
 }
 
@@ -924,6 +1096,9 @@ input {
 @media only screen and (min-width: 1200px) {
   .profile img {
     width: 30%;
+  }
+  .date {
+    font-size: 15px;
   }
   .name {
     font-size: 15px;
@@ -981,14 +1156,23 @@ input {
     font-size: 25px;
   }
 
+  #search-plus {
+    font-size: 25px;
+  }
+
   .card-footer img {
-    width: 20%;
+    width: 40%;
   }
   .last {
-    font-size: 20px;
+    font-size: 12px;
   }
-   .btn.post {
+  .btn.post {
     font-size: 15px;
+  }
+  .magnifier .magni-desc .secondicon {
+    right: 10px;
+    left: auto;
+    top: 140px;
   }
 }
 </style>

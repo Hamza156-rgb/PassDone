@@ -3,7 +3,7 @@ import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Signup from "../views/Signup.vue";
 import Main from "../views/Main.vue";
-
+import MyDesk from "../views/ClassRoom/Desk.vue";
 Vue.use(VueRouter);
 
 const routes = [
@@ -21,6 +21,11 @@ const routes = [
         path: "/home",
         name: "Main",
         component: Main,
+    },
+    {
+        path: "/my-desk",
+        name: "MyDesk",
+        component: MyDesk,
     },
 ];
 const router = new VueRouter({

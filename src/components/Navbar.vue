@@ -28,13 +28,40 @@
         <div class="col-7">
           <div class="row menuImage">
             <div class="col-3">
+                   <router-link  to="/home">
               <img src="../assets/main/home.png" />
               <p>Home</p>
+                   </router-link>
             </div>
 
-            <div class="col-3 pt-1">
-              <img src="../assets/main/classroom.png" />
-              <p>ClassRoom</p>
+            <div class="col-3 pt-1 color">
+              <div class="nav-item dropdown">
+                <img
+                  src="../assets/main/classroom.png"
+                  class="nav-link dropdown-toggle"
+                  data-bs-toggle="dropdown"
+                />
+                <p>ClassRoom</p>
+                <div class="dropdown-menu">
+                  <router-link class="dropdown-item" to="/my-desk">
+                    My Desk
+                  </router-link>
+
+                  <router-link class="dropdown-item" to="/audio-books">
+                    Courses
+                  </router-link>
+
+                  <router-link class="dropdown-item" to="/brief-books">
+                    Instructors
+                  </router-link>
+                  <router-link class="dropdown-item" to="/brief-books">
+                    Students
+                  </router-link>
+                  <router-link class="dropdown-item" to="/brief-books">
+                    Study Room
+                  </router-link>
+                </div>
+              </div>
             </div>
 
             <div class="col-3 pt-1">
@@ -99,5 +126,26 @@ export default {
 }
 img {
   cursor: pointer;
+}
+
+.dropdown-menu {
+  background-color: #145d8b;
+  width: 150px;
+  margin-left: -40px;
+}
+.dropdown-menu :hover {
+  background-color: transparent;
+}
+.dropdown-item {
+  color: white;
+  border-bottom: 1px solid #014a79;
+  padding: 10px;
+  font-size: 12px;
+}
+.nav-item:hover .dropdown-menu {
+  display: block;
+  margin-top: 0px;
+  
+ 
 }
 </style>
