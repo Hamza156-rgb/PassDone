@@ -4,6 +4,8 @@ import Home from "../views/Home.vue";
 import Signup from "../views/Signup.vue";
 import Main from "../views/Main.vue";
 import MyDesk from "../views/ClassRoom/Desk.vue";
+import Courses from "../views/ClassRoom/Courses.vue";
+
 Vue.use(VueRouter);
 
 const routes = [
@@ -26,6 +28,11 @@ const routes = [
         path: "/my-desk",
         name: "MyDesk",
         component: MyDesk,
+    },
+    {
+        path: "/my-courses",
+        name: "Courses",
+        component: Courses,
     },
 ];
 const router = new VueRouter({

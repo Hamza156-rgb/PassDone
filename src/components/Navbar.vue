@@ -47,7 +47,7 @@
                     My Desk
                   </router-link>
 
-                  <router-link class="dropdown-item" to="/audio-books">
+                  <router-link class="dropdown-item" to="/my-courses">
                     Courses
                   </router-link>
 

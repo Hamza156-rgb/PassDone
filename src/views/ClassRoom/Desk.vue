@@ -1,9 +1,13 @@
 <template>
   <div>
     <Navbar />
+    <header>
+    <svg id="svg" xmlns="http://www.w3.org/2000/svg" viewBox="-300 0 950 270" >
+    <path d="M-314,267 C105,364 400,100 812,279" fill="none" stroke="white" stroke-width="120" stroke-linecap="round"/>
+  </svg>
     <div class="container">
-      <div class="row">
-        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+      <div class="row ">
+        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 ">
           <div class="profile-image">
             <img src="../../assets/main/user.png" class="rounded-circle" />
           </div>
@@ -12,7 +16,7 @@
           </div>
         </div>
         <div class="col-lg-1 col-md-1"></div>
-        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 ">
           <div class="information">
             <h5>Student Name</h5>
             <h6>Professor - Al Al-Bayt University - Jordan</h6>
@@ -41,7 +45,7 @@
             </div>
           </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 ">
           <div class="grades">
             <h5>10000</h5>
             <p>B +points</p>
@@ -49,6 +53,7 @@
         </div>
       </div>
     </div>
+    </header>
 
     <div class="container mt-5">
       <div class="row">
@@ -650,6 +655,25 @@ export default {
 </script>
 
 <style scoped>
+
+header {
+  position: relative;
+  height: 400px;
+  background: rgba(245, 245, 245,0.5);
+  /* background-image: linear-gradient( rgba(245, 245, 245,0.5)); */
+}
+
+
+
+svg {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+}
+
+
+
 .information h5 {
   color: black;
 }
@@ -693,8 +717,6 @@ export default {
 }
 
 
-
-
 /* Side Nav  */
 .active {
   background-color: #ff9900;
@@ -732,23 +754,6 @@ export default {
 }
 
 /* Side Nav End */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 /* Side Nav  Feed Css Starts */
@@ -941,14 +946,6 @@ export default {
 /* Side Nav Courses End */
 
 
-
-
-
-
-
-
-
-
 /* Side Nav Friends  */
 
 .actives {
@@ -1011,6 +1008,12 @@ export default {
 
 
 @media only screen and (max-width: 600px) {
+  header {
+  position: relative;
+  height: 550px;
+  background: rgba(245, 245, 245,0.5);
+  /* background-image: linear-gradient( rgba(245, 245, 245,0.5)); */
+}
   .profile-image {
     display: flex;
     justify-content: center;
@@ -1088,6 +1091,12 @@ export default {
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
+  header {
+  position: relative;
+  height: 600px;
+  background: rgba(245, 245, 245,0.5);
+  /* background-image: linear-gradient( rgba(245, 245, 245,0.5)); */
+}
   .profile-image {
     display: flex;
     justify-content: center;
@@ -1170,6 +1179,12 @@ export default {
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
+  header {
+  position: relative;
+  height: 400px;
+  background: rgba(245, 245, 245,0.5);
+  /* background-image: linear-gradient( rgba(245, 245, 245,0.5)); */
+}
   .profile-image {
     width: 100%;
   }
@@ -1259,6 +1274,17 @@ export default {
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
+
+header {
+  position: relative;
+  height: 500px;
+  background: rgba(245, 245, 245,0.5);
+  /* background-image: linear-gradient( rgba(245, 245, 245,0.5)); */
+}
+
+
+
+
   .profile-image {
     width: 100%;
   }
@@ -1349,6 +1375,21 @@ export default {
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
+
+
+header {
+  position: relative;
+  height: 500px;
+  background: rgba(245, 245, 245,0.5);
+  /* background-image: linear-gradient( rgba(245, 245, 245,0.5)); */
+}
+
+
+
+
+
+
+
   .profile-image {
     width: 100%;
   }
