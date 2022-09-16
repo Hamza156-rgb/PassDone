@@ -51,13 +51,13 @@
                     Courses
                   </router-link>
 
-                  <router-link class="dropdown-item" to="/brief-books">
+                  <router-link class="dropdown-item" to="/my-instructors">
                     Instructors
                   </router-link>
                   <router-link class="dropdown-item" to="/brief-books">
                     Students
                   </router-link>
-                  <router-link class="dropdown-item" to="/brief-books">
+                  <router-link class="dropdown-item" to="/my-study-room">
                     Study Room
                   </router-link>
                 </div>

@@ -168,10 +168,10 @@ export default {
   box-shadow: 0 8px 16px 0 rgb(162 169 204 / 24%);
 }
 .card-text p {
-  font-size: 18px;
-  font-family: Segoe UI;
+  
+  
   color: #707070;
-  padding: 18px 0px 0px 24px;
+   padding: 15px 0px 0px 15px;
 }
 
 select {
@@ -180,14 +180,8 @@ select {
   border-bottom: 1px solid #ececec;
   border-radius: 0px;
   outline: 0;
+   
 }
-
-
-
-
-
-
-
 
 
 .post-information h5 {
@@ -339,13 +333,6 @@ select {
   margin: -20px auto !important;
 }
 
-
-
-
-
-
-
-
 @media only screen and (max-width: 600px) {
   .profile img {
     width: 12%;
@@ -426,6 +413,12 @@ select {
     right: 10px;
     left: auto;
     top: 30px;
+  }
+   .card-text p {
+    font-size: 11px;
+  }
+  select {
+    font-size: 11px;
   }
 }
 
@@ -511,6 +504,12 @@ select {
     right: 10px;
     left: auto;
     top: 120px;
+  }
+    .card-text p {
+    font-size: 12px;
+  }
+  select {
+    font-size: 12px;
   }
 }
 
@@ -598,6 +597,12 @@ select {
     left: auto;
     top: 60px;
   }
+   .card-text p {
+    font-size: 13px;
+  }
+  select {
+    font-size: 13px;
+  }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -684,6 +689,12 @@ select {
     left: auto;
     top: 100px;
   }
+    .card-text p {
+    font-size: 15px;
+  }
+  select {
+    font-size: 14px;
+  }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -767,6 +778,13 @@ select {
     right: 10px;
     left: auto;
     top: 140px;
+  }
+
+   .card-text p {
+    font-size: 18px;
+  }
+  select {
+    font-size: 15px;
   }
 }
 </style>

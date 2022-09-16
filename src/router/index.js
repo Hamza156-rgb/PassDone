@@ -5,6 +5,9 @@ import Signup from "../views/Signup.vue";
 import Main from "../views/Main.vue";
 import MyDesk from "../views/ClassRoom/Desk.vue";
 import Courses from "../views/ClassRoom/Courses.vue";
+import Instructors from "../views/ClassRoom/Instructors.vue";
+import StudyRoom from "../views/ClassRoom/StudyRoom.vue";
+
 
 Vue.use(VueRouter);
 
@@ -33,6 +36,16 @@ const routes = [
         path: "/my-courses",
         name: "Courses",
         component: Courses,
+    },
+    {
+        path: "/my-instructors",
+        name: "Instructors",
+        component: Instructors,
+    },
+    {
+        path: "/my-study-room",
+        name: "StudyRoom",
+        component: StudyRoom,
     },
 ];
 const router = new VueRouter({
