@@ -6,7 +6,12 @@ import Main from "../views/Main.vue";
 import MyDesk from "../views/ClassRoom/Desk.vue";
 import Courses from "../views/ClassRoom/Courses.vue";
 import Instructors from "../views/ClassRoom/Instructors.vue";
+import Students from "../views/ClassRoom/Students.vue";
 import StudyRoom from "../views/ClassRoom/StudyRoom.vue";
+import Library from "../views/Library.vue";
+import Institute from "../views/Institute.vue";
+
+
 
 
 Vue.use(VueRouter);
@@ -43,9 +48,24 @@ const routes = [
         component: Instructors,
     },
     {
+        path: "/students",
+        name: "Students",
+        component: Students,
+    },
+    {
         path: "/my-study-room",
         name: "StudyRoom",
         component: StudyRoom,
+    },
+    {
+        path: "/library",
+        name: "Library",
+        component: Library,
+    },
+    {
+        path: "/institute",
+        name: "Institute",
+        component: Institute,
     },
 ];
 const router = new VueRouter({

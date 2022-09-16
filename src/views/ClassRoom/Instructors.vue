@@ -154,10 +154,9 @@ export default {
   border-radius: 18px;
   box-shadow: 0 8px 16px 0 rgb(162 169 204 / 24%);
 }
-.card-text p{
-    
+.card-text p {
   color: #707070;
-        padding: 15px 0px 0px 15px;
+  padding: 15px 0px 0px 15px;
 }
 select {
   background-color: #fff;
@@ -225,12 +224,12 @@ select {
   select {
     font-size: 11px;
   }
-      .name {
- font-size: 14px;
-}
-.uni {
- font-size: 10px;
-}
+  .name {
+    font-size: 14px;
+  }
+  .uni {
+    font-size: 10px;
+  }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -241,12 +240,12 @@ select {
   select {
     font-size: 12px;
   }
-      .name {
- font-size: 15px;
-}
-.uni {
- font-size: 12px;
-}
+  .name {
+    font-size: 15px;
+  }
+  .uni {
+    font-size: 12px;
+  }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -257,12 +256,12 @@ select {
   select {
     font-size: 13px;
   }
-      .name {
- font-size: 16px;
-}
-.uni {
- font-size: 13px;
-}
+  .name {
+    font-size: 16px;
+  }
+  .uni {
+    font-size: 13px;
+  }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -273,12 +272,12 @@ select {
   select {
     font-size: 14px;
   }
-    .name {
- font-size: 17px;
-}
-.uni {
- font-size: 14px;
-}
+  .name {
+    font-size: 17px;
+  }
+  .uni {
+    font-size: 14px;
+  }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -290,10 +289,10 @@ select {
     font-size: 15px;
   }
   .name {
- font-size: 18px;
-}
-.uni {
- font-size: 15px;
-}
+    font-size: 18px;
+  }
+  .uni {
+    font-size: 15px;
+  }
 }
 </style>

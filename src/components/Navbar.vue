@@ -28,10 +28,10 @@
         <div class="col-7">
           <div class="row menuImage">
             <div class="col-3">
-                   <router-link  to="/home">
-              <img src="../assets/main/home.png" />
-              <p>Home</p>
-                   </router-link>
+              <router-link to="/home">
+                <img src="../assets/main/home.png" />
+                <p>Home</p>
+              </router-link>
             </div>
 
             <div class="col-3 pt-1 color">
@@ -54,7 +54,7 @@
                   <router-link class="dropdown-item" to="/my-instructors">
                     Instructors
                   </router-link>
-                  <router-link class="dropdown-item" to="/brief-books">
+                  <router-link class="dropdown-item" to="/students">
                     Students
                   </router-link>
                   <router-link class="dropdown-item" to="/my-study-room">
@@ -65,13 +65,17 @@
             </div>
 
             <div class="col-3 pt-1">
-              <img src="../assets/main/library.png" />
-              <p>Library</p>
+              <router-link to="/library">
+                <img src="../assets/main/library.png" />
+                <p>Library</p>
+              </router-link>
             </div>
 
             <div class="col-3 pt-1">
+               <router-link to="/institute">
               <img src="../assets/main/institute.png" />
               <p>Institute</p>
+                </router-link>
             </div>
           </div>
         </div>
@@ -145,7 +149,5 @@ img {
 .nav-item:hover .dropdown-menu {
   display: block;
   margin-top: 0px;
-  
- 
 }
 </style>
