@@ -43,7 +43,7 @@
 
             <div class="information">
               <div class="row">
-                <div class="col-xs-12 col-sm-12 col-md-4  col-lg-4">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                   <div class="student">
                     <h1>Student?</h1>
                     <p>
@@ -56,7 +56,7 @@
                   </div>
                 </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-4  col-lg-4">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                   <div class="Instructor">
                     <h1>Instructor?</h1>
                     <p>
@@ -70,7 +70,7 @@
                   </div>
                 </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-4  col-lg-4">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                   <div class="Institutes">
                     <h1>Institutes?</h1>
                     <p>
@@ -175,7 +175,7 @@
           Here is a look into what we do
         </h2>
 
-        <div class="col-md-6 col-xs-12">
+        <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6">
           <iframe
             width="100%"
             height="315"
@@ -185,7 +185,7 @@
             allowfullscreen
           ></iframe>
         </div>
-        <div class="col-md-6 col-xs-12">
+        <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6" id="section2">
           <p>
             World's first integral and interactive educational platform which
             combines social media and e-learning designed to simulate the
@@ -201,12 +201,9 @@
           </p>
 
           <div class="text-center">
-            <a
-              class="btn btn-lg btn-primary mt-5"
-      
-            >
-              Start now — Join our community</a
-            >
+            <button class="btn btn-lg btn-primary mt-lg-5 mt-md-4">
+              Start now — Join our community
+            </button>
           </div>
         </div>
       </div>
@@ -232,14 +229,9 @@
 
       <div class="section3 mt-4" ref="div1">
         <div style="background-color: #f6f6f6">
-          <h2
-            class="txt-blue text-center pt-4"
-            
-          >
-            Explore latest Materials
-          </h2>
+          <h2 class="txt-blue text-center pt-4">Explore latest Materials</h2>
           <div class="row">
-            <div class="col-md-4 p-4">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 p-4">
               <div class="card">
                 <div class="card-header">
                   <h5 class="heading">Graphic Designing</h5>
@@ -259,16 +251,15 @@
                     retouching, or perhaps digital painting, NOTHING about
                     Phtoshop....
                   </p>
-                  <center>
-                    <button class="btn btn-primary" style="width: 80%">
-                      Sign in & Learn More
-                    </button>
-                  </center>
+
+                  <button class="btn btn-primary" style="width: 100%">
+                    Sign in & Learn More
+                  </button>
                 </div>
               </div>
             </div>
 
-            <div class="col-md-4 p-4">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 p-4">
               <div class="card">
                 <div class="card-header">
                   <h5 class="heading">Graphic Designing</h5>
@@ -288,15 +279,15 @@
                     retouching, or perhaps digital painting, NOTHING about
                     Phtoshop....
                   </p>
-                  <center>
-                    <button class="btn btn-primary" style="width: 80%">
-                      Sign in & Learn More
-                    </button>
-                  </center>
+
+                  <button class="btn btn-primary" style="width: 100%">
+                    Sign in & Learn More
+                  </button>
                 </div>
               </div>
             </div>
-            <div class="col-md-4 p-4">
+
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 p-4">
               <div class="card">
                 <div class="card-header">
                   <h5 class="heading">Graphic Designing</h5>
@@ -316,11 +307,10 @@
                     retouching, or perhaps digital painting, NOTHING about
                     Phtoshop....
                   </p>
-                  <center>
-                    <button class="btn btn-primary" style="width: 80%">
-                      Sign in & Learn More
-                    </button>
-                  </center>
+
+                  <button class="btn btn-primary" style="width: 100%">
+                    Sign in & Learn More
+                  </button>
                 </div>
               </div>
             </div>
@@ -330,22 +320,22 @@
 
       <div class="section4 mt-5">
         <div class="row p-5">
-          <div class="col-md-3">
+          <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 mt-3">
             <img src="@/assets/home/icon-01.png" />
             <h4>Virtual Study Rooms</h4>
           </div>
 
-          <div class="col-md-3">
+          <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 mt-3">
             <img src="@/assets/home/icon-02.png" />
             <h4>Distance Learning</h4>
           </div>
 
-          <div class="col-md-3">
+          <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 mt-3">
             <img src="@/assets/home/icon-03.png" />
             <h4>Interactive platform</h4>
           </div>
 
-          <div class="col-md-3">
+          <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 mt-3">
             <img src="@/assets/home/icon-04.png" />
             <h4>Interactive platform</h4>
           </div>
@@ -635,30 +625,22 @@ polygon.arrow-top {
 }
 .date {
   color: #bdb7c0;
-  font-size: 12px;
 }
 .description {
   color: #2bd7d5;
-  font-size: 12px;
 }
 .heading {
-  font-size: 16px;
   color: #666;
 }
-.section3 h2 {
-  font-size: 2rem;
-}
+
 .section4 {
   background-color: #4f4f4f;
 }
 .section4 h4 {
   color: #fff;
-  font-size: 16px;
   text-align: center;
 }
 .section4 img {
-  width: 137px;
-  height: 98px;
   display: block;
   margin: 5px auto;
 }
@@ -680,12 +662,12 @@ polygon.arrow-top {
   filter: grayscale(0);
 }
 
-.relative{
+.relative {
   height: 100vh;
 }
 
-.relative img{
-   height: 100vh;
+.relative img {
+  height: 100vh;
 }
 
 @media only screen and (max-width: 768px) {
@@ -733,27 +715,280 @@ polygon.arrow-top {
     font-size: 14px;
   }
 
+  .txt-color1 h4 {
+    font-size: 20px;
+  }
+  .txt-color1 h5 {
+    font-size: 18px;
+  }
+
+  .txt-color2 h4 {
+    font-size: 20px;
+  }
+  .txt-color2 h5 {
+    font-size: 18px;
+  }
+
+  .txt-color3 h4 {
+    font-size: 20px;
+  }
+  .txt-color3 h5 {
+    font-size: 18px;
+  }
+
+  .txt-color4 h4 {
+    font-size: 20px;
+  }
+  .txt-color4 h5 {
+    font-size: 18px;
+  }
+
+  .txt-blue {
+    font-size: 20px;
+  }
+
+  #section2 p {
+    font-size: 12px;
+  }
+  #section2 button {
+    font-size: 12px;
+    width: 90%;
+  }
+
+  .heading {
+    font-size: 13px;
+  }
+  .description {
+    font-size: 11px;
+  }
+  .date {
+    font-size: 10px;
+  }
+  .card-footer p {
+    font-size: 13px;
+  }
+  .card-footer button {
+    font-size: 13px;
+  }
+
+  .section4 h4 {
+    font-size: 12px;
+  }
+  .section4 img {
+    width: 100px;
+    height: 80px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .heading {
+    font-size: 14px;
+  }
+  .description {
+    font-size: 12px;
+  }
+
+  .txt-color1 h4 {
+    font-size: 30px;
+  }
+  .txt-color1 h5 {
+    font-size: 20px;
+  }
+
+  .txt-color2 h4 {
+    font-size: 30px;
+  }
+  .txt-color2 h5 {
+    font-size: 20px;
+  }
+
+  .txt-color3 h4 {
+    font-size: 30px;
+  }
+  .txt-color3 h5 {
+    font-size: 20px;
+  }
+
+  .txt-color4 h4 {
+    font-size: 30px;
+  }
+  .txt-color4 h5 {
+    font-size: 20px;
+  }
+
+  .txt-blue {
+    font-size: 23px;
+  }
+  #section2 p {
+    font-size: 14px;
+  }
+  #section2 button {
+    font-size: 14px;
+  }
+
+  .date {
+    font-size: 11px;
+  }
+  .card-footer p {
+    font-size: 14px;
+  }
+  .card-footer button {
+    font-size: 12px;
+  }
+
+  .section4 h4 {
+    font-size: 13px;
+  }
+  .section4 img {
+    width: 110px;
+    height: 85px;
+  }
 }
 
 @media only screen and (min-width: 992px) {
- .relative{
-  height: 70vh;
-}
+  .relative {
+    height: 70vh;
+  }
 
-.relative img{
-   height: 70vh;
-}
+  .relative img {
+    height: 70vh;
+  }
+
+  .txt-color1 h4 {
+    font-size: 40px;
+  }
+  .txt-color1 h5 {
+    font-size: 25px;
+  }
+
+  .txt-color2 h4 {
+    font-size: 40px;
+  }
+  .txt-color2 h5 {
+    font-size: 25px;
+  }
+
+  .txt-color3 h4 {
+    font-size: 40px;
+  }
+  .txt-color3 h5 {
+    font-size: 25px;
+  }
+
+  .txt-color4 h4 {
+    font-size: 40px;
+  }
+  .txt-color4 h5 {
+    font-size: 25px;
+  }
+
+  .txt-blue {
+    font-size: 25px;
+  }
+  #section2 p {
+    font-size: 16px;
+  }
+  #section2 button {
+    font-size: 16px;
+  }
+
+  .heading {
+    font-size: 15px;
+  }
+  .description {
+    font-size: 13px;
+  }
+  .date {
+    font-size: 12px;
+  }
+  .card-footer p {
+    font-size: 15px;
+  }
+  .card-footer button {
+    font-size: 15px;
+  }
+
+  .section4 h4 {
+    font-size: 14px;
+  }
+  .section4 img {
+    width: 120px;
+    height: 90px;
+  }
 }
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
- .relative{
-  height: 100vh;
-}
+  .relative {
+    height: 100vh;
+  }
 
-.relative img{
-   height: 100vh;
-}
-}
+  .relative img {
+    height: 100vh;
+  }
 
+  .txt-color1 h4 {
+    font-size: 50px;
+  }
+  .txt-color1 h5 {
+    font-size: 20px;
+  }
 
+  .txt-color2 h4 {
+    font-size: 50px;
+  }
+  .txt-color2 h5 {
+    font-size: 20px;
+  }
+
+  .txt-color3 h4 {
+    font-size: 50px;
+  }
+  .txt-color3 h5 {
+    font-size: 20px;
+  }
+
+  .txt-color4 h4 {
+    font-size: 50px;
+  }
+  .txt-color4 h5 {
+    font-size: 20px;
+  }
+
+  .txt-blue {
+    font-size: 27px;
+  }
+  #section2 p {
+    font-size: 18px;
+  }
+
+  #section2 button {
+    font-size: 18px;
+  }
+
+  .heading {
+    font-size: 16px;
+  }
+  .description {
+    font-size: 14px;
+  }
+  .date {
+    font-size: 13px;
+  }
+
+  .card-footer p {
+    font-size: 16px;
+  }
+
+  .card-footer button {
+    font-size: 16px;
+  }
+
+  .section4 h4 {
+    font-size: 16px;
+  }
+  .section4 img {
+    width: 137px;
+    height: 98px;
+  }
+}
 </style>

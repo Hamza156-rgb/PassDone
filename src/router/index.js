@@ -10,7 +10,7 @@ import Students from "../views/ClassRoom/Students.vue";
 import StudyRoom from "../views/ClassRoom/StudyRoom.vue";
 import Library from "../views/Library.vue";
 import Institute from "../views/Institute.vue";
-
+import InstituteProfile from "../views/InstituteProfile.vue";
 
 
 
@@ -66,6 +66,12 @@ const routes = [
         path: "/institute",
         name: "Institute",
         component: Institute,
+    },
+
+    {
+        path: "/institute-profile",
+        name: "InstituteProfile",
+        component: InstituteProfile,
     },
 ];
 const router = new VueRouter({
