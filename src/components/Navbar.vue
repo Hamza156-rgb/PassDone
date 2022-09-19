@@ -47,7 +47,7 @@
                     My Desk
                   </router-link>
 
-                  <router-link class="dropdown-item" to="/my-courses">
+                  <router-link class="dropdown-item" to="/courses">
                     Courses
                   </router-link>
 
@@ -72,10 +72,10 @@
             </div>
 
             <div class="col-3 pt-1">
-               <router-link to="/institute">
-              <img src="../assets/main/institute.png" />
-              <p>Institute</p>
-                </router-link>
+              <router-link to="/institute">
+                <img src="../assets/main/institute.png" />
+                <p>Institute</p>
+              </router-link>
             </div>
           </div>
         </div>
@@ -89,7 +89,31 @@
               <i class="fa fa-bell"></i>
             </div>
             <div class="col-4">
-              <i class="fa fa-bars"></i>
+              <div class="nav-item dropdown">
+                <i class="fa fa-bars"></i>
+                <div class="dropdown-menu">
+                  <router-link class="dropdown-item" to="/my-courses">
+                    Manage Courses
+                  </router-link>
+
+                  <router-link class="dropdown-item" to="/my-library">
+                  Manage Library
+                  </router-link>
+
+                  <router-link class="dropdown-item" to="/account-setting">
+                    Account Setting
+                  </router-link>
+                  <router-link class="dropdown-item" to="/technical-support">
+                    Technical Support
+                  </router-link>
+                  <router-link class="dropdown-item" to="/update-profile">
+                  Update
+                  </router-link>
+                     <router-link class="dropdown-item" to="/my-study-room">
+                  Logout
+                  </router-link>
+                </div>
+              </div>
             </div>
           </div>
         </div>

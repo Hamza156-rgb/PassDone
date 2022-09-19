@@ -11,6 +11,14 @@ import StudyRoom from "../views/ClassRoom/StudyRoom.vue";
 import Library from "../views/Library.vue";
 import Institute from "../views/Institute.vue";
 import InstituteProfile from "../views/InstituteProfile.vue";
+import ManageCourse from "../views/LastMenu/ManageCourse.vue";
+import ManageLibrary from "../views/LastMenu/ManageLibrary.vue";
+import AccountSetting from "../views/LastMenu/AccountSetting.vue";
+import TechnicalSupport from "../views/LastMenu/TechnicalSupport.vue";
+import UpdateProfile from "../views/LastMenu/UpdateProfile.vue";
+
+
+
 
 
 
@@ -38,7 +46,7 @@ const routes = [
         component: MyDesk,
     },
     {
-        path: "/my-courses",
+        path: "/courses",
         name: "Courses",
         component: Courses,
     },
@@ -72,6 +80,31 @@ const routes = [
         path: "/institute-profile",
         name: "InstituteProfile",
         component: InstituteProfile,
+    },
+    {
+        path: "/my-courses",
+        name: "ManageCourse",
+        component: ManageCourse,
+    },
+    {
+        path: "/my-library",
+        name: "ManageLibrary",
+        component: ManageLibrary,
+    },
+    {
+        path: "/account-setting",
+        name: "AccountSetting",
+        component: AccountSetting,
+    },
+    {
+        path: "/technical-support",
+        name: "TechnicalSupport",
+        component: TechnicalSupport,
+    },
+    {
+        path: "/update-profile",
+        name: "UpdateProfile",
+        component: UpdateProfile,
     },
 ];
 const router = new VueRouter({
