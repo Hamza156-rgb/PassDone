@@ -9,13 +9,15 @@ import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import BackToTop from 'vue-backtotop'
 import Multiselect from 'vue-multiselect'
+import VueScrollFixedNavbar from "vue-scroll-fixed-navbar";
 
 
 
 Vue.use(VueCarousel);
 Vue.use(BootstrapVue);
 Vue.component('multiselect', Multiselect);
-Vue.use(BackToTop)
+Vue.use(BackToTop);
+Vue.use(VueScrollFixedNavbar);
 
 Vue.config.productionTip = false;
 Vue.use(VueJsModal, {
