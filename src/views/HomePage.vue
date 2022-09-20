@@ -461,15 +461,19 @@
         </div>
       </div>
     </div>
+    <BackToTop />
   </div>
 </template>
 
 <script>
 import Navbar from "../components/Navbar.vue";
+import BackToTop from "../components/BackToTop.vue";
+
 export default {
   name: "HomePage",
   components: {
     Navbar,
+    BackToTop,
   },
 };
 </script>
@@ -478,17 +482,14 @@ export default {
 .profile {
   display: flex;
 }
-
 .info-card.card {
   background-color: white;
   border: 1px solid #e1e6f1;
   border-radius: 0px;
 }
-
 .info-card .card-header {
   background-color: white;
 }
-
 .head {
   display: flex;
 }
@@ -504,11 +505,9 @@ export default {
 .second h5 {
   color: black;
 }
-
 .second #uni {
   color: #0776bd;
 }
-
 .seeMore {
   float: right;
   color: #0776bd;
@@ -531,7 +530,6 @@ input {
   cursor: pointer;
   width: 100%;
 }
-
 .firstSelect select {
   border-radius: 0px;
   background: transparent;
@@ -539,7 +537,6 @@ input {
   width: 100%;
   color: #bdbdbd;
 }
-
 .firstSelect select:focus {
   box-shadow: none;
   outline: none !important;
@@ -550,7 +547,6 @@ input {
 .firstSelect label {
   color: #bdbdbd;
 }
-
 .filter select {
   border-radius: 0px;
   background: transparent;

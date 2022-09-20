@@ -522,16 +522,21 @@
         </div>
       </div>
     </div>
+
+<BackToTop />
+
   </div>
 </template>
 
 <script>
 import Navbar from "../components/Navbar.vue";
+import BackToTop from "../components/BackToTop.vue";
 
 export default {
   name: "Institute",
   components: {
     Navbar,
+      BackToTop,
   },
 };
 </script>

@@ -7,11 +7,15 @@ import AOS from 'aos'
 import 'aos/dist/aos.css'
 import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
-
+import BackToTop from 'vue-backtotop'
 import Multiselect from 'vue-multiselect'
+
+
+
 Vue.use(VueCarousel);
 Vue.use(BootstrapVue);
-Vue.component('multiselect', Multiselect)
+Vue.component('multiselect', Multiselect);
+Vue.use(BackToTop)
 
 Vue.config.productionTip = false;
 Vue.use(VueJsModal, {
