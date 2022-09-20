@@ -8,8 +8,10 @@ import 'aos/dist/aos.css'
 import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 
+import Multiselect from 'vue-multiselect'
 Vue.use(VueCarousel);
 Vue.use(BootstrapVue);
+Vue.component('multiselect', Multiselect)
 
 Vue.config.productionTip = false;
 Vue.use(VueJsModal, {

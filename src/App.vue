@@ -13,7 +13,7 @@ export default {
   setup() {},
 };
 </script>
-
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 <style scoped>
 @font-face {
   font-family: "Oxygen";

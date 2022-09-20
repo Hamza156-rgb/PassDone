@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
 import Signup from "../views/Signup.vue";
-import Main from "../views/Main.vue";
+import HomePage from "../views/HomePage.vue";
 import MyDesk from "../views/ClassRoom/Desk.vue";
 import Courses from "../views/ClassRoom/Courses.vue";
 import Instructors from "../views/ClassRoom/Instructors.vue";
@@ -16,6 +16,9 @@ import ManageLibrary from "../views/LastMenu/ManageLibrary.vue";
 import AccountSetting from "../views/LastMenu/AccountSetting.vue";
 import TechnicalSupport from "../views/LastMenu/TechnicalSupport.vue";
 import UpdateProfile from "../views/LastMenu/UpdateProfile.vue";
+
+import Notification from "../views/Notification.vue";
+import FriendRequest from "../views/FriendRequest.vue";
 
 
 
@@ -37,8 +40,8 @@ const routes = [
     },
     {
         path: "/home",
-        name: "Main",
-        component: Main,
+        name: "HomePage",
+        component: HomePage,
     },
     {
         path: "/my-desk",
@@ -106,6 +109,20 @@ const routes = [
         name: "UpdateProfile",
         component: UpdateProfile,
     },
+
+    {
+        path: "/notification",
+        name: "Notification",
+        component: Notification,
+    },
+
+    {
+        path: "/friend-request",
+        name: "FriendRequest",
+        component: FriendRequest,
+    },
+
+
 ];
 const router = new VueRouter({
     mode: "history",

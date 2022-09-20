@@ -467,7 +467,7 @@
 <script>
 import Navbar from "../components/Navbar.vue";
 export default {
-  name: "Main",
+  name: "HomePage",
   components: {
     Navbar,
   },

@@ -428,9 +428,11 @@
                         class="col-xs-12 col-sm-12 col-md-5 col-lg-6"
                         align="right"
                       >
+                         <router-link to="/institute-profile">
                         <button class="btn btn-primarys info-buttons mt-2 ">
                           View
                         </button>
+                         </router-link>
                         <button class="btn btn-warnings info-buttons mt-2 ">
                           Follow
                         </button>

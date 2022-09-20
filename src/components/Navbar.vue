@@ -83,10 +83,14 @@
         <div class="col-2">
           <div class="row">
             <div class="col-4">
+               <router-link  to="/friend-request">
               <i class="fa fa-user" aria-hidden="true"></i>
+               </router-link>
             </div>
             <div class="col-4">
+                  <router-link  to="/notification">
               <i class="fa fa-bell"></i>
+                  </router-link>
             </div>
             <div class="col-4">
               <div class="nav-item dropdown">
@@ -109,7 +113,7 @@
                   <router-link class="dropdown-item" to="/update-profile">
                   Update
                   </router-link>
-                     <router-link class="dropdown-item" to="/my-study-room">
+                     <router-link class="dropdown-item" to="/">
                   Logout
                   </router-link>
                 </div>
