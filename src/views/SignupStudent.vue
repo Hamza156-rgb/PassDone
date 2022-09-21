@@ -1150,6 +1150,7 @@ export default {
         return;
       } else {
         console.log(this.form);
+           this.$router.push("/home");
       }
     },
 
