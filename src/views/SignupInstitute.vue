@@ -560,6 +560,7 @@
                     class="btn btn-lg btn-primary mt-3"
                     id="ksetp1"
                     type="button"
+                      @click="div2()"
                   >
                     Continue
                   </button>
@@ -615,6 +616,7 @@
                   <button
                     class="btn btn-lg btn-primary mr-1 mt-3"
                     type="button"
+                      @click="div1()"
                   >
                     Back
                   </button>
@@ -776,7 +778,6 @@ select {
   }
   #ksetp1 {
     width: 90%;
-   
   }
 }
 
@@ -854,5 +855,32 @@ select {
   #ksetp1 {
     width: 20%;
   }
+}
+</style>
+
+
+
+<style >
+/* This Tag is used for multi because in scoped its not worked */
+.multiselect__tags {
+  border-radius: 0px;
+  background: transparent;
+  outline: 0;
+  border-width: 0 0 1px;
+  border-color: #bdbdbd;
+  color: black;
+  box-shadow: none;
+  width: 100%;
+}
+
+.multiselect__single {
+  border-radius: 0px;
+  background: transparent;
+  outline: 0;
+  border-width: 0 0 1px;
+  border-color: #bdbdbd;
+  color: black;
+  box-shadow: none;
+  width: 100%;
 }
 </style>

@@ -147,6 +147,7 @@
                     class="btn btn-lg btn-primary mt-3"
                     id="ksetp1"
                     type="button"
+                      @click="div2()"
                   >
                     Continue
                   </button>
@@ -214,10 +215,11 @@
                     class="btn btn-lg btn-primary mt-3"
                     type="button"
                     style="margin-right: 15px"
+                      @click="div3()"
                   >
                     Continue
                   </button>
-                  <button class="btn btn-lg btn-primary mt-3" type="button">
+                  <button class="btn btn-lg btn-primary mt-3" type="button"   @click="div1()">
                     Back
                   </button>
                 </div>
@@ -278,7 +280,7 @@
                   </button>
                   <button
                     class="btn btn-lg btn-primary mr-1 mt-3"
-                    type="button"
+                    type="button"  @click="div2()"
                   >
                     Back
                   </button>
