@@ -6,7 +6,7 @@
           <div class="col-2">
             <button
               class="navbar-toggler"
-              v-b-toggle.sidebar-variant
+             @click="toggleNavbar()"
               style="background-color: white"
             >
               <span class="navbar-toggler-icon"></span>

@@ -1,7 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-import Signup from "../views/Signup.vue";
+import SignupStudent from "../views/SignupStudent.vue";
+import SignupInstructor from "../views/SignupInstructor.vue";
+import SignupInstitute from "../views/SignupInstitute.vue";
+
 import HomePage from "../views/HomePage.vue";
 import MyDesk from "../views/ClassRoom/Desk.vue";
 import Courses from "../views/ClassRoom/Courses.vue";
@@ -34,9 +37,19 @@ const routes = [
         component: Home,
     },
     {
-        path: "/signup",
-        name: "Signup",
-        component: Signup,
+        path: "/signup-student",
+        name: "SignupStudent",
+        component: SignupStudent,
+    },
+    {
+        path: "/signup-instructor",
+        name: "SignupInstructor",
+        component: SignupInstructor,
+    },
+    {
+        path: "/signup-institute",
+        name: "SignupInstitute",
+        component: SignupInstitute,
     },
     {
         path: "/home",

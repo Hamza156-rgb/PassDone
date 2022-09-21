@@ -50,9 +50,11 @@
                       Find your needed educational material, meet your friends
                       and colleagues and keep in touch with your instructors.
                     </p>
-                    <button class="btn btn-outline border-color1">
-                      Join Colleagues
-                    </button>
+                    <router-link to="/signup-student">
+                      <button class="btn btn-outline border-color1">
+                        Join Colleagues
+                      </button>
+                    </router-link>
                   </div>
                 </div>
 
@@ -64,9 +66,11 @@
                       educational institutes and countries and keep in touch
                       with your students.
                     </p>
-                    <button class="btn btn-outline border-color2">
-                      Explore Our Society
-                    </button>
+                    <router-link to="/signup-instructor">
+                      <button class="btn btn-outline border-color2">
+                        Explore Our Society
+                      </button>
+                    </router-link>
                   </div>
                 </div>
 
@@ -77,9 +81,11 @@
                       Introduce your institute worldwide, share your
                       announcements and meet your students and instructors.
                     </p>
+                        <router-link to="/signup-institute">
                     <button class="btn btn-outline border-color3">
                       Resgister Now
                     </button>
+                        </router-link>
                   </div>
                 </div>
               </div>
@@ -130,9 +136,11 @@
                       Find your needed educational material, meet your friends
                       and colleagues and keep in touch with your instructors.
                     </p>
-                    <button class="btn btn-outline border-color1">
-                      Join Colleagues
-                    </button>
+                    <router-link to="/signup-student">
+                      <button class="btn btn-outline border-color1">
+                        Join Colleagues
+                      </button>
+                    </router-link>
                   </div>
                 </div>
 
@@ -144,9 +152,11 @@
                       educational institutes and countries and keep in touch
                       with your students.
                     </p>
-                    <button class="btn btn-outline border-color2">
-                      Explore Our Society
-                    </button>
+                    <router-link to="/signup-instructor">
+                      <button class="btn btn-outline border-color2">
+                        Explore Our Society
+                      </button>
+                    </router-link>
                   </div>
                 </div>
 
@@ -157,9 +167,11 @@
                       Introduce your institute worldwide, share your
                       announcements and meet your students and instructors.
                     </p>
+                   <router-link to="/signup-institute">
                     <button class="btn btn-outline border-color3">
                       Resgister Now
                     </button>
+                        </router-link>
                   </div>
                 </div>
               </div>

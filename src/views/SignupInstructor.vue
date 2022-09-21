@@ -16,10 +16,12 @@
 
     <div class="container-fluid" id="container2">
       <div class="heading pt-5">
-        <h4>Register as a <span style="color: #0099e9">Student</span></h4>
+        <h4>Register as a <span style="color: #0099e9">Instructor</span></h4>
       </div>
       <div class="heading-text">
-        <p>Working with Student from a different culture motivates Student.</p>
+        <p>
+          Working with Instructor from a different culture motivates Instructor.
+        </p>
       </div>
 
       <div class="wizard">
@@ -67,7 +69,7 @@
             class="Material-contact-section section-padding section-dark"
           >
             <div class="row">
-              <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
+              <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-2">
                 <label>First Name *</label>
                 <input type="text" name="firstname" class="form-control" />
               </div>
@@ -163,7 +165,7 @@
             <div class="row">
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-2">
                 <label>University/School *</label>
-                
+
                 <select class="mt-2">
                   <option value="">Please Select Country First</option>
                 </select>
@@ -171,21 +173,23 @@
 
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-2">
                 <label>Major *</label>
-                
+
                 <select class="mt-2">
                   <option value="">choose One</option>
                 </select>
               </div>
 
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-2">
-                <label>Double Majors</label>
-                
-                <input type="text" name="firstname" class="form-control" placeholder="adsd"/>
+                <label>Major you teach *</label>
+
+                <select class="mt-2">
+                  <option value="">choose One</option>
+                </select>
               </div>
 
-              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-3">
-                <label>Academic Degree *</label>
-                
+              <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-2">
+                <label>Select Majors You Are Intrested In *</label>
+
                 <select class="mt-2">
                   <option value="">choose One</option>
                 </select>
@@ -193,15 +197,14 @@
 
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-2">
                 <label>Period</label>
-            
+
                 <select class="mt-2">
                   <option value="">choose One</option>
                 </select>
               </div>
 
               <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-2">
-                <label>Academic Degre</label>
-            
+                <label>Till Now</label>
 
                 <select class="mt-2">
                   <option value="">choose One</option>
@@ -210,15 +213,16 @@
 
               <div class="row mb-4">
                 <div align="right">
+                  <button class="btn btn-lg btn-primary mt-3" type="button">
+                    Back
+                  </button>
+
                   <button
                     class="btn btn-lg btn-primary mt-3"
                     type="button"
-                    style="margin-right: 15px"
+                    style="margin-left: 15px"
                   >
                     Continue
-                  </button>
-                  <button class="btn btn-lg btn-primary mt-3" type="button">
-                    Back
                   </button>
                 </div>
               </div>
@@ -294,7 +298,7 @@
 
 <script>
 export default {
-  name: "Signup",
+  name: "SignupInstructor",
   data() {
     return {
       one: true,
