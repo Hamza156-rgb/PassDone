@@ -28,7 +28,7 @@
             v-bind:class="{ show: show }"
           >
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-8 forms mt-2">
-              <form>
+              <form @submit.prevent="submit">
                 <div class="row mt-2">
                   <div
                     class="
@@ -42,7 +42,20 @@
                       class="form-control"
                       id="inputEmail4"
                       placeholder="Email"
+                      v-model="form.email"
+                      :class="{
+                        'is-invalid': submitted && $v.form.email.$error,
+                      }"
                     />
+
+                    <div
+                      v-if="submitted && $v.form.email.$error"
+                      class="invalid-feedback"
+                    >
+                      <span v-if="!$v.form.email.required">
+                        Username is required
+                      </span>
+                    </div>
                   </div>
                   <div
                     class="
@@ -56,7 +69,19 @@
                       class="form-control"
                       id="inputPassword4"
                       placeholder="Password"
+                      v-model="form.password"
+                      :class="{
+                        'is-invalid': submitted && $v.form.password.$error,
+                      }"
                     />
+                    <div
+                      v-if="submitted && $v.form.password.$error"
+                      class="invalid-feedback"
+                    >
+                      <span v-if="!$v.form.password.required">
+                        Password is required
+                      </span>
+                    </div>
                     <a
                       style="color: white"
                       @click="$refs.modalName1.openModal()"
@@ -66,19 +91,17 @@
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 buttons">
                     <div class="row">
                       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-                        <router-link to="/home">
-                          <button
-                            type="submit"
-                            class="
-                              btn btn-primary
-                              login
-                              col-xs-12 col-sm-12 col-md-12 col-lg-12
-                              mt-2
-                            "
-                          >
-                            Login
-                          </button>
-                        </router-link>
+                        <button
+                          type="submit"
+                          class="
+                            btn btn-primary
+                            login
+                            col-xs-12 col-sm-12 col-md-12 col-lg-12
+                            mt-2
+                          "
+                        >
+                          Login
+                        </button>
                       </div>
 
                       <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
@@ -139,7 +162,7 @@
 </template>
 <script>
 import Modal from "./Modal.vue";
-
+import { required, email } from "vuelidate/lib/validators";
 export default {
   name: "Navbar",
   components: {
@@ -148,18 +171,56 @@ export default {
   data() {
     return {
       show: false,
+      submitted: false,
+      form: {
+        email: "",
+        password: "",
+      },
     };
+  },
+
+  validations: {
+    form: {
+      email: {
+        required,
+        email,
+      },
+      password: {
+        required,
+      },
+    },
   },
 
   methods: {
     toggleNavbar() {
       this.show = !this.show;
     },
+    async submit() {
+      this.submitted = true;
+      this.$v.$touch();
+      if (this.$v.$invalid) {
+        return;
+      } else {
+        console.log(this.form);
+          this.$router.push("/home");
+
+      }
+    },
   },
 };
 </script>
 
 <style scoped>
+.form-control.is-invalid,
+.was-validated .form-control:invalid {
+  border-color: #dc3545;
+  padding-right: calc(1.5em + 0.75rem);
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right calc(0.375em + 0.1875rem) center;
+  background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
 .about {
   font-size: 1.5rem;
   text-align: left;

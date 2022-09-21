@@ -560,7 +560,7 @@
                     class="btn btn-lg btn-primary mt-3"
                     id="ksetp1"
                     type="button"
-                      @click="div2()"
+                    @click="div2()"
                   >
                     Continue
                   </button>
@@ -616,7 +616,7 @@
                   <button
                     class="btn btn-lg btn-primary mr-1 mt-3"
                     type="button"
-                      @click="div1()"
+                    @click="div1()"
                   >
                     Back
                   </button>

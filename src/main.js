@@ -10,6 +10,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 import BackToTop from 'vue-backtotop'
 import Multiselect from 'vue-multiselect'
 import VueScrollFixedNavbar from "vue-scroll-fixed-navbar";
+import Vuelidate from 'vuelidate';
 
 
 
@@ -18,6 +19,7 @@ Vue.use(BootstrapVue);
 Vue.component('multiselect', Multiselect);
 Vue.use(BackToTop);
 Vue.use(VueScrollFixedNavbar);
+Vue.use(Vuelidate);
 
 Vue.config.productionTip = false;
 Vue.use(VueJsModal, {
