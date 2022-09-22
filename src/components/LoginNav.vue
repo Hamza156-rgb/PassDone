@@ -83,6 +83,7 @@
                       </span>
                     </div>
                     <a
+                      id="forget"
                       style="color: white"
                       @click="$refs.modalName1.openModal()"
                       >Forget Password!
@@ -115,7 +116,7 @@
                               mt-2
                             "
                           >
-                            SignUp
+                            Sign Up
                           </button>
                         </router-link>
                       </div>
@@ -202,8 +203,12 @@ export default {
         return;
       } else {
         console.log(this.form);
-          this.$router.push("/home");
-
+        this.$router.push("/home");
+        this.$swal({
+          icon: "success",
+          title: "Welcome ",
+          showConfirmButton: false,
+        });
       }
     },
   },
@@ -263,6 +268,15 @@ export default {
   .logo img {
     width: 100%;
   }
+  .forget {
+    font-size: 13px;
+  }
+  .btn {
+    font-size: 13px;
+  }
+  #forget {
+    font-size: 13px;
+  }
 }
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
@@ -271,6 +285,16 @@ export default {
   }
   .logo img {
     width: 100%;
+  }
+  .btn {
+    font-size: 16px;
+  }
+  select {
+    font-size: 16px;
+  }
+
+  #forget {
+    font-size: 16px;
   }
 }
 </style>

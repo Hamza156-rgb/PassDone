@@ -104,6 +104,9 @@ export default {
   .para {
     font-size: 10px;
   }
+    button{
+    font-size: 10px;
+  }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -113,6 +116,9 @@ export default {
   }
 
   .para {
+    font-size: 10px;
+  }
+  button{
     font-size: 10px;
   }
 }
@@ -126,6 +132,9 @@ export default {
   .para {
     font-size: 12px;
   }
+    button{
+    font-size: 14px;
+  }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -137,6 +146,9 @@ export default {
   .para {
     font-size: 14px;
   }
+    button{
+    font-size: 16px;
+  }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -147,6 +159,9 @@ export default {
 
   .para {
     font-size: 16px;
+  }
+    button{
+    font-size: 18px;
   }
 }
 </style>

@@ -162,7 +162,7 @@
                       'is-invalid': submitted && $v.form.gender.$error,
                     }"
                   >
-                    <option value="Male">Male</option>
+                    <option value="Male" selected>Male</option>
                     <option value="Female">Female</option>
                   </select>
                   <div
@@ -202,6 +202,7 @@
                     :options="options"
                     label="name"
                     track-by="name"
+                    placeholder="Choose One"
                     v-model="form.homeTown"
                     :class="{
                       'is-invalid': submitted && $v.form.homeTown.$error,
@@ -224,6 +225,7 @@
                     label="name"
                     track-by="name"
                     v-model="form.livesIn"
+                    placeholder="Choose One"
                     :class="{
                       'is-invalid': submitted && $v.form.livesIn.$error,
                     }"
@@ -279,16 +281,17 @@
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-2">
                   <label>University/School *</label>
 
-                  <select
-                    class="mt-2"
+                  <multiselect
+                    :options="options"
+                    label="name"
+                    track-by="name"
+                    placeholder="Choose One"
                     v-model="form.university"
                     :class="{
                       'is-invalid': submitted && $v.form.university.$error,
                     }"
                   >
-                    <option value="1">First</option>
-                    <option value="2">second</option>
-                  </select>
+                  </multiselect>
                   <div
                     v-if="submitted && $v.form.university.$error"
                     class="invalid-feedback"
@@ -302,17 +305,17 @@
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-2">
                   <label>Major *</label>
 
-                  <select
-                    class="mt-2"
+                  <multiselect
+                    :options="options"
+                    label="name"
+                    track-by="name"
                     v-model="form.majors"
+                    placeholder="Choose One"
                     :class="{
                       'is-invalid': submitted && $v.form.majors.$error,
                     }"
                   >
-                    <option value="1">choose One</option>
-                    <option value="2">choose One</option>
-                    <option value="3">choose One</option>
-                  </select>
+                  </multiselect>
                   <div
                     v-if="submitted && $v.form.majors.$error"
                     class="invalid-feedback"
@@ -326,15 +329,20 @@
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-2">
                   <label>Double Majors</label>
 
-                  <input
-                    type="text"
-                    name="firstname"
-                    class="form-control"
+                  <multiselect
+                    :options="options"
+                    label="name"
+                    track-by="name"
+                    :multiple="true"
+                    :close-on-select="false"
+                    :clear-on-select="false"
+                    :preserve-search="true"
                     v-model="form.doubleMajors"
                     :class="{
                       'is-invalid': submitted && $v.form.doubleMajors.$error,
                     }"
-                  />
+                  >
+                  </multiselect>
 
                   <div
                     v-if="submitted && $v.form.doubleMajors.$error"
@@ -346,19 +354,20 @@
                   </div>
                 </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-3">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-2">
                   <label>Academic Degree *</label>
 
-                  <select
-                    class="mt-2"
+                  <multiselect
+                    :options="options"
+                    label="name"
+                    track-by="name"
                     v-model="form.degree"
+                    placeholder="Choose One"
                     :class="{
                       'is-invalid': submitted && $v.form.degree.$error,
                     }"
                   >
-                    <option value="1">choose One</option>
-                    <option value="2">choose One</option>
-                  </select>
+                  </multiselect>
                   <div
                     v-if="submitted && $v.form.degree.$error"
                     class="invalid-feedback"
@@ -372,16 +381,17 @@
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-2">
                   <label>Period</label>
 
-                  <select
-                    class="mt-2"
+                  <multiselect
+                    :options="year"
+                    label="name"
+                    track-by="name"
                     v-model="form.period"
+                    placeholder="Choose One"
                     :class="{
                       'is-invalid': submitted && $v.form.period.$error,
                     }"
                   >
-                    <option value="1">choose One</option>
-                    <option value="2">choose One</option>
-                  </select>
+                  </multiselect>
                   <div
                     v-if="submitted && $v.form.period.$error"
                     class="invalid-feedback"
@@ -393,18 +403,20 @@
                 </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-2">
-                  <label>Academic Degre</label>
-
-                  <select
-                    class="mt-2"
+                  <label></label>
+                  <multiselect
+                    :options="options"
+                    label="name"
+                    track-by="name"
                     v-model="form.tillNow"
+                    placeholder="Till Now"
                     :class="{
                       'is-invalid': submitted && $v.form.tillNow.$error,
                     }"
                   >
                     <option value="1">choose One</option>
                     <option value="2">choose One</option>
-                  </select>
+                  </multiselect>
                   <div
                     v-if="submitted && $v.form.tillNow.$error"
                     class="invalid-feedback"
@@ -449,19 +461,18 @@
                     id="email"
                     class="form-control"
                     v-model="form.email"
-                    
-   :class="{
-                    'is-invalid': submitted && $v.form.email.$error,
-                  }"
+                    :class="{
+                      'is-invalid': submitted && $v.form.email.$error,
+                    }"
                   />
-                   <div
-                      v-if="submitted && $v.form.email.$error"
-                      class="invalid-feedback"
-                    >
-                      <span v-if="!$v.form.email.required">
-                        Email is required
-                      </span>
-                    </div>
+                  <div
+                    v-if="submitted && $v.form.email.$error"
+                    class="invalid-feedback"
+                  >
+                    <span v-if="!$v.form.email.required">
+                      Email is required
+                    </span>
+                  </div>
                 </div>
                 <div class="col-xs- 12 col-sm-12 col-md-6 col-lg-6 mt-2">
                   <label>Confirm Email Address *</label>
@@ -471,19 +482,18 @@
                     id="email2"
                     class="form-control"
                     v-model="form.confirmEmail"
-                    
-   :class="{
-                    'is-invalid': submitted && $v.form.confirmEmail.$error,
-                  }"
+                    :class="{
+                      'is-invalid': submitted && $v.form.confirmEmail.$error,
+                    }"
                   />
-                   <div
-                      v-if="submitted && $v.form.confirmEmail.$error"
-                      class="invalid-feedback"
-                    >
-                      <span v-if="!$v.form.confirmEmail.required">
-                        Confirm Your Email 
-                      </span>
-                    </div>
+                  <div
+                    v-if="submitted && $v.form.confirmEmail.$error"
+                    class="invalid-feedback"
+                  >
+                    <span v-if="!$v.form.confirmEmail.required">
+                      Confirm Your Email
+                    </span>
+                  </div>
                 </div>
                 <div class="col-xs- 12 col-sm-12 col-md-6 col-lg-6 mt-2">
                   <label>Password *</label>
@@ -494,17 +504,17 @@
                     class="form-control"
                     v-model="form.password"
                     :class="{
-                    'is-invalid': submitted && $v.form.password.$error,
-                  }"
+                      'is-invalid': submitted && $v.form.password.$error,
+                    }"
                   />
-                   <div
-                      v-if="submitted && $v.form.password.$error"
-                      class="invalid-feedback"
-                    >
-                      <span v-if="!$v.form.password.required">
-                        Password is required
-                      </span>
-                    </div>
+                  <div
+                    v-if="submitted && $v.form.password.$error"
+                    class="invalid-feedback"
+                  >
+                    <span v-if="!$v.form.password.required">
+                      Password is required
+                    </span>
+                  </div>
                 </div>
                 <div class="col-xs- 12 col-sm-12 col-md-6 col-lg-6 mt-2">
                   <label>Confirm Password *</label>
@@ -514,18 +524,18 @@
                     id="password2"
                     class="form-control"
                     v-model="form.confirmPassword"
-                       :class="{
-                    'is-invalid': submitted && $v.form.confirmPassword.$error,
-                  }"
+                    :class="{
+                      'is-invalid': submitted && $v.form.confirmPassword.$error,
+                    }"
                   />
-                   <div
-                      v-if="submitted && $v.form.confirmPassword.$error"
-                      class="invalid-feedback"
-                    >
-                      <span v-if="!$v.form.confirmPassword.required">
-                        Confirm Your Password
-                      </span>
-                    </div>
+                  <div
+                    v-if="submitted && $v.form.confirmPassword.$error"
+                    class="invalid-feedback"
+                  >
+                    <span v-if="!$v.form.confirmPassword.required">
+                      Confirm Your Password
+                    </span>
+                  </div>
                 </div>
                 <div class="row mb-4">
                   <div align="right">
@@ -555,7 +565,7 @@
 </template>
 
 <script>
-import { required,email } from "vuelidate/lib/validators";
+import { required, email } from "vuelidate/lib/validators";
 
 export default {
   name: "SignupStudent",
@@ -1096,6 +1106,35 @@ export default {
         { name: "Zambia" },
         { name: "Zimbabwe" },
       ],
+
+      year: [
+        { name: "2022" },
+        { name: "2021" },
+        { name: "2020" },
+        { name: "2019" },
+        { name: "2018" },
+        { name: "2017" },
+        { name: "2016" },
+        { name: "2015" },
+        { name: "2014" },
+        { name: "2013" },
+        { name: "2012" },
+        { name: "2011" },
+        { name: "2010" },
+        { name: "2009" },
+        { name: "2008" },
+        { name: "2007" },
+        { name: "2006" },
+        { name: "2005" },
+        { name: "2004" },
+        { name: "2003" },
+        { name: "2002" },
+        { name: "2001" },
+        { name: "2000" },
+        { name: "1999" },
+        { name: "1998" },
+        { name: "1997" },
+      ],
     };
   },
   validations: {
@@ -1136,10 +1175,10 @@ export default {
       degree: { required },
       period: { required },
       tillNow: { required },
-      email:{required,email},
-      confirmEmail:{required,email},
-      password:{required},
-      confirmPassword:{required}
+      email: { required, email },
+      confirmEmail: { required, email },
+      password: { required },
+      confirmPassword: { required },
     },
   },
   methods: {
@@ -1150,7 +1189,12 @@ export default {
         return;
       } else {
         console.log(this.form);
-           this.$router.push("/home");
+        this.$router.push("/home");
+          this.$swal({
+          icon: "success",
+          title: "Welcome ",
+          showConfirmButton: false,
+        });
       }
     },
 

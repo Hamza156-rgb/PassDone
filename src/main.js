@@ -11,8 +11,9 @@ import BackToTop from 'vue-backtotop'
 import Multiselect from 'vue-multiselect'
 import VueScrollFixedNavbar from "vue-scroll-fixed-navbar";
 import Vuelidate from 'vuelidate';
-
-
+import VueSweetalert2 from 'vue-sweetalert2';
+import 'sweetalert2/dist/sweetalert2.min.css';
+Vue.use(VueSweetalert2);
 
 Vue.use(VueCarousel);
 Vue.use(BootstrapVue);

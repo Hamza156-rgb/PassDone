@@ -81,11 +81,11 @@
                       Introduce your institute worldwide, share your
                       announcements and meet your students and instructors.
                     </p>
-                        <router-link to="/signup-institute">
-                    <button class="btn btn-outline border-color3">
-                      Resgister Now
-                    </button>
-                        </router-link>
+                    <router-link to="/signup-institute">
+                      <button class="btn btn-outline border-color3">
+                        Resgister Now
+                      </button>
+                    </router-link>
                   </div>
                 </div>
               </div>
@@ -167,11 +167,11 @@
                       Introduce your institute worldwide, share your
                       announcements and meet your students and instructors.
                     </p>
-                   <router-link to="/signup-institute">
-                    <button class="btn btn-outline border-color3">
-                      Resgister Now
-                    </button>
-                        </router-link>
+                    <router-link to="/signup-institute">
+                      <button class="btn btn-outline border-color3">
+                        Resgister Now
+                      </button>
+                    </router-link>
                   </div>
                 </div>
               </div>
@@ -682,6 +682,7 @@ polygon.arrow-top {
   height: 100vh;
 }
 
+
 @media only screen and (max-width: 768px) {
   .main {
     background-color: #365160;
@@ -697,34 +698,34 @@ polygon.arrow-top {
     position: absolute;
   }
   .heading h3 {
-    font-size: 32px;
+    font-size: 18px;
   }
 
   .heading h4 {
-    font-size: 16px;
+    font-size: 12px;
   }
 
   .student h1 {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
   .student p {
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .Instructor h1 {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   .Instructor p {
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .Institutes h1 {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   .Institutes p {
-    font-size: 14px;
+    font-size: 12px;
   }
 
   .txt-color1 h4 {
@@ -789,6 +790,15 @@ polygon.arrow-top {
   .section4 img {
     width: 100px;
     height: 80px;
+  }
+  .student button{
+    font-size: 12px;
+  }
+  .Instructor button{
+    font-size: 12px;
+  }
+  .Institutes button{
+    font-size: 12px;
   }
 }
 
