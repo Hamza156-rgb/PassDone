@@ -7,18 +7,24 @@ import AOS from 'aos'
 import 'aos/dist/aos.css'
 import BootstrapVue from 'bootstrap-vue/dist/bootstrap-vue.esm';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
-import BackToTop from 'vue-backtotop'
 import Multiselect from 'vue-multiselect'
 import VueScrollFixedNavbar from "vue-scroll-fixed-navbar";
 import Vuelidate from 'vuelidate';
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
-Vue.use(VueSweetalert2);
+import Toasted from 'vue-toasted';
 
+const Options = {
+
+  position: 'top-center',
+  duration: '3000',
+};
+Vue.use(VueSweetalert2);
+Vue.use(Toasted, Options);
 Vue.use(VueCarousel);
 Vue.use(BootstrapVue);
 Vue.component('multiselect', Multiselect);
-Vue.use(BackToTop);
+
 Vue.use(VueScrollFixedNavbar);
 Vue.use(Vuelidate);
 

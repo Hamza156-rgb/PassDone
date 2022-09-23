@@ -10,7 +10,7 @@
               <div class="profile">
                 <img src="../assets/main/user.png" class="rounded-circle" />
 
-                <p class="name">Arsal Mahmood</p>
+                <p class="name">{{ userName }}</p>
               </div>
             </div>
 
@@ -36,55 +36,84 @@
             <div class="card-body second">
               <h5>My University</h5>
               <hr />
-              <h5 id="uni">Al Al-Bayt University</h5>
+              <h5 id="uni">{{ universityName }}</h5>
             </div>
           </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-2 info-card">
-          <div class="card">
-            <div class="card-header">
-              <div class="post d-flex p-1">
-                <img
-                  src="../assets/main/user.png"
-                  class="rounded-circle"
-                  style="width: 20%"
-                />
-                <input
-                  type="text"
-                  class="form-control shadow-none"
-                  placeholder="Share Your Lectures,exams,notes etc"
-                />
-              </div>
-              <input type="file" style="float: right" />
-            </div>
+          <form @submit.prevent="submit">
+            <div class="card">
+              <div class="card-header">
+                <div class="post d-flex p-1">
+                  <img
+                    src="../assets/main/user.png"
+                    class="rounded-circle"
+                    style="width: 20%"
+                  />
+                  <input
+                    type="text"
+                    class="form-control shadow-none"
+                    placeholder="Share Your Lectures,exams,notes etc"
+                    v-model="form.notes"
+                  />
+                </div>
 
-            <div class="card-body">
-              <div class="row firstSelect">
-                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 mt-2">
-                  <label class="lablefirst">Select Course</label>
-                  <select class="mt-2">
-                    <option value="">choose One</option>
-                  </select>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 mt-2">
-                  <label class="lablefirst">Select Type</label>
-                  <select class="mt-2">
-                    <option value="">choose One</option>
-                  </select>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 mt-2">
-                  <label class="lablefirst">Who Can See?</label>
-                  <select class="mt-2">
-                    <option value="">choose One</option>
-                  </select>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-4">
-                  <button class="btn post">POST</button>
+                <div class="customm-file" align="right">
+                  <input
+                    class="customm-file-input"
+                    id="postf"
+                    name="postf"
+                    type="file"
+                    @change="file($event)"
+                  />
+                  <label class="customm-file-label" for="custommFile"
+                    ><img src="../assets/file.png" class="mr-3" />Upload
+                    Attachment</label
+                  >
                 </div>
               </div>
-            </div>
-          </div>
 
+              <div class="card-body">
+                <div class="row firstSelect">
+                  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 mt-2">
+                    <label class="lablefirst">Select Course</label>
+                    <select
+                      class="mt-2"
+                      v-model="form.course"
+                      id="course"
+                      name="course"
+                    >
+                      <option value="one">One</option>
+                      <option value="two">two</option>
+                    </select>
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 mt-2">
+                    <label class="lablefirst">Select Type</label>
+                    <select class="mt-2" v-model="form.type">
+                      <option value="Lecture">Lecture</option>
+                      <option value="Exam">Exam</option>
+                      <option value="Reference">Reference</option>
+                      <option value="Home Work">Home Work</option>
+                      <option value="Books">Books</option>
+                      <option value="Notes">Notes</option>
+                    </select>
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 mt-2">
+                    <label class="lablefirst">Who Can See?</label>
+                    <select class="mt-2" v-model="form.privacy">
+                      <option value="Everyone">Everyone</option>
+                      <option value="My Major">My Major</option>
+                      <option value="Friends">Friends</option>
+                      <option value="Colleagues">Colleagues</option>
+                    </select>
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-4">
+                    <button class="btn post">POST</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
           <div class="filter mt-4">
             <label>Filter By </label>
 
@@ -118,20 +147,29 @@
             </div>
           </div>
 
-          <div class="card mt-4" style="background: #f9f9f9">
+          <div
+            class="card mt-4"
+            style="background: #f9f9f9"
+            v-for="item in items"
+            :key="item.id"
+          >
             <div class="container-fluid">
               <div class="row mt-2">
                 <div align="right">
-                  <i class="fa fa-times" style="color: red"></i>
+                  <i
+                    class="fa fa-times"
+                    style="color: red"
+                    @click="remove()"
+                  ></i>
                   <br />
-                  <span class="date"> 31-01-2020</span>
+                  <span class="date"> {{ item.date }} </span>
                 </div>
               </div>
               <div class="card-header" style="background: #f9f9f9">
                 <div class="row">
                   <div class="col-3">
                     <img
-                      src="../assets/main/user.png"
+                      :src="item.img"
                       class="rounded-circle"
                       style="width: 100%"
                     />
@@ -139,15 +177,15 @@
 
                   <div class="col-9">
                     <div class="post-information mt-1">
-                      <h5>Name Here</h5>
+                      <h5>{{ item.Name }}</h5>
                       <h6>
-                        Professor
+                        {{ item.profession }}
                         <span style="color: #0776bd"
-                          >- Al Al-Bayt University -</span
+                          >- {{ item.university }} -</span
                         >
-                        Jordan
+                        {{ item.place }}
                       </h6>
-                      <span class="notes">Notes- </span>
+                      <span class="notes">{{ item.dataType }} </span>
                     </div>
                   </div>
                 </div>
@@ -156,140 +194,19 @@
               <div class="card-body">
                 <p class="postedBy">
                   <b>posted by:</b>
-                  <span style="color: #0776bd"> Name Here</span>
+                  <span style="color: #0776bd"> {{ item.postName }}</span>
                 </p>
 
                 <div class="post-data">
                   <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Curabitur scelerisque eros in feugiat feugiat. Curabitur
-                    sollicitudin rutrum sollicitudin. Fusce tincidunt semper
-                    mauris sed ultrices. Vivamus consectetur velit tincidunt
-                    orci rutrum, sed faucibus quam elementum. Sed venenatis
-                    tortor tortor, at viverra lorem gravida in. Vivamus rutrum,
-                    ex ut congue ultricies, arcu justo auctor est, vitae auctor
-                    nulla urna quis dui. Aenean faucibus, turpis eget eleifend
-                    rhoncus, quam nisl ornare nulla, consectetur malesuada massa
-                    erat eget lectus. Nulla pharetra ultrices velit, ut tempor
-                    ligula suscipit non. Praesent eleifend est nunc, in dictum
-                    orci bibendum eget. Nulla quis mauris quis eros gravida
-                    finibus eget a mauris. Ut auctor suscipit dui non sodales.
-                    Phasellus luctus dolor sit amet fringilla venenatis.
-                    Vestibulum euismod risus eget lorem semper gravida. Mauris
-                    nunc nulla, pellentesque vitae condimentum rhoncus, euismod
-                    vel enim.
-                  </p>
-                </div>
-
-                <div class="post-image">
-                  <img
-                    src="../assets/main/post.png"
-                    class="img-fluid"
-                    alt="Responsive image"
-                  />
-
-                  <div class="d-flex post-condition mt-3">
-                    <p class="p-1">
-                      <span style="color: #05d134">1</span> TRUE
-                    </p>
-                    <p class="p-1">
-                      <span style="color: #f75555">1</span> FALSE
-                    </p>
-                    <p class="p-1">
-                      <span style="color: #ffcc00">1</span> HIGHLIGHT
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="card-footer" style="background: #f9f9f9">
-                <div class="d-flex mt-2 mb-2" style="float: left">
-                  <i class="fa fa-check true"></i>
-                  <i class="fa fa-times false"></i>
-                  <i class="fa fa-lightbulb bulb"></i>
-                </div>
-
-                <div class="d-flex mb-2 mt-2" style="float: right">
-                  <span class="last">
-                    <img src="../assets/main/restore.png" />
-                    Reply 0
-                  </span>
-                  <span class="last" style="margin-left: 10px">
-                    <img src="../assets/main/share.png" />
-                    Share
-                  </span>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="card mt-4" style="background: #f9f9f9">
-            <div class="container-fluid">
-              <div class="row mt-2">
-                <div align="right">
-                  <i class="fa fa-times" style="color: red"></i>
-                  <br />
-                  <span class="date"> 31-01-2020</span>
-                </div>
-              </div>
-              <div class="card-header" style="background: #f9f9f9">
-                <div class="row">
-                  <div class="col-3">
-                    <img
-                      src="../assets/main/user.png"
-                      class="rounded-circle"
-                      style="width: 100%"
-                    />
-                  </div>
-
-                  <div class="col-9">
-                    <div class="post-information mt-1">
-                      <h5>Name Here</h5>
-                      <h6>
-                        Professor
-                        <span style="color: #0776bd"
-                          >- Al Al-Bayt University -</span
-                        >
-                        Jordan
-                      </h6>
-                      <span class="notes">Notes- </span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="card-body">
-                <p class="postedBy">
-                  <b>posted by:</b>
-                  <span style="color: #0776bd"> Name Here</span>
-                </p>
-
-                <div class="post-data">
-                  <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Curabitur scelerisque eros in feugiat feugiat. Curabitur
-                    sollicitudin rutrum sollicitudin. Fusce tincidunt semper
-                    mauris sed ultrices. Vivamus consectetur velit tincidunt
-                    orci rutrum, sed faucibus quam elementum. Sed venenatis
-                    tortor tortor, at viverra lorem gravida in. Vivamus rutrum,
-                    ex ut congue ultricies, arcu justo auctor est, vitae auctor
-                    nulla urna quis dui. Aenean faucibus, turpis eget eleifend
-                    rhoncus, quam nisl ornare nulla, consectetur malesuada massa
-                    erat eget lectus. Nulla pharetra ultrices velit, ut tempor
-                    ligula suscipit non. Praesent eleifend est nunc, in dictum
-                    orci bibendum eget. Nulla quis mauris quis eros gravida
-                    finibus eget a mauris. Ut auctor suscipit dui non sodales.
-                    Phasellus luctus dolor sit amet fringilla venenatis.
-                    Vestibulum euismod risus eget lorem semper gravida. Mauris
-                    nunc nulla, pellentesque vitae condimentum rhoncus, euismod
-                    vel enim.
+                    {{ item.postData }}
                   </p>
                 </div>
 
                 <div class="post-media">
                   <div class="entry">
                     <img
-                      src="../assets/main/post.png"
+                      :src="item.image"
                       class="img-fluid"
                       alt="Responsive image"
                     />
@@ -313,22 +230,47 @@
                 </div>
 
                 <div class="d-flex post-condition mt-3">
-                  <p class="p-1"><span style="color: #05d134">1</span> TRUE</p>
-                  <p class="p-1"><span style="color: #f75555">1</span> FALSE</p>
                   <p class="p-1">
-                    <span style="color: #ffcc00">1</span> HIGHLIGHT
+                    <span style="color: #05d134" true-value="1" false-value="0">
+                      {{ special }}
+                    </span>
+                    TRUE
+                  </p>
+                  <p class="p-1">
+                    <span style="color: #f75555" true-value="1" false-value="0"
+                      >{{ special1 }}
+                    </span>
+                    FALSE
+                  </p>
+                  <p class="p-1">
+                    <span style="color: #ffcc00" true-value="1" false-value="0">
+                      {{ special2 }}</span
+                    >
+                    HIGHLIGHT
                   </p>
                 </div>
               </div>
 
               <div class="card-footer" style="background: #f9f9f9">
-                <div class="d-flex" style="float: left">
-                  <i class="fa fa-check true"></i>
-                  <i class="fa fa-times false"></i>
-                  <i class="fa fa-lightbulb bulb"></i>
+                <div class="d-flex mt-2 mb-2" style="float: left">
+                  <i
+                    class="fa fa-check true"
+                    @click="trueValue()"
+                    id="green"
+                  ></i>
+                  <i
+                    class="fa fa-times false"
+                    @click="falseValue()"
+                    id="red"
+                  ></i>
+                  <i
+                    class="fa fa-lightbulb bulb"
+                    @click="highValue()"
+                    id="yellow"
+                  ></i>
                 </div>
 
-                <div class="d-flex" style="float: right">
+                <div class="d-flex mb-2 mt-2" style="float: right">
                   <span class="last">
                     <img src="../assets/main/restore.png" />
                     Reply 0
@@ -347,28 +289,15 @@
             <div class="card-body">
               <span class="active"> Top Active Students</span>
               <hr />
-              <div class="profile">
-                <img src="../assets/main/user.png" class="rounded-circle" />
 
-                <p class="name">Student 1</p>
-              </div>
+              <div
+                class="profile mt-2"
+                v-for="item in studentItems"
+                :key="item.id"
+              >
+                <img :src="item.img" class="rounded-circle" />
 
-              <div class="profile mt-2">
-                <img src="../assets/main/user.png" class="rounded-circle" />
-
-                <p class="name">Student 2</p>
-              </div>
-
-              <div class="profile mt-2">
-                <img src="../assets/main/user.png" class="rounded-circle" />
-
-                <p class="name">Student 3</p>
-              </div>
-
-              <div class="profile mt-2">
-                <img src="../assets/main/user.png" class="rounded-circle" />
-
-                <p class="name">Student 4</p>
+                <p class="name">{{ item.student }}</p>
               </div>
 
               <span class="seeMore">See More... </span>
@@ -378,41 +307,16 @@
             <div class="card-body">
               <span class="active">Top Active Instructors</span>
               <hr />
-              <div class="profile mt-2">
-                <img
-                  src="../assets/main/instructor.png"
-                  class="rounded-circle"
-                />
+              <div
+                class="profile mt-2"
+                v-for="item in instructorItems"
+                :key="item.id"
+              >
+                <img :src="item.img" class="rounded-circle" />
 
-                <p class="name">Instructor 1</p>
+                <p class="name">{{ item.instructor }}</p>
               </div>
 
-              <div class="profile mt-2">
-                <img
-                  src="../assets/main/instructor.png"
-                  class="rounded-circle"
-                />
-
-                <p class="name">Instructor 2</p>
-              </div>
-
-              <div class="profile mt-2">
-                <img
-                  src="../assets/main/instructor.png"
-                  class="rounded-circle"
-                />
-
-                <p class="name">Instructor 3</p>
-              </div>
-
-              <div class="profile mt-2">
-                <img
-                  src="../assets/main/instructor.png"
-                  class="rounded-circle"
-                />
-
-                <p class="name">Instructor 4</p>
-              </div>
               <span class="seeMore">See More... </span>
             </div>
           </div>
@@ -468,17 +372,186 @@
 <script>
 import Navbar from "../components/Navbar.vue";
 import BackToTop from "../components/BackToTop.vue";
-
+import image from "../assets/main/user.png";
+import PostImage from "../assets/main/post.png";
+import studentImage from "../assets/main/user.png";
+import instructorImage from "../assets/main/instructor.png";
 export default {
   name: "HomePage",
   components: {
     Navbar,
     BackToTop,
   },
+  data() {
+    return {
+      // user Name
+      userName: "Name Here",
+      //
+      // University Name
+      universityName: "University Name Here",
+      //
+
+      special: 0,
+      special1: 0,
+      special2: 0,
+
+      items: [
+        {
+          date: "05-02-1998",
+          img: image,
+          name: "Name",
+          profession: "Professor",
+          university: "University Name",
+          place: "Jordan",
+          dataType: "Notes",
+          postName: " Name  Here",
+          postData:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur scelerisque eros in feugiat feugiat. Curabitur sollicitudin rutrum sollicitudin. Fusce tincidunt semper mauris sed ultrices. Vivamus consectetur velit tincidunt orci rutrum, sed faucibus quam elementum. Sed venenatis tortor tortor, at viverra lorem gravida in. Vivamus rutrum, ex ut congue ultricies, arcu justo auctor est, vitae auctor nulla urna quis dui. Aenean faucibus, turpis eget eleifend rhoncus, quam nisl ornare nulla, consectetur malesuada massa erat eget lectus. Nulla pharetra ultrices velit, ut tempor ligula suscipit non. Praesent eleifend est nunc, in dictum orci bibendum eget. Nulla quis mauris quis eros gravida finibus eget a mauris. Ut auctor suscipit dui non sodales. Phasellus luctus dolor sit amet fringilla venenatis. Vestibulum euismod risus eget lorem semper gravida. Mauris nunc nulla, pellentesque vitae condimentum rhoncus, euismod vel enim.",
+          image: PostImage,
+          // true: "1",
+          // false: "1",
+          // highlight: "0",
+        },
+      ],
+
+      form: {
+        notes: "",
+        attachments: "",
+        course: "Choose One",
+        type: "Choose One",
+        privacy: "Choose One",
+      },
+
+      // Top Active Students
+      studentItems: [
+        {
+          img: studentImage,
+          student: "Student1",
+        },
+        {
+          img: studentImage,
+          student: "Student2",
+        },
+        {
+          img: studentImage,
+          student: "Student3",
+        },
+        {
+          img: studentImage,
+          student: "Student4",
+        },
+      ],
+      //
+
+      // Top Active Instructors
+      instructorItems: [
+        {
+          img: instructorImage,
+          instructor: "Instructor1",
+        },
+        {
+          img: instructorImage,
+          instructor: "Instructor2",
+        },
+        {
+          img: instructorImage,
+          instructor: "Instructor3",
+        },
+        {
+          img: instructorImage,
+          instructor: "Instructor4",
+        },
+      ],
+
+      universityItems: [{}],
+
+      //
+    };
+  },
+  methods: {
+    submit() {
+      if (this.form.notes == "") {
+        this.$toasted.error("Please Share Something");
+        return;
+      }
+      if (this.form.attachments == "") {
+        this.$toasted.error("Please Select File");
+        return;
+      }
+      if (this.form.course == "") {
+        this.$toasted.error("Please Select course");
+        return;
+      }
+      if (this.form.type == "") {
+        this.$toasted.error("Please Select One Type");
+        return;
+      }
+      if (this.form.privacy == "") {
+        this.$toasted.error("Please Select One Type");
+        return;
+      } else {
+        console.log(this.form);
+        this.$toasted.success("Your Post is Shared");
+      }
+    },
+    file(event) {
+      this.form.attachments = event.target.files;
+      console.log(this.form.attachments);
+    },
+
+    remove() {
+      this.$swal({
+        icon: "warning",
+        title: "Are You Sure you want to delete?",
+        showConfirmButton: true,
+      });
+    },
+    trueValue() {
+      if (this.special == 0) {
+        this.special = 1;
+        document.getElementById("green").style.color = "#21b721";
+        this.$toasted.success("Marked As True");
+      } else if (this.special == 1) {
+        this.special = 0;
+        document.getElementById("green").style.color = "#777777";
+        this.$toasted.error("Un Marked As True");
+      }
+    },
+    falseValue() {
+      if (this.special1 == 0) {
+        this.special1 = 1;
+        document.getElementById("red").style.color = "#dc1919";
+        this.$toasted.success("Marked As False");
+      } else if (this.special1 == 1) {
+        this.special1 = 0;
+        document.getElementById("red").style.color = "#777777";
+        this.$toasted.error("Un Marked As False");
+      }
+    },
+    highValue() {
+      if (this.special2 == 0) {
+        this.special2 = 1;
+        document.getElementById("yellow").style.color = "#ffc210";
+        this.$toasted.success("Marked As Highlight");
+      } else if (this.special2 == 1) {
+        this.special2 = 0;
+        document.getElementById("yellow").style.color = "#777777";
+        this.$toasted.error("Un Marked As Highlight");
+      }
+    },
+  },
 };
 </script>
 
 <style scoped>
+.customm-file-input {
+  z-index: 2;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2px);
+  margin: 0;
+  opacity: 0;
+}
+
 .profile {
   display: flex;
 }
@@ -535,7 +608,8 @@ input {
   background: transparent;
   border-width: 0 0 0px;
   width: 100%;
-  color: #bdbdbd;
+  /* color: #bdbdbd; */
+  color: black;
 }
 .firstSelect select:focus {
   box-shadow: none;
@@ -545,7 +619,8 @@ input {
   color: #707070;
 }
 .firstSelect label {
-  color: #bdbdbd;
+  /* color: #bdbdbd; */
+  color: black;
 }
 .filter select {
   border-radius: 0px;
@@ -746,6 +821,9 @@ input {
   bottom: 0;
   top: 20% !important;
   margin: -20px auto !important;
+}
+.fa {
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 600px) {
@@ -1091,14 +1169,14 @@ input {
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
   .profile img {
-    width: 30%;
+    width: 20%;
   }
   .date {
     font-size: 15px;
   }
   .name {
     font-size: 15px;
-    margin: 30px 0px 0px 10px;
+    margin: 15px 0px 0px 10px;
   }
   .information h5 {
     font-size: 15px;
