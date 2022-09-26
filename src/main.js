@@ -13,6 +13,9 @@ import Vuelidate from 'vuelidate';
 import VueSweetalert2 from 'vue-sweetalert2';
 import 'sweetalert2/dist/sweetalert2.min.css';
 import Toasted from 'vue-toasted';
+import axios from "axios";
+
+axios.defaults.baseURL = "https://localhost:44373/api/";
 
 const Options = {
 
