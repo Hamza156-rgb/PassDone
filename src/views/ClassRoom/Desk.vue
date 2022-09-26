@@ -2,57 +2,63 @@
   <div>
     <Navbar />
     <header>
-    <svg id="svg" xmlns="http://www.w3.org/2000/svg" viewBox="-300 0 950 270" >
-    <path d="M-314,267 C105,364 400,100 812,279" fill="none" stroke="white" stroke-width="120" stroke-linecap="round"/>
-  </svg>
-    <div class="container">
-      <div class="row ">
-        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 ">
-          <div class="profile-image">
-            <img src="../../assets/main/user.png" class="rounded-circle" />
+      <svg id="svg" xmlns="http://www.w3.org/2000/svg" viewBox="-300 0 950 270">
+        <path
+          d="M-314,267 C105,364 400,100 812,279"
+          fill="none"
+          stroke="white"
+          stroke-width="120"
+          stroke-linecap="round"
+        />
+      </svg>
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+            <div class="profile-image">
+              <img v-bind:src="studentImage" class="rounded-circle" />
+            </div>
+            <div class="update mt-3">
+              <button class="btn btn-primary">Update</button>
+            </div>
           </div>
-          <div class="update mt-3">
-            <button class="btn btn-primary">Update</button>
-          </div>
-        </div>
-        <div class="col-lg-1 col-md-1"></div>
-        <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7 ">
-          <div class="information">
-            <h5>Student Name</h5>
-            <h6>Professor - Al Al-Bayt University - Jordan</h6>
-          </div>
-          <div class="data">
-            <div class="row mt-4">
-              <div class="col-3">
-                <p class="mb-0" id="one">3</p>
-                <p id="names">Posts</p>
-              </div>
+          <div class="col-lg-1 col-md-1"></div>
+          <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+            <div class="information">
+              <h5>{{ studentName }}</h5>
+              <h6>{{ type }} - {{ universityName }} - {{ universityPlace }}</h6>
+            </div>
+            <div class="data">
+              <div class="row mt-4">
+                <div class="col-3">
+                  <p class="mb-0" id="one">{{ post }}</p>
+                  <p id="names">Posts</p>
+                </div>
 
-              <div class="col-3 border-color">
-                <p class="mb-0" id="two">3</p>
-                <p id="names">Followers</p>
-              </div>
+                <div class="col-3 border-color">
+                  <p class="mb-0" id="two">{{ followers }}</p>
+                  <p id="names">Followers</p>
+                </div>
 
-              <div class="col-3 border-color">
-                <p class="mb-0" id="three">3</p>
-                <p id="names">Courses</p>
-              </div>
+                <div class="col-3 border-color">
+                  <p class="mb-0" id="three">{{ course }}</p>
+                  <p id="names">Courses</p>
+                </div>
 
-              <div class="col-3 border-color">
-                <p class="mb-0" id="four">3</p>
-                <p id="names">Friends</p>
+                <div class="col-3 border-color">
+                  <p class="mb-0" id="four">{{ friends }}</p>
+                  <p id="names">Friends</p>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2 ">
-          <div class="grades">
-            <h5>10000</h5>
-            <p>B +points</p>
+          <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+            <div class="grades">
+              <h5>{{ value }}</h5>
+              <p>{{ points }}points</p>
+            </div>
           </div>
         </div>
       </div>
-    </div>
     </header>
 
     <div class="container mt-5">
@@ -234,59 +240,15 @@
             <div class="card" style="border-color: transparent">
               <div class="card-body">
                 <div class="row">
-                  <div class="col-xs-6 col-sm-6 col-md-4 col-lg-6 mt-3">
+                  <div
+                    class="col-xs-6 col-sm-6 col-md-4 col-lg-6 mt-3"
+                    v-for="item in items"
+                    :key="item.id"
+                  >
                     <div class="card">
                       <div class="card-body course">
-                        <h3>Course Name</h3>
-                        <h4 class="mt-2">Addedd | 15 Sep 2022</h4>
-                        <button class="btn mt-2">Active</button>
-                      </div>
-                      <div class="card-footer course-footer">
-                        <div class="row mb-2">
-                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-                            <button class="btn btn-outline-primary mt-2">
-                              Colleagues
-                            </button>
-                          </div>
-                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-                            <button class="btn btn-outline-success mt-2">
-                              All Students
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-xs-6 col-sm-6 col-md-4 col-lg-6 mt-3">
-                    <div class="card">
-                      <div class="card-body course">
-                        <h3>Course Name</h3>
-                        <h4 class="mt-2">Addedd | 15 Sep 2022</h4>
-                        <button class="btn mt-2">Active</button>
-                      </div>
-                      <div class="card-footer course-footer">
-                        <div class="row mb-2">
-                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-                            <button class="btn btn-outline-primary mt-2">
-                              Colleagues
-                            </button>
-                          </div>
-                          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-                            <button class="btn btn-outline-success mt-2">
-                              All Students
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-xs-6 col-sm-6 col-md-4 col-lg-6 mt-3">
-                    <div class="card">
-                      <div class="card-body course">
-                        <h3>Course Name</h3>
-                        <h4 class="mt-2">Addedd | 15 Sep 2022</h4>
+                        <h3>{{ item.courseName }}</h3>
+                        <h4 class="mt-2">Addedd | {{ item.courseDate }}</h4>
                         <button class="btn mt-2">Active</button>
                       </div>
                       <div class="card-footer course-footer">
@@ -378,22 +340,22 @@
                 style="border-color: transparent"
               >
                 <div class="card-body">
-                  <div class="Following-data">
+                  <div class="Following-data mt-3" v-for="item in followingItems" :key="item.id">
                     <div class="row p-3">
                       <div class="col-6">
                         <div class="row">
                           <div class="col-4">
                             <img
-                              src="../../assets/main/university.png"
+                              :src="item.img"
                               class="rounded-circle"
                               style="width: 100%"
                             />
                           </div>
                           <div class="col-8 mt-lg-4">
                             <span style="color: #0776bd"
-                              >-University Name
+                              >-{{item.universityName}}
                             </span>
-                            <span class="text-muted">Jordan</span>
+                            <span class="text-muted">{{item.place}}</span>
                           </div>
                         </div>
                       </div>
@@ -405,7 +367,7 @@
                     </div>
                   </div>
 
-                  <div class="Following-data mt-3">
+                  <!-- <div class="Following-data mt-3">
                     <div class="row p-3">
                       <div class="col-6">
                         <div class="row">
@@ -430,7 +392,7 @@
                         </button>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                 </div>
               </div>
 
@@ -481,23 +443,69 @@
       </div>
     </div>
 
-   <BackToTop />
-
+    <BackToTop />
   </div>
 </template>
 
 <script>
 import Navbar from "../../components/Navbar.vue";
 import BackToTop from "../../components/BackToTop.vue";
+import studentImage from "../../assets/main/user.png";
+import universityImage from "../../assets/main/university.png";
 export default {
   name: "My Desk",
   components: {
     Navbar,
-    
-  BackToTop,
+
+    BackToTop,
   },
   data() {
     return {
+      // Information
+      studentImage,
+      studentName: "Student Name",
+      type: "Professor",
+      universityName: "Al Al-Bayt University",
+      universityPlace: "Jordan",
+      post: "1",
+      followers: "2",
+      course: "3",
+      friends: "4",
+      value: "1000",
+      points: "B+",
+      //
+
+      // Courses
+      items: [
+        {
+          courseName: "Name Here",
+          courseDate: "15 Sep 2022",
+        },
+        {
+          courseName: "Name Here",
+          courseDate: "1 Sep 2022",
+        },
+        {
+          courseName: "Name Here",
+          courseDate: "1 Sep 2022",
+        },
+      ],
+      //
+
+      // Side Nav Following
+      followingItems: [
+        {
+          img:universityImage ,
+          universityName: "Name Here",
+          place: "place",
+        },
+         {
+          img:universityImage ,
+          universityName: "Name Here",
+          place: "place",
+        },
+      ],
+
       one: true,
       two: false,
       three: false,
@@ -660,15 +668,12 @@ export default {
 </script>
 
 <style scoped>
-
 header {
   position: relative;
   height: 400px;
-  background: rgba(245, 245, 245,0.5);
+  background: rgba(245, 245, 245, 0.5);
   /* background-image: linear-gradient( rgba(245, 245, 245,0.5)); */
 }
-
-
 
 svg {
   position: absolute;
@@ -676,8 +681,6 @@ svg {
   width: 100%;
   height: auto;
 }
-
-
 
 .information h5 {
   color: black;
@@ -721,7 +724,6 @@ svg {
   background-color: white;
 }
 
-
 /* Side Nav  */
 .active {
   background-color: #ff9900;
@@ -739,17 +741,17 @@ svg {
   box-shadow: none;
 }
 
-.btn-warnings:focus {
-  color: #fff;
+/* .btn-warnings:focus {
+  color: white !important;
   background-color: #ff9900;
   outline: none;
   box-shadow: none;
   padding: 5px 8px !important;
   border-radius: 20px;
   border-color: transparent;
-}
+} */
 .btn-warnings:hover {
-  color: #fff;
+  color: white !important;
   background-color: #ff9900;
   outline: none;
   box-shadow: none;
@@ -759,7 +761,6 @@ svg {
 }
 
 /* Side Nav End */
-
 
 /* Side Nav  Feed Css Starts */
 
@@ -914,7 +915,6 @@ svg {
 
 /*Side Nav Feed Css end here */
 
-
 /* Side Nav My Courses */
 .course {
   background-color: #efefef;
@@ -950,7 +950,6 @@ svg {
 
 /* Side Nav Courses End */
 
-
 /* Side Nav Friends  */
 
 .actives {
@@ -983,7 +982,6 @@ svg {
 
 /* Side Nav Friends End */
 
-
 /* Side Nav Friends  Following*/
 
 .btn.viewprofile {
@@ -1010,15 +1008,13 @@ svg {
 
 /* Side Nav Friends  Following End Here*/
 
-
-
 @media only screen and (max-width: 600px) {
   header {
-  position: relative;
-  height: 550px;
-  background: rgba(245, 245, 245,0.5);
-  /* background-image: linear-gradient( rgba(245, 245, 245,0.5)); */
-}
+    position: relative;
+    height: 550px;
+    background: rgba(245, 245, 245, 0.5);
+    /* background-image: linear-gradient( rgba(245, 245, 245,0.5)); */
+  }
   .profile-image {
     display: flex;
     justify-content: center;
@@ -1097,11 +1093,11 @@ svg {
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
   header {
-  position: relative;
-  height: 600px;
-  background: rgba(245, 245, 245,0.5);
-  /* background-image: linear-gradient( rgba(245, 245, 245,0.5)); */
-}
+    position: relative;
+    height: 600px;
+    background: rgba(245, 245, 245, 0.5);
+    /* background-image: linear-gradient( rgba(245, 245, 245,0.5)); */
+  }
   .profile-image {
     display: flex;
     justify-content: center;
@@ -1185,11 +1181,11 @@ svg {
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
   header {
-  position: relative;
-  height: 400px;
-  background: rgba(245, 245, 245,0.5);
-  /* background-image: linear-gradient( rgba(245, 245, 245,0.5)); */
-}
+    position: relative;
+    height: 400px;
+    background: rgba(245, 245, 245, 0.5);
+    /* background-image: linear-gradient( rgba(245, 245, 245,0.5)); */
+  }
   .profile-image {
     width: 100%;
   }
@@ -1279,16 +1275,12 @@ svg {
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-
-header {
-  position: relative;
-  height: 500px;
-  background: rgba(245, 245, 245,0.5);
-  /* background-image: linear-gradient( rgba(245, 245, 245,0.5)); */
-}
-
-
-
+  header {
+    position: relative;
+    height: 500px;
+    background: rgba(245, 245, 245, 0.5);
+    /* background-image: linear-gradient( rgba(245, 245, 245,0.5)); */
+  }
 
   .profile-image {
     width: 100%;
@@ -1380,20 +1372,12 @@ header {
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-
-
-header {
-  position: relative;
-  height: 500px;
-  background: rgba(245, 245, 245,0.5);
-  /* background-image: linear-gradient( rgba(245, 245, 245,0.5)); */
-}
-
-
-
-
-
-
+  header {
+    position: relative;
+    height: 500px;
+    background: rgba(245, 245, 245, 0.5);
+    /* background-image: linear-gradient( rgba(245, 245, 245,0.5)); */
+  }
 
   .profile-image {
     width: 100%;

@@ -319,6 +319,7 @@
                     id="email2"
                     class="form-control"
                     v-model="form.confirmEmail"
+                    onblur="confirmEmail()"
                     :class="{
                       'is-invalid': submitted && $v.form.confirmEmail.$error,
                     }"
@@ -370,8 +371,15 @@
                     class="invalid-feedback"
                   >
                     <span v-if="!$v.form.confirmPassword.required">
-                      Confirm Your Password
+                      Confirm Password is required
                     </span>
+                    <span
+                      v-if="
+                        form.confirmPassword &&
+                        !$v.form.confirmPassword.sameAsPassword
+                      "
+                      >Password and Confirm Password should match</span
+                    >
                   </div>
                 </div>
                 <div class="row mb-4">
@@ -402,8 +410,7 @@
 </template>
 
 <script>
-import { required, email } from "vuelidate/lib/validators";
-
+import { required, email, sameAs } from "vuelidate/lib/validators";
 export default {
   name: "SignupInstitute",
   data() {
@@ -746,7 +753,7 @@ export default {
       email: { required, email },
       confirmEmail: { required, email },
       password: { required },
-      confirmPassword: { required },
+      confirmPassword: { required, sameAsPassword: sameAs("password") },
     },
   },
 
@@ -759,7 +766,7 @@ export default {
       } else {
         console.log(this.form);
         this.$router.push("/home");
-          this.$swal({
+        this.$swal({
           icon: "success",
           title: "Welcome ",
           showConfirmButton: false,
@@ -782,6 +789,8 @@ export default {
       document.getElementById("step1").style.backgroundColor = "#f4f4f4";
       document.getElementById("step2").style.backgroundColor = "#0099e9";
     },
+
+    
   },
 };
 </script>

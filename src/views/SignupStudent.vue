@@ -533,8 +533,15 @@
                     class="invalid-feedback"
                   >
                     <span v-if="!$v.form.confirmPassword.required">
-                      Confirm Your Password
+                      Confirm Password is required
                     </span>
+                    <span
+                      v-if="
+                        form.confirmPassword &&
+                        !$v.form.confirmPassword.sameAsPassword
+                      "
+                      >Password and Confirm Password should match</span
+                    >
                   </div>
                 </div>
                 <div class="row mb-4">
@@ -565,7 +572,7 @@
 </template>
 
 <script>
-import { required, email } from "vuelidate/lib/validators";
+import { required, email, sameAs } from "vuelidate/lib/validators";
 
 export default {
   name: "SignupStudent",
@@ -1178,7 +1185,7 @@ export default {
       email: { required, email },
       confirmEmail: { required, email },
       password: { required },
-      confirmPassword: { required },
+      confirmPassword: { required, sameAsPassword: sameAs("password") },
     },
   },
   methods: {
@@ -1190,7 +1197,7 @@ export default {
       } else {
         console.log(this.form);
         this.$router.push("/home");
-          this.$swal({
+        this.$swal({
           icon: "success",
           title: "Welcome ",
           showConfirmButton: false,
