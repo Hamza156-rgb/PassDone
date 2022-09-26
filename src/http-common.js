@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export default axios.create({
-  baseURL:  "https://localhost:44373/api/",
+  baseURL:  "http://passdoneapi.codetreck.com/public/api/",
   headers: {
     "Content-type": "application/json"
   }

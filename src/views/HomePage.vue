@@ -222,6 +222,7 @@
                             title="Read More"
                             aria-hidden="false"
                             id="search-plus"
+                            @click="getImgUrl(item.image)"
                           ></span
                         ></a>
                       </div>
@@ -363,6 +364,14 @@
             </div>
           </div>
         </div>
+
+        <modal ref="modalName1">
+          <template v-slot:body>
+            <div style="width: 100%">
+              <img class="img-fluid" :src="getImgUrl1(img)" />
+            </div>
+          </template>
+        </modal>
       </div>
     </div>
     <BackToTop />
@@ -376,11 +385,14 @@ import image from "../assets/main/user.png";
 import PostImage from "../assets/main/post.png";
 import studentImage from "../assets/main/user.png";
 import instructorImage from "../assets/main/instructor.png";
+import Modal from "../components/Modal.vue";
+
 export default {
   name: "HomePage",
   components: {
     Navbar,
     BackToTop,
+    Modal,
   },
   data() {
     return {
@@ -396,6 +408,22 @@ export default {
       special2: 0,
 
       items: [
+        {
+          date: "05-02-1998",
+          img: image,
+          name: "Name",
+          profession: "Professor",
+          university: "University Name",
+          place: "Jordan",
+          dataType: "Notes",
+          postName: " Name  Here",
+          postData:
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur scelerisque eros in feugiat feugiat. Curabitur sollicitudin rutrum sollicitudin. Fusce tincidunt semper mauris sed ultrices. Vivamus consectetur velit tincidunt orci rutrum, sed faucibus quam elementum. Sed venenatis tortor tortor, at viverra lorem gravida in. Vivamus rutrum, ex ut congue ultricies, arcu justo auctor est, vitae auctor nulla urna quis dui. Aenean faucibus, turpis eget eleifend rhoncus, quam nisl ornare nulla, consectetur malesuada massa erat eget lectus. Nulla pharetra ultrices velit, ut tempor ligula suscipit non. Praesent eleifend est nunc, in dictum orci bibendum eget. Nulla quis mauris quis eros gravida finibus eget a mauris. Ut auctor suscipit dui non sodales. Phasellus luctus dolor sit amet fringilla venenatis. Vestibulum euismod risus eget lorem semper gravida. Mauris nunc nulla, pellentesque vitae condimentum rhoncus, euismod vel enim.",
+          image: PostImage,
+          // true: "1",
+          // false: "1",
+          // highlight: "0",
+        },
         {
           date: "05-02-1998",
           img: image,
@@ -538,6 +566,16 @@ export default {
         document.getElementById("yellow").style.color = "#777777";
         this.$toasted.error("Un Marked As Highlight");
       }
+    },
+
+    getImgUrl(pet) {
+      this.img = pet;
+      this.$refs.modalName1.openModal();
+    },
+    getImgUrl1(pet) {
+      console.log(pet);
+      return pet;
+      // return require("../assets/img/photogallery/" + pet);
     },
   },
 };

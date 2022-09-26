@@ -400,7 +400,6 @@
 <script>
 import LoginNav from "../components/LoginNav.vue";
 import Footer from "../components/Footer.vue";
-
 import { Carousel, Slide } from "vue-carousel";
 export default {
   name: "Home",
