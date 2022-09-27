@@ -21,8 +21,6 @@ class ContentDataService {
     return http.get('getAllAcademicDegreesByInstitutes?institute_id=' + id)
   }
   postStudent(form) {
-    console.log(JSON.parse(JSON.stringify(form.homeTown)));
-    
     const formData = new FormData();
     formData.append('first_name', form.FirstName )
     formData.append('father_name', form.FatherName)
@@ -43,6 +41,40 @@ class ContentDataService {
     formData.append(' password', form.password)
     return http.post('createStudent', formData);
   }
+
+  jobTitle(){
+    return http.get('getAllJobTitles')
+  }
+
+
+
+
+  postInstructor(form) {
+    console.log(form.majors);
+    const formData = new FormData();
+    formData.append('first_name', form.FirstName )
+    formData.append('father_name', form.FatherName)
+    formData.append('last_name', form.LastName )
+    formData.append('date_of_birth', form.date)
+    formData.append('gender', form.gender)
+    formData.append('mobile', form.phone)
+    formData.append('country_id',form.homeTown)
+    formData.append('lives_in_id', form.livesIn)
+    formData.append('city', form.city)
+    formData.append('university_id', form.university)
+    formData.append('major_teach', form.majors)
+    formData.append('major_intrested', form.doubleMajors)
+    formData.append('job_title_id', form.jobtitle)
+    formData.append(' period', form.period)
+    formData.append(' till_now', form.tillNow)
+    formData.append('email', form.email)
+    formData.append(' password', form.password)
+    return http.post('createInstructor', formData);
+  }
+
+
+
+
 
 
   login(form) {
