@@ -13,12 +13,35 @@ class ContentDataService {
   getUniversity(id) {
     return http.get('getAllInstitutesByCountry?country_id=' + id)
   }
-  getMajor(id){
+  getMajor(id) {
     return http.get('getAllTrainingCoursesByInstitute?institute_id=' + id)
   }
- 
-  getDegree(){
-    return http.get('getAllMajorCourses')
+
+  getDegree(id) {
+    return http.get('getAllAcademicDegreesByInstitutes?institute_id=' + id)
+  }
+  postStudent(form) {
+    console.log(JSON.parse(JSON.stringify(form.homeTown)));
+    
+    const formData = new FormData();
+    formData.append('first_name', form.FirstName )
+    formData.append('father_name', form.FatherName)
+    formData.append('last_name', form.LastName )
+    formData.append('date_of_birth', form.date)
+    formData.append('gender', form.gender)
+    formData.append('mobile', form.phone)
+    formData.append('country_id',form.homeTown)
+    formData.append('lives_in_id', form.livesIn)
+    formData.append('city', form.city)
+    formData.append('university_id', form.university)
+    formData.append('major_id', form.majors)
+    formData.append('double_majors', form.doubleMajors)
+    formData.append('academic_degree_id', form.degree)
+    formData.append(' period', form.period)
+    formData.append(' till_now', form.tillNow)
+    formData.append('email', form.email)
+    formData.append(' password', form.password)
+    return http.post('createStudent', formData);
   }
 
 

@@ -199,7 +199,10 @@
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-2">
                   <label>Hometown *</label>
                   <multiselect
-                    :options="homeTownCountry"
+                    :options="homeTownCountry.map((user) => user.id)"
+                    :custom-label="
+                      (opt) => homeTownCountry.find((x) => x.id == opt).name
+                    "
                     v-on:change="homeTown"
                     label="name"
                     track-by="name"
@@ -222,7 +225,10 @@
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-2">
                   <label>Lives In *</label>
                   <multiselect
-                    :options="livesIn"
+                    :options="livesIn.map((user) => user.id)"
+                    :custom-label="
+                      (opt) => livesIn.find((x) => x.id == opt).name
+                    "
                     @select="getUniversities($event)"
                     label="name"
                     track-by="name"
@@ -266,7 +272,11 @@
                 </div>
                 <div class="row mb-4">
                   <div align="right">
-                    <button class="btn btn-lg btn-primary mt-3" id="ksetp1" @click="div2()">
+                    <button
+                      class="btn btn-lg btn-primary mt-3"
+                      id="ksetp1"
+                      @click="div2()"
+                    >
                       Continue
                     </button>
                   </div>
@@ -284,8 +294,11 @@
                   <label>University/School *</label>
 
                   <multiselect
-                    :options="universities"
-                       @select="getMajors($event)"
+                    :options="universities.map((user) => user.user_id)"
+                    :custom-label="
+                      (opt) => universities.find((x) => x.user_id == opt).name
+                    "
+                    @select="getMajors($event)"
                     label="name"
                     track-by="name"
                     placeholder="Choose One"
@@ -309,7 +322,10 @@
                   <label>Major *</label>
 
                   <multiselect
-                    :options="majors"
+                    :options="majors.map((user) => user.id)"
+                    :custom-label="
+                      (opt) => majors.find((x) => x.id == opt).name
+                    "
                     label="name"
                     track-by="name"
                     v-model="form.majors"
@@ -333,14 +349,14 @@
                   <label>Double Majors</label>
 
                   <multiselect
-                    :options="majors"
-                    label="name"
-                    track-by="name"
-                    :multiple="true"
-                    :close-on-select="false"
-                    :clear-on-select="false"
-                    :preserve-search="true"
                     v-model="form.doubleMajors"
+                    :options="majors.map((user) => user.id)"
+                    :custom-label="
+                      (opt) => majors.find((x) => x.id == opt).name
+                    "
+                    :multiple="true"
+                    :clear-on-select="false"
+                    :preserve-search="false"
                     :class="{
                       'is-invalid': submitted && $v.form.doubleMajors.$error,
                     }"
@@ -361,7 +377,10 @@
                   <label>Academic Degree *</label>
 
                   <multiselect
-                    :options="degree"
+                    :options="degree.map((user) => user.id)"
+                    :custom-label="
+                      (opt) => degree.find((x) => x.id == opt).name
+                    "
                     label="name"
                     track-by="name"
                     v-model="form.degree"
@@ -384,7 +403,7 @@
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-2">
                   <label>Period</label>
 
-                  <multiselect
+                  <!-- <multiselect
                     :options="year"
                     label="name"
                     track-by="name"
@@ -394,7 +413,102 @@
                       'is-invalid': submitted && $v.form.period.$error,
                     }"
                   >
-                  </multiselect>
+                  </multiselect> -->
+
+                  <select
+                    id="year"
+                    name="year"
+                    v-model="form.period"
+                    :class="{
+                      'is-invalid': submitted && $v.form.period.$error,
+                    }"
+                  >
+                    <option>year</option>
+                    <option value="1940">1940</option>
+                    <option value="1941">1941</option>
+                    <option value="1942">1942</option>
+                    <option value="1943">1943</option>
+                    <option value="1944">1944</option>
+                    <option value="1945">1945</option>
+                    <option value="1946">1946</option>
+                    <option value="1947">1947</option>
+                    <option value="1948">1948</option>
+                    <option value="1949">1949</option>
+                    <option value="1950">1950</option>
+                    <option value="1951">1951</option>
+                    <option value="1952">1952</option>
+                    <option value="1953">1953</option>
+                    <option value="1954">1954</option>
+                    <option value="1955">1955</option>
+                    <option value="1956">1956</option>
+                    <option value="1957">1957</option>
+                    <option value="1958">1958</option>
+                    <option value="1959">1959</option>
+                    <option value="1960">1960</option>
+                    <option value="1961">1961</option>
+                    <option value="1962">1962</option>
+                    <option value="1963">1963</option>
+                    <option value="1964">1964</option>
+                    <option value="1965">1965</option>
+                    <option value="1966">1966</option>
+                    <option value="1967">1967</option>
+                    <option value="1968">1968</option>
+                    <option value="1969">1969</option>
+                    <option value="1970">1970</option>
+                    <option value="1971">1971</option>
+                    <option value="1972">1972</option>
+                    <option value="1973">1973</option>
+                    <option value="1974">1974</option>
+                    <option value="1975">1975</option>
+                    <option value="1976">1976</option>
+                    <option value="1977">1977</option>
+                    <option value="1978">1978</option>
+                    <option value="1979">1979</option>
+                    <option value="1980">1980</option>
+                    <option value="1981">1981</option>
+                    <option value="1982">1982</option>
+                    <option value="1983">1983</option>
+                    <option value="1984">1984</option>
+                    <option value="1985">1985</option>
+                    <option value="1986">1986</option>
+                    <option value="1987">1987</option>
+                    <option value="1988">1988</option>
+                    <option value="1989">1989</option>
+                    <option value="1990">1990</option>
+                    <option value="1991">1991</option>
+                    <option value="1992">1992</option>
+                    <option value="1993">1993</option>
+                    <option value="1994">1994</option>
+                    <option value="1995">1995</option>
+                    <option value="1996">1996</option>
+                    <option value="1997">1997</option>
+                    <option value="1998">1998</option>
+                    <option value="1999">1999</option>
+                    <option value="2000">2000</option>
+                    <option value="2001">2001</option>
+                    <option value="2002">2002</option>
+                    <option value="2003">2003</option>
+                    <option value="2004">2004</option>
+                    <option value="2005">2005</option>
+                    <option value="2006">2006</option>
+                    <option value="2007">2007</option>
+                    <option value="2008">2008</option>
+                    <option value="2009">2009</option>
+                    <option value="2010">2010</option>
+                    <option value="2011">2011</option>
+                    <option value="2012">2012</option>
+                    <option value="2013">2013</option>
+                    <option value="2014">2014</option>
+                    <option value="2015">2015</option>
+                    <option value="2016">2016</option>
+                    <option value="2017">2017</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                  </select>
+
                   <div
                     v-if="submitted && $v.form.period.$error"
                     class="invalid-feedback"
@@ -406,9 +520,9 @@
                 </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-2">
-                  <label></label>
-                  <multiselect
-                    :options="year"
+                  <label>Till Now</label>
+                  <!-- <multiselect
+                    :options="TillNow"
                     label="name"
                     track-by="name"
                     v-model="form.tillNow"
@@ -417,9 +531,101 @@
                       'is-invalid': submitted && $v.form.tillNow.$error,
                     }"
                   >
-                    <option value="1">choose One</option>
-                    <option value="2">choose One</option>
-                  </multiselect>
+                
+                  </multiselect> -->
+                  <select
+                    id="year"
+                    name="year"
+                    v-model="form.tillNow"
+                    :class="{
+                      'is-invalid': submitted && $v.form.tillNow.$error,
+                    }"
+                  >
+                    <option>year</option>
+                    <option value="1940">1940</option>
+                    <option value="1941">1941</option>
+                    <option value="1942">1942</option>
+                    <option value="1943">1943</option>
+                    <option value="1944">1944</option>
+                    <option value="1945">1945</option>
+                    <option value="1946">1946</option>
+                    <option value="1947">1947</option>
+                    <option value="1948">1948</option>
+                    <option value="1949">1949</option>
+                    <option value="1950">1950</option>
+                    <option value="1951">1951</option>
+                    <option value="1952">1952</option>
+                    <option value="1953">1953</option>
+                    <option value="1954">1954</option>
+                    <option value="1955">1955</option>
+                    <option value="1956">1956</option>
+                    <option value="1957">1957</option>
+                    <option value="1958">1958</option>
+                    <option value="1959">1959</option>
+                    <option value="1960">1960</option>
+                    <option value="1961">1961</option>
+                    <option value="1962">1962</option>
+                    <option value="1963">1963</option>
+                    <option value="1964">1964</option>
+                    <option value="1965">1965</option>
+                    <option value="1966">1966</option>
+                    <option value="1967">1967</option>
+                    <option value="1968">1968</option>
+                    <option value="1969">1969</option>
+                    <option value="1970">1970</option>
+                    <option value="1971">1971</option>
+                    <option value="1972">1972</option>
+                    <option value="1973">1973</option>
+                    <option value="1974">1974</option>
+                    <option value="1975">1975</option>
+                    <option value="1976">1976</option>
+                    <option value="1977">1977</option>
+                    <option value="1978">1978</option>
+                    <option value="1979">1979</option>
+                    <option value="1980">1980</option>
+                    <option value="1981">1981</option>
+                    <option value="1982">1982</option>
+                    <option value="1983">1983</option>
+                    <option value="1984">1984</option>
+                    <option value="1985">1985</option>
+                    <option value="1986">1986</option>
+                    <option value="1987">1987</option>
+                    <option value="1988">1988</option>
+                    <option value="1989">1989</option>
+                    <option value="1990">1990</option>
+                    <option value="1991">1991</option>
+                    <option value="1992">1992</option>
+                    <option value="1993">1993</option>
+                    <option value="1994">1994</option>
+                    <option value="1995">1995</option>
+                    <option value="1996">1996</option>
+                    <option value="1997">1997</option>
+                    <option value="1998">1998</option>
+                    <option value="1999">1999</option>
+                    <option value="2000">2000</option>
+                    <option value="2001">2001</option>
+                    <option value="2002">2002</option>
+                    <option value="2003">2003</option>
+                    <option value="2004">2004</option>
+                    <option value="2005">2005</option>
+                    <option value="2006">2006</option>
+                    <option value="2007">2007</option>
+                    <option value="2008">2008</option>
+                    <option value="2009">2009</option>
+                    <option value="2010">2010</option>
+                    <option value="2011">2011</option>
+                    <option value="2012">2012</option>
+                    <option value="2013">2013</option>
+                    <option value="2014">2014</option>
+                    <option value="2015">2015</option>
+                    <option value="2016">2016</option>
+                    <option value="2017">2017</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                  </select>
                   <div
                     v-if="submitted && $v.form.tillNow.$error"
                     class="invalid-feedback"
@@ -587,7 +793,6 @@ export default {
       one: true,
       two: false,
       three: false,
-      id: "",
 
       form: {
         FirstName: "",
@@ -602,7 +807,7 @@ export default {
         // current Education
         university: "",
         majors: "",
-        doubleMajors: "",
+        doubleMajors: [],
         degree: "",
         period: "",
         tillNow: "",
@@ -620,6 +825,36 @@ export default {
       degree: [],
 
       year: [
+        { name: "2022" },
+        { name: "2021" },
+        { name: "2020" },
+        { name: "2019" },
+        { name: "2018" },
+        { name: "2017" },
+        { name: "2016" },
+        { name: "2015" },
+        { name: "2014" },
+        { name: "2013" },
+        { name: "2012" },
+        { name: "2011" },
+        { name: "2010" },
+        { name: "2009" },
+        { name: "2008" },
+        { name: "2007" },
+        { name: "2006" },
+        { name: "2005" },
+        { name: "2004" },
+        { name: "2003" },
+        { name: "2002" },
+        { name: "2001" },
+        { name: "2000" },
+        { name: "1999" },
+        { name: "1998" },
+        { name: "1997" },
+      ],
+
+      TillNow: [
+        { name: "TillNow" },
         { name: "2022" },
         { name: "2021" },
         { name: "2020" },
@@ -697,7 +932,6 @@ export default {
   created() {
     this.homeTown();
     this.LivesIn();
-    this.getDegree();
   },
 
   methods: {
@@ -713,22 +947,20 @@ export default {
     },
 
     getUniversities(event) {
-      this.livesIn = [];
       console.log(event);
-      ContentDataService.getUniversity(event.id).then((response) => {
-        console.log(response.data.data);
+      ContentDataService.getUniversity(event).then((response) => {
         this.universities = response.data.data;
+        console.log(this.universities);
       });
     },
 
     getMajors(event) {
-      ContentDataService.getMajor(event.user_id).then((response) => {
+      ContentDataService.getMajor(event).then((response) => {
         console.log(response.data.data);
         this.majors = response.data.data;
       });
-    },
-    getDegree() {
-      ContentDataService.getDegree().then((response) => {
+
+      ContentDataService.getDegree(event).then((response) => {
         console.log(response.data.data);
         this.degree = response.data.data;
       });
@@ -741,12 +973,18 @@ export default {
         return;
       } else {
         console.log(this.form);
-        this.$router.push("/home");
-        this.$swal({
-          icon: "success",
-          title: "Welcome ",
-          showConfirmButton: false,
-        });
+
+        ContentDataService.postStudent(this.form)
+          .then((response) => {
+            console.log(response.data);
+            this.$toasted.success(" Registered Successfully");
+            // this.$router.push("/home");
+          })
+          .catch((e) => {
+            if (e) {
+              this.$toasted.error("Something Went Wrong");
+            }
+          });
       }
     },
 
