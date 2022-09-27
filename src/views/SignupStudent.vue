@@ -270,16 +270,15 @@
                     </span>
                   </div>
                 </div>
-                <div class="row mb-4">
-                  <div align="right">
-                    <button
-                      class="btn btn-lg btn-primary mt-3"
-                      id="ksetp1"
-                      @click="div2()"
-                    >
-                      Continue
-                    </button>
-                  </div>
+
+                <div align="right">
+                  <button
+                    class="btn btn-primary mt-3 mb-2"
+                    id="ksetp1"
+                    @click="div2()"
+                  >
+                    Continue
+                  </button>
                 </div>
               </div>
             </section>
@@ -636,23 +635,21 @@
                   </div>
                 </div>
 
-                <div class="row mb-4">
-                  <div align="right">
-                    <button
-                      class="btn btn-lg btn-primary mt-3"
-                      style="margin-right: 15px"
-                      @click="div3()"
-                    >
-                      Continue
-                    </button>
-                    <button
-                      class="btn btn-lg btn-primary mt-3"
-                      type="button"
-                      @click="div1()"
-                    >
-                      Back
-                    </button>
-                  </div>
+                <div align="right">
+                  <button
+                    class="btn btn-primary mt-3 m-lg-2 m-md-2"
+                    id="continue"
+                    @click="div3()"
+                  >
+                    Continue
+                  </button>
+                  <button
+                    class="btn btn-primary mt-3 m-lg-2 m-md-2"
+                    id="back"
+                    @click="div1()"
+                  >
+                    Back
+                  </button>
                 </div>
               </div>
             </section>
@@ -754,23 +751,22 @@
                     >
                   </div>
                 </div>
-                <div class="row mb-4">
-                  <div align="right">
-                    <button
-                      type="submit"
-                      class="btn btn-lg btn-primary mt-3"
-                      style="margin-right: 10px"
-                    >
-                      Register
-                    </button>
-                    <button
-                      class="btn btn-lg btn-primary mr-1 mt-3"
-                      type="button"
-                      @click="div2()"
-                    >
-                      Back
-                    </button>
-                  </div>
+
+                <div align="right">
+                  <button
+                    type="submit"
+                    class="btn btn-primary mt-3 m-lg-2 m-md-2"
+                    id="continue"
+                  >
+                    Register
+                  </button>
+                  <button
+                    class="btn btn-primary mr-1 mt-3 m-lg-2 m-md-2"
+                    id="back"
+                    @click="div2()"
+                  >
+                    Back
+                  </button>
                 </div>
               </div>
             </section>
@@ -971,8 +967,7 @@ export default {
       this.$v.$touch();
       if (this.$v.$invalid) {
         return;
-      }
-       else {
+      } else {
         console.log(this.form);
 
         ContentDataService.postStudent(this.form)
@@ -1133,6 +1128,12 @@ select {
   #ksetp1 {
     width: 100%;
   }
+  #continue {
+    width: 100%;
+  }
+  #back {
+    width: 100%;
+  }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -1155,6 +1156,12 @@ select {
   #ksetp1 {
     width: 100%;
   }
+  #continue {
+    width: 100%;
+  }
+  #back {
+    width: 100%;
+  }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -1173,7 +1180,13 @@ select {
   }
 
   #ksetp1 {
-    width: 100%;
+    width: 30%;
+  }
+  #continue {
+    width: 30%;
+  }
+  #back {
+    width: 30%;
   }
 }
 
@@ -1193,6 +1206,12 @@ select {
   }
 
   #ksetp1 {
+    width: 20%;
+  }
+  #continue {
+    width: 20%;
+  }
+  #back {
     width: 20%;
   }
 }
@@ -1215,28 +1234,11 @@ select {
   #ksetp1 {
     width: 20%;
   }
-}
-</style>
-<style>
-.multiselect__tags {
-  border-radius: 0px;
-  background: transparent;
-  outline: 0;
-  border-width: 0 0 1px;
-  border-color: #bdbdbd;
-  color: black;
-  box-shadow: none;
-  width: 100%;
-}
-
-.multiselect__single {
-  border-radius: 0px;
-  background: transparent;
-  outline: 0;
-  border-width: 0 0 1px;
-  border-color: #bdbdbd;
-  color: black;
-  box-shadow: none;
-  width: 100%;
+  #continue {
+    width: 10%;
+  }
+  #back {
+    width: 10%;
+  }
 }
 </style>

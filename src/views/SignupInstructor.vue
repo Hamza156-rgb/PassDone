@@ -272,17 +272,17 @@
                     </span>
                   </div>
                 </div>
-                <div class="row mb-4">
+             
                   <div align="right">
                     <button
-                      class="btn btn-lg btn-primary mt-3"
+                      class="btn btn-primary mt-3 mb-2"
                       id="ksetp1"
                       @click="div2()"
                     >
                       Continue
                     </button>
                   </div>
-                </div>
+                
               </div>
             </section>
           </div>
@@ -639,24 +639,24 @@
                   </div>
                 </div>
 
-                <div class="row mb-4">
+            
                   <div align="right">
                     <button
-                      class="btn btn-lg btn-primary mt-3"
-                      style="margin-right: 15px"
+                      class="btn  btn-primary mt-3 m-lg-2 m-md-2"
+                          id="continue"
                       @click="div3()"
                     >
                       Continue
                     </button>
                     <button
-                      class="btn btn-lg btn-primary mt-3"
-                      type="button"
+                      class="btn  btn-primary mt-3 m-lg-2 m-md-2"
+                         id="back"
                       @click="div1()"
                     >
                       Back
                     </button>
                   </div>
-                </div>
+            
               </div>
             </section>
           </div>
@@ -757,24 +757,25 @@
                     >
                   </div>
                 </div>
-                <div class="row mb-4">
+                
                   <div align="right">
                     <button
                       type="submit"
-                      class="btn btn-lg btn-primary mt-3"
-                      style="margin-right: 10px"
+                      class="btn  btn-primary mt-3 m-lg-2 m-md-2"
+                       id="continue"
+                    
                     >
                       Register
                     </button>
                     <button
-                      class="btn btn-lg btn-primary mr-1 mt-3"
-                      type="button"
+                      class="btn  btn-primary mr-1 mt-3 m-lg-2 m-md-2"
+                       id="back"
                       @click="div2()"
                     >
                       Back
                     </button>
                   </div>
-                </div>
+              
               </div>
             </section>
           </div>
@@ -1135,6 +1136,7 @@ select {
     display: table;
     width: 100%;
   }
+
   .nav-item {
     margin-top: 10px;
   }
@@ -1144,7 +1146,14 @@ select {
     top: 10px;
     float: left;
   }
+
   #ksetp1 {
+    width: 100%;
+  }
+    #continue{
+    width: 100%;
+  }
+  #back{
     width: 100%;
   }
 }
@@ -1161,10 +1170,18 @@ select {
     float: left;
     top: 10px;
   }
+
   .nav-item {
     margin-top: 10px;
   }
+
   #ksetp1 {
+    width: 100%;
+  }
+   #continue{
+    width: 100%;
+  }
+  #back{
     width: 100%;
   }
 }
@@ -1174,6 +1191,7 @@ select {
   .btn-link {
     float: right;
   }
+
   .wizard .nav-link .badge {
     font-size: 20px;
     border-radius: 50%;
@@ -1182,8 +1200,15 @@ select {
     top: 4px;
     color: black;
   }
+
   #ksetp1 {
-    width: 100%;
+    width: 30%;
+  }
+   #continue{
+    width: 30%;
+  }
+  #back{
+    width: 30%;
   }
 }
 
@@ -1192,6 +1217,7 @@ select {
   .btn-link {
     float: right;
   }
+
   .wizard .nav-link .badge {
     font-size: 20px;
     border-radius: 50%;
@@ -1202,6 +1228,12 @@ select {
   }
 
   #ksetp1 {
+    width: 20%;
+  }
+   #continue{
+    width: 20%;
+  }
+  #back{
     width: 20%;
   }
 }
@@ -1211,6 +1243,7 @@ select {
   .btn-link {
     float: right;
   }
+
   .wizard .nav-link .badge {
     font-size: 20px;
     border-radius: 50%;
@@ -1223,30 +1256,13 @@ select {
   #ksetp1 {
     width: 20%;
   }
+  #continue{
+    width: 10%;
+  }
+  #back{
+    width: 10%;
+  }
 }
 </style>
 
 
-<style>
-.multiselect__tags {
-  border-radius: 0px;
-  background: transparent;
-  outline: 0;
-  border-width: 0 0 1px;
-  border-color: #bdbdbd;
-  color: black;
-  box-shadow: none;
-  width: 100%;
-}
-
-.multiselect__single {
-  border-radius: 0px;
-  background: transparent;
-  outline: 0;
-  border-width: 0 0 1px;
-  border-color: #bdbdbd;
-  color: black;
-  box-shadow: none;
-  width: 100%;
-}
-</style>

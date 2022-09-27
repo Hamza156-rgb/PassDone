@@ -274,13 +274,13 @@
                   </div>
                 </div>
 
-                <div class="row mb-4">
+             
                   <div align="right">
-                    <button class="btn btn-lg btn-primary mt-3" id="ksetp1">
+                    <button class="btn  btn-primary mt-3 mb-2" id="ksetp1">
                       Continue
                     </button>
                   </div>
-                </div>
+              
               </div>
             </section>
           </div>
@@ -382,24 +382,24 @@
                     >
                   </div>
                 </div>
-                <div class="row mb-4">
-                  <div align="right">
+          
+                  <div class="mb-2 mt-2" align="right">
                     <button
                       type="submit"
-                      class="btn btn-lg btn-primary mt-3"
-                      style="margin-right: 10px"
+                      class="btn btn-primary mt-3 m-lg-2 m-md-2"
+                      id="continue"
                     >
                       Register
                     </button>
                     <button
-                      class="btn btn-lg btn-primary mr-1 mt-3"
-                      type="button"
+                      class="btn btn-primary mt-3 m-lg-2 m-md-2"
+                      id="back"
                       @click="div2()"
                     >
                       Back
                     </button>
                   </div>
-                </div>
+              
               </div>
             </section>
           </div>
@@ -789,8 +789,6 @@ export default {
       document.getElementById("step1").style.backgroundColor = "#f4f4f4";
       document.getElementById("step2").style.backgroundColor = "#0099e9";
     },
-
-    
   },
 };
 </script>
@@ -903,6 +901,12 @@ select {
   #ksetp1 {
     width: 90%;
   }
+    #continue{
+    width: 100%;
+  }
+  #back{
+    width: 100%;
+  }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -923,6 +927,12 @@ select {
   #ksetp1 {
     width: 100%;
   }
+   #continue{
+    width: 100%;
+  }
+  #back{
+    width: 100%;
+  }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -939,7 +949,13 @@ select {
     color: black;
   }
   #ksetp1 {
-    width: 100%;
+    width: 30%;
+  }
+     #continue{
+    width: 30%;
+  }
+  #back{
+    width: 30%;
   }
 }
 
@@ -958,6 +974,12 @@ select {
   }
 
   #ksetp1 {
+    width: 20%;
+  }
+    #continue{
+    width: 20%;
+  }
+  #back{
     width: 20%;
   }
 }
@@ -979,32 +1001,14 @@ select {
   #ksetp1 {
     width: 20%;
   }
+    #continue{
+    width: 10%;
+  }
+  #back{
+    width: 10%;
+  }
 }
 </style>
 
 
 
-<style >
-/* This Tag is used for multi because in scoped its not worked */
-.multiselect__tags {
-  border-radius: 0px;
-  background: transparent;
-  outline: 0;
-  border-width: 0 0 1px;
-  border-color: #bdbdbd;
-  color: black;
-  box-shadow: none;
-  width: 100%;
-}
-
-.multiselect__single {
-  border-radius: 0px;
-  background: transparent;
-  outline: 0;
-  border-width: 0 0 1px;
-  border-color: #bdbdbd;
-  color: black;
-  box-shadow: none;
-  width: 100%;
-}
-</style>
