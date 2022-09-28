@@ -422,7 +422,6 @@
                       'is-invalid': submitted && $v.form.period.$error,
                     }"
                   >
-                    <option>year</option>
                     <option value="1940">1940</option>
                     <option value="1941">1941</option>
                     <option value="1942">1942</option>
@@ -959,6 +958,7 @@ export default {
       ContentDataService.getDegree(event).then((response) => {
         console.log(response.data.data);
         this.degree = response.data.data;
+        console.log( this.degree = response.data.data)
       });
     },
 

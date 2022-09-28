@@ -6,7 +6,7 @@
           <div class="col-2">
             <button
               class="navbar-toggler"
-             @click="toggleNavbar()"
+              @click="toggleNavbar()"
               style="background-color: white"
             >
               <span class="navbar-toggler-icon"></span>
@@ -83,14 +83,14 @@
         <div class="col-2">
           <div class="row">
             <div class="col-4">
-               <router-link  to="/friend-request">
-              <i class="fa fa-user" aria-hidden="true"></i>
-               </router-link>
+              <router-link to="/friend-request">
+                <i class="fa fa-user" aria-hidden="true"></i>
+              </router-link>
             </div>
             <div class="col-4">
-                  <router-link  to="/notification">
-              <i class="fa fa-bell"></i>
-                  </router-link>
+              <router-link to="/notification">
+                <i class="fa fa-bell"></i>
+              </router-link>
             </div>
             <div class="col-4">
               <div class="nav-item dropdown">
@@ -101,7 +101,7 @@
                   </router-link>
 
                   <router-link class="dropdown-item" to="/my-library">
-                  Manage Library
+                    Manage Library
                   </router-link>
 
                   <router-link class="dropdown-item" to="/account-setting">
@@ -111,11 +111,15 @@
                     Technical Support
                   </router-link>
                   <router-link class="dropdown-item" to="/update-profile">
-                  Update
+                    Update
                   </router-link>
-                     <router-link class="dropdown-item" to="/">
-                  Logout
-                  </router-link>
+                  <p
+                    class="dropdown-item"
+                    style="cursor: pointer"
+                    @click="logOut()"
+                  >
+                    Logout
+                  </p>
                 </div>
               </div>
             </div>
@@ -139,6 +143,14 @@ export default {
   methods: {
     toggleNavbar() {
       this.show = !this.show;
+    },
+    logOut() {
+      localStorage.removeItem("user_id");
+      localStorage.removeItem("token");
+      localStorage.removeItem("name");
+      localStorage.removeItem("first_name");
+      this.$toasted.success(" Logged Out Successfully");
+      this.$router.push("/");
     },
   },
 };

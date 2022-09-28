@@ -22,13 +22,13 @@ class ContentDataService {
   }
   postStudent(form) {
     const formData = new FormData();
-    formData.append('first_name', form.FirstName )
+    formData.append('first_name', form.FirstName)
     formData.append('father_name', form.FatherName)
-    formData.append('last_name', form.LastName )
+    formData.append('last_name', form.LastName)
     formData.append('date_of_birth', form.date)
     formData.append('gender', form.gender)
     formData.append('mobile', form.phone)
-    formData.append('country_id',form.homeTown)
+    formData.append('country_id', form.homeTown)
     formData.append('lives_in_id', form.livesIn)
     formData.append('city', form.city)
     formData.append('university_id', form.university)
@@ -42,23 +42,19 @@ class ContentDataService {
     return http.post('createStudent', formData);
   }
 
-  jobTitle(){
+  jobTitle() {
     return http.get('getAllJobTitles')
   }
-
-
-
-
   postInstructor(form) {
     console.log(form.majors);
     const formData = new FormData();
-    formData.append('first_name', form.FirstName )
+    formData.append('first_name', form.FirstName)
     formData.append('father_name', form.FatherName)
-    formData.append('last_name', form.LastName )
+    formData.append('last_name', form.LastName)
     formData.append('date_of_birth', form.date)
     formData.append('gender', form.gender)
     formData.append('mobile', form.phone)
-    formData.append('country_id',form.homeTown)
+    formData.append('country_id', form.homeTown)
     formData.append('lives_in_id', form.livesIn)
     formData.append('city', form.city)
     formData.append('university_id', form.university)
@@ -72,16 +68,37 @@ class ContentDataService {
     return http.post('createInstructor', formData);
   }
 
+  Institute() {
+    return http.get('getAllTypeOfInstitute')
+  }
+  getMajorInstitute() {
+    return http.get('getAllMajorCourses')
+  }
+  getTraningInstitute() {
+    return http.get('getAllTrainingCourses')
+  }
 
 
 
-
+  postInstitute(form) {
+    console.log(form.majors);
+    const formData = new FormData();
+    formData.append('email', form.email)
+    formData.append(' password', form.password)
+    formData.append(' country_id', form.country)
+    formData.append(' established_year', form.year)
+    formData.append('name', form.Name)
+    formData.append('type_of_institute_id', form.type)
+    formData.append('majors', form.subjectMajor)
+    formData.append('training_courses', form.course)
+    formData.append('about', form.about)
+    formData.append('address', form.address)
+    formData.append('contact_imformation', form.contact)
+    return http.post('createInstitute', formData);
+  }
 
   login(form) {
-    const formData = new FormData();
-    formData.append('username', form.username)
-    formData.append('password', form.password)
-    return http.post('user/login', formData);
+    return http.get('login?email=' + form.email + '&password=' + form.password, '');
   }
 
 }

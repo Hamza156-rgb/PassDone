@@ -64,7 +64,10 @@
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-2">
                   <label>Country *</label>
                   <multiselect
-                    :options="country"
+                    :options="country.map((user) => user.id)"
+                    :custom-label="
+                      (opt) => country.find((x) => x.id == opt).name
+                    "
                     label="name"
                     track-by="name"
                     placeholder="Choose One"
@@ -85,17 +88,97 @@
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-2">
                   <label>Established Year*</label>
-                  <multiselect
-                    :options="year"
-                    label="name"
-                    track-by="name"
-                    placeholder="Choose One"
+                  <select
+                    class="mt-lg-3 mt-md-3"
                     v-model="form.year"
                     :class="{
                       'is-invalid': submitted && $v.form.year.$error,
                     }"
                   >
-                  </multiselect>
+                    <option value="1940">1940</option>
+                    <option value="1941">1941</option>
+                    <option value="1942">1942</option>
+                    <option value="1943">1943</option>
+                    <option value="1944">1944</option>
+                    <option value="1945">1945</option>
+                    <option value="1946">1946</option>
+                    <option value="1947">1947</option>
+                    <option value="1948">1948</option>
+                    <option value="1949">1949</option>
+                    <option value="1950">1950</option>
+                    <option value="1951">1951</option>
+                    <option value="1952">1952</option>
+                    <option value="1953">1953</option>
+                    <option value="1954">1954</option>
+                    <option value="1955">1955</option>
+                    <option value="1956">1956</option>
+                    <option value="1957">1957</option>
+                    <option value="1958">1958</option>
+                    <option value="1959">1959</option>
+                    <option value="1960">1960</option>
+                    <option value="1961">1961</option>
+                    <option value="1962">1962</option>
+                    <option value="1963">1963</option>
+                    <option value="1964">1964</option>
+                    <option value="1965">1965</option>
+                    <option value="1966">1966</option>
+                    <option value="1967">1967</option>
+                    <option value="1968">1968</option>
+                    <option value="1969">1969</option>
+                    <option value="1970">1970</option>
+                    <option value="1971">1971</option>
+                    <option value="1972">1972</option>
+                    <option value="1973">1973</option>
+                    <option value="1974">1974</option>
+                    <option value="1975">1975</option>
+                    <option value="1976">1976</option>
+                    <option value="1977">1977</option>
+                    <option value="1978">1978</option>
+                    <option value="1979">1979</option>
+                    <option value="1980">1980</option>
+                    <option value="1981">1981</option>
+                    <option value="1982">1982</option>
+                    <option value="1983">1983</option>
+                    <option value="1984">1984</option>
+                    <option value="1985">1985</option>
+                    <option value="1986">1986</option>
+                    <option value="1987">1987</option>
+                    <option value="1988">1988</option>
+                    <option value="1989">1989</option>
+                    <option value="1990">1990</option>
+                    <option value="1991">1991</option>
+                    <option value="1992">1992</option>
+                    <option value="1993">1993</option>
+                    <option value="1994">1994</option>
+                    <option value="1995">1995</option>
+                    <option value="1996">1996</option>
+                    <option value="1997">1997</option>
+                    <option value="1998">1998</option>
+                    <option value="1999">1999</option>
+                    <option value="2000">2000</option>
+                    <option value="2001">2001</option>
+                    <option value="2002">2002</option>
+                    <option value="2003">2003</option>
+                    <option value="2004">2004</option>
+                    <option value="2005">2005</option>
+                    <option value="2006">2006</option>
+                    <option value="2007">2007</option>
+                    <option value="2008">2008</option>
+                    <option value="2009">2009</option>
+                    <option value="2010">2010</option>
+                    <option value="2011">2011</option>
+                    <option value="2012">2012</option>
+                    <option value="2013">2013</option>
+                    <option value="2014">2014</option>
+                    <option value="2015">2015</option>
+                    <option value="2016">2016</option>
+                    <option value="2017">2017</option>
+                    <option value="2018">2018</option>
+                    <option value="2019">2019</option>
+                    <option value="2020">2020</option>
+                    <option value="2021">2021</option>
+                    <option value="2022">2022</option>
+                  </select>
 
                   <div
                     v-if="submitted && $v.form.year.$error"
@@ -129,7 +212,10 @@
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                   <label class="pt-1">Type Of Institute*</label>
                   <multiselect
-                    :options="options"
+                    :options="institute.map((user) => user.id)"
+                    :custom-label="
+                      (opt) => institute.find((x) => x.id == opt).name
+                    "
                     label="name"
                     track-by="name"
                     placeholder="Choose One"
@@ -156,14 +242,13 @@
                     :class="{
                       'is-invalid': submitted && $v.form.subjectMajor.$error,
                     }"
-                    :options="options"
+                    :options="double.map((user) => user.id)"
+                    :custom-label="
+                      (opt) => double.find((x) => x.id == opt).name
+                    "
                     :multiple="true"
-                    :close-on-select="false"
                     :clear-on-select="false"
-                    :preserve-search="true"
-                    placeholder="Pick some"
-                    label="name"
-                    track-by="name"
+                    :preserve-search="false"
                     :preselect-first="true"
                   >
                   </multiselect>
@@ -183,14 +268,13 @@
                   </label>
                   <multiselect
                     v-model="form.course"
-                    :options="optionss"
+                    :options="training.map((user) => user.id)"
+                    :custom-label="
+                      (opt) => training.find((x) => x.id == opt).name
+                    "
                     :multiple="true"
-                    :close-on-select="false"
                     :clear-on-select="false"
-                    :preserve-search="true"
-                    placeholder="Pick some"
-                    label="name"
-                    track-by="name"
+                    :preserve-search="false"
                     :preselect-first="true"
                     :class="{
                       'is-invalid': submitted && $v.form.course.$error,
@@ -274,13 +358,11 @@
                   </div>
                 </div>
 
-             
-                  <div align="right">
-                    <button class="btn  btn-primary mt-3 mb-2" id="ksetp1">
-                      Continue
-                    </button>
-                  </div>
-              
+                <div class="mb-2" align="right">
+                  <button class="btn btn-primary mt-3 " id="ksetp1">
+                    Continue
+                  </button>
+                </div>
               </div>
             </section>
           </div>
@@ -382,24 +464,23 @@
                     >
                   </div>
                 </div>
-          
-                  <div class="mb-2 mt-2" align="right">
-                    <button
-                      type="submit"
-                      class="btn btn-primary mt-3 m-lg-2 m-md-2"
-                      id="continue"
-                    >
-                      Register
-                    </button>
-                    <button
-                      class="btn btn-primary mt-3 m-lg-2 m-md-2"
-                      id="back"
-                      @click="div2()"
-                    >
-                      Back
-                    </button>
-                  </div>
-              
+
+                <div class="mb-2 mt-2" align="right">
+                  <button
+                    type="submit"
+                    class="btn btn-primary mt-3 m-lg-2 m-md-2"
+                    id="continue"
+                  >
+                    Register
+                  </button>
+                  <button
+                    class="btn btn-primary mt-3 m-lg-2 m-md-2"
+                    id="back"
+                    @click="div2()"
+                  >
+                    Back
+                  </button>
+                </div>
               </div>
             </section>
           </div>
@@ -411,6 +492,8 @@
 
 <script>
 import { required, email, sameAs } from "vuelidate/lib/validators";
+import ContentDataService from "../services/ContentDataService";
+
 export default {
   name: "SignupInstitute",
   data() {
@@ -435,306 +518,10 @@ export default {
         password: "",
         confirmPassword: "",
       },
-
-      options: [
-        { name: "Vue.js", language: "JavaScript" },
-        { name: "Adonis", language: "JavaScript" },
-        { name: "Rails", language: "Ruby" },
-        { name: "Sinatra", language: "Ruby" },
-        { name: "Laravel", language: "PHP" },
-        { name: "Phoenix", language: "Elixir" },
-      ],
-
-      optionss: [
-        { name: "Vue.js", language: "JavaScript" },
-        { name: "Adonis", language: "JavaScript" },
-        { name: "Rails", language: "Ruby" },
-        { name: "Sinatra", language: "Ruby" },
-        { name: "Laravel", language: "PHP" },
-        { name: "Phoenix", language: "Elixir" },
-      ],
-
-      country: [
-        { name: "Albania" },
-        { name: "Åland Islands" },
-        { name: "Algeria" },
-        { name: "American Samoa" },
-        { name: "Andorra" },
-        { name: "Angola" },
-        { name: "Anguilla" },
-        { name: "Antarctica" },
-        { name: "Antigua and Barbuda" },
-        { name: "Argentina" },
-        { name: "Armenia" },
-        { name: "Aruba" },
-        { name: "Australia" },
-        { name: "Austria" },
-        { name: "Azerbaijan" },
-        { name: "Bahamas (the)" },
-        { name: "Bahrain" },
-        { name: "Bangladesh" },
-        { name: "Barbados" },
-        { name: "Belarus" },
-        { name: "Belgium" },
-        { name: "Belize" },
-        { name: "Benin" },
-        { name: "Bermuda" },
-        { name: "Bhutan" },
-        { name: "Bolivia (Plurinational State of)" },
-        { name: "Bonaire, Sint Eustatius and Saba" },
-        { name: "Bosnia and Herzegovina" },
-        { name: "Botswana" },
-        { name: "Bouvet Island" },
-        { name: "Brazil" },
-        { name: "British Indian Ocean Territory (the)" },
-        { name: "Brunei Darussalam" },
-        { name: "Bulgaria" },
-        { name: "Burkina Faso" },
-        { name: "Burundi" },
-        { name: "Cabo Verde" },
-        { name: "Cambodia" },
-        { name: "Cameroon" },
-        { name: "Canada" },
-        { name: "Cayman Islands (the)" },
-        { name: "Central African Republic (the)" },
-        { name: "Chad" },
-        { name: "Chile" },
-        { name: "China" },
-        { name: "Christmas Island" },
-        { name: "Cocos (Keeling) Islands (the)" },
-        { name: "Colombia" },
-        { name: "Comoros (the)" },
-        { name: "Congo (the Democratic Republic of the)" },
-        { name: "Congo (the)" },
-        { name: "Cook Islands (the)" },
-        { name: "Costa Rica" },
-        { name: "Croatia" },
-        { name: "Cuba" },
-        { name: "Curaçao" },
-        { name: "Cyprus" },
-        { name: "Czechia" },
-        { name: "Côte d'Ivoire" },
-        { name: "Denmark" },
-        { name: "Djibouti" },
-        { name: "Dominica" },
-        { name: "Dominican Republic (the)" },
-        { name: "Ecuador" },
-        { name: "Egypt" },
-        { name: "El Salvador" },
-        { name: "Equatorial Guinea" },
-        { name: "Eritrea" },
-        { name: "Estonia" },
-        { name: "Eswatini" },
-        { name: "Ethiopia" },
-        { name: "Falkland Islands (the) [Malvinas]" },
-        { name: "Faroe Islands (the)" },
-        { name: "Fiji" },
-        { name: "Finland" },
-        { name: "France" },
-        { name: "French Guiana" },
-        { name: "French Polynesia" },
-        { name: "French Southern Territories (the)" },
-        { name: "Gabon" },
-        { name: "Gambia (the)" },
-        { name: "Georgia" },
-        { name: "Germany" },
-        { name: "Ghana" },
-        { name: "Gibraltar" },
-        { name: "Greece" },
-        { name: "Greenland" },
-        { name: "Grenada" },
-        { name: "Guadeloupe" },
-        { name: "Guam" },
-        { name: "Guatemala" },
-        { name: "Guernsey" },
-        { name: "Guinea" },
-        { name: "Guinea-Bissau" },
-        { name: "Guyana" },
-        { name: "Haiti" },
-        { name: "Heard Island and McDonald Islands" },
-        { name: "Holy See (the)" },
-        { name: "Honduras" },
-        { name: "Hong Kong" },
-        { name: "Hungary" },
-        { name: "Iceland" },
-        { name: "India" },
-        { name: "Indonesia" },
-        { name: "Iran (Islamic Republic of)" },
-        { name: "Iraq" },
-        { name: "Ireland" },
-        { name: "Isle of Man" },
-        { name: "Israel" },
-        { name: "Italy" },
-        { name: "Jamaica" },
-        { name: "Japan" },
-        { name: "Jersey" },
-        { name: "Jordan" },
-        { name: "Kazakhstan" },
-        { name: "Kenya" },
-        { name: "Kiribati" },
-        { name: "Korea (the Democratic People's Republic of)" },
-        { name: "Korea (the Republic of)" },
-        { name: "Kuwait" },
-        { name: "Kyrgyzstan" },
-        { name: "Lao People's Democratic Republic (the)" },
-        { name: "Latvia" },
-        { name: "Lebanon" },
-        { name: "Lesotho" },
-        { name: "Liberia" },
-        { name: "Libya" },
-        { name: "Liechtenstein" },
-        { name: "Lithuania" },
-        { name: "Luxembourg" },
-        { name: "Macao" },
-        { name: "Madagascar" },
-        { name: "Malawi" },
-        { name: "Malaysia" },
-        { name: "Maldives" },
-        { name: "Mali" },
-        { name: "Malta" },
-        { name: "Marshall Islands (the)" },
-        { name: "Martinique" },
-        { name: "Mauritania" },
-        { name: "Mauritius" },
-        { name: "Mayotte" },
-        { name: "Mexico" },
-        { name: "Micronesia (Federated States of)" },
-        { name: "Moldova (the Republic of)" },
-        { name: "Monaco" },
-        { name: "Mongolia" },
-        { name: "Montenegro" },
-        { name: "Montserrat" },
-        { name: "Morocco" },
-        { name: "Mozambique" },
-        { name: "Myanmar" },
-        { name: "Namibia" },
-        { name: "Nauru" },
-        { name: "Nepal" },
-        { name: "Netherlands (the)" },
-        { name: "New Caledonia" },
-        { name: "New Zealand" },
-        { name: "Nicaragua" },
-        { name: "Niger (the)" },
-        { name: "Nigeria" },
-        { name: "Niue" },
-        { name: "Norfolk Island" },
-        { name: "Northern Mariana Islands (the)" },
-        { name: "Norway" },
-        { name: "Oman" },
-        { name: "Pakistan" },
-        { name: "Palau" },
-        { name: "Palestine, State of" },
-        { name: "Panama" },
-        { name: "Papua New Guinea" },
-        { name: "Paraguay" },
-        { name: "Peru" },
-        { name: "Philippines (the)" },
-        { name: "Pitcairn" },
-        { name: "Poland" },
-        { name: "Portugal" },
-        { name: "Puerto Rico" },
-        { name: "Qatar" },
-        { name: "Republic of North Macedonia" },
-        { name: "Romania", code: "RO" },
-        { name: "Russian Federation (the)" },
-        { name: "Rwanda" },
-        { name: "Réunion" },
-        { name: "Saint Barthélemy" },
-        { name: "Saint Helena, Ascension and Tristan da Cunha" },
-        { name: "Saint Kitts and Nevis" },
-        { name: "Saint Lucia" },
-        { name: "Saint Martin (French part)" },
-        { name: "Saint Pierre and Miquelon" },
-        { name: "Saint Vincent and the Grenadines" },
-        { name: "Samoa" },
-        { name: "San Marino" },
-        { name: "Sao Tome and Principe" },
-        { name: "Saudi Arabia" },
-        { name: "Senegal" },
-        { name: "Serbia" },
-        { name: "Seychelles" },
-        { name: "Sierra Leone" },
-        { name: "Singapore" },
-        { name: "Sint Maarten (Dutch part)" },
-        { name: "Slovakia" },
-        { name: "Slovenia" },
-        { name: "Solomon Islands" },
-        { name: "Somalia" },
-        { name: "South Africa" },
-        { name: "South Georgia and the South Sandwich Islands" },
-        { name: "South Sudan" },
-        { name: "Spain" },
-        { name: "Sri Lanka" },
-        { name: "Sudan (the)" },
-        { name: "Suriname" },
-        { name: "Svalbard and Jan Mayen" },
-        { name: "Sweden" },
-        { name: "Switzerland" },
-        { name: "Syrian Arab Republic" },
-        { name: "Taiwan (Province of China)" },
-        { name: "Tajikistan" },
-        { name: "Tanzania, United Republic of" },
-        { name: "Thailand" },
-        { name: "Timor-Leste" },
-        { name: "Togo" },
-        { name: "Tokelau" },
-        { name: "Tonga" },
-        { name: "Trinidad and Tobago" },
-        { name: "Tunisia" },
-        { name: "Turkey" },
-        { name: "Turkmenistan" },
-        { name: "Turks and Caicos Islands (the)" },
-        { name: "Tuvalu" },
-        { name: "Uganda" },
-        { name: "Ukraine" },
-        { name: "United Arab Emirates (the)" },
-        {
-          name: "United Kingdom of Great Britain and Northern Ireland (the)",
-        },
-        { name: "United States Minor Outlying Islands (the)" },
-        { name: "United States of America (the)" },
-        { name: "Uruguay" },
-        { name: "Uzbekistan" },
-        { name: "Vanuatu" },
-        { name: "Venezuela (Bolivarian Republic of)" },
-        { name: "Viet Nam" },
-        { name: "Virgin Islands (British)" },
-        { name: "Virgin Islands (U.S.)" },
-        { name: "Wallis and Futuna" },
-        { name: "Western Sahara" },
-        { name: "Yemen" },
-        { name: "Zambia" },
-        { name: "Zimbabwe" },
-      ],
-
-      year: [
-        { name: "2022" },
-        { name: "2021" },
-        { name: "2020" },
-        { name: "2019" },
-        { name: "2018" },
-        { name: "2017" },
-        { name: "2016" },
-        { name: "2015" },
-        { name: "2014" },
-        { name: "2013" },
-        { name: "2012" },
-        { name: "2011" },
-        { name: "2010" },
-        { name: "2009" },
-        { name: "2008" },
-        { name: "2007" },
-        { name: "2006" },
-        { name: "2005" },
-        { name: "2004" },
-        { name: "2003" },
-        { name: "2002" },
-        { name: "2001" },
-        { name: "2000" },
-        { name: "1999" },
-        { name: "1998" },
-        { name: "1997" },
-      ],
+      country: [],
+      double: [],
+      training:[],
+      institute: [],
     };
   },
 
@@ -757,7 +544,37 @@ export default {
     },
   },
 
+  created() {
+    this.Country();
+    this.Institute();
+    this.DoubleMajor();
+    this.DoubleTraning();
+  },
+
   methods: {
+    Country() {
+      ContentDataService.getCountry().then((response) => {
+        this.country = response.data.data;
+      });
+    },
+    Institute() {
+      ContentDataService.Institute().then((response) => {
+        this.institute = response.data.data;
+      });
+    },
+    DoubleMajor() {
+      ContentDataService.getMajorInstitute().then((response) => {
+        this.double = response.data.data;
+      });
+    },
+
+     DoubleTraning() {
+      ContentDataService.getTraningInstitute().then((response) => {
+        this.training = response.data.data;
+      });
+    },
+  
+
     submit() {
       this.submitted = true;
       this.$v.$touch();
@@ -765,12 +582,18 @@ export default {
         return;
       } else {
         console.log(this.form);
-        this.$router.push("/home");
-        this.$swal({
-          icon: "success",
-          title: "Welcome ",
-          showConfirmButton: false,
-        });
+
+        ContentDataService.postInstitute(this.form)
+          .then((response) => {
+            console.log(response.data);
+            this.$toasted.success(" Registered Successfully");
+            this.$router.push("/home");
+          })
+          .catch((e) => {
+            if (e) {
+              this.$toasted.error("Something Went Wrong");
+            }
+          });
       }
     },
 
@@ -901,10 +724,10 @@ select {
   #ksetp1 {
     width: 90%;
   }
-    #continue{
+  #continue {
     width: 100%;
   }
-  #back{
+  #back {
     width: 100%;
   }
 }
@@ -927,10 +750,10 @@ select {
   #ksetp1 {
     width: 100%;
   }
-   #continue{
+  #continue {
     width: 100%;
   }
-  #back{
+  #back {
     width: 100%;
   }
 }
@@ -951,10 +774,10 @@ select {
   #ksetp1 {
     width: 30%;
   }
-     #continue{
+  #continue {
     width: 30%;
   }
-  #back{
+  #back {
     width: 30%;
   }
 }
@@ -976,10 +799,10 @@ select {
   #ksetp1 {
     width: 20%;
   }
-    #continue{
+  #continue {
     width: 20%;
   }
-  #back{
+  #back {
     width: 20%;
   }
 }
@@ -1001,10 +824,10 @@ select {
   #ksetp1 {
     width: 20%;
   }
-    #continue{
+  #continue {
     width: 10%;
   }
-  #back{
+  #back {
     width: 10%;
   }
 }

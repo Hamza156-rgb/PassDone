@@ -360,34 +360,34 @@
 
           <div class="image">
             <div class="row mb-4">
-              <div class="col-md-1"></div>
-              <div class="col-md-1"></div>
-              <div class="col-md-1 col-4">
+              <div class="col-md-1 col-lg-1 "></div>
+              <div class="col-md-1 col-lg-1"></div>
+              <div class="col-md-1 col-lg-1 col-4">
                 <img src="@/assets/home/noimg.png" />
               </div>
-              <div class="col-md-1 col-4">
+              <div class="col-md-1 col-lg-1 col-4">
                 <img src="@/assets/home/noimg.png" />
               </div>
-              <div class="col-md-1 col-4">
+              <div class="col-md-1 col-lg-1 col-4">
                 <img src="@/assets/home/partner1.png" />
               </div>
-              <div class="col-md-1 col-4">
+              <div class="col-md-1 col-lg-1 col-4">
                 <img src="@/assets/home/partner2.png" />
               </div>
-              <div class="col-md-1 col-4">
+              <div class="col-md-1 col-lg-1 col-4">
                 <img src="@/assets/home/partner3.jpg" />
               </div>
-              <div class="col-md-1 col-4">
+              <div class="col-md-1 col-lg-1 col-4">
                 <img src="@/assets/home/partner4.jpg" />
               </div>
-              <div class="col-md-1 col-4">
+              <div class="col-md-1 col-lg-1 col-4">
                 <img src="@/assets/home/partner5.png" />
               </div>
-              <div class="col-md-1 col-4">
+              <div class="col-md-1 col-lg-1 col-4">
                 <img src="@/assets/home/partner6.jpg" />
               </div>
-              <div class="col-md-1"></div>
-              <div class="col-md-1"></div>
+              <div class="col-md-1 col-lg-1 "></div>
+              <div class="col-md-1  col-lg-1 "></div>
             </div>
           </div>
         </div>

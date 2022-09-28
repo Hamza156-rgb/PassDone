@@ -164,6 +164,8 @@
 <script>
 import Modal from "./Modal.vue";
 import { required, email } from "vuelidate/lib/validators";
+import ContentDataService from "../services/ContentDataService";
+
 export default {
   name: "Navbar",
   components: {
@@ -196,19 +198,31 @@ export default {
     toggleNavbar() {
       this.show = !this.show;
     },
-    async submit() {
+    submit() {
       this.submitted = true;
       this.$v.$touch();
       if (this.$v.$invalid) {
         return;
       } else {
         console.log(this.form);
-        this.$router.push("/home");
-        this.$swal({
-          icon: "success",
-          title: "Welcome ",
-          showConfirmButton: false,
-        });
+        ContentDataService.login(this.form)
+          .then((response) => {
+            console.log(response.data);
+            localStorage.setItem("user_id", response.data.data.user_id);
+            if (response.data.data.user_type != 3) {
+              localStorage.setItem("first_name", response.data.data.first_name);
+            } else if(response.data.data.user_type == 3){
+              localStorage.setItem("name", response.data.data.name);
+            }
+            localStorage.setItem("token", response.data.token);
+                this.$toasted.success(" Logged In Successfully");
+            this.$router.push("/home");
+          })
+          .catch((e) => {
+            if (e) {
+              this.$toasted.error("Username or Password is incorrect");
+            }
+          });
       }
     },
   },

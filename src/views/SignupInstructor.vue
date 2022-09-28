@@ -996,7 +996,7 @@ export default {
           .then((response) => {
             console.log(response.data);
             this.$toasted.success(" Registered Successfully");
-            // this.$router.push("/home");
+            this.$router.push("/home");
           })
           .catch((e) => {
             if (e) {
