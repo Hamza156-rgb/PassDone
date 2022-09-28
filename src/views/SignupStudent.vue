@@ -271,12 +271,8 @@
                   </div>
                 </div>
 
-                <div align="right">
-                  <button
-                    class="btn btn-primary mt-3 mb-2"
-                    id="ksetp1"
-                    @click="div2()"
-                  >
+                <div align="right" class="mt-3 mb-3">
+                  <button class="btn btn-primary" id="ksetp1" @click="div2()">
                     Continue
                   </button>
                 </div>
@@ -399,7 +395,7 @@
                   </div>
                 </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-2">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-3">
                   <label>Period</label>
 
                   <!-- <multiselect
@@ -517,7 +513,7 @@
                   </div>
                 </div>
 
-                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-2">
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-3">
                   <label>Till Now</label>
                   <!-- <multiselect
                     :options="TillNow"
@@ -539,7 +535,6 @@
                       'is-invalid': submitted && $v.form.tillNow.$error,
                     }"
                   >
-                    <option>year</option>
                     <option value="1940">1940</option>
                     <option value="1941">1941</option>
                     <option value="1942">1942</option>
@@ -634,16 +629,16 @@
                   </div>
                 </div>
 
-                <div align="right">
+                <div align="right" class="mt-3 mb-3">
                   <button
-                    class="btn btn-primary mt-3 m-lg-2 m-md-2"
+                    class="btn btn-primary mt-2 m-lg-2 m-md-2"
                     id="continue"
                     @click="div3()"
                   >
                     Continue
                   </button>
                   <button
-                    class="btn btn-primary mt-3 m-lg-2 m-md-2"
+                    class="btn btn-primary mt-2 m-lg-2 m-md-2"
                     id="back"
                     @click="div1()"
                   >
@@ -751,16 +746,16 @@
                   </div>
                 </div>
 
-                <div align="right">
+                <div align="right" class="mt-3 mb-3">
                   <button
                     type="submit"
-                    class="btn btn-primary mt-3 m-lg-2 m-md-2"
+                    class="btn btn-primary mt-2 m-lg-2 m-md-2"
                     id="continue"
                   >
                     Register
                   </button>
                   <button
-                    class="btn btn-primary mr-1 mt-3 m-lg-2 m-md-2"
+                    class="btn btn-primary mt-2 m-lg-2 m-md-2"
                     id="back"
                     @click="div2()"
                   >
@@ -794,7 +789,7 @@ export default {
         FatherName: "",
         LastName: "",
         date: "",
-        gender: "",
+        gender: "Male",
         phone: "",
         homeTown: "",
         livesIn: "",
@@ -974,9 +969,10 @@ export default {
           .then((response) => {
             localStorage.setItem("user_id", response.data.data.user_id);
             localStorage.setItem("first_name", response.data.data.first_name);
-                localStorage.setItem("token", response.data.token);
+            localStorage.setItem("token", response.data.token);
             this.$toasted.success(" Registered Successfully");
             this.$router.push("/home");
+            // localStorage.setItem("user_type");
           })
           .catch((e) => {
             if (e) {

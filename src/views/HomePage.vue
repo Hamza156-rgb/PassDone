@@ -445,7 +445,7 @@ export default {
       form: {
         notes: "",
         attachments: "",
-        course: "Choose One",
+        course: "ChooseOne",
         type: "Choose One",
         privacy: "Choose One",
       },

@@ -358,8 +358,8 @@
                   </div>
                 </div>
 
-                <div class="mb-2" align="right">
-                  <button class="btn btn-primary mt-3" id="ksetp1">
+                <div class="mb-3 mt-3" align="right">
+                  <button class="btn btn-primary " id="ksetp1">
                     Continue
                   </button>
                 </div>
@@ -465,16 +465,16 @@
                   </div>
                 </div>
 
-                <div class="mb-2 mt-2" align="right">
+                <div class="mb-3 mt-3" align="right">
                   <button
                     type="submit"
-                    class="btn btn-primary mt-3 m-lg-2 m-md-2"
+                    class="btn btn-primary mt-2 m-lg-2 m-md-2"
                     id="continue"
                   >
                     Register
                   </button>
                   <button
-                    class="btn btn-primary mt-3 m-lg-2 m-md-2"
+                    class="btn btn-primary mt-2 m-lg-2 m-md-2"
                     id="back"
                     @click="div2()"
                   >
@@ -585,6 +585,7 @@ export default {
             localStorage.setItem("user_id", response.data.data.user_id);
             localStorage.setItem("name", response.data.data.name);
             localStorage.setItem("token", response.data.token);
+                  // localStorage.setItem("user_type");
 
             this.$toasted.success(" Registered Successfully");
             this.$router.push("/home");

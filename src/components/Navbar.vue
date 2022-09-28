@@ -121,8 +121,14 @@
                     Logout
                   </p>
 
-                  <p class="token" style="color: white">
-                    {{ Name }} {{ name }}
+                  <p class="token" style="color: white" v-if="user_type == 1">
+                    {{ Name }}
+                  </p>
+                  <p class="token" style="color: white" v-if="user_type == 2">
+                    {{ Name }}
+                  </p>
+                  <p class="token" style="color: white" v-if="user_type == 3">
+                    {{ name }}
                   </p>
                 </div>
               </div>
@@ -143,12 +149,14 @@ export default {
       show: false,
       Name: "",
       name: "",
+      user_type: "",
     };
   },
 
   created() {
     this.Name = localStorage.getItem("first_name");
     this.name = localStorage.getItem("name");
+    this.user_type = localStorage.getItem("user_type");
   },
 
   methods: {
@@ -160,6 +168,7 @@ export default {
       localStorage.removeItem("token");
       localStorage.removeItem("name");
       localStorage.removeItem("first_name");
+      localStorage.removeItem("user_type");
       this.$toasted.success(" Logged Out Successfully");
       this.$router.push("/");
     },

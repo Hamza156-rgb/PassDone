@@ -7,10 +7,11 @@
         style="background-color: #0776bd"
       >
         <div class="container-fluid">
-          <div class="col-xs-2 col-sm-12 col-md-12 col-lg-2 logo">
+          <div class="col-xs-12 col-sm-12 col-md-12 col-lg-2 logo">
             <img src="../assets/logo.png" class="mb-2" />
 
             <button
+          
               class="navbar-toggler"
               type="button"
               data-toggle="collapse"
@@ -207,22 +208,23 @@ export default {
         console.log(this.form);
         ContentDataService.login(this.form)
           .then((response) => {
-            console.log(response.data);
             localStorage.setItem("user_id", response.data.data.user_id);
-            if (response.data.data.user_type != 3) {
+            if (response.data.data.user_type == 1) {
               localStorage.setItem("first_name", response.data.data.first_name);
-            } else if (response.data.data.user_type == 3) {
+            }
+            else if (response.data.data.user_type == 2) {
+              localStorage.setItem("first_name", response.data.data.first_name);
+            }
+             else if (response.data.data.user_type == 3) {
               localStorage.setItem("name", response.data.data.name);
             }
             localStorage.setItem("token", response.data.token);
+               localStorage.setItem("user_type", response.data.data.user_type);
             this.$toasted.success(" Logged In Successfully");
             this.$router.push("/home");
           })
           .catch((e) => {
-            if (e.response.status == 500) {
-              this.$toasted.error("Username or Password is incorrect");
-            }
-            if (e.response.status == 400) {
+            if (e) {
               this.$toasted.error("Username or Password is incorrect");
             }
           });
@@ -257,6 +259,24 @@ export default {
   width: 40%;
 }
 
+
+
+
+@media only screen and (max-width: 600px) {
+  .logo button{
+    margin-left: 130px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
 @media only screen and (max-width: 768px) {
   .select {
     margin: 15px 0px 0px 0px;
@@ -267,6 +287,7 @@ export default {
   .main img {
     width: 10%;
   }
+  
 }
 
 @media only screen and (min-width: 768px) {
@@ -289,7 +310,7 @@ export default {
     font-size: 13px;
   }
   .btn {
-    font-size: 13px;
+    font-size: 12px;
   }
   #forget {
     font-size: 13px;
