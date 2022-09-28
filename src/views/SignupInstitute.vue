@@ -359,7 +359,7 @@
                 </div>
 
                 <div class="mb-2" align="right">
-                  <button class="btn btn-primary mt-3 " id="ksetp1">
+                  <button class="btn btn-primary mt-3" id="ksetp1">
                     Continue
                   </button>
                 </div>
@@ -520,7 +520,7 @@ export default {
       },
       country: [],
       double: [],
-      training:[],
+      training: [],
       institute: [],
     };
   },
@@ -568,12 +568,11 @@ export default {
       });
     },
 
-     DoubleTraning() {
+    DoubleTraning() {
       ContentDataService.getTraningInstitute().then((response) => {
         this.training = response.data.data;
       });
     },
-  
 
     submit() {
       this.submitted = true;
@@ -581,11 +580,12 @@ export default {
       if (this.$v.$invalid) {
         return;
       } else {
-        console.log(this.form);
-
         ContentDataService.postInstitute(this.form)
           .then((response) => {
-            console.log(response.data);
+            localStorage.setItem("user_id", response.data.data.user_id);
+            localStorage.setItem("name", response.data.data.name);
+            localStorage.setItem("token", response.data.token);
+
             this.$toasted.success(" Registered Successfully");
             this.$router.push("/home");
           })

@@ -120,6 +120,10 @@
                   >
                     Logout
                   </p>
+
+                  <p class="token" style="color: white">
+                    {{ Name }} {{ name }}
+                  </p>
                 </div>
               </div>
             </div>
@@ -137,7 +141,14 @@ export default {
   data() {
     return {
       show: false,
+      Name: "",
+      name: "",
     };
+  },
+
+  created() {
+    this.Name = localStorage.getItem("first_name");
+    this.name = localStorage.getItem("name");
   },
 
   methods: {
@@ -189,5 +200,10 @@ img {
 .nav-item:hover .dropdown-menu {
   display: block;
   margin-top: 0px;
+}
+.token {
+  margin-left: 5px;
+  font-size: 12px;
+  cursor: pointer;
 }
 </style>

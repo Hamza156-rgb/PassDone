@@ -958,7 +958,7 @@ export default {
       ContentDataService.getDegree(event).then((response) => {
         console.log(response.data.data);
         this.degree = response.data.data;
-        console.log( this.degree = response.data.data)
+        console.log((this.degree = response.data.data));
       });
     },
 
@@ -972,7 +972,9 @@ export default {
 
         ContentDataService.postStudent(this.form)
           .then((response) => {
-            console.log(response.data);
+            localStorage.setItem("user_id", response.data.data.user_id);
+            localStorage.setItem("first_name", response.data.data.first_name);
+                localStorage.setItem("token", response.data.token);
             this.$toasted.success(" Registered Successfully");
             this.$router.push("/home");
           })

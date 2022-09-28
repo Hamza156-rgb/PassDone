@@ -211,15 +211,18 @@ export default {
             localStorage.setItem("user_id", response.data.data.user_id);
             if (response.data.data.user_type != 3) {
               localStorage.setItem("first_name", response.data.data.first_name);
-            } else if(response.data.data.user_type == 3){
+            } else if (response.data.data.user_type == 3) {
               localStorage.setItem("name", response.data.data.name);
             }
             localStorage.setItem("token", response.data.token);
-                this.$toasted.success(" Logged In Successfully");
+            this.$toasted.success(" Logged In Successfully");
             this.$router.push("/home");
           })
           .catch((e) => {
-            if (e) {
+            if (e.response.status == 500) {
+              this.$toasted.error("Username or Password is incorrect");
+            }
+            if (e.response.status == 400) {
               this.$toasted.error("Username or Password is incorrect");
             }
           });

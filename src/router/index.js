@@ -35,105 +35,134 @@ const routes = [
         path: "/",
         name: "Home",
         component: Home,
+        meta: {
+            auth: false
+        }
     },
     {
         path: "/signup-student",
         name: "SignupStudent",
         component: SignupStudent,
+        meta: {
+            auth: false
+        }
     },
     {
         path: "/signup-instructor",
         name: "SignupInstructor",
         component: SignupInstructor,
+        meta: {
+            auth: false
+        }
     },
     {
         path: "/signup-institute",
         name: "SignupInstitute",
         component: SignupInstitute,
+        meta: {
+            auth: false
+        }
     },
     {
         path: "/home",
         name: "HomePage",
         component: HomePage,
+        meta: { requiresAuth: true },
     },
     {
         path: "/my-desk",
         name: "MyDesk",
         component: MyDesk,
+        meta: { requiresAuth: true },
     },
     {
         path: "/courses",
         name: "Courses",
         component: Courses,
+        meta: { requiresAuth: true },
     },
     {
         path: "/my-instructors",
         name: "Instructors",
         component: Instructors,
+        meta: { requiresAuth: true },
     },
     {
         path: "/students",
         name: "Students",
         component: Students,
+        meta: { requiresAuth: true },
     },
     {
         path: "/my-study-room",
         name: "StudyRoom",
         component: StudyRoom,
+        meta: { requiresAuth: true },
     },
     {
         path: "/library",
         name: "Library",
         component: Library,
+        meta: { requiresAuth: true },
     },
     {
         path: "/institute",
         name: "Institute",
         component: Institute,
+        meta: { requiresAuth: true },
     },
 
     {
         path: "/institute-profile",
         name: "InstituteProfile",
         component: InstituteProfile,
+        meta: { requiresAuth: true },
     },
     {
         path: "/my-courses",
         name: "ManageCourse",
         component: ManageCourse,
+        meta: { requiresAuth: true },
     },
     {
         path: "/my-library",
         name: "ManageLibrary",
         component: ManageLibrary,
+        meta: { requiresAuth: true },
     },
     {
         path: "/account-setting",
         name: "AccountSetting",
         component: AccountSetting,
+        meta: { requiresAuth: true },
     },
     {
         path: "/technical-support",
         name: "TechnicalSupport",
         component: TechnicalSupport,
+        meta: { requiresAuth: true },
     },
     {
         path: "/update-profile",
         name: "UpdateProfile",
         component: UpdateProfile,
+        meta: { requiresAuth: true },
     },
 
     {
         path: "/notification",
         name: "Notification",
         component: Notification,
+        meta: { requiresAuth: true },
     },
 
     {
         path: "/friend-request",
         name: "FriendRequest",
         component: FriendRequest,
+        meta: { requiresAuth: true },
     },
+    { path: '*', redirect: '/' }
 
 
 ];
@@ -142,5 +171,20 @@ const router = new VueRouter({
     base: process.env.BASE_URL,
     routes,
 });
+
+router.beforeEach((to, from, next) => {
+
+    var loggedIn = localStorage.getItem('user_id');
+
+    if (to.matched.some(record => record.meta.requiresAuth) && (loggedIn == null || loggedIn == false)) {
+        next('/')
+        return;
+    }
+    next()
+})
+
+
+
+
 
 export default router;
