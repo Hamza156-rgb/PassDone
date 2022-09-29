@@ -1,3 +1,4 @@
+
 import http from "../http-common";
 // import authHeader from './auth-header';
 
@@ -78,8 +79,6 @@ class ContentDataService {
     return http.get('getAllTrainingCourses')
   }
 
-
-
   postInstitute(form) {
     console.log(form.majors);
     const formData = new FormData();
@@ -96,10 +95,83 @@ class ContentDataService {
     formData.append('contact_imformation', form.contact)
     return http.post('createInstitute', formData);
   }
-
   login(form) {
     return http.get('login?email=' + form.email + '&password=' + form.password, '');
   }
+
+
+
+  getColleagues(id) {
+    return http.get('getTotalUserColleagues?user_id=' + id)
+  }
+
+  getFollowers(id) {
+    return http.get('getTotalUserFollower?user_id=' + id)
+  }
+  getFollowing(id) {
+    return http.get('getTotalUserFollowing?user_id=' + id)
+  }
+  getFriends(id) {
+    return http.get('getTotalUserFriends?user_id=' + id)
+  }
+
+  getUniversityInstructors(id) {
+    return http.get('getTotalInstitutesInstructors?user_id=' + id)
+  }
+  getUniversityStudents(id) {
+    return http.get('getTotalInstitutesStudents?user_id=' + id)
+  }
+  getUniversityFollowers(id) {
+    return http.get('getTotalUserFollower?user_id=' + id)
+
+  }
+
+
+  getActiveStudents() {
+    return http.get('getTopActiveStudents')
+
+  }
+  getActiveInstructors() {
+    return http.get('getTopActiveInstructors')
+
+  }
+  getActiveInstitutes() {
+    return http.get('getTopActiveInstitutes')
+
+  }
+
+  getHomePost() {
+    return http.get('getAllPosts')
+
+  }
+
+  postTrue(id) {
+    return http.post('addTrueToPost?post_id=' + id)
+  }
+  postFalse(id) {
+    return http.post('addFalseToPost?post_id=' + id)
+  }
+  postHighlight(id) {
+    return http.post('addHighLightToPost?post_id=' + id)
+  }
+
+  removeTrue(id) {
+    return http.get('removeTrueToPost?post_id=' + id)
+  }
+  removeFalse(id) {
+    return http.get('removeFalseToPost?post_id=' + id)
+  }
+  removeHighlight(id) {
+    return http.get('removeHighLightToPost?post_id=' + id)
+
+  }
+
+
+
+
+
+
+
 
 }
 

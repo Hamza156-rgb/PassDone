@@ -11,7 +11,6 @@
             <img src="../assets/logo.png" class="mb-2" />
 
             <button
-          
               class="navbar-toggler"
               type="button"
               data-toggle="collapse"
@@ -205,21 +204,37 @@ export default {
       if (this.$v.$invalid) {
         return;
       } else {
-        console.log(this.form);
         ContentDataService.login(this.form)
           .then((response) => {
+            console.log(response.data);
             localStorage.setItem("user_id", response.data.data.user_id);
             if (response.data.data.user_type == 1) {
               localStorage.setItem("first_name", response.data.data.first_name);
-            }
-            else if (response.data.data.user_type == 2) {
+              localStorage.setItem(
+                "university_name",
+                response.data.data.university.name
+              );
+            } else if (response.data.data.user_type == 2) {
               localStorage.setItem("first_name", response.data.data.first_name);
-            }
-             else if (response.data.data.user_type == 3) {
+              localStorage.setItem(
+                "university_name",
+                response.data.data.university.name
+              );
+            } else if (response.data.data.user_type == 3) {
               localStorage.setItem("name", response.data.data.name);
             }
+            if (response.data.data.profile_pic == null) {
+              console.log('aya')
+              localStorage.setItem("profile_pic", "null");
+            } else {
+              localStorage.setItem(
+                "profile_pic",
+                "passdoneapi.codetreck.com" + response.data.data.profile_pic
+              );
+            }
+
             localStorage.setItem("token", response.data.token);
-               localStorage.setItem("user_type", response.data.data.user_type);
+            localStorage.setItem("user_type", response.data.data.user_type);
             this.$toasted.success(" Logged In Successfully");
             this.$router.push("/home");
           })
@@ -259,23 +274,11 @@ export default {
   width: 40%;
 }
 
-
-
-
 @media only screen and (max-width: 600px) {
-  .logo button{
+  .logo button {
     margin-left: 130px;
   }
 }
-
-
-
-
-
-
-
-
-
 
 @media only screen and (max-width: 768px) {
   .select {
@@ -287,7 +290,6 @@ export default {
   .main img {
     width: 10%;
   }
-  
 }
 
 @media only screen and (min-width: 768px) {

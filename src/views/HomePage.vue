@@ -8,14 +8,22 @@
           <div class="card">
             <div class="card-header">
               <div class="profile">
-                <img src="../assets/main/user.png" class="rounded-circle" />
+                <img
+                  v-if="profilePicture == 'null'"
+                  src="../assets/main/user.png"
+                  class="rounded-circle"
+                />
 
-                <p class="name">{{ userName }}</p>
+                <img v-else :src="profilePicture" class="rounded-circle" />
+
+                <p class="name" v-if="user_type == 1">{{ Name }}</p>
+                <p class="name" v-if="user_type == 2">{{ Name }}</p>
+                <p class="name" v-if="user_type == 3">{{ name }}</p>
               </div>
             </div>
 
             <div class="card-body">
-              <div class="row">
+              <div class="row" v-if="user_type == 1 || user_type == 2">
                 <div class="col-6 information">
                   <h5>Colleagues</h5>
                   <h5>Followers</h5>
@@ -24,15 +32,28 @@
                 </div>
                 <div class="col-4"></div>
                 <div class="col-2 value">
-                  <h5>0</h5>
-                  <h5>0</h5>
-                  <h5>0</h5>
-                  <h5>0</h5>
+                  <h5>{{ colleagues }}</h5>
+                  <h5>{{ followers }}</h5>
+                  <h5>{{ following }}</h5>
+                  <h5>{{ friends }}</h5>
+                </div>
+              </div>
+              <div class="row" v-if="user_type == 3">
+                <div class="col-6 information">
+                  <h5>Instructors</h5>
+                  <h5>Students</h5>
+                  <h5>Followers</h5>
+                </div>
+                <div class="col-4"></div>
+                <div class="col-2 value">
+                  <h5>{{ TotalInstructor }}</h5>
+                  <h5>{{ TotalStudents }}</h5>
+                  <h5>{{ TotalFollowers }}</h5>
                 </div>
               </div>
             </div>
           </div>
-          <div class="card mt-4">
+          <div class="card mt-4" v-if="user_type == 1 || user_type == 2">
             <div class="card-body second">
               <h5>My University</h5>
               <hr />
@@ -73,7 +94,7 @@
                 </div>
               </div>
 
-              <div class="card-body">
+              <div class="card-body" v-if="user_type == 1 || user_type == 2">
                 <div class="row firstSelect">
                   <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 mt-2">
                     <label class="lablefirst">Select Course</label>
@@ -108,6 +129,38 @@
                     </select>
                   </div>
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-4">
+                    <button class="btn post">POST</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-body" v-if="user_type == 3">
+                <div class="row firstSelect">
+                  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-2">
+                    <label class="lablefirst">Select Course</label>
+                    <select
+                      class="mt-2"
+                      v-model="form.course"
+                      id="course"
+                      name="course"
+                    >
+                      <option value="one">One</option>
+                      <option value="two">two</option>
+                    </select>
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-2">
+                    <label class="lablefirst">Select Type</label>
+                    <select class="mt-2" v-model="form.type">
+                      <option value="Lecture">Lecture</option>
+                      <option value="Exam">Exam</option>
+                      <option value="Reference">Reference</option>
+                      <option value="Home Work">Home Work</option>
+                      <option value="Books">Books</option>
+                      <option value="Notes">Notes</option>
+                    </select>
+                  </div>
+
+                  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-4">
                     <button class="btn post">POST</button>
                   </div>
                 </div>
@@ -150,7 +203,7 @@
           <div
             class="card mt-4"
             style="background: #f9f9f9"
-            v-for="item in items"
+            v-for="item in PostsData"
             :key="item.id"
           >
             <div class="container-fluid">
@@ -162,14 +215,22 @@
                     @click="remove()"
                   ></i>
                   <br />
-                  <span class="date"> {{ item.date }} </span>
+                  <span class="date"> {{ item.created_at }} </span>
                 </div>
               </div>
               <div class="card-header" style="background: #f9f9f9">
                 <div class="row">
                   <div class="col-3">
                     <img
-                      :src="item.img"
+                      v-if="item.postedBy.profile_pic"
+                      :src="item.postedBy.profile_pic"
+                      class="rounded-circle"
+                      style="width: 100%"
+                    />
+
+                    <img
+                      v-else
+                      src="../assets/main/user.png"
                       class="rounded-circle"
                       style="width: 100%"
                     />
@@ -177,15 +238,35 @@
 
                   <div class="col-9">
                     <div class="post-information mt-1">
-                      <h5>{{ item.Name }}</h5>
+                      <h5 v-if="item.postedBy.first_name">
+                        {{ item.postedBy.first_name }}
+                      </h5>
+                      <h5 v-if="item.postedBy.name">
+                        {{ item.postedBy.name }}
+                      </h5>
                       <h6>
-                        {{ item.profession }}
+                        <span v-if="item.postedBy.user_type == 1">{{
+                          item.postedBy.major.name
+                        }}</span>
+                        <span v-if="item.postedBy.user_type == 2">{{
+                          item.postedBy.jobTitle.name
+                        }}</span>
+                        <span v-if="item.postedBy.user_type == 3">{{
+                          item.postedBy.typeOfInstitute.name
+                        }}</span>
                         <span style="color: #0776bd"
-                          >- {{ item.university }} -</span
-                        >
-                        {{ item.place }}
+                          ><span v-if="item.postedBy.user_type == 1">
+                            - {{ item.postedBy.university.name }} -
+                          </span>
+                          <span v-if="item.postedBy.user_type == 2">
+                            - {{ item.postedBy.institute.name }} -
+                          </span>
+                          <span v-if="item.postedBy.user_type == 3">
+                            - Institute -
+                          </span>
+                        </span>
+                        {{ item.postedBy.country.name }}
                       </h6>
-                      <span class="notes">{{ item.dataType }} </span>
                     </div>
                   </div>
                 </div>
@@ -193,17 +274,22 @@
 
               <div class="card-body">
                 <p class="postedBy">
-                  <b>posted by:</b>
-                  <span style="color: #0776bd"> {{ item.postName }}</span>
+                  <b>posted by :</b>
+                  <span style="color: #0776bd" v-if="item.postedBy.first_name">
+                    {{ item.postedBy.first_name }}</span
+                  >
+                  <span style="color: #0776bd" v-if="item.postedBy.name">
+                    {{ item.postedBy.name }}</span
+                  >
                 </p>
 
                 <div class="post-data">
                   <p>
-                    {{ item.postData }}
+                    {{ item.description }}
                   </p>
                 </div>
 
-                <div class="post-media">
+                <div class="post-media" v-if="item.image">
                   <div class="entry">
                     <img
                       :src="item.image"
@@ -233,19 +319,19 @@
                 <div class="d-flex post-condition mt-3">
                   <p class="p-1">
                     <span style="color: #05d134" true-value="1" false-value="0">
-                      {{ special }}
+                      {{ item.is_true }}
                     </span>
                     TRUE
                   </p>
                   <p class="p-1">
                     <span style="color: #f75555" true-value="1" false-value="0"
-                      >{{ special1 }}
+                      >{{ item.is_false }}
                     </span>
                     FALSE
                   </p>
                   <p class="p-1">
                     <span style="color: #ffcc00" true-value="1" false-value="0">
-                      {{ special2 }}</span
+                      {{ item.is_highlight }}</span
                     >
                     HIGHLIGHT
                   </p>
@@ -256,17 +342,17 @@
                 <div class="d-flex mt-2 mb-2" style="float: left">
                   <i
                     class="fa fa-check true"
-                    @click="trueValue()"
+                    @click="trueValue(item.id)"
                     id="green"
                   ></i>
                   <i
                     class="fa fa-times false"
-                    @click="falseValue()"
+                    @click="falseValue(item.id)"
                     id="red"
                   ></i>
                   <i
                     class="fa fa-lightbulb bulb"
-                    @click="highValue()"
+                    @click="highValue(item.id)"
                     id="yellow"
                   ></i>
                 </div>
@@ -293,12 +379,22 @@
 
               <div
                 class="profile mt-2"
-                v-for="item in studentItems"
+                v-for="item in ActiveStudents"
                 :key="item.id"
               >
-                <img :src="item.img" class="rounded-circle" />
+                <img
+                  v-if="item.profile_pic"
+                  :src="item.profile_pic"
+                  class="rounded-circle"
+                />
 
-                <p class="name">{{ item.student }}</p>
+                <img
+                  v-else
+                  src="../assets/main/user.png"
+                  class="rounded-circle"
+                />
+
+                <p class="name">{{ item.first_name }}</p>
               </div>
 
               <span class="seeMore">See More... </span>
@@ -310,12 +406,21 @@
               <hr />
               <div
                 class="profile mt-2"
-                v-for="item in instructorItems"
+                v-for="item in ActiveInstructors"
                 :key="item.id"
               >
-                <img :src="item.img" class="rounded-circle" />
+                <img
+                  v-if="item.profile_pic"
+                  :src="item.profile_pic"
+                  class="rounded-circle"
+                />
+                <img
+                  v-else
+                  src="../assets/main/instructor.png"
+                  class="rounded-circle"
+                />
 
-                <p class="name">{{ item.instructor }}</p>
+                <p class="name">{{ item.first_name }}</p>
               </div>
 
               <span class="seeMore">See More... </span>
@@ -325,41 +430,26 @@
             <div class="card-body">
               <span class="active">Top Active Universities</span>
               <hr />
-              <div class="profile">
+              <div
+                class="profile mt-2"
+                v-for="item in ActiveInstitutes"
+                :key="item.id"
+              >
                 <img
+                  v-if="item.profile_pic"
+                  :src="item.profile_pic"
+                  class="rounded-circle"
+                />
+
+                <img
+                  v-else
                   src="../assets/main/university.png"
                   class="rounded-circle"
                 />
 
-                <p class="name">University 1</p>
+                <p class="name">{{ item.name }}</p>
               </div>
 
-              <div class="profile mt-3">
-                <img
-                  src="../assets/main/university.png"
-                  class="rounded-circle"
-                />
-
-                <p class="name">University 2</p>
-              </div>
-
-              <div class="profile mt-2">
-                <img
-                  src="../assets/main/university.png"
-                  class="rounded-circle"
-                />
-
-                <p class="name">University 3</p>
-              </div>
-
-              <div class="profile mt-2">
-                <img
-                  src="../assets/main/university.png"
-                  class="rounded-circle"
-                />
-
-                <p class="name">University 4</p>
-              </div>
               <span class="seeMore">See More... </span>
             </div>
           </div>
@@ -386,6 +476,7 @@ import PostImage from "../assets/main/post.png";
 import studentImage from "../assets/main/user.png";
 import instructorImage from "../assets/main/instructor.png";
 import Modal from "../components/Modal.vue";
+import ContentDataService from "../services/ContentDataService";
 
 export default {
   name: "HomePage",
@@ -396,11 +487,30 @@ export default {
   },
   data() {
     return {
-      // user Name
-      userName: "Name Here",
+      colleagues: "",
+      followers: "",
+      following: "",
+      friends: "",
+      profilePicture: "",
+      trueCheck: false,
+      falseCheck: false,
+      highlightCheck: false,
+
+      // University Data User_Type 3
+      universityName: "",
+      TotalInstructor: "",
+      TotalStudents: "",
+      TotalFollowers: "",
       //
-      // University Name
-      universityName: "University Name Here",
+      ActiveStudents: [],
+      ActiveInstructors: [],
+      ActiveInstitutes: [],
+
+      PostsData: [],
+
+      Name: "",
+      name: "",
+      user_type: "",
       //
 
       special: 0,
@@ -496,7 +606,125 @@ export default {
       //
     };
   },
+
+  created() {
+    this.Name = localStorage.getItem("first_name");
+    this.name = localStorage.getItem("name");
+    this.user_type = localStorage.getItem("user_type");
+    this.universityName = localStorage.getItem("university_name");
+    this.profilePicture = localStorage.getItem("profile_pic");
+    this.getAllColleagues();
+    this.getAllFollowers();
+    this.getAllFollowing();
+    this.getAllFriends();
+
+    this.getStudents();
+    this.getInstructors();
+    this.getInstitutes();
+
+    // Uni Starts Here
+    this.getUniInstructor();
+    this.getUniStudents();
+    this.getUniFollowers();
+    // End Here
+
+    this.getAllPosts();
+  },
+
+  // mounted() {
+  //   this.removeTrue();
+  //   this.removeFalse();
+  //   this.removehigh();
+  // },
+
   methods: {
+    getAllColleagues() {
+      ContentDataService.getColleagues(localStorage.getItem("user_id")).then(
+        (response) => {
+          this.colleagues = response.data.data;
+        }
+      );
+    },
+
+    getAllFollowers() {
+      ContentDataService.getFollowers(localStorage.getItem("user_id")).then(
+        (response) => {
+          this.followers = response.data.data;
+        }
+      );
+    },
+
+    getAllFollowing() {
+      ContentDataService.getFollowing(localStorage.getItem("user_id")).then(
+        (response) => {
+          this.following = response.data.data;
+        }
+      );
+    },
+    getAllFriends() {
+      ContentDataService.getFriends(localStorage.getItem("user_id")).then(
+        (response) => {
+          this.friends = response.data.data;
+        }
+      );
+    },
+
+    // Uni Start Here
+    getUniInstructor() {
+      ContentDataService.getUniversityInstructors(
+        localStorage.getItem("user_id")
+      ).then((response) => {
+        this.TotalInstructor = response.data.data;
+      });
+    },
+    getUniStudents() {
+      ContentDataService.getUniversityStudents(
+        localStorage.getItem("user_id")
+      ).then((response) => {
+        this.TotalStudents = response.data.data;
+      });
+    },
+    getUniFollowers() {
+      ContentDataService.getUniversityFollowers(
+        localStorage.getItem("user_id")
+      ).then((response) => {
+        this.TotalFollowers = response.data.data;
+      });
+    },
+    // End Here
+
+    getStudents() {
+      ContentDataService.getActiveStudents().then((response) => {
+        var a = response.data;
+        var b = Object.values(a);
+        this.ActiveStudents = b[0];
+      });
+    },
+    getInstructors() {
+      ContentDataService.getActiveInstructors().then((response) => {
+        var a = response.data;
+        var b = Object.values(a);
+        this.ActiveInstructors = b[0];
+      });
+    },
+    getInstitutes() {
+      ContentDataService.getActiveInstitutes().then((response) => {
+        var a = response.data;
+        var b = Object.values(a);
+        this.ActiveInstitutes = b[0];
+      });
+    },
+
+    getAllPosts() {
+      ContentDataService.getHomePost().then((response) => {
+        var a = response.data;
+        var b = Object.values(a);
+        //this.ActiveInstitutes = b[0];
+        this.PostsData = b[0];
+        console.log(this.PostsData);
+      });
+    },
+
     submit() {
       if (this.form.notes == "") {
         this.$toasted.error("Please Share Something");
@@ -534,37 +762,57 @@ export default {
         showConfirmButton: true,
       });
     },
-    trueValue() {
-      if (this.special == 0) {
-        this.special = 1;
-        document.getElementById("green").style.color = "#21b721";
-        this.$toasted.success("Marked As True");
-      } else if (this.special == 1) {
-        this.special = 0;
-        document.getElementById("green").style.color = "#777777";
-        this.$toasted.error("Un Marked As True");
+    trueValue(id) {
+      if (this.trueCheck == false) {
+        ContentDataService.postTrue(id).then((response) => {
+          console.log(response.data);
+          document.getElementById("green").style.color = "#21b721";
+          this.$toasted.success("Marked As True");
+          this.trueCheck = true;
+        });
+      } else if (this.trueCheck == true) {
+        ContentDataService.removeTrue(id).then((response) => {
+          console.log(response.data);
+          document.getElementById("green").style.color = "#777777";
+          this.$toasted.success("Unmarked as True");
+          this.trueCheck = false;
+        });
       }
     },
-    falseValue() {
-      if (this.special1 == 0) {
-        this.special1 = 1;
-        document.getElementById("red").style.color = "#dc1919";
-        this.$toasted.success("Marked As False");
-      } else if (this.special1 == 1) {
-        this.special1 = 0;
-        document.getElementById("red").style.color = "#777777";
-        this.$toasted.error("Un Marked As False");
+
+    falseValue(id) {
+      if (this.falseCheck == false) {
+        ContentDataService.postFalse(id).then((response) => {
+          console.log(response.data);
+          document.getElementById("red").style.color = "#dc1919";
+          this.$toasted.success("Marked As False");
+          this.falseCheck = true;
+        });
+      } else if (this.falseCheck == true) {
+        ContentDataService.removeFalse(id).then((response) => {
+          console.log(response.data);
+          document.getElementById("red").style.color = "#777777";
+          this.$toasted.success("Unmarked As False");
+          this.falseCheck = false;
+        });
       }
     },
-    highValue() {
-      if (this.special2 == 0) {
-        this.special2 = 1;
+    highValue(id) {
+      if (this.highlightCheck == false) {
+      ContentDataService.postHighlight(id).then((response) => {
+        console.log(response.data);
         document.getElementById("yellow").style.color = "#ffc210";
         this.$toasted.success("Marked As Highlight");
-      } else if (this.special2 == 1) {
-        this.special2 = 0;
+        this.highlightCheck = true;
+      });
+      }
+
+      else if (this.highlightCheck == true) {
+        ContentDataService.removeHighlight(id).then((response) => {
+        console.log(response.data);
         document.getElementById("yellow").style.color = "#777777";
-        this.$toasted.error("Un Marked As Highlight");
+        this.$toasted.success("Unmarked As Highlight");
+      });
       }
     },
 
