@@ -378,7 +378,7 @@
                   style="background-color: white; border: 2px solid white"
                   v-if="reply"
                 >
-                  <div class="row p-2 mt-2">
+                  <div class="row p-2 mt-2" >
                     <div class="col-2">
                       <img
                         src="../assets/main/user.png"
@@ -401,12 +401,13 @@
                 </div>
               </form>
 
-              <div class="p-2" v-if="reply">
+              <div class="p-2" v-if="reply" >
                 <div
                   class="row p-2 mt-2"
                   style="background-color: white; border: 1px solid #f9f9f9"
                   v-for="reply in item.post_replies"
                   :key="reply.id"
+                  
                 >
                   <div class="col-2">
                     <img
@@ -471,7 +472,6 @@
                         <span class="last">
                           <img
                             src="../assets/main/restore.png"
-                            @click="comments()"
                             style="cursor: pointer"
                           />
                           Reply {{ item.post_replies.length }}
@@ -955,8 +955,10 @@ export default {
 
     comments() {
       if (this.reply == false) {
+        
         this.reply = true;
       } else {
+        
         this.reply = false;
       }
     },
