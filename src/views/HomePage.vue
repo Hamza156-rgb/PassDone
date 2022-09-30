@@ -359,13 +359,126 @@
 
                 <div class="d-flex mb-2 mt-2" style="float: right">
                   <span class="last">
-                    <img src="../assets/main/restore.png" />
-                    Reply 0
+                    <img
+                      src="../assets/main/restore.png"
+                      @click="comments()"
+                      style="cursor: pointer"
+                    />
+                    Reply {{ item.post_replies.length }}
                   </span>
                   <span class="last" style="margin-left: 10px">
                     <img src="../assets/main/share.png" />
                     Share
                   </span>
+                </div>
+              </div>
+              <form @submit.prevent="commentSubmit(item.id)">
+                <div
+                  class="mt-5 mb-2"
+                  style="background-color: white; border: 2px solid white"
+                  v-if="reply"
+                >
+                  <div class="row p-2 mt-2">
+                    <div class="col-2">
+                      <img
+                        src="../assets/main/user.png"
+                        class="rounded-circle"
+                        style="width: 100%"
+                      />
+                    </div>
+                    <div class="col-8">
+                      <input
+                        type="text"
+                        class="form-control shadow-none"
+                        placeholder="Share Your Lectures,exams,notes etc"
+                        v-model="commentForm.description"
+                      />
+                    </div>
+                    <div class="col-2 mt-5 mb-1">
+                      <button class="comment-btn">Post</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+
+              <div class="p-2" v-if="reply">
+                <div
+                  class="row p-2 mt-2"
+                  style="background-color: white; border: 1px solid #f9f9f9"
+                  v-for="reply in item.post_replies"
+                  :key="reply.id"
+                >
+                  <div class="col-2">
+                    <img
+                      src="../assets/main/user.png"
+                      class="rounded-circle m-1"
+                      style="width: 100%"
+                    />
+                  </div>
+
+                  <div class="col-10">
+                    <div class="post-information mt-2">
+                      <h5>{{ reply.posted_by_name }}</h5>
+                    </div>
+                    <div class="d-flex post-condition">
+                      <p class="p-1">
+                        <span
+                          style="color: #05d134"
+                          true-value="1"
+                          false-value="0"
+                        >
+                          {{ reply.is_true }}
+                        </span>
+                        TRUE
+                      </p>
+                      <p class="p-1">
+                        <span
+                          style="color: #f75555"
+                          true-value="1"
+                          false-value="0"
+                          >{{ reply.is_false }}
+                        </span>
+                        FALSE
+                      </p>
+                      <p class="p-1">
+                        <span
+                          style="color: #ffcc00"
+                          true-value="1"
+                          false-value="0"
+                        >
+                          {{ reply.is_highlight }}
+                        </span>
+                        HIGHLIGHT
+                      </p>
+                    </div>
+                  </div>
+                  <div class="col-2"></div>
+                  <div class="col-10 post-information mt-1">
+                    <h6>{{ reply.description }}</h6>
+
+                    <div class="row">
+                      <div
+                        class="col-xs-6 col-sm-6 col-md-4 col-lg-3 card-footers"
+                      >
+                        <i class="fa fa-check true" id="green"></i>
+                        <i class="fa fa-times false" id="red"></i>
+                        <i class="fa fa-lightbulb bulb" id="yellow"></i>
+                      </div>
+                      <div
+                        class="col-xs-6 col-sm-6 col-md-8 col-lg-9"
+                        align="right"
+                      >
+                        <span class="last">
+                          <img
+                            src="../assets/main/restore.png"
+                            @click="comments()"
+                            style="cursor: pointer"
+                          />
+                          Reply {{ item.post_replies.length }}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -517,6 +630,8 @@ export default {
       special1: 0,
       special2: 0,
 
+      reply: false,
+
       items: [
         {
           date: "05-02-1998",
@@ -551,6 +666,12 @@ export default {
           // highlight: "0",
         },
       ],
+
+      commentForm: {
+        Post_Id: "",
+        description: "",
+        name: "",
+      },
 
       form: {
         notes: "",
@@ -677,6 +798,7 @@ export default {
         this.TotalInstructor = response.data.data;
       });
     },
+
     getUniStudents() {
       ContentDataService.getUniversityStudents(
         localStorage.getItem("user_id")
@@ -684,6 +806,7 @@ export default {
         this.TotalStudents = response.data.data;
       });
     },
+
     getUniFollowers() {
       ContentDataService.getUniversityFollowers(
         localStorage.getItem("user_id")
@@ -700,6 +823,7 @@ export default {
         this.ActiveStudents = b[0];
       });
     },
+
     getInstructors() {
       ContentDataService.getActiveInstructors().then((response) => {
         var a = response.data;
@@ -707,6 +831,7 @@ export default {
         this.ActiveInstructors = b[0];
       });
     },
+
     getInstitutes() {
       ContentDataService.getActiveInstitutes().then((response) => {
         var a = response.data;
@@ -750,6 +875,7 @@ export default {
         this.$toasted.success("Your Post is Shared");
       }
     },
+
     file(event) {
       this.form.attachments = event.target.files;
       console.log(this.form.attachments);
@@ -762,6 +888,7 @@ export default {
         showConfirmButton: true,
       });
     },
+
     trueValue(id) {
       if (this.trueCheck == false) {
         ContentDataService.postTrue(id).then((response) => {
@@ -797,22 +924,21 @@ export default {
         });
       }
     },
+
     highValue(id) {
       if (this.highlightCheck == false) {
-      ContentDataService.postHighlight(id).then((response) => {
-        console.log(response.data);
-        document.getElementById("yellow").style.color = "#ffc210";
-        this.$toasted.success("Marked As Highlight");
-        this.highlightCheck = true;
-      });
-      }
-
-      else if (this.highlightCheck == true) {
+        ContentDataService.postHighlight(id).then((response) => {
+          console.log(response.data);
+          document.getElementById("yellow").style.color = "#ffc210";
+          this.$toasted.success("Marked As Highlight");
+          this.highlightCheck = true;
+        });
+      } else if (this.highlightCheck == true) {
         ContentDataService.removeHighlight(id).then((response) => {
-        console.log(response.data);
-        document.getElementById("yellow").style.color = "#777777";
-        this.$toasted.success("Unmarked As Highlight");
-      });
+          console.log(response.data);
+          document.getElementById("yellow").style.color = "#777777";
+          this.$toasted.success("Unmarked As Highlight");
+        });
       }
     },
 
@@ -820,10 +946,45 @@ export default {
       this.img = pet;
       this.$refs.modalName1.openModal();
     },
+
     getImgUrl1(pet) {
       console.log(pet);
       return pet;
       // return require("../assets/img/photogallery/" + pet);
+    },
+
+    comments() {
+      if (this.reply == false) {
+        this.reply = true;
+      } else {
+        this.reply = false;
+      }
+    },
+    commentSubmit(Post_Id) {
+      if (this.commentForm.description == "") {
+        this.$toasted.error("Please Share Something");
+        return;
+      } else {
+        if (localStorage.getItem("user_type") == 1) {
+          this.commentForm.name = localStorage.getItem("first_name");
+        } else if (localStorage.getItem("user_type") == 2) {
+          this.commentForm.name = localStorage.getItem("first_name");
+        } else if (localStorage.getItem("user_type") == 3) {
+          this.commentForm.name = localStorage.getItem("name");
+        }
+        this.commentForm.Post_Id = Post_Id;
+        console.log(this.commentForm);
+        ContentDataService.addReply(this.commentForm)
+          .then((response) => {
+            console.log(response.data);
+            this.$toasted.success("Successfully Posted");
+          })
+          .catch((e) => {
+            if (e) {
+              this.$toasted.error("Something Went Wrong");
+            }
+          });
+      }
     },
   },
 };
@@ -841,6 +1002,7 @@ export default {
 .profile {
   display: flex;
 }
+
 .info-card.card {
   background-color: white;
   border: 1px solid #e1e6f1;
@@ -982,6 +1144,11 @@ input {
   cursor: pointer;
   color: #777777;
 }
+.card-footers .fa {
+  cursor: pointer;
+  color: #777777;
+}
+
 .true {
   padding-left: 0px;
 }
@@ -1112,6 +1279,20 @@ input {
   cursor: pointer;
 }
 
+.comment-btn {
+  color: white;
+  border: 2px solid #0776bd;
+  border-radius: 50px;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  background-color: #0776bd;
+}
+.comment-btn:hover {
+  background-color: #0e6ca8;
+  color: white;
+}
+
 @media only screen and (max-width: 600px) {
   .profile img {
     width: 12%;
@@ -1182,6 +1363,7 @@ input {
   .card-footer img {
     width: 30%;
   }
+
   .last {
     font-size: 10px;
   }
@@ -1192,6 +1374,10 @@ input {
     right: 10px;
     left: auto;
     top: 30px;
+  }
+  .comment-btn {
+    padding: 2px 7px;
+    font-size: 8px;
   }
 }
 
@@ -1267,6 +1453,7 @@ input {
   .card-footer img {
     width: 30%;
   }
+
   .last {
     font-size: 10px;
   }
@@ -1277,6 +1464,11 @@ input {
     right: 10px;
     left: auto;
     top: 120px;
+  }
+
+  .comment-btn {
+    padding: 2px 11px;
+    font-size: 10px;
   }
 }
 
@@ -1364,6 +1556,11 @@ input {
     left: auto;
     top: 60px;
   }
+
+  .comment-btn {
+    padding: 2px 11px;
+    font-size: 10px;
+  }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -1439,6 +1636,7 @@ input {
   .card-footer img {
     width: 30%;
   }
+
   .last {
     font-size: 13px;
   }
@@ -1449,6 +1647,11 @@ input {
     right: 10px;
     left: auto;
     top: 100px;
+  }
+
+  .comment-btn {
+    padding: 2px 14px;
+    font-size: 12px;
   }
 }
 
@@ -1523,6 +1726,7 @@ input {
   .card-footer img {
     width: 40%;
   }
+
   .last {
     font-size: 12px;
   }
@@ -1533,6 +1737,11 @@ input {
     right: 10px;
     left: auto;
     top: 140px;
+  }
+
+  .comment-btn {
+    padding: 2px 16px;
+    font-size: 14px;
   }
 }
 </style>

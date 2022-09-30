@@ -166,6 +166,15 @@ class ContentDataService {
 
   }
 
+  addReply(commentForm) {
+    const formData = new FormData();
+    formData.append('post_id', commentForm.Post_Id)
+    formData.append(' description', commentForm.description)
+    formData.append('posted_by', localStorage.getItem('user_id'))
+    formData.append('posted_by_name', commentForm.name)
+    return http.post('createPostReply', formData);
+  }
+
 
 
 
