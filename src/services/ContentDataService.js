@@ -148,21 +148,21 @@ class ContentDataService {
   postTrue(id) {
     return http.post('addTrueToPost?post_id=' + id)
   }
+  removeTrue(id) {
+    return http.post('removeTrueToPost?post_id' + id)
+  }
   postFalse(id) {
     return http.post('addFalseToPost?post_id=' + id)
+  }
+
+  removeFalse(id) {
+    return http.post('removeFalseToPost?post_id=' + id)
   }
   postHighlight(id) {
     return http.post('addHighLightToPost?post_id=' + id)
   }
-
-  removeTrue(id) {
-    return http.get('removeTrueToPost?post_id=' + id)
-  }
-  removeFalse(id) {
-    return http.get('removeFalseToPost?post_id=' + id)
-  }
   removeHighlight(id) {
-    return http.get('removeHighLightToPost?post_id=' + id)
+    return http.post('removeHighLightToPost?post_id=' + id)
 
   }
 

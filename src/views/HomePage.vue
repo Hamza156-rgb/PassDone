@@ -361,7 +361,7 @@
                   <span class="last">
                     <img
                       src="../assets/main/restore.png"
-                      @click="comments()"
+                      @click="comments(item.id)"
                       style="cursor: pointer"
                     />
                     Reply {{ item.post_replies.length }}
@@ -372,11 +372,12 @@
                   </span>
                 </div>
               </div>
+              <div   v-if="reply">
               <form @submit.prevent="commentSubmit(item.id)">
                 <div
                   class="mt-5 mb-2"
                   style="background-color: white; border: 2px solid white"
-                  v-if="reply"
+                
                 >
                   <div class="row p-2 mt-2" >
                     <div class="col-2">
@@ -401,7 +402,7 @@
                 </div>
               </form>
 
-              <div class="p-2" v-if="reply" >
+              <div class="p-2" >
                 <div
                   class="row p-2 mt-2"
                   style="background-color: white; border: 1px solid #f9f9f9"
@@ -481,6 +482,11 @@
                   </div>
                 </div>
               </div>
+              </div>
+
+
+
+
             </div>
           </div>
         </div>
@@ -752,11 +758,9 @@ export default {
     this.getAllPosts();
   },
 
-  // mounted() {
-  //   this.removeTrue();
-  //   this.removeFalse();
-  //   this.removehigh();
-  // },
+  mounted() {
+   
+  },
 
   methods: {
     getAllColleagues() {
@@ -906,6 +910,7 @@ export default {
         });
       }
     },
+   
 
     falseValue(id) {
       if (this.falseCheck == false) {
@@ -953,8 +958,9 @@ export default {
       // return require("../assets/img/photogallery/" + pet);
     },
 
-    comments() {
+    comments(id) {
       if (this.reply == false) {
+        console.log(id);
         
         this.reply = true;
       } else {
