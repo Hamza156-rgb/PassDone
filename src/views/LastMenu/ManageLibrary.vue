@@ -334,11 +334,10 @@ export default {
       ContentDataService.getmyBook().then((response) => {
         console.log(response.data.data);
         this.myBook = response.data.data;
+        
         for (let i = 0; i < this.myBook.length; i++) {
           this.myBook[i].file =
             "http://passdoneapi.codetreck.com/public/" + this.myBook[i].file;
-
-        
         }
       });
     },

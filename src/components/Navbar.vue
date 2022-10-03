@@ -1,32 +1,28 @@
 <template >
   <div class="container-fluid" style="background-color: #0776bd">
     <nav class="navbar navbar-expand-lg" v-bind:class="{ navbarOpen: show }">
-      <div class="col-2">
-        <div class="row">
-          <div class="col-2">
-            <button
-              class="navbar-toggler"
-              @click="toggleNavbar()"
-              style="background-color: white"
-            >
-              <span class="navbar-toggler-icon"></span>
-            </button>
-          </div>
-
-          <div class="col-10">
-            <img src="../assets/logo.png" style="width: 100%" />
-          </div>
+      <div class="col-xs-4 col-sm-6 col-md-4 col-lg-2 logo">
+        <div align="left">
+          <img src="../assets/logo.png" class="img-fluid" />
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            @click.stop="toggleNavbar()"
+            style="box-shadow: none !important; float: left"
+          >
+            <span class="navbar-toggler-icon"></span>
+          </button>
         </div>
       </div>
-
       <div
         class="collapse navbar-collapse"
         id="navbarSupportedContent"
         v-bind:class="{ show: show }"
       >
-        <div class="col-1"></div>
-        <div class="col-7">
-          <div class="row menuImage">
+        <div class="col-xs-4 col-sm-12 col-md-12 col-lg-8">
+          <div class="row menuImage" align="center">
             <div class="col-3">
               <router-link to="/home">
                 <img src="../assets/main/home.png" />
@@ -80,8 +76,8 @@
           </div>
         </div>
 
-        <div class="col-2">
-          <div class="row">
+        <div class="col-xs-4 col-sm-12 col-md-12 col-lg-2">
+          <div class="row" align="right">
             <div class="col-4">
               <router-link to="/friend-request">
                 <i class="fa fa-user" aria-hidden="true"></i>
@@ -195,7 +191,7 @@ img {
 .dropdown-menu {
   background-color: #145d8b;
   width: 150px;
-  margin-left: -40px;
+  /* margin-left: -40px; */
 }
 .dropdown-menu :hover {
   background-color: transparent;
@@ -214,5 +210,38 @@ img {
   margin-left: 5px;
   font-size: 12px;
   cursor: pointer;
+}
+
+
+
+
+@media only screen and (max-width: 600px) {
+  .logo img {
+  width: 40%;
+}
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .logo img {
+  width: 40%;
+}
+}
+
+@media only screen and (min-width: 768px) {
+  .logo img {
+    width: 45%;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .logo img {
+    width: 100%;
+  }
+}
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .logo img {
+    width: 100%;
+  }
 }
 </style>
