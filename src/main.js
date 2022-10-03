@@ -18,9 +18,9 @@ axios.defaults.baseURL = "http://passdoneapi.codetreck.com/public/api/";
 import store from "./store";
 
 const Options = {
-
   position: 'top-center',
   duration: '3000',
+  
 };
 Vue.use(VueSweetalert2);
 Vue.use(Toasted, Options);

@@ -22,11 +22,11 @@
             <div class="row">
               <div class="col-6"><h4 class="library">Library Manage</h4></div>
               <div class="col-6">
-                <div class="card-options crd">
-                  <a href="#" class="add-list">
+                <div class="card-options crd" style="cursor:pointer">
+                  <a @click="$refs.modalName1.openModal()">
                     <i
                       class="fa-sharp fa-solid fa-circle-plus"
-                      style="margin-right: 5px"
+                      style="margin-right: 5px;color:#0776BD"
                     ></i>
                   </a>
 
@@ -79,11 +79,6 @@
               </div>
             </div>
 
-           
-
-            
-
-            
             <div class="card mt-4">
               <div class="Following-data p-3">
                 <div class="row">
@@ -100,7 +95,10 @@
                         <h5 class="name">Book Name-Added Date</h5>
                         <h6 class="uni">
                           <span style="color: #0776bd">Subject</span> |
-                          <span style="color: #0776bd"> <b style="color:black">By</b> Student Name</span> |
+                          <span style="color: #0776bd">
+                            <b style="color: black">By</b> Student Name</span
+                          >
+                          |
                           <span style="color: #0776bd">University Name</span>
                         </h6>
                       </div>
@@ -121,27 +119,150 @@
                 </div>
               </div>
             </div>
-
-              
-
-          
           </div>
         </div>
       </div>
     </div>
-       <BackToTop />
+
+    <form v-on:submit.prevent="submit">
+      <modal ref="modalName1">
+        <template v-slot:header>
+          <h5 style="color: #3390ff">Add New Book</h5>
+          <div class="row mt-4">
+            <div class="col-12">
+              <label><b>Book Name </b> </label>
+              <input
+                class="form-control form-control-lg mt-2"
+                type="text"
+                v-model="form.book"
+                placeholder="Enter the Book Name"
+              />
+            </div>
+            <div class="col-12 mt-3">
+              <label><b>Subject </b> </label>
+              <input
+                class="form-control form-control-lg mt-2"
+                type="text"
+                v-model="form.subject"
+                placeholder="Enter the Suject"
+              />
+            </div>
+            <div class="col-12 mt-3">
+              <label><b>Course Name </b> </label>
+              <multiselect
+                class="mt-2"
+                :options="degree.map((user) => user.id)"
+                :custom-label="(opt) => degree.find((x) => x.id == opt).name"
+                label="name"
+                track-by="name"
+                v-model="form.course"
+                placeholder="Select/Search for Course Name"
+              >
+              </multiselect>
+            </div>
+            <div class="col-12 mt-3">
+              <label> <b> Detail </b> </label>
+              <textarea
+                class="form-control mt-2"
+                style="border: 1px solid #dddddd"
+                id="exampleFormControlTextarea1"
+                v-model="form.detail"
+                rows="4"
+              ></textarea>
+            </div>
+
+            <div class="col-12 mt-3">
+              <label> <b> Attach Book</b> </label>
+              <input
+                class="form-control form-control-lg mt-2"
+                id="formFileLg"
+                type="file"
+                style="border: 1px solid #dddddd"
+                @change="file($event)"
+              />
+            </div>
+
+            <div class="col-12 mt-3">
+              <div align="right">
+                <button class="btn btn-primary m-2">close</button>
+                <button class="btn btn-primary m-2">Save Changes</button>
+              </div>
+            </div>
+          </div>
+        </template>
+      </modal>
+    </form>
+
+    <BackToTop />
   </div>
 </template>
 
 <script>
 import Navbar from "../../components/Navbar.vue";
 import BackToTop from "../../components/BackToTop.vue";
+import Modal from "../../components/Modal.vue";
+import ContentDataService from "../../services/ContentDataService";
 
 export default {
   name: "ManageLibrary",
   components: {
     Navbar,
-      BackToTop,
+    BackToTop,
+    Modal,
+  },
+
+  data() {
+    return {
+      degree: [],
+      form: {
+        book: "",
+        subject: "",
+        course: [],
+        detail: "",
+        attachments: "",
+      },
+    };
+  },
+
+  methods: {
+    submit() {
+      if (this.form.book == "") {
+        this.$toasted.error("Please Enter Book Name");
+        return;
+      }
+      if (this.form.subject == "") {
+        this.$toasted.error("Please Enter Subject");
+        return;
+      }
+      if (this.form.course == "") {
+        this.$toasted.error("Please Select Course");
+        return;
+      }
+      if (this.form.detail == "") {
+        this.$toasted.error("Please Write Detail");
+        return;
+      }
+      if (this.form.attachments == "") {
+        this.$toasted.error("Please Attach File");
+        return;
+      } else {
+        ContentDataService.addBook(this.form).then((response) => {
+          console.log(response.data);
+          this.$toasted.success(" Addedd Successfully");
+        });
+      }
+
+      console.log(this.form);
+    },
+    file(event) {
+      this.form.attachments = event.target.files[0];
+    },
+    getMajors() {
+      var id = localStorage.getItem("user_id");
+      ContentDataService.getMajor(id).then((response) => {
+        this.degree = response.data.data;
+      });
+    },
   },
 };
 </script>
@@ -201,6 +322,13 @@ export default {
   border-color: #bdbdbd;
   color: black;
   box-shadow: none;
+}
+.form-control-lg {
+  border-left: 5px solid #f95858;
+  box-shadow: none;
+  border-top: 1px solid #dddddd;
+  border-right: 1px solid #dddddd;
+  border-bottom: 1px solid #dddddd;
 }
 .arrow {
   float: right;
@@ -435,5 +563,22 @@ export default {
     font-size: 12px;
     width: 30%;
   }
+}
+</style>
+
+<style>
+.multiselect__tags {
+  border: 1px solid #dddddd !important;
+
+  border-left: 5px solid #f95858 !important ;
+  color: black !important;
+
+  width: 100% !important;
+}
+
+.multiselect__single {
+  color: black;
+
+  width: 100%;
 }
 </style>

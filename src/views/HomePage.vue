@@ -372,121 +372,118 @@
                   </span>
                 </div>
               </div>
-              <div   v-if="reply">
-              <form @submit.prevent="commentSubmit(item.id)">
-                <div
-                  class="mt-5 mb-2"
-                  style="background-color: white; border: 2px solid white"
-                
-                >
-                  <div class="row p-2 mt-2" >
+              <div v-if="reply">
+                <form @submit.prevent="commentSubmit(item.id)">
+                  <div
+                    class="mt-5 mb-2"
+                    style="background-color: white; border: 2px solid white"
+                  >
+                    <div class="row p-2 mt-2">
+                      <div class="col-2">
+                        <img
+                          src="../assets/main/user.png"
+                          class="rounded-circle"
+                          style="width: 100%"
+                        />
+                      </div>
+                      <div class="col-8">
+                        <input
+                          type="text"
+                          class="form-control shadow-none"
+                          placeholder="Share Your Lectures,exams,notes etc"
+                          v-model="commentForm.description"
+                        />
+                      </div>
+                      <div class="col-2 mt-5 mb-1">
+                        <button class="comment-btn">Post</button>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+
+                <div class="p-2">
+                  <div
+                    class="row p-2 mt-2"
+                    style="background-color: white; border: 1px solid #f9f9f9"
+                    v-for="reply in item.post_replies"
+                    :key="reply.id"
+                  >
                     <div class="col-2">
                       <img
                         src="../assets/main/user.png"
-                        class="rounded-circle"
+                        class="rounded-circle m-1"
                         style="width: 100%"
                       />
                     </div>
-                    <div class="col-8">
-                      <input
-                        type="text"
-                        class="form-control shadow-none"
-                        placeholder="Share Your Lectures,exams,notes etc"
-                        v-model="commentForm.description"
-                      />
-                    </div>
-                    <div class="col-2 mt-5 mb-1">
-                      <button class="comment-btn">Post</button>
-                    </div>
-                  </div>
-                </div>
-              </form>
 
-              <div class="p-2" >
-                <div
-                  class="row p-2 mt-2"
-                  style="background-color: white; border: 1px solid #f9f9f9"
-                  v-for="reply in item.post_replies"
-                  :key="reply.id"
-                  
-                >
-                  <div class="col-2">
-                    <img
-                      src="../assets/main/user.png"
-                      class="rounded-circle m-1"
-                      style="width: 100%"
-                    />
-                  </div>
-
-                  <div class="col-10">
-                    <div class="post-information mt-2">
-                      <h5>{{ reply.posted_by_name }}</h5>
-                    </div>
-                    <div class="d-flex post-condition">
-                      <p class="p-1">
-                        <span
-                          style="color: #05d134"
-                          true-value="1"
-                          false-value="0"
-                        >
-                          {{ reply.is_true }}
-                        </span>
-                        TRUE
-                      </p>
-                      <p class="p-1">
-                        <span
-                          style="color: #f75555"
-                          true-value="1"
-                          false-value="0"
-                          >{{ reply.is_false }}
-                        </span>
-                        FALSE
-                      </p>
-                      <p class="p-1">
-                        <span
-                          style="color: #ffcc00"
-                          true-value="1"
-                          false-value="0"
-                        >
-                          {{ reply.is_highlight }}
-                        </span>
-                        HIGHLIGHT
-                      </p>
-                    </div>
-                  </div>
-                  <div class="col-2"></div>
-                  <div class="col-10 post-information mt-1">
-                    <h6>{{ reply.description }}</h6>
-
-                    <div class="row">
-                      <div
-                        class="col-xs-6 col-sm-6 col-md-4 col-lg-3 card-footers"
-                      >
-                        <i class="fa fa-check true" id="green"></i>
-                        <i class="fa fa-times false" id="red"></i>
-                        <i class="fa fa-lightbulb bulb" id="yellow"></i>
+                    <div class="col-10">
+                      <div class="post-information mt-2">
+                        <h5>{{ reply.posted_by_name }}</h5>
                       </div>
-                      <div
-                        class="col-xs-6 col-sm-6 col-md-8 col-lg-9"
-                        align="right"
-                      >
-                        <span class="last">
-                          <img
-                            src="../assets/main/restore.png"
-                            style="cursor: pointer"
-                          />
-                          Reply {{ item.post_replies.length }}
-                        </span>
+                      <div class="d-flex post-condition">
+                        <p class="p-1">
+                          <span
+                            style="color: #05d134"
+                            true-value="1"
+                            false-value="0"
+                          >
+                            {{ reply.is_true }}
+                          </span>
+                          TRUE
+                        </p>
+                        <p class="p-1">
+                          <span
+                            style="color: #f75555"
+                            true-value="1"
+                            false-value="0"
+                            >{{ reply.is_false }}
+                          </span>
+                          FALSE
+                        </p>
+                        <p class="p-1">
+                          <span
+                            style="color: #ffcc00"
+                            true-value="1"
+                            false-value="0"
+                          >
+                            {{ reply.is_highlight }}
+                          </span>
+                          HIGHLIGHT
+                        </p>
+                      </div>
+                    </div>
+                    <div class="col-2"></div>
+                    <div class="col-10 post-information mt-1">
+                      <h6>{{ reply.description }}</h6>
+
+                      <div class="row">
+                        <div
+                          class="
+                            col-xs-6 col-sm-6 col-md-4 col-lg-3
+                            card-footers
+                          "
+                        >
+                          <i class="fa fa-check true" id="green"></i>
+                          <i class="fa fa-times false" id="red"></i>
+                          <i class="fa fa-lightbulb bulb" id="yellow"></i>
+                        </div>
+                        <div
+                          class="col-xs-6 col-sm-6 col-md-8 col-lg-9"
+                          align="right"
+                        >
+                          <span class="last">
+                            <img
+                              src="../assets/main/restore.png"
+                              style="cursor: pointer"
+                            />
+                            Reply {{ item.post_replies.length }}
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              </div>
-
-
-
-
             </div>
           </div>
         </div>
@@ -758,10 +755,6 @@ export default {
     this.getAllPosts();
   },
 
-  mounted() {
-   
-  },
-
   methods: {
     getAllColleagues() {
       ContentDataService.getColleagues(localStorage.getItem("user_id")).then(
@@ -900,6 +893,7 @@ export default {
           document.getElementById("green").style.color = "#21b721";
           this.$toasted.success("Marked As True");
           this.trueCheck = true;
+          this.getAllPosts();
         });
       } else if (this.trueCheck == true) {
         ContentDataService.removeTrue(id).then((response) => {
@@ -907,10 +901,10 @@ export default {
           document.getElementById("green").style.color = "#777777";
           this.$toasted.success("Unmarked as True");
           this.trueCheck = false;
+          this.getAllPosts();
         });
       }
     },
-   
 
     falseValue(id) {
       if (this.falseCheck == false) {
@@ -919,6 +913,7 @@ export default {
           document.getElementById("red").style.color = "#dc1919";
           this.$toasted.success("Marked As False");
           this.falseCheck = true;
+          this.getAllPosts();
         });
       } else if (this.falseCheck == true) {
         ContentDataService.removeFalse(id).then((response) => {
@@ -926,6 +921,7 @@ export default {
           document.getElementById("red").style.color = "#777777";
           this.$toasted.success("Unmarked As False");
           this.falseCheck = false;
+          this.getAllPosts();
         });
       }
     },
@@ -937,12 +933,14 @@ export default {
           document.getElementById("yellow").style.color = "#ffc210";
           this.$toasted.success("Marked As Highlight");
           this.highlightCheck = true;
+          this.getAllPosts();
         });
       } else if (this.highlightCheck == true) {
         ContentDataService.removeHighlight(id).then((response) => {
           console.log(response.data);
           document.getElementById("yellow").style.color = "#777777";
           this.$toasted.success("Unmarked As Highlight");
+          this.getAllPosts();
         });
       }
     },
@@ -961,13 +959,13 @@ export default {
     comments(id) {
       if (this.reply == false) {
         console.log(id);
-        
+
         this.reply = true;
       } else {
-        
         this.reply = false;
       }
     },
+
     commentSubmit(Post_Id) {
       if (this.commentForm.description == "") {
         this.$toasted.error("Please Share Something");
@@ -982,10 +980,13 @@ export default {
         }
         this.commentForm.Post_Id = Post_Id;
         console.log(this.commentForm);
+
         ContentDataService.addReply(this.commentForm)
           .then((response) => {
             console.log(response.data);
             this.$toasted.success("Successfully Posted");
+            this.getAllPosts();
+            this.commentForm.description = "";
           })
           .catch((e) => {
             if (e) {
@@ -1736,7 +1737,7 @@ input {
   }
 
   .last {
-    font-size: 12px;
+    font-size: 11px;
   }
   .btn.post {
     font-size: 15px;

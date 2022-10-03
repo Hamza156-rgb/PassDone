@@ -175,7 +175,21 @@ class ContentDataService {
     return http.post('createPostReply', formData);
   }
 
-
+  addBook(form) {
+    const formData = new FormData();
+    formData.append('name', form.book)
+    formData.append(' subject', form.subject)
+    formData.append('course_id', form.course)
+    formData.append('detail', form.detail)
+    formData.append('posted_by', localStorage.getItem('user_id'))
+    if (form.attachments == null || form.attachments == undefined || form.attachments == '') {
+      formData.append('file', "")
+    }
+    else {
+      formData.append('file', form.attachments)
+    }
+    return http.post('createBook', formData);
+  }
 
 
 
