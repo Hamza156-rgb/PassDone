@@ -22,11 +22,11 @@
             <div class="row">
               <div class="col-6"><h4 class="library">Library Manage</h4></div>
               <div class="col-6">
-                <div class="card-options crd" style="cursor:pointer">
+                <div class="card-options crd" style="cursor: pointer">
                   <a @click="$refs.modalName1.openModal()">
                     <i
                       class="fa-sharp fa-solid fa-circle-plus"
-                      style="margin-right: 5px;color:#0776BD"
+                      style="margin-right: 5px; color: #0776bd"
                     ></i>
                   </a>
 
@@ -79,7 +79,7 @@
               </div>
             </div>
 
-            <div class="card mt-4">
+            <div class="card mt-4" v-for="item in myBook" :key="item.id">
               <div class="Following-data p-3">
                 <div class="row">
                   <div class="col-2">
@@ -92,14 +92,39 @@
                   <div class="col-10 mt-lg-4">
                     <div class="row">
                       <div class="col-xs-12 col-sm-12 col-md-7 col-lg-6">
-                        <h5 class="name">Book Name-Added Date</h5>
+                        <h5 class="name">
+                          {{ item.name }} -{{ item.created_at }}
+                        </h5>
                         <h6 class="uni">
-                          <span style="color: #0776bd">Subject</span> |
-                          <span style="color: #0776bd">
-                            <b style="color: black">By</b> Student Name</span
-                          >
+                          <span style="color: #0776bd">{{ item.subject }}</span>
                           |
-                          <span style="color: #0776bd">University Name</span>
+                          <span
+                            style="color: #0776bd"
+                            v-if="item.instructor.user_type == 1"
+                          >
+                            <b style="color: black">By</b>
+                            {{ item.instructor.first_name }}
+                          </span>
+                          <span
+                            style="color: #0776bd"
+                            v-if="item.instructor.user_type == 2"
+                          >
+                            <b style="color: black">By</b>
+                            {{ item.instructor.first_name }}
+                          </span>
+
+                          <span
+                            style="color: #0776bd"
+                            v-if="item.instructor.user_type == 3"
+                          >
+                            <b style="color: black">By</b>
+                            {{ item.instructor.name }}
+                          </span>
+
+                          |
+                          <span style="color: #0776bd"
+                            ><a v-bind:href="item.file" target="blank">File</a>
+                          </span>
                         </h6>
                       </div>
 
@@ -107,7 +132,10 @@
                         class="col-xs-12 col-sm-12 col-md-5 col-lg-6"
                         align="right"
                       >
-                        <button class="btn btn-dangers info-buttons mt-2">
+                        <button
+                          class="btn btn-dangers info-buttons mt-2"
+                          @click="deleteBook(item.id)"
+                        >
                           Delete
                         </button>
                         <button class="btn btn-warnings info-buttons mt-2">
@@ -124,7 +152,7 @@
       </div>
     </div>
 
-    <form v-on:submit.prevent="submit">
+    <form @submit.prevent="submit">
       <modal ref="modalName1">
         <template v-slot:header>
           <h5 style="color: #3390ff">Add New Book</h5>
@@ -150,6 +178,11 @@
             <div class="col-12 mt-3">
               <label><b>Course Name </b> </label>
               <multiselect
+                style="
+                  border: 1px solid #dddddd !important;
+
+                  border-left: 5px solid #f95858 !important ;
+                "
                 class="mt-2"
                 :options="degree.map((user) => user.id)"
                 :custom-label="(opt) => degree.find((x) => x.id == opt).name"
@@ -172,20 +205,45 @@
             </div>
 
             <div class="col-12 mt-3">
-              <label> <b> Attach Book</b> </label>
               <input
                 class="form-control form-control-lg mt-2"
                 id="formFileLg"
                 type="file"
-                style="border: 1px solid #dddddd"
+                style="border-left: 0px white"
                 @change="file($event)"
               />
+              <!-- <div
+                class="customm-file p-1 mt-2"
+                align="right"
+                style="border: 1px solid #dddddd"
+              >
+                <p style="float: left; color: #ff5500">Please Select File</p>
+                <label
+                  class="customm-file-label"
+                  for="custommFile"
+                  style="background-color: #eceeef; float: right"
+                  ><img src="../../assets/file-upload.png"   />
+                </label>
+
+                <input
+                  class="customm-file-input"
+                  id="postf"
+                  name="postf"
+                  type="file"
+                  @change="file($event)"
+                />
+              </div> -->
             </div>
 
-            <div class="col-12 mt-3">
+            <div class="col-12 mt-4">
               <div align="right">
-                <button class="btn btn-primary m-2">close</button>
-                <button class="btn btn-primary m-2">Save Changes</button>
+                <button
+                  class="btn btn-about m-2"
+                  @click="$refs.modalName1.closeModal()"
+                >
+                  close
+                </button>
+                <button class="btn btn-about m-2">Save Changes</button>
               </div>
             </div>
           </div>
@@ -221,10 +279,26 @@ export default {
         detail: "",
         attachments: "",
       },
+      myBook: [],
+      user_type: "",
     };
+  },
+  created() {
+    this.getMajors();
+    this.getBook();
+    this.user_type = localStorage.getItem("user_type");
   },
 
   methods: {
+    file(event) {
+      this.form.attachments = event.target.files[0];
+    },
+    getMajors() {
+      var id = localStorage.getItem("user_id");
+      ContentDataService.getMajor(id).then((response) => {
+        this.degree = response.data.data;
+      });
+    },
     submit() {
       if (this.form.book == "") {
         this.$toasted.error("Please Enter Book Name");
@@ -249,18 +323,30 @@ export default {
         ContentDataService.addBook(this.form).then((response) => {
           console.log(response.data);
           this.$toasted.success(" Addedd Successfully");
+          this.$refs.modalName1.closeModal();
+          this.getBook();
         });
       }
 
       console.log(this.form);
     },
-    file(event) {
-      this.form.attachments = event.target.files[0];
+    getBook() {
+      ContentDataService.getmyBook().then((response) => {
+        console.log(response.data.data);
+        this.myBook = response.data.data;
+        for (let i = 0; i < this.myBook.length; i++) {
+          this.myBook[i].file =
+            "http://passdoneapi.codetreck.com/public/" + this.myBook[i].file;
+
+        
+        }
+      });
     },
-    getMajors() {
-      var id = localStorage.getItem("user_id");
-      ContentDataService.getMajor(id).then((response) => {
-        this.degree = response.data.data;
+    deleteBook(id) {
+      ContentDataService.deletemyBook(id).then((response) => {
+        console.log(response.data);
+        this.$toasted.success(" Deleted Successfully");
+        this.getBook();
       });
     },
   },
@@ -268,6 +354,11 @@ export default {
 </script>
 
 <style scoped>
+.customm-file-input {
+  z-index: 2;
+  height: 5px;
+  opacity: 0;
+}
 .card {
   border: none;
 }
@@ -368,6 +459,11 @@ export default {
   outline: none;
   cursor: pointer;
 }
+
+.btn-dangers:hover {
+  background-color: #ff3434;
+}
+
 .btn-warnings {
   color: #fff !important;
   border: 2px solid #ff9900;
@@ -383,6 +479,25 @@ export default {
   outline: none;
   cursor: pointer;
 }
+.btn-warnings:hover {
+  background-color: #fab002;
+  border: 2px solid #fab002;
+}
+
+.btn-about {
+  color: #fff !important;
+  border: 2px solid #0776bd;
+  border-radius: 30px;
+  padding: 1px 22px !important;
+  background-color: #0776bd;
+  font-size: 14px;
+  outline: none;
+  cursor: pointer;
+}
+
+.btn-about:hover {
+  background-color: #08619a;
+}
 
 @media only screen and (max-width: 600px) {
   .library {
@@ -394,7 +509,7 @@ export default {
   }
 
   .manage-semester {
-    font-size: 14px;
+    font-size: 17px;
   }
   .card-text p {
     font-size: 11px;
@@ -430,7 +545,7 @@ export default {
   }
 
   .manage-semester {
-    font-size: 16px;
+    font-size: 19px;
   }
   .card-text p {
     font-size: 12px;
@@ -566,19 +681,3 @@ export default {
 }
 </style>
 
-<style>
-.multiselect__tags {
-  border: 1px solid #dddddd !important;
-
-  border-left: 5px solid #f95858 !important ;
-  color: black !important;
-
-  width: 100% !important;
-}
-
-.multiselect__single {
-  color: black;
-
-  width: 100%;
-}
-</style>

@@ -191,6 +191,16 @@ class ContentDataService {
     return http.post('createBook', formData);
   }
 
+  getmyBook() {
+    return http.get('getBookByUser?user_id=' + localStorage.getItem("user_id"))
+  }
+  deletemyBook(id) {
+    return http.post('deleteBook?id=' + id)
+  }
+
+  getInstituteProfile() {
+    return http.get('getInstituteById?user_id=' + localStorage.getItem('user_id'))
+  }
 
 
 

@@ -3,9 +3,9 @@
     <Navbar />
 
     <div id="containers">
-      <img src="../assets/institute/back.jpg" class="backImg" />
+      <img :src="cover_img" class="backImg" />
       <div class="top-left">
-        <img src="../assets/institute/user.jpg" class="rounded-circle" />
+        <img :src="profile_img" class="rounded-circle" />
         <br />
         <button class="btn btn-follow mt-2">Follow</button>
       </div>
@@ -98,20 +98,49 @@
       </div>
     </div>
 
-
- <BackToTop />
-
+    <BackToTop />
   </div>
 </template>
 
 <script>
 import Navbar from "../components/Navbar.vue";
 import BackToTop from "../components/BackToTop.vue";
+import ContentDataService from "../services/ContentDataService";
+
 export default {
   name: "InstituteProfile",
   components: {
     Navbar,
-      BackToTop,
+    BackToTop,
+  },
+
+  data() {
+    return {
+      profile_img: "",
+      cover_img: "",
+    };
+  },
+
+  created() {
+    this.getProfile();
+  },
+
+  methods: {
+    getProfile() {
+      ContentDataService.getInstituteProfile().then((response) => {
+        console.log(response.data.data);
+        var a = response.data.data;
+        var b = Object.values(a);
+        this.ActiveInstitutes = b[0];
+        this.profile_img =
+          "http://passdoneapi.codetreck.com/public/" +
+          response.data.data.profile_pic;
+
+        this.cover_img =
+          "http://passdoneapi.codetreck.com/public/" +
+          response.data.data.cover_picture;
+      });
+    },
   },
 };
 </script>
@@ -124,7 +153,7 @@ export default {
 }
 #second {
   position: absolute;
-  top: 55%;
+
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -218,6 +247,9 @@ export default {
   .information {
     text-align: center;
   }
+  #second {
+    top: 55%;
+  }
   .information h5 {
     font-size: 13px;
   }
@@ -250,6 +282,9 @@ export default {
   .information {
     text-align: center;
   }
+  #second {
+    top: 70%;
+  }
   .information h5 {
     font-size: 14px;
   }
@@ -281,6 +316,9 @@ export default {
 @media only screen and (min-width: 768px) {
   .information {
     text-align: left;
+  }
+  #second {
+    top: 65%;
   }
   .information h5 {
     font-size: 15px;
@@ -318,6 +356,9 @@ export default {
   .information {
     text-align: left;
   }
+  #second {
+    top: 70%;
+  }
   .information h5 {
     font-size: 17px;
   }
@@ -333,7 +374,7 @@ export default {
     font-size: 26px;
   }
   .names {
-    font-size: 16px;
+    font-size: 15px;
   }
   #border {
     border-left: 2px solid #aea6a677;
@@ -354,6 +395,9 @@ export default {
   .top-left {
     top: 20px;
     left: 100px;
+  }
+  #second {
+    top: 75%;
   }
 
   .information {

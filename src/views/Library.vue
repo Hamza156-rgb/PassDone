@@ -651,7 +651,7 @@ select {
   }
 
   .manage-semester {
-    font-size: 14px;
+    font-size: 17px;
   }
   .card-text p {
     font-size: 11px;
@@ -687,7 +687,7 @@ select {
   }
 
   .manage-semester {
-    font-size: 16px;
+    font-size: 19px;
   }
   .card-text p {
     font-size: 12px;
