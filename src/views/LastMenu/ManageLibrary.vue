@@ -209,30 +209,10 @@
                 class="form-control form-control-lg mt-2"
                 id="formFileLg"
                 type="file"
+                accept=".doc, .docx,.pdf"
                 style="border-left: 0px white"
                 @change="file($event)"
               />
-              <!-- <div
-                class="customm-file p-1 mt-2"
-                align="right"
-                style="border: 1px solid #dddddd"
-              >
-                <p style="float: left; color: #ff5500">Please Select File</p>
-                <label
-                  class="customm-file-label"
-                  for="custommFile"
-                  style="background-color: #eceeef; float: right"
-                  ><img src="../../assets/file-upload.png"   />
-                </label>
-
-                <input
-                  class="customm-file-input"
-                  id="postf"
-                  name="postf"
-                  type="file"
-                  @change="file($event)"
-                />
-              </div> -->
             </div>
 
             <div class="col-12 mt-4">
@@ -280,21 +260,35 @@ export default {
         attachments: "",
       },
       myBook: [],
-      user_type: "",
     };
   },
   created() {
     this.getMajors();
     this.getBook();
-    this.user_type = localStorage.getItem("user_type");
   },
 
   methods: {
+    addClass() {
+      var con = document.getElementById("main-container");
+      con.classList.add("is-blurred");
+    },
     file(event) {
+     
       this.form.attachments = event.target.files[0];
     },
     getMajors() {
-      var id = localStorage.getItem("user_id");
+      var id = "" ;
+      var userType = localStorage.getItem("user_type");
+      if (userType == 1 ){
+        id = localStorage.getItem("university_id");
+      }
+      else if (userType == 2 ){
+        id = localStorage.getItem("university_id");
+      }
+      else{
+        id =  localStorage.getItem("user_id");
+      }
+
       ContentDataService.getMajor(id).then((response) => {
         this.degree = response.data.data;
       });
@@ -334,7 +328,10 @@ export default {
       ContentDataService.getmyBook().then((response) => {
         console.log(response.data.data);
         this.myBook = response.data.data;
-        
+        if(this.myBook == 'No Data Found'){
+          this.myBook =[]
+        }
+
         for (let i = 0; i < this.myBook.length; i++) {
           this.myBook[i].file =
             "http://passdoneapi.codetreck.com/public/" + this.myBook[i].file;

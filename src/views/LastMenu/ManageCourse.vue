@@ -87,7 +87,7 @@
             />
           </div>
           <div class="col-10">
-            <p class="mt-lg-4 mt-md-4">Name</p>
+         <b>   <p class="mt-lg-4 mt-md-4" style="color:#707070">Name</p></b>
           </div>
         </div>
 
@@ -281,6 +281,19 @@ export default {
     font-size: 12px;
     width: 50%;
   }
+
+
+
+.btn-addcourse {
+  width:100%;
+     font-size: 13px;
+}
+
+
+
+
+
+
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -317,6 +330,20 @@ export default {
     font-size: 12px;
     width: 50%;
   }
+
+
+
+.btn-addcourse {
+  width:100%;
+     font-size: 13px;
+}
+
+
+
+
+
+
+
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -355,6 +382,21 @@ export default {
   .manage-semester {
     font-size: 18px;
   }
+
+
+
+
+.btn-addcourse {
+  width:30%;
+     font-size: 14px;
+}
+
+
+
+
+
+
+
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -396,6 +438,19 @@ export default {
   .manage-semester {
     font-size: 20px;
   }
+
+
+
+
+
+
+.btn-addcourse {
+  width:30%;
+   
+}
+
+
+
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -433,5 +488,9 @@ export default {
     font-size: 12px;
     width: 30%;
   }
+  .btn-addcourse {
+  width:30%;
+     
+}
 }
 </style>

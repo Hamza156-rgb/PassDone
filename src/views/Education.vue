@@ -7,8 +7,6 @@
       <div class="top-left">
         <img v-if="profile_img" :src="profile_img" class="rounded-circle" />
         <img v-else src="../assets/main/user.png" class="rounded-circle" />
-
-      
       </div>
     </div>
     <div class="container" id="second">
@@ -65,7 +63,7 @@
         </div>
       </div>
     </div>
-    <div class="container mt-4">
+    <div class="container mt-4 mt-md-3 mt-lg-3">
       <div class="row">
         <div class="card second-card p-lg-3">
           <div class="card-body">
@@ -212,11 +210,6 @@ export default {
   left: 100px;
 }
 
-.backImg {
-  width: 100%;
-  height: 500px;
-}
-
 .ad-card {
   margin-bottom: 15px;
   padding: 3px;
@@ -324,6 +317,10 @@ export default {
   .inf-text p {
     font-size: 12px;
   }
+  .backImg {
+    width: 100%;
+    height: 390px;
+  }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -359,6 +356,11 @@ export default {
   .inf-text p {
     font-size: 13px;
   }
+
+  .backImg {
+    width: 100%;
+    height: 390px;
+  }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -367,7 +369,7 @@ export default {
     text-align: left;
   }
   #second {
-    top: 50%;
+    top: 40%;
   }
   .information h5 {
     font-size: 15px;
@@ -397,6 +399,11 @@ export default {
   }
   .inf-text p {
     font-size: 14px;
+  }
+
+  .backImg {
+    width: 450px;
+    height: 390px;
   }
 }
 
@@ -437,6 +444,11 @@ export default {
   .inf-text p {
     font-size: 15px;
   }
+
+  .backImg {
+    width: 480px;
+    height: 390px;
+  }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -447,6 +459,11 @@ export default {
   }
   #second {
     top: 60%;
+  }
+
+  .backImg {
+    width: 500px;
+    height: 400px;
   }
 
   .information {
