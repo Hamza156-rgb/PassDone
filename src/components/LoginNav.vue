@@ -206,7 +206,7 @@ export default {
       } else {
         ContentDataService.login(this.form)
           .then((response) => {
-            console.log(response.data);
+            // console.log(response.data);
             localStorage.setItem("user_id", response.data.data.user_id);
             if (response.data.data.user_type == 1) {
               localStorage.setItem("first_name", response.data.data.first_name);
@@ -224,7 +224,7 @@ export default {
               localStorage.setItem("name", response.data.data.name);
             }
             if (response.data.data.profile_pic == null) {
-              console.log('aya')
+            
               localStorage.setItem("profile_pic", "null");
             } else {
               localStorage.setItem(

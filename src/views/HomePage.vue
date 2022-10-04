@@ -843,7 +843,7 @@ export default {
         var b = Object.values(a);
         //this.ActiveInstitutes = b[0];
         this.PostsData = b[0];
-        console.log(this.PostsData);
+        // console.log(this.PostsData);
       });
     },
 

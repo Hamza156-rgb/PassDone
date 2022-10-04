@@ -22,7 +22,7 @@
             <div class="row">
               <div class="col-6"><h4 class="courses">Manage Courses</h4></div>
               <div class="col-6">
-                <div class="card-options crd"  style="cursor:pointer">
+                <div class="card-options crd" style="cursor: pointer">
                   <a @click="$refs.modalName1.openModal()">
                     <i
                       class="fa-sharp fa-solid fa-circle-plus"
@@ -93,20 +93,45 @@
 
         <div class="row mt-2">
           <div class="col-12">
-            <!-- <multiselect
+            <multiselect
               style="
                 border: 1px solid #dddddd !important;
+
                 border-left: 5px solid #f95858 !important ;
               "
               class="mt-2"
-              :options:"option"
+              :options="degree.map((user) => user.id)"
+              :custom-label="(opt) => degree.find((x) => x.id == opt).name"
               label="name"
               track-by="name"
+              v-model="form.course"
+              placeholder="Choose One"
+            >
+            </multiselect>
+          </div>
+          <div class="col-12 mt-4">
+            <label> <b>Instructor Name</b> </label>
+            <multiselect
+              style="
+                border: 1px solid #dddddd !important;
+                border-left: 5px solid #dddddd !important ;
+              "
+              class="mt-3"
+              :options="degree.map((user) => user.id)"
+              :custom-label="(opt) => degree.find((x) => x.id == opt).name"
+              label="name"
+              track-by="name"
+              v-model="form.course"
               placeholder="Select/Search for Course Name"
             >
-            </multiselect> -->
+            </multiselect>
           </div>
-          <div class="col-12"></div>
+
+          <div class="col-12 mt-4">
+            <div align="right">
+              <button class="btn btn-addcourse">Save Changes</button>
+            </div>
+          </div>
         </div>
       </template>
     </modal>
@@ -119,6 +144,8 @@
 import Navbar from "../../components/Navbar.vue";
 import BackToTop from "../../components/BackToTop.vue";
 import Modal from "../../components/Modal.vue";
+import ContentDataService from "../../services/ContentDataService";
+
 export default {
   name: "ManageCourse",
   components: {
@@ -127,14 +154,23 @@ export default {
     Modal,
   },
 
-data(){
-  return{
+  data() {
+    return {
+      degree: [],
+      form: {
+        course: [],
+      },
+    };
+  },
 
-option:[]
-
-  }
-}
-
+  methods: {
+    getMajors() {
+      var id = localStorage.getItem("user_id");
+      ContentDataService.getMajor(id).then((response) => {
+        this.degree = response.data.data;
+      });
+    },
+  },
 };
 </script>
 
@@ -198,6 +234,19 @@ option:[]
 }
 .manage-semester {
   color: #0776bd;
+}
+
+.btn-addcourse {
+  color: #fff !important;
+  border: 2px solid #0776bd;
+  border-radius: 50px;
+  padding: 4px 36px !important;
+  background-color: #0776bd;
+  font-size: 15px;
+  cursor: pointer;
+}
+.btn-addcourse:hover {
+  background-color: #0e6ca8;
 }
 
 @media only screen and (max-width: 600px) {
