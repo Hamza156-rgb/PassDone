@@ -21,7 +21,7 @@
         id="navbarSupportedContent"
         v-bind:class="{ show: show }"
       >
-        <div class="col-xs-4 col-sm-12 col-md-12 col-lg-8">
+        <div class="col-xs-4 col-sm-12 col-md-12 col-lg-8" v-if="user_type == 1 || user_type == 2">
           <div class="row menuImage" align="center">
             <div class="col-3">
               <router-link to="/home">
@@ -76,7 +76,43 @@
           </div>
         </div>
 
-        <div class="col-xs-4 col-sm-12 col-md-12 col-lg-2">
+
+
+             <div class="col-xs-4 col-sm-12 col-md-12 col-lg-8" v-if="user_type == 3">
+          <div class="row menuImage" align="center">
+            <div class="col-2"></div>
+            <div class="col-3">
+              <router-link to="/home">
+                <img src="../assets/main/home.png" />
+                <p>Home</p>
+              </router-link>
+            </div>
+
+         
+
+            <div class="col-3 pt-1">
+              <router-link to="/library">
+                <img src="../assets/main/library.png" />
+                <p>Library</p>
+              </router-link>
+            </div>
+
+            <div class="col-3 pt-1">
+              <router-link to="/education">
+                <img src="../assets/main/institute.png" />
+                <p>Institute</p>
+              </router-link>
+            </div>
+              <div class="col-1"></div>
+          </div>
+        </div>
+
+
+
+
+
+
+        <div class="col-xs-4 col-sm-12 col-md-12 col-lg-2" v-if="user_type == 1 || user_type == 2">
           <div class="row" align="right">
             <div class="col-4">
               <router-link to="/friend-request">
@@ -131,6 +167,68 @@
             </div>
           </div>
         </div>
+
+
+
+
+
+  <div class="col-xs-4 col-sm-12 col-md-12 col-lg-2" v-if="user_type == 3">
+          <div class="row" align="right">
+            <div class="col-4">
+              <router-link to="/friend-request">
+                <i class="fa fa-user" aria-hidden="true"></i>
+              </router-link>
+            </div>
+            <div class="col-4">
+              <router-link to="/notification">
+                <i class="fa fa-bell"></i>
+              </router-link>
+            </div>
+            <div class="col-4">
+              <div class="nav-item dropdown">
+                <i class="fa fa-bars"></i>
+                <div class="dropdown-menu">
+                  <router-link class="dropdown-item" to="/my-courses">
+                    Manage Courses
+                  </router-link>
+
+                  <router-link class="dropdown-item" to="/institute-instructor-list">
+                   Instructor List
+                  </router-link>
+
+                  <router-link class="dropdown-item" to="/institute-student-list">
+                    Student List
+                  </router-link>
+                  <router-link class="dropdown-item" to="/my-library">
+                    Manage Library
+                  </router-link>
+                  <router-link class="dropdown-item" to="/account-setting">
+                  Account Setting
+                  </router-link>
+                  <p
+                    class="dropdown-item"
+                    style="cursor: pointer"
+                    @click="logOut()"
+                  >
+                    Logout
+                  </p>
+
+                  <p class="token" style="color: white" v-if="user_type == 1">
+                    {{ Name }}
+                  </p>
+                  <p class="token" style="color: white" v-if="user_type == 2">
+                    {{ Name }}
+                  </p>
+                  <p class="token" style="color: white" v-if="user_type == 3">
+                    {{ name }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
       </div>
     </nav>
   </div>

@@ -110,7 +110,7 @@ import ContentDataService from "../services/ContentDataService";
 // import img from "../assets/main/user.png";
 
 export default {
-  name: "InstituteProfile",
+  name: "Education",
   components: {
     Navbar,
     BackToTop,

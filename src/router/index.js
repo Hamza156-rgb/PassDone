@@ -9,11 +9,14 @@ import HomePage from "../views/HomePage.vue";
 import MyDesk from "../views/ClassRoom/Desk.vue";
 import Courses from "../views/ClassRoom/Courses.vue";
 import Instructors from "../views/ClassRoom/Instructors.vue";
+import InstituteInstructorList from "../views/InstituteInstructorList.vue";
+import InstituteStudentList from "../views/InstituteStudentList.vue";
 import Students from "../views/ClassRoom/Students.vue";
 import StudyRoom from "../views/ClassRoom/StudyRoom.vue";
 import Library from "../views/Library.vue";
 import Institute from "../views/Institute.vue";
 import InstituteProfile from "../views/InstituteProfile.vue";
+import Education from "../views/Education.vue";
 import ManageCourse from "../views/LastMenu/ManageCourse.vue";
 import ManageLibrary from "../views/LastMenu/ManageLibrary.vue";
 import AccountSetting from "../views/LastMenu/AccountSetting.vue";
@@ -87,6 +90,21 @@ const routes = [
         component: Instructors,
         meta: { requiresAuth: true },
     },
+
+
+    {
+        path: "/institute-instructor-list",
+        name: "InstituteInstructorList",
+        component: InstituteInstructorList,
+        meta: { requiresAuth: true },
+    },
+    {
+        path: "/institute-student-list",
+        name: "InstituteStudentList",
+        component: InstituteStudentList,
+        meta: { requiresAuth: true },
+    },
+
     {
         path: "/students",
         name: "Students",
@@ -116,6 +134,12 @@ const routes = [
         path: "/institute-profile",
         name: "InstituteProfile",
         component: InstituteProfile,
+        meta: { requiresAuth: true },
+    },
+    {
+        path: "/education",
+        name: "Education",
+        component: Education,
         meta: { requiresAuth: true },
     },
     {
