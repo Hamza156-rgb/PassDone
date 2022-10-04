@@ -138,7 +138,10 @@
                         >
                           Delete
                         </button>
-                        <button class="btn btn-warnings info-buttons mt-2">
+                        <button
+                          class="btn btn-warnings info-buttons mt-2"
+                          @click="openEdit(item)"
+                        >
                           Edit
                         </button>
                       </div>
@@ -231,6 +234,87 @@
       </modal>
     </form>
 
+    <modal ref="modalName2">
+      <template v-slot:header>
+        <h5 style="color: #3390ff">Add New Book</h5>
+        <div class="row mt-4">
+          <div class="col-12">
+            <label><b>Book Name </b> </label>
+            <input
+              class="form-control form-control-lg mt-2"
+              type="text"
+              v-model="book.name"
+              placeholder="Enter the Book Name"
+            />
+          </div>
+          <div class="col-12 mt-3">
+            <label><b>Subject </b> </label>
+            <input
+              class="form-control form-control-lg mt-2"
+              type="text"
+              v-model="book.subject"
+              placeholder="Enter the Suject"
+            />
+          </div>
+          <div class="col-12 mt-3">
+            <label><b>Course Name </b> </label>
+            <multiselect
+              style="
+                border: 1px solid #dddddd !important;
+
+                border-left: 5px solid #f95858 !important ;
+              "
+              class="mt-2"
+              :options="degree.map((user) => user.id)"
+              :custom-label="(opt) => degree.find((x) => x.id == opt).name"
+              label="name"
+              track-by="name"
+              v-model="book.course_id"
+              placeholder="Select/Search for Course Name"
+            >
+            </multiselect>
+          </div>
+          <div class="col-12 mt-3">
+            <label> <b> Detail </b> </label>
+            <textarea
+              class="form-control mt-2"
+              style="border: 1px solid #dddddd"
+              id="exampleFormControlTextarea1"
+              v-model="book.detail"
+              rows="4"
+            ></textarea>
+          </div>
+
+          <div class="col-12 mt-2">
+            <span> <b>Attach Book</b> <a :href="book.file" style="text-decoration:none;margin-left:5px" >OLD BOOK</a> </span>
+          </div>
+
+          <div class="col-12 mt-2">
+            <input
+              class="form-control form-control-lg mt-2"
+              id="formFileLg"
+              type="file"
+              accept=".doc, .docx,.pdf"
+              style="border-left: 0px white"
+              @change="file($event)"
+            />
+          </div>
+
+          <div class="col-12 mt-4">
+            <div align="right">
+              <button
+                class="btn btn-about m-2"
+                @click="$refs.modalName1.closeModal()"
+              >
+                close
+              </button>
+              <button class="btn btn-about m-2">Save Changes</button>
+            </div>
+          </div>
+        </div>
+      </template>
+    </modal>
+
     <BackToTop />
   </div>
 </template>
@@ -260,6 +344,7 @@ export default {
         attachments: "",
       },
       myBook: [],
+      book: "",
     };
   },
   created() {
@@ -282,7 +367,6 @@ export default {
         return;
       }
       for (let i = 0; i <= event.target.files.length - 1; i++) {
-        console.log(event.target.files.item(i).type);
         if (
           event.target.files.item(i).type == "application/pdf" ||
           event.target.files.item(i).type ==
@@ -374,6 +458,12 @@ export default {
         this.$toasted.success(" Deleted Successfully");
         this.getBook();
       });
+    },
+
+    openEdit(item) {
+      this.book = item;
+      console.log(this.book);
+      this.$refs.modalName2.openModal();
     },
   },
 };
