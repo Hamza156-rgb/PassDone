@@ -273,20 +273,50 @@ export default {
       con.classList.add("is-blurred");
     },
     file(event) {
-     
-      this.form.attachments = event.target.files[0];
+      var sizeAllowed = 25000;
+      var filesSize = 0;
+      this.form.attachments = "";
+
+      if (event.target.files.length > 1) {
+        this.$toasted.error("More than 2 files cannot be uploaded");
+        return;
+      }
+      for (let i = 0; i <= event.target.files.length - 1; i++) {
+        console.log(event.target.files.item(i).type);
+        if (
+          event.target.files.item(i).type == "application/pdf" ||
+          event.target.files.item(i).type ==
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        ) {
+          const fsize = event.target.files.item(i).size;
+          const file = Math.round(fsize / 1024);
+          filesSize += file;
+          if (filesSize >= sizeAllowed) {
+            this.$toasted.error(
+              "Maximum file size exceeded, please select a files less than 25mb"
+            );
+          } else {
+            if (i == 0) {
+              this.form.attachments = event.target.files[i];
+            }
+          }
+        } else {
+          this.$toasted.error("One of the files are not of required file type");
+          return;
+        }
+      }
+
+      // this.form.attachments = event.target.files[0];
     },
     getMajors() {
-      var id = "" ;
+      var id = "";
       var userType = localStorage.getItem("user_type");
-      if (userType == 1 ){
+      if (userType == 1) {
         id = localStorage.getItem("university_id");
-      }
-      else if (userType == 2 ){
+      } else if (userType == 2) {
         id = localStorage.getItem("university_id");
-      }
-      else{
-        id =  localStorage.getItem("user_id");
+      } else {
+        id = localStorage.getItem("user_id");
       }
 
       ContentDataService.getMajor(id).then((response) => {
@@ -328,8 +358,8 @@ export default {
       ContentDataService.getmyBook().then((response) => {
         console.log(response.data.data);
         this.myBook = response.data.data;
-        if(this.myBook == 'No Data Found'){
-          this.myBook =[]
+        if (this.myBook == "No Data Found") {
+          this.myBook = [];
         }
 
         for (let i = 0; i < this.myBook.length; i++) {
