@@ -22,37 +22,50 @@
             <div class="row">
               <div class="col-6"><h4 class="courses">Manage Courses</h4></div>
               <div class="col-6">
-                <div class="card-options crd">
-                  <a href="#" class="add-list">
+                <div class="card-options crd"  style="cursor:pointer">
+                  <a @click="$refs.modalName1.openModal()">
                     <i
-                      class="fa-sharp fa-solid fa-circle-plus "
+                      class="fa-sharp fa-solid fa-circle-plus"
                       style="margin-right: 5px"
                     ></i>
                   </a>
 
-              <h4 class="manage-semester  ">Add New </h4>
+                  <h4 class="manage-semester">Add New</h4>
                 </div>
               </div>
             </div>
             <hr />
 
-            <div class="card" >
+            <div class="card">
               <div class="card-body">
                 <div class="row">
-                  <div class="col-xs-6 col-sm-6 col-md-4 col-lg-6 mt-3">
-                    <div class="card" style="background:#EFEFEF">
-                   
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-3">
+                    <div class="card" style="background: #efefef">
                       <div class="card-body course">
-                           <i class="fa fa-times" style="float:right;color:#E71126"></i>
+                        <i
+                          class="fa fa-times"
+                          style="float: right; color: #e71126"
+                        ></i>
                         <h3>Course Name</h3>
                         <h4 class="mt-2">Addedd | 15 Sep 2022</h4>
                         <button class="btn mt-2">Active</button>
                       </div>
-                      
                     </div>
                   </div>
 
-               
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-3">
+                    <div class="card" style="background: #efefef">
+                      <div class="card-body course">
+                        <i
+                          class="fa fa-times"
+                          style="float: right; color: #e71126"
+                        ></i>
+                        <h3>Course Name</h3>
+                        <h4 class="mt-2">Addedd | 15 Sep 2022</h4>
+                        <button class="btn mt-2">Active</button>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -60,19 +73,68 @@
         </div>
       </div>
     </div>
-       <BackToTop />
+
+    <modal ref="modalName1">
+      <template v-slot:header>
+        <h5 style="color: #3390ff">Add New Courses</h5>
+
+        <div class="row mt-4">
+          <div class="col-2">
+            <img
+              src="../../assets/main/user.png"
+              class="rounded-circle"
+              style="width: 100%"
+            />
+          </div>
+          <div class="col-10">
+            <p class="mt-lg-4 mt-md-4">Name</p>
+          </div>
+        </div>
+
+        <div class="row mt-2">
+          <div class="col-12">
+            <!-- <multiselect
+              style="
+                border: 1px solid #dddddd !important;
+                border-left: 5px solid #f95858 !important ;
+              "
+              class="mt-2"
+              :options:"option"
+              label="name"
+              track-by="name"
+              placeholder="Select/Search for Course Name"
+            >
+            </multiselect> -->
+          </div>
+          <div class="col-12"></div>
+        </div>
+      </template>
+    </modal>
+
+    <BackToTop />
   </div>
 </template>
 
 <script>
 import Navbar from "../../components/Navbar.vue";
 import BackToTop from "../../components/BackToTop.vue";
+import Modal from "../../components/Modal.vue";
 export default {
   name: "ManageCourse",
   components: {
     Navbar,
-      BackToTop,
+    BackToTop,
+    Modal,
   },
+
+data(){
+  return{
+
+option:[]
+
+  }
+}
+
 };
 </script>
 
@@ -106,7 +168,6 @@ export default {
   background-color: white;
 }
 
-
 .card-options {
   margin-left: auto;
   display: flex;
@@ -139,17 +200,16 @@ export default {
   color: #0776bd;
 }
 
-
 @media only screen and (max-width: 600px) {
   .courses {
     font-size: 14px;
   }
 
- .fa-sharp {
+  .fa-sharp {
     font-size: 18px;
   }
   .manage-semester {
-    font-size: 18px;
+    font-size: 17px;
   }
   .card-text p {
     font-size: 11px;
@@ -172,9 +232,6 @@ export default {
     font-size: 12px;
     width: 50%;
   }
-   .manage-semester {
-    font-size: 14px;
-  }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -188,7 +245,7 @@ export default {
   }
 
   .manage-semester {
-    font-size: 16px;
+    font-size: 18px;
   }
   .card-text p {
     font-size: 12px;
@@ -210,9 +267,6 @@ export default {
   .btn-warnings {
     font-size: 12px;
     width: 50%;
-  }
-   .manage-semester {
-    font-size: 16px;
   }
 }
 
@@ -290,10 +344,9 @@ export default {
     font-size: 12px;
     width: 30%;
   }
-   .manage-semester {
+  .manage-semester {
     font-size: 20px;
   }
-
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */

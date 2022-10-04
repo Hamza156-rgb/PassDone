@@ -202,6 +202,28 @@ class ContentDataService {
     return http.get('getInstituteById?user_id=' + localStorage.getItem('user_id'))
   }
 
+  getInstituteFeed() {
+    return http.get('getTotalUserPosts?user_id=' + localStorage.getItem('user_id'))
+  }
+
+
+  getInstituteMajor() {
+    return http.get('getTotalInstituteMajors?user_id=' + localStorage.getItem('user_id'))
+  }
+
+  getInstituteCourse() {
+    return http.get('getTotalInstituteCourses?user_id=' + localStorage.getItem('user_id'))
+  }
+  getInstituteInstructor() {
+    return http.get('getTotalInstitutesInstructors?user_id=' + localStorage.getItem('user_id'))
+  }
+  getInstituteStudents() {
+    return http.get('getTotalInstitutesStudents?user_id=' + localStorage.getItem('user_id'))
+  }
+  getInstituteFollowers() {
+    return http.get('getTotalUserFollower?user_id=' + localStorage.getItem('user_id'))
+  }
+
 
 
 

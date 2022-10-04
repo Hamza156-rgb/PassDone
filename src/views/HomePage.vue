@@ -2,7 +2,7 @@
   <div>
     <Navbar />
 
-    <div class="container-fluid mt-2">
+    <div class="container mt-2">
       <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 mt-2 info-card">
           <div class="card">

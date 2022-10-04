@@ -9,13 +9,13 @@ export default {
   methods: {
     closeModal() {
       this.show = false;
-      document.querySelector("body").classList.remove("overflow-hidden");
-      var con = document.getElementById("main-container");
-      con.classList.remove("is-blurred");
+      // document.querySelector("body").remove("overflow-hidden");
+      // var con = document.getElementById("main-container");
+      // con.remove("is-blurred");
     },
     openModal() {
       this.show = true;
-      document.querySelector("body").classList.add("overflow-hidden");
+      // document.querySelector("body").add("overflow-hidden");
     },
   },
 };

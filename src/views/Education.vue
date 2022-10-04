@@ -2,13 +2,13 @@
   <div>
     <Navbar />
     <div id="containers">
-      <img :src="cover_img" class="backImg" />
+      <img v-if="cover_img" :src="cover_img" class="backImg" />
+      <img v-else src="../assets/main/background.jpg" class="backImg" />
       <div class="top-left">
         <img v-if="profile_img" :src="profile_img" class="rounded-circle" />
         <img v-else src="../assets/main/user.png" class="rounded-circle" />
 
-        <br />
-        <button class="btn btn-follow mt-3">Follow</button>
+      
       </div>
     </div>
     <div class="container" id="second">
@@ -16,9 +16,9 @@
         <div class="row p-lg-4 p-md-3">
           <div class="col-xs-12 col-sm-12 col-md-3 col-lg-4">
             <div class="information">
-              <h5>University Name Here</h5>
-              <h6>University Address</h6>
-              <p>Date</p>
+              <h5>{{ Name }}</h5>
+              <h6>{{ Address }}</h6>
+              <p>{{ Dates }}</p>
             </div>
           </div>
 
@@ -26,37 +26,37 @@
             <div class="row card-data pb-4">
               <div class="col-2">
                 <div class="value">
-                  <h3 class="mb-0">0</h3>
+                  <h3 class="mb-0">{{ Feed }}</h3>
                 </div>
                 <div class="names">Feed</div>
               </div>
               <div class="col-2" id="border">
                 <div class="value1">
-                  <h3 class="mb-0">0</h3>
+                  <h3 class="mb-0">{{ Major }}</h3>
                 </div>
                 <div class="names">Major</div>
               </div>
               <div class="col-2" id="border">
                 <div class="value2">
-                  <h3 class="mb-0">0</h3>
+                  <h3 class="mb-0">{{ Course }}</h3>
                 </div>
                 <div class="names">Courses</div>
               </div>
               <div class="col-2" id="border">
                 <div class="value3">
-                  <h3 class="mb-0">0</h3>
+                  <h3 class="mb-0">{{ Instructor }}</h3>
                 </div>
                 <div class="names">Instructors</div>
               </div>
               <div class="col-2" id="border">
                 <div class="value4">
-                  <h3 class="mb-0">0</h3>
+                  <h3 class="mb-0">{{ Students }}</h3>
                 </div>
                 <div class="names">Students</div>
               </div>
               <div class="col-2" id="border">
                 <div class="value5">
-                  <h3 class="mb-0">0</h3>
+                  <h3 class="mb-0">{{ Followers }}</h3>
                 </div>
                 <div class="names">Followers</div>
               </div>
@@ -65,34 +65,22 @@
         </div>
       </div>
     </div>
-    <div class="container">
+    <div class="container mt-4">
       <div class="row">
         <div class="card second-card p-lg-3">
           <div class="card-body">
             <h5>About</h5>
             <div class="inf-text">
-              <h6>Vision</h6>
               <p>
-                A pioneering university in constructing knowledge, promoting
-                scientific research and providing distinguished community
-                services striving to compete with leading universities.
+                {{ AboutDescription }}
               </p>
             </div>
-            <div class="inf-text">
-              <h6>Vision</h6>
-              <p>
-                Providing high quality academic programs to prepare well –
-                qualified individuals to fulfill the future demands of
-                employment, conduct scientific research that contributes to
-                solving social problems and ensure the availability of an
-                attractive university environment .
-              </p>
-            </div>
+
             <div class="inf-text">
               <h6>Contact</h6>
-              <p>Tel:Number</p>
-              <p>Fax:Number</p>
-              <p>email:email</p>
+              <p>{{ Contact }}</p>
+
+              <p>{{ Email }}</p>
             </div>
           </div>
         </div>
@@ -120,29 +108,86 @@ export default {
     return {
       profile_img: "",
       cover_img: "",
+      Name: "",
+      Address: "",
+      Dates: "",
+
+      AboutDescription: "",
+      Contact: "",
+      Email: "",
+
+      Feed: "",
+      Major: "",
+      Course: "",
+      Instructor: "",
+      Students: "",
+      Followers: "",
     };
   },
 
   created() {
     this.getProfile();
+    this.getFeed();
+    this.getMajor();
+    this.getCourse();
+    this.getInstructor();
+    this.getStudents();
+    this.getFollowers();
   },
 
   methods: {
     getProfile() {
       ContentDataService.getInstituteProfile().then((response) => {
         console.log(response.data.data);
+        this.Name = response.data.data.name;
+        this.Address = response.data.data.address;
+        this.Dates = response.data.data.created_at;
+        this.AboutDescription = response.data.data.about;
+        this.Contact = response.data.data.contact_imformation;
+        this.Email = response.data.data.email;
         var a = response.data.data;
         var b = Object.values(a);
         this.ActiveInstitutes = b[0];
-     if (this.profile_img) {
+        if (this.profile_img) {
           this.profile_img =
             "http://passdoneapi.codetreck.com/public/" +
             response.data.data.profile_pic;
         }
-
-        this.cover_img =
-          "http://passdoneapi.codetreck.com/public/" +
-          response.data.data.cover_picture;
+        if (this.cover_img) {
+          this.cover_img =
+            "http://passdoneapi.codetreck.com/public/" +
+            response.data.data.cover_picture;
+        }
+      });
+    },
+    getFeed() {
+      ContentDataService.getInstituteFeed().then((response) => {
+        this.Feed = response.data.data;
+      });
+    },
+    getMajor() {
+      ContentDataService.getInstituteMajor().then((response) => {
+        this.Major = response.data.data;
+      });
+    },
+    getCourse() {
+      ContentDataService.getInstituteCourse().then((response) => {
+        this.Course = response.data.data;
+      });
+    },
+    getInstructor() {
+      ContentDataService.getInstituteInstructor().then((response) => {
+        this.Instructor = response.data.data;
+      });
+    },
+    getStudents() {
+      ContentDataService.getInstituteStudents().then((response) => {
+        this.Students = response.data.data;
+      });
+    },
+    getFollowers() {
+      ContentDataService.getInstituteFollowers().then((response) => {
+        this.Followers = response.data.data;
       });
     },
   },
@@ -169,7 +214,7 @@ export default {
 
 .backImg {
   width: 100%;
-  height: 400px;
+  height: 500px;
 }
 
 .ad-card {
@@ -322,7 +367,7 @@ export default {
     text-align: left;
   }
   #second {
-    top: 40%;
+    top: 50%;
   }
   .information h5 {
     font-size: 15px;
