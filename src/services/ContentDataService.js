@@ -224,6 +224,19 @@ class ContentDataService {
     return http.get('getTotalUserFollower?user_id=' + localStorage.getItem('user_id'))
   }
 
+  getInstructorInstitute() {
+    console.log(localStorage.getItem('user_id'))
+    return http.get('getAllInstructorsByInstitute?university_id=' + localStorage.getItem('user_id'))
+  }
+
+  addInstitueCourses(form){
+    const formData = new FormData();
+    formData.append('training_course_id', form.course)
+    formData.append('instructor_id', form.teacher)
+    formData.append('institute_id', localStorage.getItem('user_id'))
+    return http.post('createInstituteToTrainingCourse', formData);
+  }
+
 
 
 

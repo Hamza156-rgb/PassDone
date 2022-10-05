@@ -427,7 +427,8 @@ export default {
       if (this.form.attachments == "") {
         this.$toasted.error("Please Attach File");
         return;
-      } else {
+      }
+       else {
         ContentDataService.addBook(this.form).then((response) => {
           console.log(response.data);
           this.$toasted.success(" Addedd Successfully");

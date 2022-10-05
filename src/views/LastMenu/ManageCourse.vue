@@ -39,30 +39,17 @@
             <div class="card">
               <div class="card-body">
                 <div class="row">
-                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-3">
+                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-3" v-for="item in courseDetail" :key="item.id">
                     <div class="card" style="background: #efefef">
                       <div class="card-body course">
                         <i
                           class="fa fa-times"
                           style="float: right; color: #e71126"
                         ></i>
-                        <h3>Course Name</h3>
-                        <h4 class="mt-2">Addedd | 15 Sep 2022</h4>
-                        <button class="btn mt-2">Active</button>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-3">
-                    <div class="card" style="background: #efefef">
-                      <div class="card-body course">
-                        <i
-                          class="fa fa-times"
-                          style="float: right; color: #e71126"
-                        ></i>
-                        <h3>Course Name</h3>
-                        <h4 class="mt-2">Addedd | 15 Sep 2022</h4>
-                        <button class="btn mt-2">Active</button>
+                        <h3>  {{item.name}} </h3>
+                        <h4 class="mt-2">Addedd | {{item.created_at}}</h4>
+                        <button class="btn mt-2" v-if="item.is_active == 1">Active</button>
+                           <button class="btn red mt-2" v-if="item.is_active == 0">Not-Active</button>
                       </div>
                     </div>
                   </div>
@@ -73,68 +60,71 @@
         </div>
       </div>
     </div>
+    <form @submit.prevent="submit">
+      <modal ref="modalName1">
+        <template v-slot:header>
+          <h5 style="color: #3390ff">Add New Courses</h5>
 
-    <modal ref="modalName1">
-      <template v-slot:header>
-        <h5 style="color: #3390ff">Add New Courses</h5>
-
-        <div class="row mt-4">
-          <div class="col-2">
-            <img
-              src="../../assets/main/user.png"
-              class="rounded-circle"
-              style="width: 100%"
-            />
-          </div>
-          <div class="col-10">
-         <b>   <p class="mt-lg-4 mt-md-4" style="color:#707070">Name</p></b>
-          </div>
-        </div>
-
-        <div class="row mt-2">
-          <div class="col-12">
-            <multiselect
-              style="
-                border: 1px solid #dddddd !important;
-
-                border-left: 5px solid #f95858 !important ;
-              "
-              class="mt-2"
-              :options="degree.map((user) => user.id)"
-              :custom-label="(opt) => degree.find((x) => x.id == opt).name"
-              label="name"
-              track-by="name"
-              v-model="form.course"
-              placeholder="Choose One"
-            >
-            </multiselect>
-          </div>
-          <div class="col-12 mt-4">
-            <label> <b>Instructor Name</b> </label>
-            <multiselect
-              style="
-                border: 1px solid #dddddd !important;
-                border-left: 5px solid #dddddd !important ;
-              "
-              class="mt-3"
-              :options="degree.map((user) => user.id)"
-              :custom-label="(opt) => degree.find((x) => x.id == opt).name"
-              label="name"
-              track-by="name"
-              v-model="form.course"
-              placeholder="Select/Search for Course Name"
-            >
-            </multiselect>
-          </div>
-
-          <div class="col-12 mt-4">
-            <div align="right">
-              <button class="btn btn-addcourse">Save Changes</button>
+          <div class="row mt-4">
+            <div class="col-2">
+              <img
+                src="../../assets/main/user.png"
+                class="rounded-circle"
+                style="width: 100%"
+              />
+            </div>
+            <div class="col-10">
+              <b> <p class="mt-lg-4 mt-md-4" style="color: #707070">Name</p></b>
             </div>
           </div>
-        </div>
-      </template>
-    </modal>
+
+          <div class="row mt-4">
+            <div class="col-12">
+              <multiselect
+                style="
+                  border: 1px solid #dddddd !important;
+
+                  border-left: 5px solid #f95858 !important ;
+                "
+                class="mt-2"
+                :options="degree.map((user) => user.id)"
+                :custom-label="(opt) => degree.find((x) => x.id == opt).name"
+                label="name"
+                track-by="name"
+                v-model="form.course"
+                placeholder="Choose One"
+              >
+              </multiselect>
+            </div>
+            <div class="col-12 mt-4">
+              <label> <b>Instructor Name</b> </label>
+              <multiselect
+                style="
+                  border: 1px solid #dddddd !important;
+                  border-left: 5px solid #dddddd !important ;
+                "
+                class="mt-3"
+                :options="instructor.map((user) => user.user_id)"
+                :custom-label="
+                  (opt) => instructor.find((x) => x.user_id == opt).first_name
+                "
+                label="first_name"
+                track-by="first_name"
+                v-model="form.teacher"
+                placeholder="Select/Search for Course Name"
+              >
+              </multiselect>
+            </div>
+
+            <div class="col-12 mt-4">
+              <div align="right">
+                <button class="btn btn-addcourse">Save Changes</button>
+              </div>
+            </div>
+          </div>
+        </template>
+      </modal>
+    </form>
 
     <BackToTop />
   </div>
@@ -157,17 +147,57 @@ export default {
   data() {
     return {
       degree: [],
+      instructor: [],
       form: {
         course: [],
+        teacher: [],
+        
       },
+      courseDetail: [],
     };
+  },
+
+  created() {
+    this.getMajors();
+    this.getInstructor();
+    this.getCourseDetail();
   },
 
   methods: {
     getMajors() {
+      ContentDataService.getTraningInstitute().then((response) => {
+        this.degree = response.data.data;
+      });
+    },
+
+    getInstructor() {
+      ContentDataService.getInstructorInstitute().then((response) => {
+        var a = Object.values(response.data);
+        this.instructor = a[0];
+        console.log(this.instructor[0].first_name);
+      });
+    },
+    submit() {
+      if (this.form.course == "") {
+        this.$toasted.error("Please Select Course");
+        return;
+      }
+      if (this.form.teacher == "") {
+        this.$toasted.error("Please Select Instructor");
+        return;
+      } else {
+        ContentDataService.addInstitueCourses(this.form).then((response) => {
+          console.log(response.data.data);
+          this.$toasted.success(" Addedd Successfully");
+          this.$refs.modalName1.closeModal();
+        });
+      }
+    },
+    getCourseDetail() {
       var id = localStorage.getItem("user_id");
       ContentDataService.getMajor(id).then((response) => {
-        this.degree = response.data.data;
+        console.log(response.data.data);
+        this.courseDetail = response.data.data;
       });
     },
   },
@@ -232,6 +262,9 @@ export default {
   background-color: #ff3434;
   color: white;
 }
+.red{
+   background-color: #ff3434 !important;
+}
 .manage-semester {
   color: #0776bd;
 }
@@ -282,18 +315,10 @@ export default {
     width: 50%;
   }
 
-
-
-.btn-addcourse {
-  width:100%;
-     font-size: 13px;
-}
-
-
-
-
-
-
+  .btn-addcourse {
+    width: 100%;
+    font-size: 13px;
+  }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -331,19 +356,10 @@ export default {
     width: 50%;
   }
 
-
-
-.btn-addcourse {
-  width:100%;
-     font-size: 13px;
-}
-
-
-
-
-
-
-
+  .btn-addcourse {
+    width: 100%;
+    font-size: 13px;
+  }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -383,20 +399,10 @@ export default {
     font-size: 18px;
   }
 
-
-
-
-.btn-addcourse {
-  width:30%;
-     font-size: 14px;
-}
-
-
-
-
-
-
-
+  .btn-addcourse {
+    width: 30%;
+    font-size: 14px;
+  }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -439,18 +445,9 @@ export default {
     font-size: 20px;
   }
 
-
-
-
-
-
-.btn-addcourse {
-  width:30%;
-   
-}
-
-
-
+  .btn-addcourse {
+    width: 30%;
+  }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -489,8 +486,7 @@ export default {
     width: 30%;
   }
   .btn-addcourse {
-  width:30%;
-     
-}
+    width: 30%;
+  }
 }
 </style>
