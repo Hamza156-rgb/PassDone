@@ -39,17 +39,36 @@
             <div class="card">
               <div class="card-body">
                 <div class="row">
-                  <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-3" v-for="item in courseDetail" :key="item.id">
+                  <div
+                    class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-3"
+                    v-for="item in courseDetail"
+                    :key="item.id"
+                  >
                     <div class="card" style="background: #efefef">
                       <div class="card-body course">
                         <i
                           class="fa fa-times"
-                          style="float: right; color: #e71126"
+                          style="float: right; color: #e71126; cursor: pointer"
+                          @click="deleteCourse(item.id)"
                         ></i>
-                        <h3>  {{item.name}} </h3>
-                        <h4 class="mt-2">Addedd | {{item.created_at}}</h4>
-                        <button class="btn mt-2" v-if="item.is_active == 1">Active</button>
-                           <button class="btn red mt-2" v-if="item.is_active == 0">Not-Active</button>
+                        <h3>{{ item.name }}</h3>
+                        <h4 class="mt-2">Addedd | {{ item.created_at }}</h4>
+                        <button
+                          class="btn mt-2"
+                          v-if="item.is_active == 1"
+                          @click="Active(item.id)"
+                          id="green"
+                        >
+                          Active
+                        </button>
+                        <button
+                          class="btn red mt-2"
+                          v-if="item.is_active == 0"
+                          @click="notActive(item.id)"
+                          id="red"
+                        >
+                          Not-Active
+                        </button>
                       </div>
                     </div>
                   </div>
@@ -151,7 +170,10 @@ export default {
       form: {
         course: [],
         teacher: [],
-        
+      },
+      formStatus: {
+        id: "",
+        is_Active: "",
       },
       courseDetail: [],
     };
@@ -190,14 +212,45 @@ export default {
           console.log(response.data.data);
           this.$toasted.success(" Addedd Successfully");
           this.$refs.modalName1.closeModal();
+          this.getCourseDetail();
         });
       }
     },
     getCourseDetail() {
-      var id = localStorage.getItem("user_id");
-      ContentDataService.getMajor(id).then((response) => {
+      ContentDataService.getMajor().then((response) => {
         console.log(response.data.data);
         this.courseDetail = response.data.data;
+      });
+    },
+    Active(id) {
+      console.log(id);
+
+      this.formStatus.id = id;
+      this.formStatus.is_Active = 0;
+      ContentDataService.changeCourseStatus(this.formStatus).then(
+        (response) => {
+          console.log(response.data.data);
+          this.$toasted.success(" Status Changed Successfully");
+          this.getCourseDetail();
+        }
+      );
+    },
+    notActive(id) {
+      this.formStatus.id = id;
+      this.formStatus.is_Active = 1;
+      ContentDataService.changeCourseStatus(this.formStatus).then(
+        (response) => {
+          console.log(response.data.data);
+          this.$toasted.success(" Status Changed Successfully");
+          this.getCourseDetail();
+        }
+      );
+    },
+    deleteCourse(id) {
+      ContentDataService.deleteCourse(id).then((response) => {
+        console.log(response.data.data);
+        this.$toasted.success(" Course Deleted Successfully");
+        this.getCourseDetail();
       });
     },
   },
@@ -262,8 +315,11 @@ export default {
   background-color: #ff3434;
   color: white;
 }
-.red{
-   background-color: #ff3434 !important;
+.red {
+  background-color: #ff3434 !important;
+}
+.red:hover {
+  background-color: #093 !important;
 }
 .manage-semester {
   color: #0776bd;

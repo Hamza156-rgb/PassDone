@@ -14,7 +14,14 @@ class ContentDataService {
   getUniversity(id) {
     return http.get('getAllInstitutesByCountry?country_id=' + id)
   }
-  getMajor(id) {
+  getMajor() {
+    var id = "";
+    if (localStorage.getItem("user_type") == 1 || localStorage.getItem("user_type") == 2) {
+      id = localStorage.getItem('university_id');
+    }
+    else{
+      id = localStorage.getItem('user_id');
+    }
     return http.get('getAllTrainingCoursesByInstitute?institute_id=' + id)
   }
 
@@ -178,7 +185,7 @@ class ContentDataService {
   addBook(form) {
     const formData = new FormData();
     formData.append('name', form.book)
-    formData.append(' subject', form.subject)
+    formData.append('subject', form.subject)
     formData.append('course_id', form.course)
     formData.append('detail', form.detail)
     formData.append('posted_by', localStorage.getItem('user_id'))
@@ -190,6 +197,28 @@ class ContentDataService {
     }
     return http.post('createBook', formData);
   }
+
+
+
+  updateBook(updateForm) {
+    const formData = new FormData();
+    formData.append('name', updateForm.book)
+    formData.append('subject', updateForm.subject)
+    formData.append('course_id', updateForm.course)
+    formData.append('detail', updateForm.detail)
+    formData.append('oldFile', updateForm.oldFile)
+    formData.append('posted_by', localStorage.getItem('user_id'))
+    formData.append('id', updateForm.id)
+
+    if (updateForm.attachments == null || updateForm.attachments == undefined || updateForm.attachments == '') {
+      formData.append('file', "")
+    }
+    else {
+      formData.append('file', updateForm.attachments)
+    }
+    return http.post('updateBook', formData);
+  }
+
 
   getmyBook() {
     return http.get('getBookByUser?user_id=' + localStorage.getItem("user_id"))
@@ -225,11 +254,17 @@ class ContentDataService {
   }
 
   getInstructorInstitute() {
-    console.log(localStorage.getItem('user_id'))
-    return http.get('getAllInstructorsByInstitute?university_id=' + localStorage.getItem('user_id'))
+    var id = "";
+    if (localStorage.getItem("user_type") == 1 || localStorage.getItem("user_type") == 2) {
+      id = localStorage.getItem('university_id');
+    }
+    else{
+      id = localStorage.getItem('user_id');
+    }
+    return http.get('getAllInstructorsByInstitute?university_id=' + id)
   }
 
-  addInstitueCourses(form){
+  addInstitueCourses(form) {
     const formData = new FormData();
     formData.append('training_course_id', form.course)
     formData.append('instructor_id', form.teacher)
@@ -237,6 +272,15 @@ class ContentDataService {
     return http.post('createInstituteToTrainingCourse', formData);
   }
 
+  changeCourseStatus(formStatus) {
+    const formData = new FormData();
+    formData.append('id', formStatus.id)
+    formData.append('is_active', formStatus.is_Active)
+    return http.post('changeStatusInstituteToTrainingCourse', formData)
+  }
+  deleteCourse(id) {
+    return http.post('deleteInstituteToTrainingCourse?id=' + id)
+  }
 
 
 

@@ -123,7 +123,7 @@
 
                           |
                           <span style="color: #0776bd"
-                            ><a v-bind:href="item.file" target="blank">File</a>
+                            ><a v-bind:href="url + item.file" target="blank">File</a>
                           </span>
                         </h6>
                       </div>
@@ -233,87 +233,97 @@
         </template>
       </modal>
     </form>
+    <form @submit.prevent="updateBooks">
+      <modal ref="modalName2">
+        <template v-slot:header>
+          <h5 style="color: #3390ff">Add New Book</h5>
+          <div class="row mt-4">
+            <div class="col-12">
+              <label><b>Book Name </b> </label>
+              <input
+                class="form-control form-control-lg mt-2"
+                type="text"
+                v-model="book.name"
+                placeholder="Enter the Book Name"
+              />
+            </div>
+            <div class="col-12 mt-3">
+              <label><b>Subject </b> </label>
+              <input
+                class="form-control form-control-lg mt-2"
+                type="text"
+                v-model="book.subject"
+                placeholder="Enter the Suject"
+              />
+            </div>
+            <div class="col-12 mt-3">
+              <label><b>Course Name </b> </label>
+              <multiselect
+                style="
+                  border: 1px solid #dddddd !important;
 
-    <modal ref="modalName2">
-      <template v-slot:header>
-        <h5 style="color: #3390ff">Add New Book</h5>
-        <div class="row mt-4">
-          <div class="col-12">
-            <label><b>Book Name </b> </label>
-            <input
-              class="form-control form-control-lg mt-2"
-              type="text"
-              v-model="book.name"
-              placeholder="Enter the Book Name"
-            />
-          </div>
-          <div class="col-12 mt-3">
-            <label><b>Subject </b> </label>
-            <input
-              class="form-control form-control-lg mt-2"
-              type="text"
-              v-model="book.subject"
-              placeholder="Enter the Suject"
-            />
-          </div>
-          <div class="col-12 mt-3">
-            <label><b>Course Name </b> </label>
-            <multiselect
-              style="
-                border: 1px solid #dddddd !important;
-
-                border-left: 5px solid #f95858 !important ;
-              "
-              class="mt-2"
-              :options="degree.map((user) => user.id)"
-              :custom-label="(opt) => degree.find((x) => x.id == opt).name"
-              label="name"
-              track-by="name"
-              v-model="book.course_id"
-              placeholder="Select/Search for Course Name"
-            >
-            </multiselect>
-          </div>
-          <div class="col-12 mt-3">
-            <label> <b> Detail </b> </label>
-            <textarea
-              class="form-control mt-2"
-              style="border: 1px solid #dddddd"
-              id="exampleFormControlTextarea1"
-              v-model="book.detail"
-              rows="4"
-            ></textarea>
-          </div>
-
-          <div class="col-12 mt-2">
-            <span> <b>Attach Book</b> <a :href="book.file" style="text-decoration:none;margin-left:5px" >OLD BOOK</a> </span>
-          </div>
-
-          <div class="col-12 mt-2">
-            <input
-              class="form-control form-control-lg mt-2"
-              id="formFileLg"
-              type="file"
-              accept=".doc, .docx,.pdf"
-              style="border-left: 0px white"
-              @change="file($event)"
-            />
-          </div>
-
-          <div class="col-12 mt-4">
-            <div align="right">
-              <button
-                class="btn btn-about m-2"
-                @click="$refs.modalName1.closeModal()"
+                  border-left: 5px solid #f95858 !important ;
+                "
+                class="mt-2"
+                :options="degree.map((user) => user.id)"
+                :custom-label="
+                  (opt) => degree.find((x) => x.id == opt).name
+                "
+                label="name"
+                track-by="name"
+                v-model="book.course_id"
+                placeholder="Select/Search for Course Name"
               >
-                close
-              </button>
-              <button class="btn btn-about m-2">Save Changes</button>
+              </multiselect>
+            </div>
+            <div class="col-12 mt-3">
+              <label> <b> Detail </b> </label>
+              <textarea
+                class="form-control mt-2"
+                style="border: 1px solid #dddddd"
+                id="exampleFormControlTextarea1"
+                v-model="book.detail"
+                rows="4"
+              ></textarea>
+            </div>
+
+            <div class="col-12 mt-2">
+              <span>
+                <b>Attach Book</b>
+                <a
+                  :href="url + book.file"
+                  style="text-decoration: none; margin-left: 5px"
+                  >OLD BOOK</a
+                >
+              </span>
+            </div>
+
+            <div class="col-12 mt-2">
+              <input
+                class="form-control form-control-lg mt-2"
+                id="formFileLg"
+                type="file"
+                accept=".doc, .docx,.pdf"
+                style="border-left: 0px white"
+                @change="updatefile($event)"
+              />
+            </div>
+
+            <div class="col-12 mt-4">
+              <div align="right">
+                <button
+                  class="btn btn-about m-2"
+                  @click="$refs.modalName1.closeModal()"
+                >
+                  close
+                </button>
+                <button class="btn btn-about m-2">Save Changes</button>
+              </div>
             </div>
           </div>
-        </div>
-      </template>
-    </modal>
+        </template>
+      </modal>
+    </form>
 
     <BackToTop />
   </div>
@@ -343,8 +353,18 @@ export default {
         detail: "",
         attachments: "",
       },
+      updateForm: {
+        book: "",
+        subject: "",
+        course: [],
+        detail: "",
+        attachments: "",
+        id:"",
+        oldFile : "",
+      },
       myBook: [],
       book: "",
+      url: "http://passdoneapi.codetreck.com/public/"
     };
   },
   created() {
@@ -392,6 +412,47 @@ export default {
 
       // this.form.attachments = event.target.files[0];
     },
+
+
+
+
+
+  updatefile(event) {
+      var sizeAllowed = 25000;
+      var filesSize = 0;
+      this.updateForm.attachments = "";
+
+      if (event.target.files.length > 1) {
+        this.$toasted.error("More than 2 files cannot be uploaded");
+        return;
+      }
+      for (let i = 0; i <= event.target.files.length - 1; i++) {
+        if (
+          event.target.files.item(i).type == "application/pdf" ||
+          event.target.files.item(i).type ==
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        ) {
+          const fsize = event.target.files.item(i).size;
+          const file = Math.round(fsize / 1024);
+          filesSize += file;
+          if (filesSize >= sizeAllowed) {
+            this.$toasted.error(
+              "Maximum file size exceeded, please select a files less than 25mb"
+            );
+          } else {
+            if (i == 0) {
+              this.updateForm.attachments = event.target.files[i];
+            }
+          }
+        } else {
+          this.$toasted.error("One of the files are not of required file type");
+          return;
+        }
+      }
+    },
+
+
+
     getMajors() {
       var id = "";
       var userType = localStorage.getItem("user_type");
@@ -405,6 +466,7 @@ export default {
 
       ContentDataService.getMajor(id).then((response) => {
         this.degree = response.data.data;
+        console.log(this.degree);
       });
     },
     submit() {
@@ -427,8 +489,7 @@ export default {
       if (this.form.attachments == "") {
         this.$toasted.error("Please Attach File");
         return;
-      }
-       else {
+      } else {
         ContentDataService.addBook(this.form).then((response) => {
           console.log(response.data);
           this.$toasted.success(" Addedd Successfully");
@@ -437,7 +498,6 @@ export default {
         });
       }
 
-      console.log(this.form);
     },
     getBook() {
       ContentDataService.getmyBook().then((response) => {
@@ -447,10 +507,10 @@ export default {
           this.myBook = [];
         }
 
-        for (let i = 0; i < this.myBook.length; i++) {
-          this.myBook[i].file =
-            "http://passdoneapi.codetreck.com/public/" + this.myBook[i].file;
-        }
+        // for (let i = 0; i < this.myBook.length; i++) {
+        //   this.myBook[i].file =
+        //     "http://passdoneapi.codetreck.com/public/" + this.myBook[i].file;
+        // }
       });
     },
     deleteBook(id) {
@@ -462,9 +522,27 @@ export default {
     },
 
     openEdit(item) {
-      this.book = item;
-      console.log(this.book);
       this.$refs.modalName2.openModal();
+      this.book = item;
+      this.form.id = this.book.id;
+    },
+
+    updateBooks() {
+      console.log(this.book)
+      this.updateForm.book = this.book.name;
+      this.updateForm.subject = this.book.subject;
+      this.updateForm.course = this.book.course_id;
+      this.updateForm.detail = this.book.detail;
+      this.updateForm.oldFile = this.book.file;
+      this.updateForm.id = this.book.id;
+      //this.updateForm.attachments = 
+      console.log(this.updateForm);
+      ContentDataService.updateBook(this.updateForm).then((response) => {
+          console.log(response.data);
+          this.$toasted.success("  Successfully");
+          this.$refs.modalName2.closeModal();
+          this.getBook();
+        });
     },
   },
 };
