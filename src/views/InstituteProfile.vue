@@ -295,7 +295,7 @@ export default {
   }
   .profile-button {
     top: 30%;
-    left: 38%;
+    left: 35%;
   }
 
   .ad-card {

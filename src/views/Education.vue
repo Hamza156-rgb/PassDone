@@ -170,6 +170,7 @@ export default {
     },
     getCourse() {
       ContentDataService.getInstituteCourse().then((response) => {
+        console.log(response.data.data)
         this.Course = response.data.data;
       });
     },
