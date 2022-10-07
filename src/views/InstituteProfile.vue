@@ -1,99 +1,92 @@
 <template>
   <div>
     <Navbar />
-    <div id="containers">
-      <img :src="cover_img" class="backImg" />
-      <div class="top-left">
+    <div class="background">
+      <div class="back-image">
+        <img
+          src="../assets/main/ground.jpg"
+          class="img-fluid"
+          style="width: 100%; height: 400px"
+        />
+      </div>
+      <div class="profile-img">
         <img v-if="profile_img" :src="profile_img" class="rounded-circle" />
         <img v-else src="../assets/main/user.png" class="rounded-circle" />
-
-        <br />
+      </div>
+      <div class="profile-button">
         <button class="btn btn-follow mt-3">Follow</button>
       </div>
     </div>
-    <div class="container" id="second">
-      <div class="card ad-card institiute-margin">
-        <div class="row p-lg-4 p-md-3">
-          <div class="col-xs-12 col-sm-12 col-md-3 col-lg-4">
-            <div class="information">
-              <h5>University Name Here</h5>
-              <h6>University Address</h6>
-              <p>Date</p>
-            </div>
+    <div class="card ad-card p-4 mb-4">
+      <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
+          <div class="information">
+            <h5>{{ uniName }}</h5>
+            <h6>{{ uniAddress }}</h6>
+            <p>{{ datetime }}</p>
           </div>
+        </div>
 
-          <div class="col-xs-12 col-sm-12 col-md-9 col-lg-8">
-            <div class="row card-data pb-4">
-              <div class="col-2">
-                <div class="value">
-                  <h3 class="mb-0">0</h3>
-                </div>
-                <div class="names">Feed</div>
+        <div class="col-xs-12 col-sm-12 col-md-10 col-lg-10">
+          <div class="row card-data">
+            <div class="col-2">
+              <div class="value">
+                <h3 class="mb-0">{{ Feed }}</h3>
               </div>
-              <div class="col-2" id="border">
-                <div class="value1">
-                  <h3 class="mb-0">0</h3>
-                </div>
-                <div class="names">Major</div>
+              <div class="names">Feed</div>
+            </div>
+            <div class="col-2" id="border">
+              <div class="value1">
+                <h3 class="mb-0">{{ Major }}</h3>
               </div>
-              <div class="col-2" id="border">
-                <div class="value2">
-                  <h3 class="mb-0">0</h3>
-                </div>
-                <div class="names">Courses</div>
+              <div class="names">Major</div>
+            </div>
+            <div class="col-2" id="border">
+              <div class="value2">
+                <h3 class="mb-0">{{ Course }}</h3>
               </div>
-              <div class="col-2" id="border">
-                <div class="value3">
-                  <h3 class="mb-0">0</h3>
-                </div>
-                <div class="names">Instructors</div>
+              <div class="names">Courses</div>
+            </div>
+            <div class="col-2" id="border">
+              <div class="value3">
+                <h3 class="mb-0">{{ Instructor }}</h3>
               </div>
-              <div class="col-2" id="border">
-                <div class="value4">
-                  <h3 class="mb-0">0</h3>
-                </div>
-                <div class="names">Students</div>
+              <div class="names">Instructors</div>
+            </div>
+            <div class="col-2" id="border">
+              <div class="value4">
+                <h3 class="mb-0">{{ Students }}</h3>
               </div>
-              <div class="col-2" id="border">
-                <div class="value5">
-                  <h3 class="mb-0">0</h3>
-                </div>
-                <div class="names">Followers</div>
+              <div class="names">Students</div>
+            </div>
+            <div class="col-2" id="border">
+              <div class="value5">
+                <h3 class="mb-0">{{ Followers }}</h3>
               </div>
+              <div class="names">Followers</div>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="container">
-      <div class="row">
-        <div class="card second-card p-lg-3">
-          <div class="card-body">
-            <h5>About</h5>
-            <div class="inf-text">
-              <h6>Vision</h6>
-              <p>
-                A pioneering university in constructing knowledge, promoting
-                scientific research and providing distinguished community
-                services striving to compete with leading universities.
-              </p>
-            </div>
-            <div class="inf-text">
-              <h6>Vision</h6>
-              <p>
-                Providing high quality academic programs to prepare well –
-                qualified individuals to fulfill the future demands of
-                employment, conduct scientific research that contributes to
-                solving social problems and ensure the availability of an
-                attractive university environment .
-              </p>
-            </div>
-            <div class="inf-text">
-              <h6>Contact</h6>
-              <p>Tel:Number</p>
-              <p>Fax:Number</p>
-              <p>email:email</p>
-            </div>
+    <br />
+    <div class="mt-5">
+      <div class="card second-card">
+        <div class="card-body">
+          <h5>About</h5>
+          <div class="inf-text">
+            <p>
+              {{ About }}
+            </p>
+          </div>
+
+          <div class="inf-text">
+            <h6>
+              Contact: <b style="color: red">{{ contact }} </b>
+            </h6>
+            <p>Tel:Number : {{ contact }}</p>
+
+            <p>email: {{ email }}</p>
           </div>
         </div>
       </div>
@@ -118,31 +111,81 @@ export default {
 
   data() {
     return {
+      pageName: "",
+      uniName: "",
+      uniAddress: "",
+      datetime: "",
+
+      About: "",
+      contact: "",
+      email: "",
       profile_img: "",
       cover_img: "",
+
+      Feed: "",
+      Major: "",
+      Course: "",
+      Instructor: "",
+      Students: "",
+      Followers: "",
     };
   },
 
   created() {
-    this.getProfile();
+    this.getFeed();
+    this.getMajor();
+    this.getCourse();
+    this.getInstructor();
+    this.getStudents();
+    this.getFollowers();
+  },
+
+  beforeCreate() {
+    (this.pageName = this.$route.params.id),
+      ContentDataService.getInstituteProfileTwo(this.pageName).then(
+        (response) => {
+          console.log(response.data.data);
+          this.uniName = response.data.data.name;
+          this.uniAddress = response.data.data.address;
+          this.datetime = response.data.data.created_at;
+
+          this.About = response.data.data.about;
+          this.contact = response.data.data.contact_imformation;
+          this.email = response.data.data.email;
+        }
+      );
   },
 
   methods: {
-    getProfile() {
-      ContentDataService.getInstituteProfile().then((response) => {
-        console.log(response.data.data);
-        var a = response.data.data;
-        var b = Object.values(a);
-        this.ActiveInstitutes = b[0];
-     if (this.profile_img) {
-          this.profile_img =
-            "http://passdoneapi.codetreck.com/public/" +
-            response.data.data.profile_pic;
-        }
+    getFeed() {
+      ContentDataService.getInstituteFeedId().then((response) => {
+        this.Feed = response.data.data;
+      });
+    },
 
-        this.cover_img =
-          "http://passdoneapi.codetreck.com/public/" +
-          response.data.data.cover_picture;
+    getMajor() {
+      ContentDataService.getInstituteMajorId().then((response) => {
+        this.Major = response.data.data;
+      });
+    },
+    getCourse() {
+      ContentDataService.getInstituteCourseId().then((response) => {
+        this.Course = response.data.data;
+      });
+    },
+    getInstructor() {
+      ContentDataService.getInstituteInstructorId().then((response) => {
+        this.Instructor = response.data.data;
+      });
+    },
+    getStudents() {
+      ContentDataService.getInstituteStudentsId().then((response) => {
+        this.Students = response.data.data;
+      });
+    },
+    getFollowers() {
+      ContentDataService.getInstituteFollowersId().then((response) => {
+        this.Followers = response.data.data;
       });
     },
   },
@@ -150,34 +193,29 @@ export default {
 </script>
 
 <style scoped>
-#containers {
+.back-image {
   position: relative;
-  text-align: center;
-  color: white;
 }
-#second {
+.profile-img {
   position: absolute;
-
-  left: 50%;
-  transform: translate(-50%, -50%);
+  
 }
-.top-left {
+.profile-button {
   position: absolute;
-  top: 20px;
-  left: 100px;
+ 
 }
 
-.backImg {
-  width: 100%;
-  height: 400px;
+.background {
+  position: relative;
 }
 
 .ad-card {
-  margin-bottom: 15px;
-  padding: 3px;
   border: 0;
   border-radius: 12px;
   box-shadow: 0 8px 16px 0 rgb(162 169 204 / 24%);
+  width: 100%;
+  position: absolute;
+ 
 }
 
 .second-card {
@@ -188,8 +226,7 @@ export default {
 }
 
 .rounded-circle {
-  width: 170px;
-  height: 170px;
+  
   border-radius: 50%;
   background: #fff;
   padding: 5px;
@@ -251,9 +288,20 @@ export default {
   .information {
     text-align: center;
   }
-  #second {
-    top: 55%;
+
+  .profile-img {
+    top: 2%;
+    left: 35%;
   }
+  .profile-button {
+    top: 30%;
+    left: 38%;
+  }
+
+  .ad-card {
+    top: 40%;
+  }
+
   .information h5 {
     font-size: 13px;
   }
@@ -270,15 +318,26 @@ export default {
   .names {
     font-size: 8px;
   }
-  .second-card {
-    margin-top: 60px;
-  }
+
   .inf-text h6 {
     font-size: 14px;
   }
   .inf-text p {
     font-size: 12px;
   }
+
+
+
+.rounded-circle {
+  width: 110px;
+  height: 110px;
+ 
+}
+
+
+
+
+
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -286,9 +345,20 @@ export default {
   .information {
     text-align: center;
   }
-  #second {
+
+  .profile-img {
+    top: 5%;
+    left: 45%;
+  }
+  .profile-button {
+    top: 35%;
+    left: 47%;
+  }
+
+  .ad-card {
     top: 50%;
   }
+
   .information h5 {
     font-size: 14px;
   }
@@ -305,15 +375,25 @@ export default {
   .names {
     font-size: 12px;
   }
-  .second-card {
-    margin-top: 60px;
-  }
+
   .inf-text h6 {
     font-size: 15px;
   }
   .inf-text p {
     font-size: 13px;
   }
+
+
+
+.rounded-circle {
+  width: 120px;
+  height: 120px;
+ 
+}
+
+
+
+
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -321,9 +401,20 @@ export default {
   .information {
     text-align: left;
   }
-  #second {
-    top: 40%;
+
+  .profile-img {
+    top: 8%;
+    left: 5%;
   }
+  .profile-button {
+    top: 40%;
+    left: 7%;
+  }
+
+  .ad-card {
+    top: 50%;
+  }
+
   .information h5 {
     font-size: 15px;
   }
@@ -344,15 +435,23 @@ export default {
   #border {
     border-left: 2px solid #aea6a677;
   }
-  .second-card {
-    margin-top: 80px;
-  }
+
   .inf-text h6 {
     font-size: 16px;
   }
   .inf-text p {
     font-size: 14px;
   }
+
+
+
+.rounded-circle {
+  width: 130px;
+  height: 130px;
+ 
+}
+
+
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -360,9 +459,21 @@ export default {
   .information {
     text-align: left;
   }
-  #second {
-    top: 55%;
+
+  .profile-img {
+    top: 10%;
+    left: 5%;
   }
+  .profile-button {
+    top: 45%;
+    left: 8%;
+
+  }
+
+  .ad-card {
+    top: 60%;
+  }
+
   .information h5 {
     font-size: 17px;
   }
@@ -383,27 +494,41 @@ export default {
   #border {
     border-left: 2px solid #aea6a677;
   }
-  .second-card {
-    margin-top: 90px;
-  }
+
   .inf-text h6 {
     font-size: 17px;
   }
   .inf-text p {
     font-size: 15px;
   }
+
+
+.rounded-circle {
+  width: 150px;
+  height: 150px;
+ 
+}
+
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-  .top-left {
-    top: 20px;
-    left: 100px;
+  .profile-img {
+    top: 10%;
+    left: 16px;
   }
-  #second {
-    top: 60%;
+  .profile-button {
+    top: 50%;
+    left: 4%;
   }
 
+  .background {
+    position: relative;
+  }
+
+  .ad-card {
+    top: 60%;
+  }
   .information {
     text-align: left;
   }
@@ -429,14 +554,22 @@ export default {
     border-left: 2px solid #aea6a677;
   }
 
-  .second-card {
-    margin-top: 100px;
-  }
   .inf-text h6 {
     font-size: 18px;
   }
   .inf-text p {
     font-size: 16px;
   }
+
+
+
+.rounded-circle {
+  width: 170px;
+  height: 170px;
+ 
+}
+
+
+
 }
 </style>

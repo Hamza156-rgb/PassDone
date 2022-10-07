@@ -131,7 +131,7 @@ const routes = [
     },
 
     {
-        path: "/institute-profile",
+        path: "/institute-profile/:id",
         name: "InstituteProfile",
         component: InstituteProfile,
         meta: { requiresAuth: true },

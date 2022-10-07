@@ -336,7 +336,6 @@
                   </select>
 
                   <select class="form-select shadow-none mt-2">
-                
                     <option>All</option>
                     <option>College</option>
                     <option>other</option>
@@ -405,11 +404,18 @@
               </div>
             </div>
 
-            <div class="card mt-4">
+            <div class="card mt-4" v-for="item in University" :key="item.id">
               <div class="Following-data p-3">
                 <div class="row">
                   <div class="col-2">
                     <img
+                      v-if="item.profile_pic"
+                      class="rounded-circle"
+                      style="width: 100%"
+                    />
+
+                    <img
+                      v-else
                       src="../assets/main/university.png"
                       class="rounded-circle"
                       style="width: 100%"
@@ -418,9 +424,11 @@
                   <div class="col-10 mt-lg-4">
                     <div class="row">
                       <div class="col-xs-12 col-sm-12 col-md-7 col-lg-6">
-                        <h5 class="name">University Name</h5>
+                        <h5 class="name">{{ item.name }}</h5>
                         <h6 class="uni">
-                         University Area
+                          {{ item.typeOfInstitute.name }}-{{
+                            item.country.name
+                          }}
                         </h6>
                       </div>
 
@@ -428,12 +436,18 @@
                         class="col-xs-12 col-sm-12 col-md-5 col-lg-6"
                         align="right"
                       >
-                         <router-link to="/institute-profile">
-                        <button class="btn btn-primarys info-buttons mt-2 ">
-                          View
-                        </button>
-                         </router-link>
-                        <button class="btn btn-warnings info-buttons mt-2 ">
+                        
+                          <button
+                            class="btn btn-primarys info-buttons mt-2"
+                            @click="viewPage(item.user_id)"
+                          >
+                            View
+                          </button>
+                      
+                        <button
+                          class="btn btn-warnings info-buttons mt-2"
+                          @click="following()"
+                        >
                           Follow
                         </button>
                       </div>
@@ -442,101 +456,51 @@
                 </div>
               </div>
             </div>
-
-
-               <div class="card mt-4">
-              <div class="Following-data p-3">
-                <div class="row">
-                  <div class="col-2">
-                    <img
-                      src="../assets/main/university.png"
-                      class="rounded-circle"
-                      style="width: 100%"
-                    />
-                  </div>
-                  <div class="col-10 mt-lg-4">
-                    <div class="row">
-                      <div class="col-xs-12 col-sm-12 col-md-7 col-lg-6">
-                        <h5 class="name">University Name</h5>
-                        <h6 class="uni">
-                         University Area
-                        </h6>
-                      </div>
-
-                      <div
-                        class="col-xs-12 col-sm-12 col-md-5 col-lg-6"
-                        align="right"
-                      >
-                        <button class="btn btn-primarys info-buttons mt-2 ">
-                          View
-                        </button>
-                        <button class="btn btn-warnings info-buttons mt-2 ">
-                          Follow
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-               <div class="card mt-4">
-              <div class="Following-data p-3">
-                <div class="row">
-                  <div class="col-2">
-                    <img
-                      src="../assets/main/university.png"
-                      class="rounded-circle"
-                      style="width: 100%"
-                    />
-                  </div>
-                  <div class="col-10 mt-lg-4">
-                    <div class="row">
-                      <div class="col-xs-12 col-sm-12 col-md-7 col-lg-6">
-                        <h5 class="name">University Name</h5>
-                        <h6 class="uni">
-                         University Area
-                        </h6>
-                      </div>
-
-                      <div
-                        class="col-xs-12 col-sm-12 col-md-5 col-lg-6"
-                        align="right"
-                      >
-                        <button class="btn btn-primarys info-buttons mt-2 ">
-                          View
-                        </button>
-                        <button class="btn btn-warnings info-buttons mt-2 ">
-                          Follow
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-         
           </div>
         </div>
       </div>
     </div>
 
-<BackToTop />
-
+    <BackToTop />
   </div>
 </template>
 
 <script>
 import Navbar from "../components/Navbar.vue";
 import BackToTop from "../components/BackToTop.vue";
+import ContentDataService from "../services/ContentDataService";
 
 export default {
   name: "Institute",
   components: {
     Navbar,
-      BackToTop,
+    BackToTop,
+  },
+
+  data() {
+    return {
+      University: [],
+    };
+  },
+
+  created() {
+    this.getUniversity();
+  },
+
+  methods: {
+    getUniversity() {
+      ContentDataService.getAllInstitute().then((response) => {
+        console.log(response.data.data);
+        this.University = response.data.data;
+      });
+    },
+    following() {},
+    viewPage(user_id) {
+      this.$router.push({
+        name: "InstituteProfile",
+        params: {id:user_id},
+      });
+    },
   },
 };
 </script>
@@ -630,7 +594,7 @@ select {
 
 .btn-primarys {
   color: #fff !important;
-  border: 2px solid #0776BD;
+  border: 2px solid #0776bd;
   border-radius: 30px;
   padding: 1px 12px !important;
   display: inline-block;
@@ -638,7 +602,7 @@ select {
   text-align: center;
   vertical-align: middle;
   user-select: none;
-  background-color: #0776BD;
+  background-color: #0776bd;
   line-height: 1.5;
   outline: none;
   cursor: pointer;
@@ -723,8 +687,8 @@ select {
 
   .btn-primarys {
     font-size: 12px;
-     width: 45%;
-        margin-right: 10px;
+    width: 45%;
+    margin-right: 10px;
   }
   .btn-warnings {
     font-size: 12px;
@@ -761,11 +725,11 @@ select {
   .btn-primarys {
     font-size: 10px;
     margin-right: 1px;
-    width:60%
+    width: 60%;
   }
   .btn-warnings {
     font-size: 10px;
-      width:60%
+    width: 60%;
   }
 }
 

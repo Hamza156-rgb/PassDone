@@ -231,26 +231,57 @@ class ContentDataService {
     return http.get('getInstituteById?user_id=' + localStorage.getItem('user_id'))
   }
 
+  getInstituteProfileTwo(id) {
+    return http.get('getInstituteById?user_id=' + id)
+  }
+
   getInstituteFeed() {
     return http.get('getTotalUserPosts?user_id=' + localStorage.getItem('user_id'))
   }
+
+  getInstituteFeedId(id) {
+    return http.get('getTotalUserPosts?user_id=' + id)
+  }
+
 
 
   getInstituteMajor() {
     return http.get('getTotalInstituteMajors?user_id=' + localStorage.getItem('user_id'))
   }
+  getInstituteMajorId(id) {
+    return http.get('getTotalInstituteMajors?user_id=' + id)
+  }
 
   getInstituteCourse() {
     return http.get('getTotalInstituteCourses?user_id=' + localStorage.getItem('user_id'))
   }
+  getInstituteCourseId(id) {
+    return http.get('getTotalInstituteCourses?user_id=' + id)
+  }
+
+
+
   getInstituteInstructor() {
     return http.get('getTotalInstitutesInstructors?user_id=' + localStorage.getItem('user_id'))
   }
+  getInstituteInstructorId(id) {
+    return http.get('getTotalInstitutesInstructors?user_id=' + id)
+  }
+
+
   getInstituteStudents() {
     return http.get('getTotalInstitutesStudents?user_id=' + localStorage.getItem('user_id'))
   }
+  getInstituteStudentsId(id) {
+    return http.get('getTotalInstitutesStudents?user_id=' + id)
+  }
+
+
   getInstituteFollowers() {
     return http.get('getTotalUserFollower?user_id=' + localStorage.getItem('user_id'))
+  }
+  getInstituteFollowersId(id) {
+    return http.get('getTotalUserFollower?user_id=' + id)
   }
 
   getInstructorInstitute() {
@@ -283,6 +314,9 @@ class ContentDataService {
   }
 
 
+  getAllInstitute(){
+    return http.get('getAllInstitutes')
+  }
 
 
 }

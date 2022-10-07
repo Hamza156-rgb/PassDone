@@ -535,11 +535,11 @@ export default {
       this.updateForm.detail = this.book.detail;
       this.updateForm.oldFile = this.book.file;
       this.updateForm.id = this.book.id;
-      //this.updateForm.attachments = 
       console.log(this.updateForm);
       ContentDataService.updateBook(this.updateForm).then((response) => {
-          console.log(response.data);
-          this.$toasted.success("  Successfully");
+        console.log(response.data)
+        
+          this.$toasted.success("Updated  Successfully");
           this.$refs.modalName2.closeModal();
           this.getBook();
         });
