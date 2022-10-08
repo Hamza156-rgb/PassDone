@@ -457,7 +457,8 @@
                             style="color: #0776bd"
                             v-if="item.instructor.name"
                           >
-                            <b style="color: black">By</b>
+                            <b style="color: black;margin-right:3px">By</b>
+                      <img src="../assets/main/ecllipse.png" />
                             {{ item.instructor.name }}
                           </span>
 
@@ -466,7 +467,8 @@
                             @click="viewPage(item.instructor.institute.user_id)"
                             v-if="item.instructor.institute"
                           >
-                            | {{ item.instructor.institute.name }}
+                            | <img src="../assets/main/ecllipse.png" />
+                            {{ item.instructor.institute.name }} 
                           </span>
                           <span
                             style="color: #0776bd"
@@ -475,7 +477,8 @@
                             "
                             v-if="item.instructor.university"
                           >
-                            | {{ item.instructor.university.name }}
+                            | <img src="../assets/main/ecllipse.png" />
+                            {{ item.instructor.university.name }}
                           </span>
                         </h6>
                       </div>
@@ -554,14 +557,18 @@
                     @click="viewPage(book.instructor.institute.user_id)"
                     v-if="book.instructor.institute"
                   >
-                    | {{ book.instructor.institute.name }}
+                    |
+                    <img src="../assets/main/ecllipse.png" class="img-fluid" />
+                    {{ book.instructor.institute.name }}
                   </span>
+
                   <span
                     style="color: #0776bd"
                     @click="viewPage(book.instructor.university.user_id)"
                     v-if="book.instructor.university"
                   >
-                    | {{ book.instructor.university.name }}
+                    | <img src="../assets/main/ecllipse.png" />
+                    {{ book.instructor.university.name }}
                   </span>
                 </h6>
               </div>
@@ -573,8 +580,7 @@
 
         <button class="btn btn-dangers info-buttons mt-2">
           <a
-            :href="url + book.file" 
-          
+            :href="url + book.file"
             style="color: white; text-decoration: none"
           >
             Download
