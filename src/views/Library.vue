@@ -422,6 +422,14 @@
                 <div class="row">
                   <div class="col-2">
                     <img
+                      v-if="item.profile_pic"
+                      :src="item.profile_pic"
+                      class="rounded-circle"
+                      style="width: 100%"
+                    />
+
+                    <img
+                      v-else
                       src="../assets/main/user.png"
                       class="rounded-circle"
                       style="width: 100%"
@@ -445,7 +453,7 @@
                           </span>
 
                           <span
-                           @click="viewPage(item.instructor.user_id)"
+                            @click="viewPage(item.instructor.user_id)"
                             style="color: #0776bd"
                             v-if="item.instructor.name"
                           >
@@ -473,7 +481,10 @@
                       </div>
 
                       <div class="col-xs-12 col-sm-12 col-md-5 col-lg-6">
-                        <button class="btn btn-dangers info-buttons mt-2">
+                        <button
+                          class="btn btn-dangers info-buttons mt-2"
+                          @click="modal(item)"
+                        >
                           Download
                         </button>
                       </div>
@@ -487,6 +498,91 @@
       </div>
     </div>
 
+    <modal ref="modalName1">
+      <template v-slot:header>
+        <h5 style="color: #3390ff">{{ book.name }}</h5>
+        <h6 style="float: right; color: #707070">
+          Added {{ book.created_at }}
+        </h6>
+      </template>
+
+      <template v-slot:body>
+        <div class="row">
+          <div class="col-2">
+            <img
+              v-if="book.profile_pic"
+              :src="book.profile_pic"
+              class="rounded-circle"
+              style="width: 100%"
+            />
+
+            <img
+              v-else
+              src="../assets/main/user.png"
+              class="rounded-circle"
+              style="width: 100%"
+            />
+          </div>
+          <div class="col-10 mt-lg-3 mt-md-4">
+            <div class="row">
+              <div class="col-xs-12 col-sm-12 col-md-7 col-lg-6">
+                <h5 class="name">
+                  {{ book.name }}
+                </h5>
+                <h6 class="uni">
+                  <span style="color: #0776bd">{{ book.subject }}</span>
+                  |
+                  <span
+                    style="color: #0776bd"
+                    v-if="book.instructor.first_name"
+                  >
+                    <b style="color: black">By</b>
+                    {{ book.instructor.first_name }}
+                  </span>
+
+                  <span
+                    @click="viewPage(book.instructor.user_id)"
+                    style="color: #0776bd"
+                    v-if="book.instructor.name"
+                  >
+                    <b style="color: black">By</b>
+                    {{ book.instructor.name }}
+                  </span>
+
+                  <span
+                    style="color: #0776bd"
+                    @click="viewPage(book.instructor.institute.user_id)"
+                    v-if="book.instructor.institute"
+                  >
+                    | {{ book.instructor.institute.name }}
+                  </span>
+                  <span
+                    style="color: #0776bd"
+                    @click="viewPage(book.instructor.university.user_id)"
+                    v-if="book.instructor.university"
+                  >
+                    | {{ book.instructor.university.name }}
+                  </span>
+                </h6>
+              </div>
+            </div>
+          </div>
+        </div>
+        <hr />
+        <h6>{{ book.subject }}</h6>
+
+        <button class="btn btn-dangers info-buttons mt-2">
+          <a
+            :href="url + book.file" 
+          
+            style="color: white; text-decoration: none"
+          >
+            Download
+          </a>
+        </button>
+      </template>
+    </modal>
+
     <BackToTop />
   </div>
 </template>
@@ -494,7 +590,7 @@
 <script>
 import Navbar from "../components/Navbar.vue";
 import BackToTop from "../components/BackToTop.vue";
-
+import Modal from "../components/Modal.vue";
 import ContentDataService from "../services/ContentDataService";
 
 export default {
@@ -502,6 +598,7 @@ export default {
   components: {
     Navbar,
     BackToTop,
+    Modal,
   },
 
   data() {
@@ -523,6 +620,11 @@ export default {
       con.classList.add("is-blurred");
     },
 
+    modal(item) {
+      this.$refs.modalName1.openModal();
+      this.book = item;
+    },
+
     getBook() {
       ContentDataService.getAllBooks().then((response) => {
         console.log(response.data.data);
@@ -533,21 +635,12 @@ export default {
       });
     },
 
-    openEdit(item) {
-      this.$refs.modalName2.openModal();
-      this.book = item;
-      this.form.id = this.book.id;
-    },
-
-
- viewPage(user_id) {
+    viewPage(user_id) {
       this.$router.push({
         name: "InstituteProfile",
-        params: {id:user_id},
+        params: { id: user_id },
       });
     },
-
-
   },
 };
 </script>
@@ -677,8 +770,8 @@ select {
 .btn-about:hover {
   background-color: #08619a;
 }
-.uni{
-  cursor:pointer
+.uni {
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 600px) {
