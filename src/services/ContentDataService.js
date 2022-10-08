@@ -317,7 +317,9 @@ class ContentDataService {
   getAllInstitute(){
     return http.get('getAllInstitutes')
   }
-
+getAllBooks(){
+  return http.get('getAllBooks')
+}
 
 }
 

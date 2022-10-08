@@ -70,8 +70,9 @@
       </div>
     </div>
     <br />
-    <div class="mt-5">
-      <div class="card second-card">
+    <div class="height " ></div>
+    
+      <div class="second-card ">
         <div class="card-body">
           <h5>About</h5>
           <div class="inf-text">
@@ -90,7 +91,7 @@
           </div>
         </div>
       </div>
-    </div>
+  
 
     <BackToTop />
   </div>
@@ -334,7 +335,9 @@ export default {
  
 }
 
-
+.height{
+  margin-top: 10vh;
+}
 
 
 
@@ -356,7 +359,7 @@ export default {
   }
 
   .ad-card {
-    top: 50%;
+    top: 30%;
   }
 
   .information h5 {
@@ -391,7 +394,9 @@ export default {
  
 }
 
-
+.height{
+  margin-top: 12vh;
+}
 
 
 }
@@ -412,7 +417,7 @@ export default {
   }
 
   .ad-card {
-    top: 50%;
+    top: 35%;
   }
 
   .information h5 {
@@ -450,6 +455,9 @@ export default {
   height: 130px;
  
 }
+.height{
+  margin-top: 15vh;
+}
 
 
 }
@@ -471,7 +479,7 @@ export default {
   }
 
   .ad-card {
-    top: 60%;
+    top: 45%;
   }
 
   .information h5 {
@@ -508,6 +516,10 @@ export default {
   height: 150px;
  
 }
+.height{
+  margin-top: 18vh;
+}
+
 
 }
 
@@ -568,7 +580,9 @@ export default {
   height: 170px;
  
 }
-
+.height{
+  margin-top: 20vh;
+}
 
 
 }
