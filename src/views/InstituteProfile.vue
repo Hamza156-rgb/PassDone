@@ -3,7 +3,13 @@
     <Navbar />
     <div class="background">
       <div class="back-image">
-        <img
+          <img
+          v-if="cover_img"
+          :src="cover_img"
+          class="img-fluid"
+          style="width: 100%; height: 400px"
+        />
+        <img v-else
           src="../assets/main/ground.jpg"
           class="img-fluid"
           style="width: 100%; height: 400px"
@@ -72,7 +78,7 @@
     <br />
     <div class="height " ></div>
     
-      <div class="second-card ">
+      <div class="card second-card ">
         <div class="card-body">
           <h5>About</h5>
           <div class="inf-text">

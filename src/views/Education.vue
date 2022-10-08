@@ -1,91 +1,104 @@
 <template>
   <div>
     <Navbar />
-    <div id="containers">
-      <img v-if="cover_img" :src="cover_img" class="backImg" />
-      <img v-else src="../assets/main/background.jpg" class="backImg" />
-      <div class="top-left">
+    
+    
+    <div class="background">
+      <div class="back-image">
+        <img
+          v-if="cover_img"
+          :src="cover_img"
+          class="img-fluid"
+          style="width: 100%; "
+        />
+        <img
+          v-else
+          src="../assets/main/background.jpg"
+          class="img-fluid"
+          style="width: 100%; height: 400px"
+        />
+      </div>
+      <div class="profile-img">
         <img v-if="profile_img" :src="profile_img" class="rounded-circle" />
         <img v-else src="../assets/main/user.png" class="rounded-circle" />
       </div>
     </div>
-    <div class="container" id="second">
-      <div class="card ad-card institiute-margin">
-        <div class="row p-lg-4 p-md-3">
-          <div class="col-xs-12 col-sm-12 col-md-3 col-lg-4">
-            <div class="information">
-              <h5>{{ Name }}</h5>
-              <h6>{{ Address }}</h6>
-              <p>{{ Dates }}</p>
-            </div>
-          </div>
 
-          <div class="col-xs-12 col-sm-12 col-md-9 col-lg-8">
-            <div class="row card-data pb-4">
-              <div class="col-2">
-                <div class="value">
-                  <h3 class="mb-0">{{ Feed }}</h3>
-                </div>
-                <div class="names">Feed</div>
-              </div>
-              <div class="col-2" id="border">
-                <div class="value1">
-                  <h3 class="mb-0">{{ Major }}</h3>
-                </div>
-                <div class="names">Major</div>
-              </div>
-              <div class="col-2" id="border">
-                <div class="value2">
-                  <h3 class="mb-0">{{ Course }}</h3>
-                </div>
-                <div class="names">Courses</div>
-              </div>
-              <div class="col-2" id="border">
-                <div class="value3">
-                  <h3 class="mb-0">{{ Instructor }}</h3>
-                </div>
-                <div class="names">Instructors</div>
-              </div>
-              <div class="col-2" id="border">
-                <div class="value4">
-                  <h3 class="mb-0">{{ Students }}</h3>
-                </div>
-                <div class="names">Students</div>
-              </div>
-              <div class="col-2" id="border">
-                <div class="value5">
-                  <h3 class="mb-0">{{ Followers }}</h3>
-                </div>
-                <div class="names">Followers</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="container mt-4 mt-md-3 mt-lg-3">
+    <div class="card ad-card p-4 mb-4">
       <div class="row">
-        <div class="card second-card p-lg-3">
-          <div class="card-body">
-            <h5>About</h5>
-            <div class="inf-text">
-              <p>
-                {{ AboutDescription }}
-              </p>
+        <div class="col-xs-12 col-sm-12 col-md-3 col-lg-4">
+          <div class="information">
+            <h5>{{ Name }}</h5>
+            <h6>{{ Address }}</h6>
+            <p>{{ Dates }}</p>
+          </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-9 col-lg-8">
+          <div class="row card-data">
+            <div class="col-2">
+              <div class="value">
+                <h3 class="mb-0">{{ Feed }}</h3>
+              </div>
+              <div class="names">Feed</div>
             </div>
-
-            <div class="inf-text">
-              <h6>Contact</h6>
-              <p>{{ Contact }}</p>
-
-              <p>{{ Email }}</p>
+            <div class="col-2" id="border">
+              <div class="value1">
+                <h3 class="mb-0">{{ Major }}</h3>
+              </div>
+              <div class="names">Major</div>
+            </div>
+            <div class="col-2" id="border">
+              <div class="value2">
+                <h3 class="mb-0">{{ Course }}</h3>
+              </div>
+              <div class="names">Courses</div>
+            </div>
+            <div class="col-2" id="border">
+              <div class="value3">
+                <h3 class="mb-0">{{ Instructor }}</h3>
+              </div>
+              <div class="names">Instructors</div>
+            </div>
+            <div class="col-2" id="border">
+              <div class="value4">
+                <h3 class="mb-0">{{ Students }}</h3>
+              </div>
+              <div class="names">Students</div>
+            </div>
+            <div class="col-2" id="border">
+              <div class="value5">
+                <h3 class="mb-0">{{ Followers }}</h3>
+              </div>
+              <div class="names">Followers</div>
             </div>
           </div>
         </div>
       </div>
     </div>
+    <div class="height"></div>
 
+    <div class="card second-card">
+      <div class="card-body">
+        <h5>About</h5>
+        <div class="inf-text">
+          <p>
+            {{ AboutDescription }}
+          </p>
+        </div>
+
+        <div class="inf-text">
+          <h6>Contact</h6>
+          <p>{{ Contact }}</p>
+
+          <p>{{ Email }}</p>
+        </div>
+      </div>
+    </div>
+  
+ 
     <BackToTop />
+       
   </div>
 </template>
 
@@ -170,7 +183,7 @@ export default {
     },
     getCourse() {
       ContentDataService.getInstituteCourse().then((response) => {
-        console.log(response.data.data)
+        console.log(response.data.data);
         this.Course = response.data.data;
       });
     },
@@ -194,33 +207,28 @@ export default {
 </script>
 
 <style scoped>
-#containers {
+.back-image {
   position: relative;
-  text-align: center;
-  color: white;
 }
-#second {
+.profile-img {
   position: absolute;
+}
+.profile-button {
+  position: absolute;
+}
 
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-.top-left {
-  position: absolute;
-  top: 20px;
-  left: 100px;
+.background {
+  position: relative;
 }
 
 .ad-card {
-  margin-bottom: 15px;
-  padding: 3px;
   border: 0;
   border-radius: 12px;
   box-shadow: 0 8px 16px 0 rgb(162 169 204 / 24%);
+  width: 100%;
+  position: absolute;
 }
-
 .second-card {
-  padding: 3px;
   border: 0;
   border-radius: 12px;
   box-shadow: 0 8px 16px 0 rgb(162 169 204 / 24%);
@@ -282,7 +290,6 @@ export default {
   font-size: 14px;
   line-height: 1.5;
   outline: none;
-
   cursor: pointer;
 }
 
@@ -290,9 +297,20 @@ export default {
   .information {
     text-align: center;
   }
-  #second {
-    top: 55%;
+
+  .profile-img {
+    top: 2%;
+    left: 35%;
   }
+  .profile-button {
+    top: 30%;
+    left: 35%;
+  }
+
+  .ad-card {
+    top: 40%;
+  }
+
   .information h5 {
     font-size: 13px;
   }
@@ -309,19 +327,32 @@ export default {
   .names {
     font-size: 8px;
   }
-  .second-card {
-    margin-top: 60px;
-  }
+  
   .inf-text h6 {
     font-size: 14px;
   }
   .inf-text p {
     font-size: 12px;
   }
-  .backImg {
-    width: 100%;
-    height: 390px;
+
+  .rounded-circle {
+    width: 110px;
+    height: 110px;
   }
+
+  .height {
+    margin-top: 10vh;
+  }
+
+
+
+
+
+
+
+
+
+
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -329,9 +360,19 @@ export default {
   .information {
     text-align: center;
   }
-  #second {
-    top: 50%;
+  .profile-img {
+    top: 5%;
+    left: 45%;
   }
+  .profile-button {
+    top: 35%;
+    left: 47%;
+  }
+
+  .ad-card {
+    top: 30%;
+  }
+
   .information h5 {
     font-size: 14px;
   }
@@ -348,9 +389,7 @@ export default {
   .names {
     font-size: 12px;
   }
-  .second-card {
-    margin-top: 60px;
-  }
+  
   .inf-text h6 {
     font-size: 15px;
   }
@@ -358,10 +397,26 @@ export default {
     font-size: 13px;
   }
 
-  .backImg {
-    width: 100%;
-    height: 390px;
+  .rounded-circle {
+    width: 120px;
+    height: 120px;
   }
+
+  .height {
+    margin-top: 12vh;
+  }
+
+
+
+.back-image{
+  height:380px;
+}
+
+
+
+
+
+
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -369,8 +424,17 @@ export default {
   .information {
     text-align: left;
   }
-  #second {
+  .profile-img {
+    top: 8%;
+    left: 5%;
+  }
+  .profile-button {
     top: 40%;
+    left: 7%;
+  }
+
+  .ad-card {
+    top: 35%;
   }
   .information h5 {
     font-size: 15px;
@@ -392,9 +456,7 @@ export default {
   #border {
     border-left: 2px solid #aea6a677;
   }
-  .second-card {
-    margin-top: 80px;
-  }
+ 
   .inf-text h6 {
     font-size: 16px;
   }
@@ -402,10 +464,26 @@ export default {
     font-size: 14px;
   }
 
-  .backImg {
-    width: 450px;
-    height: 390px;
+  .rounded-circle {
+    width: 130px;
+    height: 130px;
   }
+  .height {
+    margin-top: 15vh;
+  }
+
+
+
+
+.back-image{
+  height:400px;
+}
+
+
+
+
+
+
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -413,8 +491,17 @@ export default {
   .information {
     text-align: left;
   }
-  #second {
-    top: 55%;
+  .profile-img {
+    top: 10%;
+    left: 5%;
+  }
+  .profile-button {
+    top: 45%;
+    left: 8%;
+  }
+
+  .ad-card {
+    top: 45%;
   }
   .information h5 {
     font-size: 17px;
@@ -436,9 +523,7 @@ export default {
   #border {
     border-left: 2px solid #aea6a677;
   }
-  .second-card {
-    margin-top: 90px;
-  }
+
   .inf-text h6 {
     font-size: 17px;
   }
@@ -446,27 +531,44 @@ export default {
     font-size: 15px;
   }
 
-  .backImg {
-    width: 480px;
-    height: 390px;
+  .rounded-circle {
+    width: 150px;
+    height: 150px;
   }
+  .height {
+    margin-top: 18vh;
+  }
+
+
+
+
+
+.back-image{
+  height:450px;
+}
+
+
+
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-  .top-left {
-    top: 20px;
-    left: 100px;
+  .profile-img {
+    top: 10%;
+    left: 16px;
   }
-  #second {
+  .profile-button {
+    top: 50%;
+    left: 4%;
+  }
+
+  .background {
+    position: relative;
+  }
+
+  .ad-card {
     top: 60%;
   }
-
-  .backImg {
-    width: 500px;
-    height: 400px;
-  }
-
   .information {
     text-align: left;
   }
@@ -492,14 +594,29 @@ export default {
     border-left: 2px solid #aea6a677;
   }
 
-  .second-card {
-    margin-top: 100px;
-  }
+ 
   .inf-text h6 {
     font-size: 18px;
   }
   .inf-text p {
     font-size: 16px;
   }
+
+  .rounded-circle {
+    width: 170px;
+    height: 170px;
+  }
+  .height {
+    margin-top: 25vh;
+  }
+
+
+
+.back-image{
+  height:500px;
+}
+
+
+
 }
 </style>
