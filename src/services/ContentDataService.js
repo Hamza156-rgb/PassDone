@@ -19,7 +19,7 @@ class ContentDataService {
     if (localStorage.getItem("user_type") == 1 || localStorage.getItem("user_type") == 2) {
       id = localStorage.getItem('university_id');
     }
-    else{
+    else {
       id = localStorage.getItem('user_id');
     }
     return http.get('getAllTrainingCoursesByInstitute?institute_id=' + id)
@@ -289,7 +289,7 @@ class ContentDataService {
     if (localStorage.getItem("user_type") == 1 || localStorage.getItem("user_type") == 2) {
       id = localStorage.getItem('university_id');
     }
-    else{
+    else {
       id = localStorage.getItem('user_id');
     }
     return http.get('getAllInstructorsByInstitute?university_id=' + id)
@@ -314,12 +314,35 @@ class ContentDataService {
   }
 
 
-  getAllInstitute(){
+  getAllInstitute() {
     return http.get('getAllInstitutes')
   }
-getAllBooks(){
-  return http.get('getAllBooks')
+  getAllBooks() {
+    return http.get('getAllBooks')
+  }
+
+
+  sharePost(form) {
+    const formData = new FormData();
+    formData.append('description', form.notes)
+    formData.append('where_to_show', form.show)
+    formData.append('who_can_see', form.see)
+    formData.append('post_type', form.type)
+    formData.append('posted_by', localStorage.getItem('user_id'))
+    formData.append('user_type', localStorage.getItem('user_type'))
+    if (form.attachments == null || form.attachments == undefined || form.attachments == '') {
+      formData.append('image', "")
+    }
+    else {
+      formData.append('image', form.attachments)
+    }
+    return http.post('createPost', formData);
+  }
+
+deletePost(id){
+  return http.post('deletePost?id=' + id)
 }
+
 
 }
 

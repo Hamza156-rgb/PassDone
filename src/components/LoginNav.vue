@@ -220,14 +220,15 @@ export default {
                 response.data.data.university.user_id
               );
             } else if (response.data.data.user_type == 2) {
+               console.log(response.data.data)
               localStorage.setItem("first_name", response.data.data.first_name);
               localStorage.setItem(
                 "university_name",
-                response.data.data.university.name
+                response.data.data.institute.name
               );
               localStorage.setItem(
                 "university_id",
-                response.data.data.university.user_id
+                response.data.data.institute.user_id
               );
             } else if (response.data.data.user_type == 3) {
               localStorage.setItem("name", response.data.data.name);

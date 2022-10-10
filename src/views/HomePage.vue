@@ -62,111 +62,123 @@
           </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-2 info-card">
-          <form @submit.prevent="submit">
-            <div class="card">
-              <div class="card-header">
-                <div class="post d-flex p-1">
-                  <img
-                    src="../assets/main/user.png"
-                    class="rounded-circle"
-                    style="width: 20%"
-                  />
-                  <input
-                    type="text"
-                    class="form-control shadow-none"
-                    placeholder="Share Your Lectures,exams,notes etc"
-                    v-model="form.notes"
-                  />
-                </div>
+          <div class="card">
+            <div class="card-header">
+              <div class="post d-flex p-1">
+                <img
+                  src="../assets/main/user.png"
+                  class="rounded-circle"
+                  style="width: 20%"
+                />
+                <input
+                  type="text"
+                  class="form-control shadow-none"
+                  placeholder="Share Your Lectures,exams,notes etc"
+                  v-model="form.notes"
+                />
+              </div>
 
-                <div class="customm-file" align="right">
-                  <input
-                    class="customm-file-input"
-                    id="postf"
-                    name="postf"
-                    type="file"
-                    @change="file($event)"
-                  />
-                  <label class="customm-file-label" for="custommFile"
-                    ><img src="../assets/file.png" class="mr-3" />Upload
-                    Attachment</label
+              <div class="customm-file" align="right">
+                <input
+                  class="customm-file-input"
+                  id="postf"
+                  name="postf"
+                  type="file"
+                  @change="file($event)"
+                />
+                <label class="customm-file-label" for="custommFile"
+                  ><img src="../assets/file.png" class="mr-3" />Upload
+                  Attachment</label
+                >
+              </div>
+            </div>
+
+            <div class="card-body" v-if="user_type == 1 || user_type == 2">
+              <div class="row firstSelect">
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 mt-2">
+                  <label class="lablefirst">Select Course</label>
+                  <select
+                    class="mt-2"
+                    v-model="form.course"
+                    id="course"
+                    name="course"
                   >
+                    <option value="one">One</option>
+                    <option value="two">two</option>
+                  </select>
                 </div>
-              </div>
-
-              <div class="card-body" v-if="user_type == 1 || user_type == 2">
-                <div class="row firstSelect">
-                  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 mt-2">
-                    <label class="lablefirst">Select Course</label>
-                    <select
-                      class="mt-2"
-                      v-model="form.course"
-                      id="course"
-                      name="course"
-                    >
-                      <option value="one">One</option>
-                      <option value="two">two</option>
-                    </select>
-                  </div>
-                  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 mt-2">
-                    <label class="lablefirst">Select Type</label>
-                    <select class="mt-2" v-model="form.type">
-                      <option value="Lecture">Lecture</option>
-                      <option value="Exam">Exam</option>
-                      <option value="Reference">Reference</option>
-                      <option value="Home Work">Home Work</option>
-                      <option value="Books">Books</option>
-                      <option value="Notes">Notes</option>
-                    </select>
-                  </div>
-                  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 mt-2">
-                    <label class="lablefirst">Who Can See?</label>
-                    <select class="mt-2" v-model="form.privacy">
-                      <option value="Everyone">Everyone</option>
-                      <option value="My Major">My Major</option>
-                      <option value="Friends">Friends</option>
-                      <option value="Colleagues">Colleagues</option>
-                    </select>
-                  </div>
-                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-4">
-                    <button class="btn post">POST</button>
-                  </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 mt-2">
+                  <label class="lablefirst">Select Type</label>
+                  <select class="mt-2" v-model="form.type">
+                    <option value="Lecture">Lecture</option>
+                    <option value="Exam">Exam</option>
+                    <option value="Reference">Reference</option>
+                    <option value="Home Work">Home Work</option>
+                    <option value="Books">Books</option>
+                    <option value="Notes">Notes</option>
+                  </select>
                 </div>
-              </div>
-
-              <div class="card-body" v-if="user_type == 3">
-                <div class="row firstSelect">
-                  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-2">
-                    <label class="lablefirst">Select Course</label>
-                    <select
-                      class="mt-2"
-                      v-model="form.course"
-                      id="course"
-                      name="course"
-                    >
-                      <option value="one">One</option>
-                      <option value="two">two</option>
-                    </select>
-                  </div>
-                  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-2">
-                    <label class="lablefirst">Select Type</label>
-                    <select class="mt-2" v-model="form.type">
-                      <option value="Lecture">Lecture</option>
-                      <option value="Exam">Exam</option>
-                      <option value="Reference">Reference</option>
-                      <option value="Home Work">Home Work</option>
-                      <option value="Books">Books</option>
-                      <option value="Notes">Notes</option>
-                    </select>
-                  </div>
-
-                  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 mt-4">
-                    <button class="btn post">POST</button>
-                  </div>
+                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 mt-2">
+                  <label class="lablefirst">Who Can See?</label>
+                  <select class="mt-2" v-model="form.privacy">
+                    <option value="Everyone">Everyone</option>
+                    <option value="My Major">My Major</option>
+                    <option value="Friends">Friends</option>
+                    <option value="Colleagues">Colleagues</option>
+                  </select>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-4">
+                  <button class="btn post">POST</button>
                 </div>
               </div>
             </div>
-          </form>
+            <form @submit.prevent="submit">
+              <div class="card-body" v-if="user_type == 3">
+                <div class="row firstSelect">
+                  <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 mt-2">
+                    <label class="lablefirst">Show Post?</label>
+                    <select
+                      class="mt-2"
+                      v-model="form.show"
+                      id="course"
+                      name="course"
+                    >
+                      <option value="0">All</option>
+                      <option value="1">My country</option>
+                      <option value="2">My University</option>
+                    </select>
+                  </div>
+
+                  <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 mt-2">
+                    <label class="lablefirst">Select Type</label>
+                    <select class="mt-2" v-model="form.type">
+                      <option value="0">Lecture</option>
+                      <option value="1">Exam</option>
+                      <option value="2">Reference</option>
+                      <option value="3">Home Work</option>
+                      <option value="4">Books</option>
+                      <option value="5">Notes</option>
+                      <option value="6">image</option>
+                    </select>
+                  </div>
+
+                  <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 mt-2">
+                    <label class="lablefirst">Who Can See</label>
+                    <select class="mt-2" v-model="form.see">
+                      <option value="0">Everyone</option>
+                      <option value="1">Instructors</option>
+                      <option value="2">Students</option>
+                    </select>
+                  </div>
+
+                  <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 mt-4">
+                    <button class="btn post">POST</button>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
           <div class="filter mt-4">
             <label>Filter By </label>
 
@@ -212,7 +224,7 @@
                   <i
                     class="fa fa-times"
                     style="color: red"
-                    @click="remove()"
+                    @click="remove(item.id)"
                   ></i>
                   <br />
                   <span class="date"> {{ item.created_at }} </span>
@@ -291,27 +303,36 @@
 
                 <div class="post-media" v-if="item.image">
                   <div class="entry">
-                    <img
-                      :src="item.image"
-                      class="img-fluid"
-                      alt="Responsive image"
-                    />
-                    <div class="magnifier">
-                      <div class="magni-desc">
-                        <a
-                          class="secondicon example-image-link"
-                          data-lightbox="example-set"
-                        >
-                          <span
-                            class="fa fa-search-plus"
-                            data-glyph="zoom-in"
-                            title="Read More"
-                            aria-hidden="false"
-                            id="search-plus"
-                            @click="getImgUrl(item.image)"
-                          ></span
-                        ></a>
+                    <div v-if="item.post_type == 6">
+                      <img
+                        :src="url + item.image"
+                        class="img-fluid"
+                        alt="Responsive image"
+                      />
+                      <div class="magnifier">
+                        <div class="magni-desc">
+                          <a
+                            class="secondicon example-image-link"
+                            data-lightbox="example-set"
+                          >
+                            <span
+                              class="fa fa-search-plus"
+                              data-glyph="zoom-in"
+                              title="Read More"
+                              aria-hidden="false"
+                              id="search-plus"
+                              @click="getImgUrl(item.image)"
+                            ></span
+                          ></a>
+                        </div>
                       </div>
+                    </div>
+                    <div v-if="item.post_type != 6">
+                      <span style="color: #0776bd"
+                        ><a v-bind:href="url + item.image" target="blank"
+                          >File</a
+                        >
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -679,9 +700,9 @@ export default {
       form: {
         notes: "",
         attachments: "",
-        course: "ChooseOne",
-        type: "Choose One",
-        privacy: "Choose One",
+        show: "ChooseOne",
+        see: "Choose One",
+        type: "",
       },
 
       // Top Active Students
@@ -726,7 +747,7 @@ export default {
       ],
 
       universityItems: [{}],
-
+      url: "http://passdoneapi.codetreck.com/public/",
       //
     };
   },
@@ -843,7 +864,7 @@ export default {
         var b = Object.values(a);
         //this.ActiveInstitutes = b[0];
         this.PostsData = b[0];
-        // console.log(this.PostsData);
+        console.log(this.PostsData);
       });
     },
 
@@ -857,32 +878,73 @@ export default {
         return;
       }
       if (this.form.course == "") {
-        this.$toasted.error("Please Select course");
+        this.$toasted.error("Please Select Where To Show");
         return;
       }
       if (this.form.type == "") {
-        this.$toasted.error("Please Select One Type");
-        return;
-      }
-      if (this.form.privacy == "") {
-        this.$toasted.error("Please Select One Type");
+        this.$toasted.error("Please Select Who Can See");
         return;
       } else {
         console.log(this.form);
+
+        ContentDataService.sharePost(this.form).then((response) => {
+          console.log(response.data);
+          this.$toasted.success(" Shared Post Successfully");
+
+          this.getAllPosts();
+        });
+
         this.$toasted.success("Your Post is Shared");
       }
     },
 
     file(event) {
-      this.form.attachments = event.target.files;
-      console.log(this.form.attachments);
+      var sizeAllowed = 25000;
+      var filesSize = 0;
+      this.form.attachments = "";
+
+      if (event.target.files.length > 1) {
+        this.$toasted.error("More than 2 files cannot be uploaded");
+        return;
+      }
+      for (let i = 0; i <= event.target.files.length - 1; i++) {
+        if (
+          event.target.files.item(i).type == "image/png" ||
+          event.target.files.item(i).type == "image/jpg" ||
+          event.target.files.item(i).type == "image/jpeg" ||
+          event.target.files.item(i).type == "image/gif" ||
+          event.target.files.item(i).type == "video/mp4" ||
+          event.target.files.item(i).type == "audio/mp3" ||
+          event.target.files.item(i).type == "application/pdf" ||
+          event.target.files.item(i).type ==
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        ) {
+          const fsize = event.target.files.item(i).size;
+          const file = Math.round(fsize / 1024);
+          filesSize += file;
+          if (filesSize >= sizeAllowed) {
+            this.$toasted.error(
+              "Maximum file size exceeded, please select a files less than 25mb"
+            );
+          } else {
+            if (i == 0) {
+              this.form.attachments = event.target.files[i];
+            }
+          }
+        } else {
+          this.$toasted.error("One of the files are not of required file type");
+          return;
+        }
+      }
+
+      // this.form.attachments = event.target.files[0];
     },
 
-    remove() {
-      this.$swal({
-        icon: "warning",
-        title: "Are You Sure you want to delete?",
-        showConfirmButton: true,
+    remove(id) {
+      ContentDataService.deletePost(id).then((response) => {
+        console.log(response.data);
+        this.$toasted.success("Deleted Successfully");
+        this.getAllPosts();
       });
     },
 
@@ -946,7 +1008,7 @@ export default {
     },
 
     getImgUrl(pet) {
-      this.img = pet;
+      this.img = this.url + pet;
       this.$refs.modalName1.openModal();
     },
 
