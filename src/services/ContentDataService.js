@@ -339,9 +339,43 @@ class ContentDataService {
     return http.post('createPost', formData);
   }
 
-deletePost(id){
-  return http.post('deletePost?id=' + id)
-}
+
+  sharePostOther(studentForm) {
+    const formData = new FormData();
+    formData.append('description', studentForm.notes)
+    formData.append('course_id', studentForm.course)
+    formData.append('who_can_see', studentForm.see)
+    formData.append('post_type', studentForm.type)
+    formData.append('posted_by', localStorage.getItem('user_id'))
+    formData.append('user_type', localStorage.getItem('user_type'))
+    if (studentForm.attachments == null || studentForm.attachments == undefined || studentForm.attachments == '') {
+      formData.append('image', "")
+    }
+    else {
+      formData.append('image', studentForm.attachments)
+    }
+    return http.post('createPost', formData);
+  }
+
+  deletePost(id) {
+    return http.post('deletePost?id=' + id)
+  }
+
+  addFollowers(id) {
+    console.log(localStorage.getItem("user_id"));
+    return http.post('addUserFollower?user_id=' + id + '&following_id=' + localStorage.getItem("user_id"));
+  }
+  removeFollowers(id) {
+  
+    return http.post('removeUserFollower?user_id=' + id );
+  }
+
+
+
+  getFollowingData() {
+    return http.get('getAllUserFollowing?user_id=' + localStorage.getItem("user_id"))
+  }
+
 
 
 }

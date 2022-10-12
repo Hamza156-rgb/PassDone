@@ -62,78 +62,124 @@
           </div>
         </div>
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-2 info-card">
-          <div class="card">
-            <div class="card-header">
-              <div class="post d-flex p-1">
-                <img
-                  src="../assets/main/user.png"
-                  class="rounded-circle"
-                  style="width: 20%"
-                />
-                <input
-                  type="text"
-                  class="form-control shadow-none"
-                  placeholder="Share Your Lectures,exams,notes etc"
-                  v-model="form.notes"
-                />
-              </div>
+          <form @submit.prevent="submitForm">
+            <div class="card" v-if="user_type == 1 || user_type == 2">
+              <div class="card-header">
+                <div class="post d-flex p-1">
+                  <img
+                    src="../assets/main/user.png"
+                    class="rounded-circle"
+                    style="width: 20%"
+                  />
+                  <input
+                    type="text"
+                    class="form-control shadow-none"
+                    placeholder="Share Your Lectures,exams,notes etc"
+                    v-model="studentForm.notes"
+                  />
+                </div>
 
-              <div class="customm-file" align="right">
-                <input
-                  class="customm-file-input"
-                  id="postf"
-                  name="postf"
-                  type="file"
-                  @change="file($event)"
-                />
-                <label class="customm-file-label" for="custommFile"
-                  ><img src="../assets/file.png" class="mr-3" />Upload
-                  Attachment</label
-                >
-              </div>
-            </div>
-
-            <div class="card-body" v-if="user_type == 1 || user_type == 2">
-              <div class="row firstSelect">
-                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 mt-2">
-                  <label class="lablefirst">Select Course</label>
-                  <select
-                    class="mt-2"
-                    v-model="form.course"
-                    id="course"
-                    name="course"
+                <div class="customm-file" align="right">
+                  <input
+                    class="customm-file-input"
+                    id="postf"
+                    name="postf"
+                    type="file"
+                    @change="files($event)"
+                  />
+                  <label class="customm-file-label" for="custommFile"
+                    ><img src="../assets/file.png" class="mr-3" />Upload
+                    Attachment</label
                   >
-                    <option value="one">One</option>
-                    <option value="two">two</option>
-                  </select>
                 </div>
-                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 mt-2">
-                  <label class="lablefirst">Select Type</label>
-                  <select class="mt-2" v-model="form.type">
-                    <option value="Lecture">Lecture</option>
-                    <option value="Exam">Exam</option>
-                    <option value="Reference">Reference</option>
-                    <option value="Home Work">Home Work</option>
-                    <option value="Books">Books</option>
-                    <option value="Notes">Notes</option>
-                  </select>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 mt-2">
-                  <label class="lablefirst">Who Can See?</label>
-                  <select class="mt-2" v-model="form.privacy">
-                    <option value="Everyone">Everyone</option>
-                    <option value="My Major">My Major</option>
-                    <option value="Friends">Friends</option>
-                    <option value="Colleagues">Colleagues</option>
-                  </select>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-4">
-                  <button class="btn post">POST</button>
+              </div>
+              <div class="card-body">
+                <div class="row firstSelect">
+                  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 mt-2">
+                    <label class="lablefirst">Select Course</label>
+                    <select
+                      class="mt-2"
+                      v-model="studentForm.course"
+                      id="course"
+                      name="course"
+                    >
+                      <option value="null" disabled selected hidden>
+                        Choose One
+                      </option>
+                      <option
+                        v-for="item in StudentCourses"
+                        :key="item.id"
+                        :value="item.tarining_course_id"
+                      >
+                        {{ item.name }}
+                      </option>
+                    </select>
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 mt-2">
+                    <label class="lablefirst">Select Type</label>
+                    <select class="mt-2" v-model="studentForm.type">
+                      <option value="null" disabled selected hidden>
+                        Choose One
+                      </option>
+                      <option value="0">Lecture</option>
+                      <option value="1">Exam</option>
+                      <option value="2">Reference</option>
+                      <option value="3">Home Work</option>
+                      <option value="4">Books</option>
+                      <option value="5">Notes</option>
+                    </select>
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-4 col-lg-3 mt-2">
+                    <label class="lablefirst">Who Can See?</label>
+                    <select class="mt-2" v-model="studentForm.see">
+                      <option value="null" disabled selected hidden>
+                        Choose One
+                      </option>
+                      <option value="0">Everyone</option>
+                      <option value="1">My Major</option>
+                      <option value="2">Friends</option>
+                      <option value="3">Colleagues</option>
+                    </select>
+                  </div>
+                  <div class="col-xs-12 col-sm-12 col-md-12 col-lg-3 mt-4">
+                    <button class="btn post">POST</button>
+                  </div>
                 </div>
               </div>
             </div>
-            <form @submit.prevent="submit">
-              <div class="card-body" v-if="user_type == 3">
+          </form>
+          <form @submit.prevent="submit">
+            <div class="card" v-if="user_type == 3">
+              <div class="card-header">
+                <div class="post d-flex p-1">
+                  <img
+                    src="../assets/main/user.png"
+                    class="rounded-circle"
+                    style="width: 20%"
+                  />
+                  <input
+                    type="text"
+                    class="form-control shadow-none"
+                    placeholder="Share Your Lectures,exams,notes etc"
+                    v-model="form.notes"
+                  />
+                </div>
+
+                <div class="customm-file" align="right">
+                  <input
+                    class="customm-file-input"
+                    id="postf"
+                    name="postf"
+                    type="file"
+                    @change="file($event)"
+                  />
+                  <label class="customm-file-label" for="custommFile"
+                    ><img src="../assets/file.png" class="mr-3" />Upload
+                    Attachment</label
+                  >
+                </div>
+              </div>
+              <div class="card-body">
                 <div class="row firstSelect">
                   <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 mt-2">
                     <label class="lablefirst">Show Post?</label>
@@ -143,6 +189,9 @@
                       id="course"
                       name="course"
                     >
+                      <option value="null" disabled selected hidden>
+                        Choose One
+                      </option>
                       <option value="0">All</option>
                       <option value="1">My country</option>
                       <option value="2">My University</option>
@@ -152,6 +201,9 @@
                   <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 mt-2">
                     <label class="lablefirst">Select Type</label>
                     <select class="mt-2" v-model="form.type">
+                      <option value="null" disabled selected hidden>
+                        Choose One
+                      </option>
                       <option value="0">Lecture</option>
                       <option value="1">Exam</option>
                       <option value="2">Reference</option>
@@ -165,6 +217,10 @@
                   <div class="col-xs-12 col-sm-12 col-md-3 col-lg-3 mt-2">
                     <label class="lablefirst">Who Can See</label>
                     <select class="mt-2" v-model="form.see">
+                      <option value="null" disabled selected hidden>
+                        Choose One
+                      </option>
+
                       <option value="0">Everyone</option>
                       <option value="1">Instructors</option>
                       <option value="2">Students</option>
@@ -176,8 +232,8 @@
                   </div>
                 </div>
               </div>
-            </form>
-          </div>
+            </div>
+          </form>
 
           <div class="filter mt-4">
             <label>Filter By </label>
@@ -301,9 +357,9 @@
                   </p>
                 </div>
 
-                <div class="post-media" v-if="item.image">
+                <div class="post-media">
                   <div class="entry">
-                    <div v-if="item.post_type == 6">
+                    <div v-if="item.image">
                       <img
                         :src="url + item.image"
                         class="img-fluid"
@@ -327,10 +383,16 @@
                         </div>
                       </div>
                     </div>
-                    <div v-if="item.post_type != 6">
-                      <span style="color: #0776bd"
-                        ><a v-bind:href="url + item.image" target="blank"
-                          >File</a
+                    <div
+                      class="home-pic-card px-2 text-center"
+                      v-if="item.file"
+                    >
+                      <span
+                        ><a
+                          v-bind:href="url + item.file"
+                          target="blank"
+                          style="color: #0776bd; text-decoration: none"
+                          ><b> Download File </b></a
                         >
                       </span>
                     </div>
@@ -592,13 +654,15 @@
           </div>
         </div>
 
+
         <modal ref="modalName1">
-          <template v-slot:body>
-            <div style="width: 100%">
+          <template v-slot:body style="width:100%;">
+            <div >
               <img class="img-fluid" :src="getImgUrl1(img)" />
             </div>
           </template>
         </modal>
+
       </div>
     </div>
     <BackToTop />
@@ -608,10 +672,6 @@
 <script>
 import Navbar from "../components/Navbar.vue";
 import BackToTop from "../components/BackToTop.vue";
-import image from "../assets/main/user.png";
-import PostImage from "../assets/main/post.png";
-import studentImage from "../assets/main/user.png";
-import instructorImage from "../assets/main/instructor.png";
 import Modal from "../components/Modal.vue";
 import ContentDataService from "../services/ContentDataService";
 
@@ -656,97 +716,29 @@ export default {
 
       reply: false,
 
-      items: [
-        {
-          date: "05-02-1998",
-          img: image,
-          name: "Name",
-          profession: "Professor",
-          university: "University Name",
-          place: "Jordan",
-          dataType: "Notes",
-          postName: " Name  Here",
-          postData:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur scelerisque eros in feugiat feugiat. Curabitur sollicitudin rutrum sollicitudin. Fusce tincidunt semper mauris sed ultrices. Vivamus consectetur velit tincidunt orci rutrum, sed faucibus quam elementum. Sed venenatis tortor tortor, at viverra lorem gravida in. Vivamus rutrum, ex ut congue ultricies, arcu justo auctor est, vitae auctor nulla urna quis dui. Aenean faucibus, turpis eget eleifend rhoncus, quam nisl ornare nulla, consectetur malesuada massa erat eget lectus. Nulla pharetra ultrices velit, ut tempor ligula suscipit non. Praesent eleifend est nunc, in dictum orci bibendum eget. Nulla quis mauris quis eros gravida finibus eget a mauris. Ut auctor suscipit dui non sodales. Phasellus luctus dolor sit amet fringilla venenatis. Vestibulum euismod risus eget lorem semper gravida. Mauris nunc nulla, pellentesque vitae condimentum rhoncus, euismod vel enim.",
-          image: PostImage,
-          // true: "1",
-          // false: "1",
-          // highlight: "0",
-        },
-        {
-          date: "05-02-1998",
-          img: image,
-          name: "Name",
-          profession: "Professor",
-          university: "University Name",
-          place: "Jordan",
-          dataType: "Notes",
-          postName: " Name  Here",
-          postData:
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur scelerisque eros in feugiat feugiat. Curabitur sollicitudin rutrum sollicitudin. Fusce tincidunt semper mauris sed ultrices. Vivamus consectetur velit tincidunt orci rutrum, sed faucibus quam elementum. Sed venenatis tortor tortor, at viverra lorem gravida in. Vivamus rutrum, ex ut congue ultricies, arcu justo auctor est, vitae auctor nulla urna quis dui. Aenean faucibus, turpis eget eleifend rhoncus, quam nisl ornare nulla, consectetur malesuada massa erat eget lectus. Nulla pharetra ultrices velit, ut tempor ligula suscipit non. Praesent eleifend est nunc, in dictum orci bibendum eget. Nulla quis mauris quis eros gravida finibus eget a mauris. Ut auctor suscipit dui non sodales. Phasellus luctus dolor sit amet fringilla venenatis. Vestibulum euismod risus eget lorem semper gravida. Mauris nunc nulla, pellentesque vitae condimentum rhoncus, euismod vel enim.",
-          image: PostImage,
-          // true: "1",
-          // false: "1",
-          // highlight: "0",
-        },
-      ],
-
       commentForm: {
         Post_Id: "",
         description: "",
         name: "",
       },
 
+      studentForm: {
+        notes: "",
+        attachments: "",
+        course: null,
+        type: null,
+        see: null,
+      },
+
       form: {
         notes: "",
         attachments: "",
-        show: "ChooseOne",
-        see: "Choose One",
-        type: "",
+        show: null,
+        see: null,
+        type: null,
       },
 
-      // Top Active Students
-      studentItems: [
-        {
-          img: studentImage,
-          student: "Student1",
-        },
-        {
-          img: studentImage,
-          student: "Student2",
-        },
-        {
-          img: studentImage,
-          student: "Student3",
-        },
-        {
-          img: studentImage,
-          student: "Student4",
-        },
-      ],
-      //
-
-      // Top Active Instructors
-      instructorItems: [
-        {
-          img: instructorImage,
-          instructor: "Instructor1",
-        },
-        {
-          img: instructorImage,
-          instructor: "Instructor2",
-        },
-        {
-          img: instructorImage,
-          instructor: "Instructor3",
-        },
-        {
-          img: instructorImage,
-          instructor: "Instructor4",
-        },
-      ],
-
-      universityItems: [{}],
+      StudentCourses: [],
       url: "http://passdoneapi.codetreck.com/public/",
       //
     };
@@ -774,6 +766,7 @@ export default {
     // End Here
 
     this.getAllPosts();
+    this.getCourses();
   },
 
   methods: {
@@ -868,6 +861,13 @@ export default {
       });
     },
 
+    getCourses() {
+      ContentDataService.getMajor().then((response) => {
+        console.log(response.data.data);
+        this.StudentCourses = response.data.data;
+      });
+    },
+
     submit() {
       if (this.form.notes == "") {
         this.$toasted.error("Please Share Something");
@@ -889,12 +889,44 @@ export default {
 
         ContentDataService.sharePost(this.form).then((response) => {
           console.log(response.data);
-          this.$toasted.success(" Shared Post Successfully");
+          this.$toasted.success("Post Created Successfully");
 
           this.getAllPosts();
         });
+      }
+    },
 
-        this.$toasted.success("Your Post is Shared");
+    submitForm() {
+      if (this.studentForm.notes == "") {
+        this.$toasted.error("Please Share Something");
+        return;
+      }
+      if (this.studentForm.attachments == "") {
+        this.$toasted.error("Please Select File");
+        return;
+      }
+      if (this.studentForm.course == "") {
+        this.$toasted.error("Please Select Course");
+        return;
+      }
+
+      if (this.studentForm.type == "") {
+        this.$toasted.error("Please Select Type");
+        return;
+      }
+
+      if (this.studentForm.see == "") {
+        this.$toasted.error("Please Select Who Can See");
+        return;
+      } else {
+        console.log(this.studentForm);
+
+        ContentDataService.sharePostOther(this.studentForm).then((response) => {
+          console.log(response.data);
+          this.$toasted.success(" Post Created Successfully");
+
+          this.getAllPosts();
+        });
       }
     },
 
@@ -936,8 +968,46 @@ export default {
           return;
         }
       }
+    },
 
-      // this.form.attachments = event.target.files[0];
+    files(event) {
+      var sizeAllowed = 25000;
+      var filesSize = 0;
+      this.studentForm.attachments = "";
+
+      if (event.target.files.length > 1) {
+        this.$toasted.error("More than 2 files cannot be uploaded");
+        return;
+      }
+      for (let i = 0; i <= event.target.files.length - 1; i++) {
+        if (
+          event.target.files.item(i).type == "image/png" ||
+          event.target.files.item(i).type == "image/jpg" ||
+          event.target.files.item(i).type == "image/jpeg" ||
+          event.target.files.item(i).type == "image/gif" ||
+          event.target.files.item(i).type == "video/mp4" ||
+          event.target.files.item(i).type == "audio/mp3" ||
+          event.target.files.item(i).type == "application/pdf" ||
+          event.target.files.item(i).type ==
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        ) {
+          const fsize = event.target.files.item(i).size;
+          const file = Math.round(fsize / 1024);
+          filesSize += file;
+          if (filesSize >= sizeAllowed) {
+            this.$toasted.error(
+              "Maximum file size exceeded, please select a files less than 25mb"
+            );
+          } else {
+            if (i == 0) {
+              this.studentForm.attachments = event.target.files[i];
+            }
+          }
+        } else {
+          this.$toasted.error("One of the files are not of required file type");
+          return;
+        }
+      }
     },
 
     remove(id) {
@@ -1061,7 +1131,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style scoped >
 .customm-file-input {
   z-index: 2;
   width: 100%;
@@ -1283,11 +1353,11 @@ input {
   left: 0;
   top: 50%;
   text-align: center;
-  /* bottom: 10px; */
   opacity: 0;
   width: 100%;
-  /* margin: -20px auto; */
   display: block;
+  bottom: 10px;
+  right: 10px;
 }
 
 .entry:hover .magnifier .magni-desc {
@@ -1325,8 +1395,8 @@ input {
   font-size: 25px !important;
   width: 35px;
   height: 35px;
-  left: 10px;
-  bottom: 20px;
+  bottom: 10px;
+  right: 10px;
   color: #ffffff !important;
   line-height: 35px;
   background-color: #000;
@@ -1339,13 +1409,13 @@ input {
   border-radius: 5px;
 }
 
-.blog-wrapper .magnifier .magni-desc .secondicon {
+/* .blog-wrapper .magnifier .magni-desc .secondicon {
   left: 0;
   right: 0;
   bottom: 0;
   top: 20% !important;
   margin: -20px auto !important;
-}
+} */
 .fa {
   cursor: pointer;
 }
@@ -1363,6 +1433,22 @@ input {
   background-color: #0e6ca8;
   color: white;
 }
+
+.home-pic-card {
+  margin-bottom: 15px;
+  padding: 8px 3px;
+  border: 1px solid #d6d6d6;
+  border-radius: 8px;
+  background: #fff;
+}
+
+
+
+
+
+
+
+
 
 @media only screen and (max-width: 600px) {
   .profile img {
@@ -1441,11 +1527,11 @@ input {
   .btn.post {
     font-size: 10px;
   }
-  .magnifier .magni-desc .secondicon {
+  /* .magnifier .magni-desc .secondicon {
     right: 10px;
     left: auto;
     top: 30px;
-  }
+  } */
   .comment-btn {
     padding: 2px 7px;
     font-size: 8px;
@@ -1531,11 +1617,11 @@ input {
   .btn.post {
     font-size: 10px;
   }
-  .magnifier .magni-desc .secondicon {
+  /* .magnifier .magni-desc .secondicon {
     right: 10px;
     left: auto;
     top: 120px;
-  }
+  } */
 
   .comment-btn {
     padding: 2px 11px;
@@ -1622,11 +1708,11 @@ input {
   .btn.post {
     font-size: 10px;
   }
-  .magnifier .magni-desc .secondicon {
+  /* .magnifier .magni-desc .secondicon {
     right: 10px;
     left: auto;
     top: 60px;
-  }
+  } */
 
   .comment-btn {
     padding: 2px 11px;
@@ -1714,11 +1800,11 @@ input {
   .btn.post {
     font-size: 13px;
   }
-  .magnifier .magni-desc .secondicon {
+  /* .magnifier .magni-desc .secondicon {
     right: 10px;
     left: auto;
     top: 100px;
-  }
+  } */
 
   .comment-btn {
     padding: 2px 14px;
@@ -1804,11 +1890,11 @@ input {
   .btn.post {
     font-size: 15px;
   }
-  .magnifier .magni-desc .secondicon {
+  /* .magnifier .magni-desc .secondicon {
     right: 10px;
     left: auto;
     top: 140px;
-  }
+  } */
 
   .comment-btn {
     padding: 2px 16px;

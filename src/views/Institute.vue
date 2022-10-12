@@ -423,7 +423,7 @@
                   </div>
                   <div class="col-10 mt-lg-4">
                     <div class="row">
-                      <div class="col-xs-12 col-sm-12 col-md-7 col-lg-6">
+                      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <h5 class="name">{{ item.name }}</h5>
                         <h6 class="uni">
                           {{ item.typeOfInstitute.name }}-{{
@@ -433,20 +433,27 @@
                       </div>
 
                       <div
-                        class="col-xs-12 col-sm-12 col-md-5 col-lg-6"
+                        class="col-xs-12 col-sm-12 col-md-6 col-lg-6"
                         align="right"
                       >
-                        
-                          <button
-                            class="btn btn-primarys info-buttons mt-2"
-                            @click="viewPage(item.user_id)"
-                          >
-                            View
-                          </button>
-                      
                         <button
+                          class="btn btn-primarys info-buttons mt-2"
+                          @click="viewPage(item.user_id)"
+                        >
+                          View Profile
+                        </button>
+
+                        <button
+                          v-if="followings.includes(item.user_id)"
                           class="btn btn-warnings info-buttons mt-2"
-                          @click="following()"
+                          @click="unfollowing(item.user_id)"
+                        >
+                          Following
+                        </button>
+                        <button
+                          v-else
+                          class="btn btn-warnings info-buttons mt-2"
+                          @click="following(item.user_id)"
                         >
                           Follow
                         </button>
@@ -480,11 +487,13 @@ export default {
   data() {
     return {
       University: [],
+      followings: [],
     };
   },
 
   created() {
     this.getUniversity();
+    this.getFollowing();
   },
 
   methods: {
@@ -494,11 +503,34 @@ export default {
         this.University = response.data.data;
       });
     },
-    following() {},
+
+    getFollowing() {
+      ContentDataService.getFollowingData().then((response) => {
+        console.log(response.data.data);
+        this.followings = response.data.data;
+      });
+    },
+
+    following(id) {
+      ContentDataService.addFollowers(id).then((response) => {
+        console.log(response.data);
+        this.$toasted.success("Follow Successfully");
+        this.getUniversity();
+           this.getFollowing();
+      });
+    },
+    unfollowing(id) {
+      ContentDataService.removeFollowers(id).then((response) => {
+        console.log(response.data);
+        this.$toasted.success("UnFollow Successfully");
+        this.getUniversity();
+           this.getFollowing();
+      });
+    },
     viewPage(user_id) {
       this.$router.push({
         name: "InstituteProfile",
-        params: {id:user_id},
+        params: { id: user_id },
       });
     },
   },
@@ -650,12 +682,12 @@ select {
 
   .btn-primarys {
     font-size: 12px;
-    width: 40%;
-    margin-right: 15px;
+    width: 45%;
+    margin-right: 5%;
   }
   .btn-warnings {
     font-size: 12px;
-    width: 40%;
+    width: 45%;
   }
 }
 
@@ -688,7 +720,8 @@ select {
   .btn-primarys {
     font-size: 12px;
     width: 45%;
-    margin-right: 10px;
+    
+    margin-right: 5%;
   }
   .btn-warnings {
     font-size: 12px;
@@ -761,12 +794,12 @@ select {
 
   .btn-primarys {
     font-size: 12px;
-    width: 40%;
-    margin-right: 5px;
+    width: 50%;
+  
   }
   .btn-warnings {
     font-size: 12px;
-    width: 40%;
+    width: 50%;
   }
 }
 
@@ -797,12 +830,12 @@ select {
   }
   .btn-primarys {
     font-size: 12px;
-    width: 30%;
+    width: 40%;
     margin-right: 5px;
   }
   .btn-warnings {
     font-size: 12px;
-    width: 30%;
+    width: 40%;
   }
 }
 </style>

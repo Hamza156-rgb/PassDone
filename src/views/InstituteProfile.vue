@@ -3,13 +3,14 @@
     <Navbar />
     <div class="background">
       <div class="back-image">
-          <img
+        <img
           v-if="cover_img"
           :src="cover_img"
           class="img-fluid"
           style="width: 100%; height: 400px"
         />
-        <img v-else
+        <img
+          v-else
           src="../assets/main/ground.jpg"
           class="img-fluid"
           style="width: 100%; height: 400px"
@@ -18,9 +19,16 @@
       <div class="profile-img">
         <img v-if="profile_img" :src="profile_img" class="rounded-circle" />
         <img v-else src="../assets/main/user.png" class="rounded-circle" />
+      <div  v-if="followings.includes(user_id)">
+        <button class="btn btn-follow mt-3" @click="unfollowing(user_id)">
+          Following
+        </button>
       </div>
-      <div class="profile-button">
-        <button class="btn btn-follow mt-3">Follow</button>
+      <div  v-else>
+        <button class="btn btn-follow mt-3" @click="following(user_id)">
+          Follow
+        </button>
+      </div>
       </div>
     </div>
     <div class="card ad-card p-4 mb-4">
@@ -76,28 +84,27 @@
       </div>
     </div>
     <br />
-    <div class="height " ></div>
-    
-      <div class="card second-card ">
-        <div class="card-body">
-          <h5>About</h5>
-          <div class="inf-text">
-            <p>
-              {{ About }}
-            </p>
-          </div>
+    <div class="height"></div>
 
-          <div class="inf-text">
-            <h6>
-              Contact: <b style="color: red">{{ contact }} </b>
-            </h6>
-            <p>Tel:Number : {{ contact }}</p>
+    <div class="card second-card">
+      <div class="card-body">
+        <h5>About</h5>
+        <div class="inf-text">
+          <p>
+            {{ About }}
+          </p>
+        </div>
 
-            <p>email: {{ email }}</p>
-          </div>
+        <div class="inf-text">
+          <h6>
+            Contact: <b style="color: red">{{ contact }} </b>
+          </h6>
+          <p>Tel:Number : {{ contact }}</p>
+
+          <p>email: {{ email }}</p>
         </div>
       </div>
-  
+    </div>
 
     <BackToTop />
   </div>
@@ -135,6 +142,9 @@ export default {
       Instructor: "",
       Students: "",
       Followers: "",
+
+      followings: [],
+      user_id: "",
     };
   },
 
@@ -145,6 +155,7 @@ export default {
     this.getInstructor();
     this.getStudents();
     this.getFollowers();
+    this.getFollowing();
   },
 
   beforeCreate() {
@@ -155,7 +166,7 @@ export default {
           this.uniName = response.data.data.name;
           this.uniAddress = response.data.data.address;
           this.datetime = response.data.data.created_at;
-
+          this.user_id = response.data.data.user_id;
           this.About = response.data.data.about;
           this.contact = response.data.data.contact_imformation;
           this.email = response.data.data.email;
@@ -164,34 +175,56 @@ export default {
   },
 
   methods: {
+    getFollowing() {
+      ContentDataService.getFollowingData().then((response) => {
+        console.log(response.data.data);
+        this.followings = response.data.data;
+      });
+    },
+
+    following(id) {
+      ContentDataService.addFollowers(id).then((response) => {
+        console.log(response.data);
+        this.$toasted.success("Follow Successfully");
+        this.getFollowing();
+      });
+    },
+    unfollowing(id) {
+      ContentDataService.removeFollowers(id).then((response) => {
+        console.log(response.data);
+        this.$toasted.success("UnFollow Successfully");
+        this.getFollowing();
+      });
+    },
+
     getFeed() {
-      ContentDataService.getInstituteFeedId().then((response) => {
+      ContentDataService.getInstituteFeedId(this.$route.params.id).then((response) => {
         this.Feed = response.data.data;
       });
     },
 
     getMajor() {
-      ContentDataService.getInstituteMajorId().then((response) => {
+      ContentDataService.getInstituteMajorId(this.$route.params.id).then((response) => {
         this.Major = response.data.data;
       });
     },
     getCourse() {
-      ContentDataService.getInstituteCourseId().then((response) => {
+      ContentDataService.getInstituteCourseId(this.$route.params.id).then((response) => {
         this.Course = response.data.data;
       });
     },
     getInstructor() {
-      ContentDataService.getInstituteInstructorId().then((response) => {
+      ContentDataService.getInstituteInstructorId(this.$route.params.id).then((response) => {
         this.Instructor = response.data.data;
       });
     },
     getStudents() {
-      ContentDataService.getInstituteStudentsId().then((response) => {
+      ContentDataService.getInstituteStudentsId(this.$route.params.id).then((response) => {
         this.Students = response.data.data;
       });
     },
     getFollowers() {
-      ContentDataService.getInstituteFollowersId().then((response) => {
+      ContentDataService.getInstituteFollowersId(this.$route.params.id).then((response) => {
         this.Followers = response.data.data;
       });
     },
@@ -205,11 +238,9 @@ export default {
 }
 .profile-img {
   position: absolute;
-  
 }
 .profile-button {
   position: absolute;
- 
 }
 
 .background {
@@ -222,7 +253,6 @@ export default {
   box-shadow: 0 8px 16px 0 rgb(162 169 204 / 24%);
   width: 100%;
   position: absolute;
- 
 }
 
 .second-card {
@@ -233,7 +263,6 @@ export default {
 }
 
 .rounded-circle {
-  
   border-radius: 50%;
   background: #fff;
   padding: 5px;
@@ -287,7 +316,7 @@ export default {
   font-size: 14px;
   line-height: 1.5;
   outline: none;
-
+width: 100%;
   cursor: pointer;
 }
 
@@ -333,20 +362,14 @@ export default {
     font-size: 12px;
   }
 
+  .rounded-circle {
+    width: 110px;
+    height: 110px;
+  }
 
-
-.rounded-circle {
-  width: 110px;
-  height: 110px;
- 
-}
-
-.height{
-  margin-top: 10vh;
-}
-
-
-
+  .height {
+    margin-top: 10vh;
+  }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -392,19 +415,14 @@ export default {
     font-size: 13px;
   }
 
+  .rounded-circle {
+    width: 120px;
+    height: 120px;
+  }
 
-
-.rounded-circle {
-  width: 120px;
-  height: 120px;
- 
-}
-
-.height{
-  margin-top: 12vh;
-}
-
-
+  .height {
+    margin-top: 12vh;
+  }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -454,18 +472,13 @@ export default {
     font-size: 14px;
   }
 
-
-
-.rounded-circle {
-  width: 130px;
-  height: 130px;
- 
-}
-.height{
-  margin-top: 15vh;
-}
-
-
+  .rounded-circle {
+    width: 130px;
+    height: 130px;
+  }
+  .height {
+    margin-top: 15vh;
+  }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -481,7 +494,6 @@ export default {
   .profile-button {
     top: 45%;
     left: 8%;
-
   }
 
   .ad-card {
@@ -516,17 +528,13 @@ export default {
     font-size: 15px;
   }
 
-
-.rounded-circle {
-  width: 150px;
-  height: 150px;
- 
-}
-.height{
-  margin-top: 18vh;
-}
-
-
+  .rounded-circle {
+    width: 150px;
+    height: 150px;
+  }
+  .height {
+    margin-top: 18vh;
+  }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -579,17 +587,12 @@ export default {
     font-size: 16px;
   }
 
-
-
-.rounded-circle {
-  width: 170px;
-  height: 170px;
- 
-}
-.height{
-  margin-top: 20vh;
-}
-
-
+  .rounded-circle {
+    width: 170px;
+    height: 170px;
+  }
+  .height {
+    margin-top: 20vh;
+  }
 }
 </style>
