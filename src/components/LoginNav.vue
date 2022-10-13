@@ -206,12 +206,13 @@ export default {
       } else {
         ContentDataService.login(this.form)
           .then((response) => {
-            // console.log(response.data);
+            console.log(response.data);
             localStorage.setItem("user_id", response.data.data.user_id);
-               localStorage.setItem("degree", response.data.data.degree.name);
-                     localStorage.setItem("country", response.data.data.country.name);
+
             if (response.data.data.user_type == 1) {
-              console.log(response.data.data)
+              console.log(response.data.data);
+              localStorage.setItem("degree", response.data.data.degree.name);
+              localStorage.setItem("country", response.data.data.country.name);
               localStorage.setItem("first_name", response.data.data.first_name);
               localStorage.setItem(
                 "university_name",
@@ -222,7 +223,9 @@ export default {
                 response.data.data.university.user_id
               );
             } else if (response.data.data.user_type == 2) {
-               console.log(response.data.data)
+              console.log(response.data.data);
+              // localStorage.setItem("degree", response.data.data.degree.name);
+              // localStorage.setItem("country", response.data.data.country.name);
               localStorage.setItem("first_name", response.data.data.first_name);
               localStorage.setItem(
                 "university_name",
@@ -236,7 +239,6 @@ export default {
               localStorage.setItem("name", response.data.data.name);
             }
             if (response.data.data.profile_pic == null) {
-            
               localStorage.setItem("profile_pic", "null");
             } else {
               localStorage.setItem(

@@ -726,6 +726,15 @@ export default {
          trueCheck: false,
       falseCheck: false,
       highlightCheck: false,
+      reply: false,
+
+      
+      commentForm: {
+        Post_Id: "",
+        description: "",
+        name: "",
+      },
+
 
       one: true,
       two: false,
@@ -870,8 +879,46 @@ export default {
 
 
 
+ comments(id) {
+      if (this.reply == false) {
+        console.log(id);
+
+        this.reply = true;
+      } else {
+        this.reply = false;
+      }
+    },
 
 
+commentSubmit(Post_Id) {
+      if (this.commentForm.description == "") {
+        this.$toasted.error("Please Share Something");
+        return;
+      } else {
+        if (localStorage.getItem("user_type") == 1) {
+          this.commentForm.name = localStorage.getItem("first_name");
+        } else if (localStorage.getItem("user_type") == 2) {
+          this.commentForm.name = localStorage.getItem("first_name");
+        } else if (localStorage.getItem("user_type") == 3) {
+          this.commentForm.name = localStorage.getItem("name");
+        }
+        this.commentForm.Post_Id = Post_Id;
+        console.log(this.commentForm);
+
+        ContentDataService.addReply(this.commentForm)
+          .then((response) => {
+            console.log(response.data);
+            this.$toasted.success("Successfully Posted");
+            this.getAllPosts();
+            this.commentForm.description = "";
+          })
+          .catch((e) => {
+            if (e) {
+              this.$toasted.error("Something Went Wrong");
+            }
+          });
+      }
+    },
 
 
 
@@ -1367,7 +1414,40 @@ svg {
   border: 1px solid #d6d6d6;
 }
 
+
+
+
+
+
+
 /* Side Nav Friends  Following End Here*/
+
+
+
+
+
+
+.comment-btn {
+  color: white;
+  border: 2px solid #0776bd;
+  border-radius: 50px;
+  display: inline-block;
+  text-align: center;
+  vertical-align: middle;
+  background-color: #0776bd;
+}
+.comment-btn:hover {
+  background-color: #0e6ca8;
+  color: white;
+}
+
+
+input {
+  border: 0px;
+}
+
+
+
 
 @media only screen and (max-width: 600px) {
   header {
@@ -1443,6 +1523,11 @@ svg {
   }
   .btn.post {
     font-size: 10px;
+  }
+
+    .comment-btn {
+    padding: 2px 7px;
+    font-size: 8px;
   }
 }
 
@@ -1618,6 +1703,10 @@ svg {
   .btn.post {
     font-size: 10px;
   }
+   .comment-btn {
+    padding: 2px 11px;
+    font-size: 10px;
+  }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -1711,6 +1800,12 @@ svg {
   }
 
   /* End Feed Css */
+
+
+   .comment-btn {
+    padding: 2px 14px;
+    font-size: 12px;
+  }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -1805,5 +1900,10 @@ svg {
   }
 
   /* End */
+
+   .comment-btn {
+    padding: 2px 16px;
+    font-size: 14px;
+  }
 }
 </style>
