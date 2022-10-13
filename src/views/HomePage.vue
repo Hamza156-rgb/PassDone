@@ -38,6 +38,7 @@
                   <h5>{{ friends }}</h5>
                 </div>
               </div>
+
               <div class="row" v-if="user_type == 3">
                 <div class="col-6 information">
                   <h5>Instructors</h5>
@@ -53,6 +54,18 @@
               </div>
             </div>
           </div>
+
+          <div class="card mt-4">
+            <div class="card-body second">
+              <h5>My Course</h5>
+              <hr />
+              <div v-for="item in StudentCourses" :key="item.id">
+                <h5 id="uni">{{ item.name }}</h5>
+              </div>
+              <span class="seeMore">See More... </span>
+            </div>
+          </div>
+
           <div class="card mt-4" v-if="user_type == 1 || user_type == 2">
             <div class="card-body second">
               <h5>My University</h5>
@@ -654,15 +667,13 @@
           </div>
         </div>
 
-
         <modal ref="modalName1">
-          <template v-slot:body style="width:100%;">
-            <div >
+          <template v-slot:body style="width: 100%">
+            <div>
               <img class="img-fluid" :src="getImgUrl1(img)" />
             </div>
           </template>
         </modal>
-
       </div>
     </div>
     <BackToTop />
@@ -739,6 +750,7 @@ export default {
       },
 
       StudentCourses: [],
+
       url: "http://passdoneapi.codetreck.com/public/",
       //
     };
@@ -1441,14 +1453,6 @@ input {
   border-radius: 8px;
   background: #fff;
 }
-
-
-
-
-
-
-
-
 
 @media only screen and (max-width: 600px) {
   .profile img {

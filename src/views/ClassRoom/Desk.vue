@@ -15,7 +15,12 @@
         <div class="row">
           <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
             <div class="profile-image">
-              <img v-bind:src="studentImage" class="rounded-circle" />
+              <img
+                v-if="profile_pic"
+                :src="profile_pic"
+                class="rounded-circle"
+              />
+              <img v-else :src="studentImage" class="rounded-circle" />
             </div>
             <div class="update mt-3">
               <button class="btn btn-primary">Update</button>
@@ -54,7 +59,7 @@
           <div class="col-xs-12 col-sm-12 col-md-2 col-lg-2">
             <div class="grades">
               <h5>{{ value }}</h5>
-              <p>{{ points }}points</p>
+              <p>points</p>
             </div>
           </div>
         </div>
@@ -111,19 +116,37 @@
           <div class="custom-card p-3" v-if="one">
             <h3>FEED</h3>
             <hr />
-            <div class="card" style="background: #f9f9f9">
+
+            <div
+              class="card mt-4"
+              style="background: #f9f9f9"
+              v-for="item in PostsData"
+              :key="item.id"
+            >
               <div class="container-fluid">
                 <div class="row mt-2">
                   <div align="right">
-                    <i class="fa fa-times" style="color: red"></i>
+                    <i
+                      class="fa fa-times"
+                      style="color: red;cursor:pointer"
+                      @click="remove(item.id)"
+                    ></i>
                     <br />
-                    <span class="date"> 31-01-2020</span>
+                    <span class="date"> {{ item.created_at }} </span>
                   </div>
                 </div>
                 <div class="card-header" style="background: #f9f9f9">
                   <div class="row">
                     <div class="col-3">
                       <img
+                        v-if="item.postedBy.profile_pic"
+                        :src="item.postedBy.profile_pic"
+                        class="rounded-circle"
+                        style="width: 100%"
+                      />
+
+                      <img
+                        v-else
                         src="../../assets/main/user.png"
                         class="rounded-circle"
                         style="width: 100%"
@@ -132,15 +155,35 @@
 
                     <div class="col-9">
                       <div class="post-information mt-1">
-                        <h5>Name Here</h5>
+                        <h5 v-if="item.postedBy.first_name">
+                          {{ item.postedBy.first_name }}
+                        </h5>
+                        <h5 v-if="item.postedBy.name">
+                          {{ item.postedBy.name }}
+                        </h5>
                         <h6>
-                          Professor
+                          <span v-if="item.postedBy.user_type == 1">{{
+                            item.postedBy.major.name
+                          }}</span>
+                          <span v-if="item.postedBy.user_type == 2">{{
+                            item.postedBy.jobTitle.name
+                          }}</span>
+                          <span v-if="item.postedBy.user_type == 3">{{
+                            item.postedBy.typeOfInstitute.name
+                          }}</span>
                           <span style="color: #0776bd"
-                            >- Al Al-Bayt University -</span
-                          >
-                          Jordan
+                            ><span v-if="item.postedBy.user_type == 1">
+                              - {{ item.postedBy.university.name }} -
+                            </span>
+                            <span v-if="item.postedBy.user_type == 2">
+                              - {{ item.postedBy.institute.name }} -
+                            </span>
+                            <span v-if="item.postedBy.user_type == 3">
+                              - Institute -
+                            </span>
+                          </span>
+                          {{ item.postedBy.country.name }}
                         </h6>
-                        <span class="notes">Notes- </span>
                       </div>
                     </div>
                   </div>
@@ -148,87 +191,243 @@
 
                 <div class="card-body">
                   <p class="postedBy">
-                    <b>posted by:</b>
-                    <span style="color: #0776bd"> Name Here</span>
+                    <b>posted by :</b>
+                    <span
+                      style="color: #0776bd"
+                      v-if="item.postedBy.first_name"
+                    >
+                      {{ item.postedBy.first_name }}</span
+                    >
+                    <span style="color: #0776bd" v-if="item.postedBy.name">
+                      {{ item.postedBy.name }}</span
+                    >
                   </p>
 
                   <div class="post-data">
                     <p>
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                      Curabitur scelerisque eros in feugiat feugiat. Curabitur
-                      sollicitudin rutrum sollicitudin. Fusce tincidunt semper
-                      mauris sed ultrices. Vivamus consectetur velit tincidunt
-                      orci rutrum, sed faucibus quam elementum. Sed venenatis
-                      tortor tortor, at viverra lorem gravida in. Vivamus
-                      rutrum, ex ut congue ultricies, arcu justo auctor est,
-                      vitae auctor nulla urna quis dui. Aenean faucibus, turpis
-                      eget eleifend rhoncus, quam nisl ornare nulla, consectetur
-                      malesuada massa erat eget lectus. Nulla pharetra ultrices
-                      velit, ut tempor ligula suscipit non. Praesent eleifend
-                      est nunc, in dictum orci bibendum eget. Nulla quis mauris
-                      quis eros gravida finibus eget a mauris. Ut auctor
-                      suscipit dui non sodales. Phasellus luctus dolor sit amet
-                      fringilla venenatis. Vestibulum euismod risus eget lorem
-                      semper gravida. Mauris nunc nulla, pellentesque vitae
-                      condimentum rhoncus, euismod vel enim.
+                      {{ item.description }}
                     </p>
                   </div>
 
                   <div class="post-media">
                     <div class="entry">
-                      <img
-                        src="../../assets/main/post.png"
-                        class="img-fluid"
-                        alt="Responsive image"
-                      />
-                      <div class="magnifier">
-                        <div class="magni-desc">
-                          <a
-                            class="secondicon example-image-link"
-                            data-lightbox="example-set"
-                          >
-                            <span
-                              class="fa fa-search-plus"
-                              data-glyph="zoom-in"
-                              title="Read More"
-                              aria-hidden="false"
-                              id="search-plus"
-                            ></span
-                          ></a>
+                      <div v-if="item.image">
+                        <img
+                          :src="url + item.image"
+                          class="img-fluid"
+                          alt="Responsive image"
+                        />
+                        <div class="magnifier">
+                          <div class="magni-desc">
+                            <a
+                              class="secondicon example-image-link"
+                              data-lightbox="example-set"
+                            >
+                              <span
+                                class="fa fa-search-plus"
+                                data-glyph="zoom-in"
+                                title="Read More"
+                                aria-hidden="false"
+                                id="search-plus"
+                                @click="getImgUrl(item.image)"
+                              ></span
+                            ></a>
+                          </div>
                         </div>
+                      </div>
+                      <div
+                        class="home-pic-card px-2 text-center"
+                        v-if="item.file"
+                      >
+                        <span
+                          ><a
+                            v-bind:href="url + item.file"
+                            target="blank"
+                            style="color: #0776bd; text-decoration: none"
+                            ><b> Download File </b></a
+                          >
+                        </span>
                       </div>
                     </div>
                   </div>
 
                   <div class="d-flex post-condition mt-3">
                     <p class="p-1">
-                      <span style="color: #05d134">1</span> TRUE
+                      <span
+                        style="color: #05d134"
+                        true-value="1"
+                        false-value="0"
+                      >
+                        {{ item.is_true }}
+                      </span>
+                      TRUE
                     </p>
                     <p class="p-1">
-                      <span style="color: #f75555">1</span> FALSE
+                      <span
+                        style="color: #f75555"
+                        true-value="1"
+                        false-value="0"
+                        >{{ item.is_false }}
+                      </span>
+                      FALSE
                     </p>
                     <p class="p-1">
-                      <span style="color: #ffcc00">1</span> HIGHLIGHT
+                      <span
+                        style="color: #ffcc00"
+                        true-value="1"
+                        false-value="0"
+                      >
+                        {{ item.is_highlight }}</span
+                      >
+                      HIGHLIGHT
                     </p>
                   </div>
                 </div>
 
                 <div class="card-footer" style="background: #f9f9f9">
-                  <div class="d-flex mb-3" style="float: left">
-                    <i class="fa fa-check true"></i>
-                    <i class="fa fa-times false"></i>
-                    <i class="fa fa-lightbulb bulb"></i>
+                  <div class="d-flex mt-2 mb-2" style="float: left">
+                    <i
+                      class="fa fa-check true"
+                      @click="trueValue(item.id)"
+                      id="green"
+                    ></i>
+                    <i
+                      class="fa fa-times false"
+                      @click="falseValue(item.id)"
+                      id="red"
+                    ></i>
+                    <i
+                      class="fa fa-lightbulb bulb"
+                      @click="highValue(item.id)"
+                      id="yellow"
+                    ></i>
                   </div>
 
-                  <div class="d-flex" style="float: right">
+                  <div class="d-flex mb-2 mt-2" style="float: right">
                     <span class="last">
-                      <img src="../../assets/main/restore.png" />
-                      Reply 0
+                      <img
+                        src="../../assets/main/restore.png"
+                        @click="comments(item.id)"
+                        style="cursor: pointer"
+                      />
+                      Reply {{ item.post_replies.length }}
                     </span>
                     <span class="last" style="margin-left: 10px">
                       <img src="../../assets/main/share.png" />
                       Share
                     </span>
+                  </div>
+                </div>
+                <div v-if="reply">
+                  <form @submit.prevent="commentSubmit(item.id)">
+                    <div
+                      class="mt-5 mb-2"
+                      style="background-color: white; border: 2px solid white"
+                    >
+                      <div class="row p-2 mt-2">
+                        <div class="col-2">
+                          <img
+                            src="../../assets/main/user.png"
+                            class="rounded-circle"
+                            style="width: 100%"
+                          />
+                        </div>
+                        <div class="col-8">
+                          <input
+                            type="text"
+                            class="form-control shadow-none"
+                            placeholder="Share Your Lectures,exams,notes etc"
+                            v-model="commentForm.description"
+                          />
+                        </div>
+                        <div class="col-2 mt-5 mb-1">
+                          <button class="comment-btn">Post</button>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
+
+                  <div class="p-2">
+                    <div
+                      class="row p-2 mt-2"
+                      style="background-color: white; border: 1px solid #f9f9f9"
+                      v-for="reply in item.post_replies"
+                      :key="reply.id"
+                    >
+                      <div class="col-2">
+                        <img
+                          src="../../assets/main/user.png"
+                          class="rounded-circle m-1"
+                          style="width: 100%"
+                        />
+                      </div>
+
+                      <div class="col-10">
+                        <div class="post-information mt-2">
+                          <h5>{{ reply.posted_by_name }}</h5>
+                        </div>
+                        <div class="d-flex post-condition">
+                          <p class="p-1">
+                            <span
+                              style="color: #05d134"
+                              true-value="1"
+                              false-value="0"
+                            >
+                              {{ reply.is_true }}
+                            </span>
+                            TRUE
+                          </p>
+                          <p class="p-1">
+                            <span
+                              style="color: #f75555"
+                              true-value="1"
+                              false-value="0"
+                              >{{ reply.is_false }}
+                            </span>
+                            FALSE
+                          </p>
+                          <p class="p-1">
+                            <span
+                              style="color: #ffcc00"
+                              true-value="1"
+                              false-value="0"
+                            >
+                              {{ reply.is_highlight }}
+                            </span>
+                            HIGHLIGHT
+                          </p>
+                        </div>
+                      </div>
+                      <div class="col-2"></div>
+                      <div class="col-10 post-information mt-1">
+                        <h6>{{ reply.description }}</h6>
+
+                        <div class="row">
+                          <div
+                            class="
+                              col-xs-6 col-sm-6 col-md-4 col-lg-3
+                              card-footers
+                            "
+                          >
+                            <i class="fa fa-check true" id="green"></i>
+                            <i class="fa fa-times false" id="red"></i>
+                            <i class="fa fa-lightbulb bulb" id="yellow"></i>
+                          </div>
+                          <div
+                            class="col-xs-6 col-sm-6 col-md-8 col-lg-9"
+                            align="right"
+                          >
+                            <span class="last">
+                              <img
+                                src="../../assets/main/restore.png"
+                                style="cursor: pointer"
+                              />
+                              Reply {{ item.post_replies.length }}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -340,7 +539,11 @@
                 style="border-color: transparent"
               >
                 <div class="card-body">
-                  <div class="Following-data mt-3" v-for="item in followingItems" :key="item.id">
+                  <div
+                    class="Following-data mt-3"
+                    v-for="item in followingItems"
+                    :key="item.id"
+                  >
                     <div class="row p-3">
                       <div class="col-6">
                         <div class="row">
@@ -353,9 +556,9 @@
                           </div>
                           <div class="col-8 mt-lg-4">
                             <span style="color: #0776bd"
-                              >-{{item.universityName}}
+                              >-{{ item.universityName }}
                             </span>
-                            <span class="text-muted">{{item.place}}</span>
+                            <span class="text-muted">{{ item.place }}</span>
                           </div>
                         </div>
                       </div>
@@ -443,6 +646,14 @@
       </div>
     </div>
 
+    <modal ref="modalName1">
+      <template v-slot:body style="width: 100%">
+        <div>
+          <img class="img-fluid" :src="getImgUrl1(img)" />
+        </div>
+      </template>
+    </modal>
+
     <BackToTop />
   </div>
 </template>
@@ -452,26 +663,29 @@ import Navbar from "../../components/Navbar.vue";
 import BackToTop from "../../components/BackToTop.vue";
 import studentImage from "../../assets/main/user.png";
 import universityImage from "../../assets/main/university.png";
+import ContentDataService from "../../services/ContentDataService";
+import Modal from "../../components/Modal.vue";
+
 export default {
-  name: "My Desk",
+  name: "MyDesk",
   components: {
     Navbar,
-
+    Modal,
     BackToTop,
   },
   data() {
     return {
       // Information
       studentImage,
-      studentName: "Student Name",
-      type: "Professor",
-      universityName: "Al Al-Bayt University",
-      universityPlace: "Jordan",
-      post: "1",
-      followers: "2",
-      course: "3",
-      friends: "4",
-      value: "1000",
+      studentName: "",
+      type: "",
+      universityName: "",
+      universityPlace: "",
+      post: "",
+      followers: "",
+      course: "",
+      friends: "",
+      value: "",
       points: "B+",
       //
 
@@ -495,16 +709,23 @@ export default {
       // Side Nav Following
       followingItems: [
         {
-          img:universityImage ,
+          img: universityImage,
           universityName: "Name Here",
           place: "place",
         },
-         {
-          img:universityImage ,
+        {
+          img: universityImage,
           universityName: "Name Here",
           place: "place",
         },
       ],
+
+      PostsData: [],
+
+      url: "http://passdoneapi.codetreck.com/public/",
+         trueCheck: false,
+      falseCheck: false,
+      highlightCheck: false,
 
       one: true,
       two: false,
@@ -517,7 +738,155 @@ export default {
       Followers: false,
     };
   },
+
+  created() {
+    this.profilePicture = localStorage.getItem("profile_pic");
+    this.studentName = localStorage.getItem("first_name");
+    this.universityName = localStorage.getItem("university_name");
+    this.type = localStorage.getItem("degree");
+    this.universityPlace = localStorage.getItem("country");
+    this.getPost();
+    this.getFollowers();
+    this.getCourse();
+    this.getFriends();
+    this.getPoint();
+    this.getMyAllPosts();
+  },
+
   methods: {
+    getPost() {
+      ContentDataService.getInstituteFeed().then((response) => {
+        this.post = response.data.data;
+      });
+    },
+
+    getFollowers() {
+      ContentDataService.getInstituteFollowers().then((response) => {
+        this.followers = response.data.data;
+      });
+    },
+
+    getCourse() {
+      ContentDataService.getInstituteCourse().then((response) => {
+        this.course = response.data.data;
+      });
+    },
+
+    getFriends() {
+      ContentDataService.getAllFriends().then((response) => {
+        this.friends = response.data.data;
+      });
+    },
+    getPoint() {
+      ContentDataService.getPoints().then((response) => {
+        this.value = response.data.data;
+      });
+    },
+
+    getMyAllPosts() {
+      ContentDataService.getMyPosts().then((response) => {
+        var a = response.data;
+        var b = Object.values(a);
+        //this.ActiveInstitutes = b[0];
+        this.PostsData = b[0];
+        console.log(this.PostsData);
+      });
+    },
+
+
+
+ remove(id) {
+      ContentDataService.deletePost(id).then((response) => {
+        console.log(response.data);
+        this.$toasted.success("Deleted Successfully");
+        this.getMyAllPosts();
+      });
+    },
+
+
+
+
+
+
+    trueValue(id) {
+      if (this.trueCheck == false) {
+        ContentDataService.postTrue(id).then((response) => {
+          console.log(response.data);
+          document.getElementById("green").style.color = "#21b721";
+          this.$toasted.success("Marked As True");
+          this.trueCheck = true;
+          this.getMyAllPosts();
+        });
+      } else if (this.trueCheck == true) {
+        ContentDataService.removeTrue(id).then((response) => {
+          console.log(response.data);
+          document.getElementById("green").style.color = "#777777";
+          this.$toasted.success("Unmarked as True");
+          this.trueCheck = false;
+          this.getMyAllPosts();
+        });
+      }
+    },
+
+    falseValue(id) {
+      if (this.falseCheck == false) {
+        ContentDataService.postFalse(id).then((response) => {
+          console.log(response.data);
+          document.getElementById("red").style.color = "#dc1919";
+          this.$toasted.success("Marked As False");
+          this.falseCheck = true;
+          this.getMyAllPosts();
+        });
+      } else if (this.falseCheck == true) {
+        ContentDataService.removeFalse(id).then((response) => {
+          console.log(response.data);
+          document.getElementById("red").style.color = "#777777";
+          this.$toasted.success("Unmarked As False");
+          this.falseCheck = false;
+          this.getMyAllPosts();
+        });
+      }
+    },
+
+    highValue(id) {
+      if (this.highlightCheck == false) {
+        ContentDataService.postHighlight(id).then((response) => {
+          console.log(response.data);
+          document.getElementById("yellow").style.color = "#ffc210";
+          this.$toasted.success("Marked As Highlight");
+          this.highlightCheck = true;
+          this.getAllPosts();
+        });
+      } else if (this.highlightCheck == true) {
+        ContentDataService.removeHighlight(id).then((response) => {
+          console.log(response.data);
+          document.getElementById("yellow").style.color = "#777777";
+          this.$toasted.success("Unmarked As Highlight");
+          this.getAllPosts();
+        });
+      }
+    },
+
+
+
+
+
+
+
+
+
+
+    getImgUrl(pet) {
+      this.img = this.url + pet;
+      this.$refs.modalName1.openModal();
+    },
+
+    getImgUrl1(pet) {
+      console.log(pet);
+      return pet;
+      // return require("../assets/img/photogallery/" + pet);
+    },
+
     div1() {
       this.one = true;
       this.two = false;
@@ -849,11 +1218,11 @@ svg {
   left: 0;
   top: 50%;
   text-align: center;
-  /* bottom: 10px; */
   opacity: 0;
   width: 100%;
-  /* margin: -20px auto; */
   display: block;
+  bottom: 10px;
+  right: 10px;
 }
 
 .entry:hover .magnifier .magni-desc {
@@ -891,8 +1260,8 @@ svg {
   font-size: 25px !important;
   width: 35px;
   height: 35px;
-  left: 10px;
-  bottom: 20px;
+  bottom: 10px;
+  right: 10px;
   color: #ffffff !important;
   line-height: 35px;
   background-color: #000;
@@ -903,14 +1272,6 @@ svg {
   -o-transition: all 0.7s ease-in-out;
   transition: all 0.7s ease-in-out;
   border-radius: 5px;
-}
-
-.blog-wrapper .magnifier .magni-desc .secondicon {
-  left: 0;
-  right: 0;
-  bottom: 0;
-  top: 20% !important;
-  margin: -20px auto !important;
 }
 
 /*Side Nav Feed Css end here */
@@ -1083,11 +1444,6 @@ svg {
   .btn.post {
     font-size: 10px;
   }
-  .magnifier .magni-desc .secondicon {
-    right: 10px;
-    left: auto;
-    top: 30px;
-  }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -1170,11 +1526,6 @@ svg {
   }
   .btn.post {
     font-size: 10px;
-  }
-  .magnifier .magni-desc .secondicon {
-    right: 10px;
-    left: auto;
-    top: 60px;
   }
 }
 
@@ -1267,10 +1618,6 @@ svg {
   .btn.post {
     font-size: 10px;
   }
-  .magnifier .magni-desc .secondicon {
-    right: 10px;
-    left: auto;
-  }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -1362,11 +1709,7 @@ svg {
   .btn.post {
     font-size: 13px;
   }
-  .magnifier .magni-desc .secondicon {
-    right: 10px;
-    left: auto;
-    top: 100px;
-  }
+
   /* End Feed Css */
 }
 
@@ -1459,11 +1802,6 @@ svg {
   }
   .btn.post {
     font-size: 15px;
-  }
-  .magnifier .magni-desc .secondicon {
-    right: 10px;
-    left: auto;
-    top: 200px;
   }
 
   /* End */

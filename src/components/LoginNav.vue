@@ -208,6 +208,8 @@ export default {
           .then((response) => {
             // console.log(response.data);
             localStorage.setItem("user_id", response.data.data.user_id);
+               localStorage.setItem("degree", response.data.data.degree.name);
+                     localStorage.setItem("country", response.data.data.country.name);
             if (response.data.data.user_type == 1) {
               console.log(response.data.data)
               localStorage.setItem("first_name", response.data.data.first_name);

@@ -147,10 +147,27 @@ class ContentDataService {
 
   }
 
+  getPoints() {
+    return http.get('getTotalUserPoints?user_id='+ localStorage.getItem('user_id') )
+
+  }
+
+
   getHomePost() {
     return http.get('getAllPosts')
 
   }
+
+
+
+
+  getMyPosts() {
+    return http.get('getPostByUser?user_id='+ localStorage.getItem('user_id') )
+
+  }
+
+
+
 
   postTrue(id) {
     return http.post('addTrueToPost?post_id=' + id)
@@ -284,6 +301,11 @@ class ContentDataService {
     return http.get('getTotalUserFollower?user_id=' + id)
   }
 
+  getAllFriends() {
+    return http.get('getTotalUserFriends?user_id=' + localStorage.getItem('user_id'))
+  }
+
+
   getInstructorInstitute() {
     var id = "";
     if (localStorage.getItem("user_type") == 1 || localStorage.getItem("user_type") == 2) {
@@ -366,8 +388,8 @@ class ContentDataService {
     return http.post('addUserFollower?user_id=' + id + '&following_id=' + localStorage.getItem("user_id"));
   }
   removeFollowers(id) {
-  
-    return http.post('removeUserFollower?user_id=' + id );
+
+    return http.post('removeUserFollower?user_id=' + id);
   }
 
 
