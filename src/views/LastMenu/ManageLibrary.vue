@@ -93,7 +93,7 @@
                     <div class="row">
                       <div class="col-xs-12 col-sm-12 col-md-7 col-lg-6">
                         <h5 class="name">
-                          {{ item.name }} -{{ item.created_at }}
+                          {{ item.name }} -{{ item.created_at .slice(0, 10) }}
                         </h5>
                         <h6 class="uni">
                           <span style="color: #0776bd">{{ item.subject }}</span>

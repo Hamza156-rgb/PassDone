@@ -2,62 +2,30 @@
   <div class="container-fluid" style="background-color: #365160">
     <div class="row p-4">
       <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 color mt-2">
-        <h4 class="head">About PassDone</h4>
-        <p class="para">
-          PassDone.com is the world’s First integral and interactive educational
-          platform designed to give the cultural and educational exchange
-          another dimension...
-        </p>
+        <h4 class="head">{{ footerTitle }}</h4>
+        <p class="para">{{ footerDescription.slice(0, 152) }}...</p>
         <button class="btn btn-primary" @click="$refs.modalName1.openModal()">
           Read More
         </button>
       </div>
-      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6  color mt-2">
+      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 color mt-2">
         <h4 class="head">Connect with us</h4>
         <p class="para">
-          Reach us at <a href="hello@passdone.org"> hello@passdone.org</a> or
-          through our online contact form.
+          Reach us at <a :href="email"> hello@passdone.org</a> or through our
+          online contact form.
         </p>
         <button class="btn btn-primary mt-lg-4 mt-md-4">Contact Us</button>
       </div>
 
       <modal ref="modalName1">
         <template v-slot:header>
-          <h3 class="about">About PassDone</h3>
+          <h3 class="about">{{ footerTitle }}</h3>
         </template>
 
         <template v-slot:body>
           <div class="main" style="border-top: 1px solid grey">
             <p class="mt-3">
-              PassDone.com is the world’s First integral and interactive
-              educational platform designed to give the cultural and educational
-              exchange another dimension.
-            </p>
-            <p class="mt-3">
-              It’s a combination between social media and E-learning serves the
-              educational process by gathering all its elements such as
-              students, Instructors, educational institutes and educational
-              material from different universities and sources worldwide in one
-              place in order to exchange and share the latest updated knowledge
-              which will have a great impact inside the classroom with more
-              quality and variety.
-            </p>
-            <p class="mt-3">
-              PassDone Saves the students’ time while writing and searching for
-              their daily notes, references and other needed educational
-              material by inserting them all in their smart phones. As well as
-              it links them with their Instructors and link instructors with
-              their colleagues inside and outside their educational institutes.
-              It’s also encouraging the positivity of Knowledge Sharing by
-              giving B+ points (positivity indicator) against members positive
-              actions such like sharing useful content and those points can be
-              exchange with gifts and surprises later on.
-            </p>
-
-            <p class="mt-3">
-              Finally we wish to deliver the knowledge to everyone who need it
-              in easiest and shortest way and “One World, One Word” in not only
-              out slogan, but it’s also our target!
+              {{ footerDescription }}
             </p>
           </div>
         </template>
@@ -72,11 +40,40 @@
 
 <script>
 import Modal from "../components/Modal.vue";
+import ContentDataService from "../services/ContentDataService";
 
 export default {
   name: "Footer",
   components: {
     Modal,
+  },
+  data() {
+    return {
+      footerTitle: "",
+      footerDescription: "",
+      email: "",
+    };
+  },
+
+  created() {
+    this.getFooter();
+    this.getMail();
+  },
+
+  methods: {
+    getFooter() {
+      ContentDataService.getHomeFooter().then((response) => {
+        console.log(response.data);
+        this.footerDescription = response.data.data[0].description;
+        this.footerTitle = response.data.data[0].title;
+      });
+    },
+    getMail() {
+      ContentDataService.getEmail().then((response) => {
+        console.log(response.data);
+        this.email = response.data.data[0].email;
+      });
+    },
   },
 };
 </script>
@@ -97,56 +94,56 @@ export default {
 }
 
 @media only screen and (max-width: 600px) {
-       .head {
+  .head {
     font-size: 12px;
   }
 
   .para {
     font-size: 10px;
   }
-    button{
+  button {
     font-size: 10px;
   }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-       .head {
+  .head {
     font-size: 14px;
   }
 
   .para {
     font-size: 10px;
   }
-  button{
+  button {
     font-size: 10px;
   }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-     .head {
+  .head {
     font-size: 16px;
   }
 
   .para {
     font-size: 12px;
   }
-    button{
+  button {
     font-size: 14px;
   }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-   .head {
+  .head {
     font-size: 18px;
   }
 
   .para {
     font-size: 14px;
   }
-    button{
+  button {
     font-size: 16px;
   }
 }
@@ -160,7 +157,7 @@ export default {
   .para {
     font-size: 16px;
   }
-    button{
+  button {
     font-size: 18px;
   }
 }

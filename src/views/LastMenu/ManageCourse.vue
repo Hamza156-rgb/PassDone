@@ -55,7 +55,7 @@
                           @click="deleteCourse(item.id)"
                         ></i>
                         <h3>{{ item.name }}</h3>
-                        <h4 class="mt-2">Addedd | {{ item.created_at }}</h4>
+                        <h4 class="mt-2">Addedd | {{ item.created_at .slice(0, 10) }}</h4>
                         <button
                           class="btn mt-2"
                           v-if="item.is_active == 1"

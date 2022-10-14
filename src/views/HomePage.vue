@@ -296,7 +296,7 @@
                     @click="remove(item.id)"
                   ></i>
                   <br />
-                  <span class="date"> {{ item.created_at }} </span>
+                  <span class="date"> {{ item.created_at .slice(0, 10) }} </span>
                 </div>
               </div>
               <div class="card-header" style="background: #f9f9f9">

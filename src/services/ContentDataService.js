@@ -7,6 +7,43 @@ class ContentDataService {
     return http.get('content/getcontent?pageName=' + pageName + '&langId=' + langId);
   }
 
+
+  getHomeSlider() {
+    return http.get('getAllHomePageSlider')
+  }
+
+  getHomeSection2() {
+    return http.get('getAllWhatWeDo')
+  }
+
+  getYoutubeVideo() {
+    return http.get('getAllYouTubeVideo')
+  }
+
+  getHomeStudents() {
+    return http.get('getTotalStudents')
+  }
+  getHomeInstructor() {
+    return http.get('getTotalInstructors')
+  }
+  getHomeInstitutes() {
+    return http.get('getTotalInstitutes')
+  }
+  getHomeMaterials() {
+    return http.get('getTotalMaterials')
+  }
+
+getHomeFooter(){
+  return http.get('getAllAboutPassdone')
+}
+getEmail(){
+  return http.get('getContactEmails')
+}
+
+
+
+
+
   getCountry() {
     return http.get('getAllCountries?lang_id=1')
   }
@@ -148,7 +185,7 @@ class ContentDataService {
   }
 
   getPoints() {
-    return http.get('getTotalUserPoints?user_id='+ localStorage.getItem('user_id') )
+    return http.get('getTotalUserPoints?user_id=' + localStorage.getItem('user_id'))
 
   }
 
@@ -157,12 +194,16 @@ class ContentDataService {
     return http.get('getAllPosts')
 
   }
+  getHomeLatestPost() {
+    return http.get('getLatestPosts')
+
+  }
 
 
 
 
   getMyPosts() {
-    return http.get('getPostByUser?user_id='+ localStorage.getItem('user_id') )
+    return http.get('getPostByUser?user_id=' + localStorage.getItem('user_id'))
 
   }
 

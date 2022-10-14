@@ -9,8 +9,8 @@
       :autoplayTimeout="5000"
       :loop="true"
     >
-      <slide>
-        <img src="@/assets/home/1.png" class="relative" style="width: 100%" />
+      <slide v-for="item in sliderImage" :key="item.key">
+        <img :src="url + item.image" class="relative" style="width: 100%" />
 
         <div class="centered">
           <svg id="more-arrows" @click="goto('div1')">
@@ -33,11 +33,10 @@
           <div class="main">
             <div class="heading">
               <h3>
-                World's first integral and interactive educational platform
+                {{ item.image_text }}
               </h3>
               <h4>
-                which combines social media and e-learning designed to simulate
-                the educational process and support their elements.
+                {{ item.small_text }}
               </h4>
             </div>
 
@@ -75,92 +74,6 @@
                 </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
-                  <div class="Institutes">
-                    <h1>Institutes?</h1>
-                    <p>
-                      Introduce your institute worldwide, share your
-                      announcements and meet your students and instructors.
-                    </p>
-                    <router-link to="/signup-institute">
-                      <button class="btn btn-outline border-color3">
-                        Resgister Now
-                      </button>
-                    </router-link>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </slide>
-
-      <slide>
-        <div class="relative">
-          <img src="@/assets/home/2.jpg" style="width: 100%" />
-          <div class="centered">
-            <svg id="more-arrows" @click="goto('div1')">
-              <polygon
-                class="arrow-top"
-                points="37.6,27.9 1.8,1.3 3.3,0 37.6,25.3 71.9,0 73.7,1.3 "
-              ></polygon>
-              <polygon
-                class="arrow-middle"
-                points="37.6,45.8 0.8,18.7 4.4,16.4 37.6,41.2 71.2,16.4 74.5,18.7 "
-              ></polygon>
-              <polygon
-                class="arrow-bottom"
-                points="37.6,64 0,36.1 5.1,32.8 37.6,56.8 70.4,32.8 75.5,36.1 "
-              ></polygon>
-            </svg>
-          </div>
-        </div>
-
-        <div class="first">
-          <div class="main">
-            <div class="heading">
-              <h3>
-                World's first integral and interactive educational platform
-              </h3>
-              <h4>
-                which combines social media and e-learning designed to simulate
-                the educational process and support their elements.
-              </h4>
-            </div>
-
-            <div class="information">
-              <div class="row">
-                <div class="col-md-4 col-xs-12">
-                  <div class="student">
-                    <h1>Student?</h1>
-                    <p>
-                      Find your needed educational material, meet your friends
-                      and colleagues and keep in touch with your instructors.
-                    </p>
-                    <router-link to="/signup-student">
-                      <button class="btn btn-outline border-color1">
-                        Join Colleagues
-                      </button>
-                    </router-link>
-                  </div>
-                </div>
-
-                <div class="col-md-4 col-xs-12">
-                  <div class="Instructor">
-                    <h1>Instructor?</h1>
-                    <p>
-                      Exchange latest knowledge with instructors from different
-                      educational institutes and countries and keep in touch
-                      with your students.
-                    </p>
-                    <router-link to="/signup-instructor">
-                      <button class="btn btn-outline border-color2">
-                        Explore Our Society
-                      </button>
-                    </router-link>
-                  </div>
-                </div>
-
-                <div class="col-md-4 col-xs-12">
                   <div class="Institutes">
                     <h1>Institutes?</h1>
                     <p>
@@ -198,19 +111,7 @@
           ></iframe>
         </div>
         <div class="col-sm-12 col-xs-12 col-md-6 col-lg-6" id="section2">
-          <p>
-            World's first integral and interactive educational platform which
-            combines social media and e-learning designed to simulate the
-            educational process and support their elements.
-          </p>
-          <p>
-            It’s a combination between social media and E-learning serves the
-            educational process by gathering all its elements such as students,
-            Instructors, educational institutes and educational material from
-            different universities and sources worldwide in one place in order
-            to exchange and share the latest updated knowledge which will have a
-            great impact inside the classroom with more quality and variety.
-          </p>
+          <div v-html="sectionDescription"></div>
 
           <div class="text-center">
             <button class="btn btn-lg btn-primary mt-lg-5 mt-md-4">
@@ -222,19 +123,19 @@
 
       <div class="row mt-4">
         <div class="col-md-3 txt-color1">
-          <h4>10</h4>
+          <h4>{{ student }}</h4>
           <h5>Students</h5>
         </div>
         <div class="col-md-3 txt-color2">
-          <h4>6</h4>
+          <h4>{{ instructor }}</h4>
           <h5>Instructor</h5>
         </div>
         <div class="col-md-3 txt-color3">
-          <h4>163</h4>
+          <h4>{{ institutes }}</h4>
           <h5>Institutes</h5>
         </div>
         <div class="col-md-3 txt-color4">
-          <h4>78</h4>
+          <h4>{{ material }}</h4>
           <h5>Materials</h5>
         </div>
       </div>
@@ -243,25 +144,24 @@
         <div style="background-color: #f6f6f6">
           <h2 class="txt-blue text-center pt-4">Explore latest Materials</h2>
           <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 p-4">
+            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 p-4" v-for="item in PostsData"
+            :key="item.id">
               <div class="card">
                 <div class="card-header">
-                  <h5 class="heading">Graphic Designing</h5>
+                  <h5 class="heading"> {{item.course.name}} </h5>
 
                   <h6 class="description">
-                    Book-Graphic Designing |<span class="date">
-                      posted date:24-02-2022</span
+                    {{item.course.name}} |<span class="date">
+                      posted date:{{ item.created_at .slice(0, 10) }} </span
                     >
                   </h6>
                 </div>
                 <div class="card-body">
-                  <img src="@/assets/home/noimg.png" style="width: 100%" />
+                  <img :src=" url +'public/'+ item.image" style="width: 100%;height:50vh" />
                 </div>
                 <div class="card-footer p-4">
                   <p>
-                    Maybe you've been eyeing a sweet Udemy course about photo
-                    retouching, or perhaps digital painting, NOTHING about
-                    Phtoshop....
+                 {{ item.description .slice(0, 20) }}
                   </p>
 
                   <button class="btn btn-primary" style="width: 100%">
@@ -271,61 +171,9 @@
               </div>
             </div>
 
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 p-4">
-              <div class="card">
-                <div class="card-header">
-                  <h5 class="heading">Graphic Designing</h5>
+          
 
-                  <h6 class="description">
-                    Book-Graphic Designing |<span class="date">
-                      posted date:24-02-2022</span
-                    >
-                  </h6>
-                </div>
-                <div class="card-body">
-                  <img src="@/assets/home/noimg.png" style="width: 100%" />
-                </div>
-                <div class="card-footer p-4">
-                  <p>
-                    Maybe you've been eyeing a sweet Udemy course about photo
-                    retouching, or perhaps digital painting, NOTHING about
-                    Phtoshop....
-                  </p>
-
-                  <button class="btn btn-primary" style="width: 100%">
-                    Sign in & Learn More
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 p-4">
-              <div class="card">
-                <div class="card-header">
-                  <h5 class="heading">Graphic Designing</h5>
-
-                  <h6 class="description">
-                    Book-Graphic Designing |<span class="date">
-                      posted date:24-02-2022</span
-                    >
-                  </h6>
-                </div>
-                <div class="card-body">
-                  <img src="@/assets/home/noimg.png" style="width: 100%" />
-                </div>
-                <div class="card-footer p-4">
-                  <p>
-                    Maybe you've been eyeing a sweet Udemy course about photo
-                    retouching, or perhaps digital painting, NOTHING about
-                    Phtoshop....
-                  </p>
-
-                  <button class="btn btn-primary" style="width: 100%">
-                    Sign in & Learn More
-                  </button>
-                </div>
-              </div>
-            </div>
+           
           </div>
         </div>
       </div>
@@ -360,7 +208,7 @@
 
           <div class="image">
             <div class="row mb-4">
-              <div class="col-md-1 col-lg-1 "></div>
+              <div class="col-md-1 col-lg-1"></div>
               <div class="col-md-1 col-lg-1"></div>
               <div class="col-md-1 col-lg-1 col-4">
                 <img src="@/assets/home/noimg.png" />
@@ -386,8 +234,8 @@
               <div class="col-md-1 col-lg-1 col-4">
                 <img src="@/assets/home/partner6.jpg" />
               </div>
-              <div class="col-md-1 col-lg-1 "></div>
-              <div class="col-md-1  col-lg-1 "></div>
+              <div class="col-md-1 col-lg-1"></div>
+              <div class="col-md-1 col-lg-1"></div>
             </div>
           </div>
         </div>
@@ -401,6 +249,8 @@
 import LoginNav from "../components/LoginNav.vue";
 import Footer from "../components/Footer.vue";
 import { Carousel, Slide } from "vue-carousel";
+import ContentDataService from "../services/ContentDataService";
+
 export default {
   name: "Home",
   components: {
@@ -409,15 +259,101 @@ export default {
     Carousel,
     Slide,
   },
+
+  data() {
+    return {
+      sliderImage: [],
+      url: "http://passdoneapi.codetreck.com/",
+      sectionDescription: "",
+      sectionVideo: "",
+      student: "",
+      instructor: "",
+      institutes: "",
+      material: "",
+        PostsData: [],
+    };
+  },
+
   mounted() {
     window.addEventListener("scroll", this.handleScroll);
   },
+
+  created() {
+    this.sliderData();
+    this.section2();
+    this.video();
+    this.students();
+    this.instructors();
+    this.Institutes();
+    this.Materials();
+    this.getHomePost();
+  },
+
   methods: {
     goto(div1) {
       var element = this.$refs[div1];
       var top = element.offsetTop;
       window.scrollTo(0, top);
     },
+    sliderData() {
+      ContentDataService.getHomeSlider().then((response) => {
+        console.log(response.data.data);
+        this.sliderImage = response.data.data;
+      });
+    },
+    section2() {
+      ContentDataService.getHomeSection2().then((response) => {
+        this.sectionDescription = response.data.data[0].description;
+        console.log(this.sectionDescription);
+      });
+    },
+    video() {
+      ContentDataService.getYoutubeVideo().then((response) => {
+        console.log(response.data.data);
+        this.sectionVideo = response.data.data;
+      });
+    },
+    students() {
+      ContentDataService.getHomeStudents().then((response) => {
+        this.student = response.data.data;
+      });
+    },
+    instructors() {
+      ContentDataService.getHomeInstructor().then((response) => {
+        console.log(response.data);
+        this.instructor = response.data.data;
+      });
+    },
+    Institutes() {
+      ContentDataService.getHomeInstitutes().then((response) => {
+        console.log(response.data);
+        this.institutes = response.data.data;
+      });
+    },
+    Materials() {
+      ContentDataService.getHomeMaterials().then((response) => {
+        console.log(response.data);
+        this.material = response.data.data;
+      });
+    },
+
+
+
+
+    getHomePost() {
+      ContentDataService.getHomeLatestPost().then((response) => {
+        var a = response.data;
+        var b = Object.values(a);
+        //this.ActiveInstitutes = b[0];
+        this.PostsData = b[0];
+        console.log(this.PostsData);
+      });
+    },
+
+
+
+
+
   },
 };
 </script>
@@ -681,7 +617,6 @@ polygon.arrow-top {
   height: 100vh;
 }
 
-
 @media only screen and (max-width: 768px) {
   .main {
     background-color: #365160;
@@ -790,13 +725,13 @@ polygon.arrow-top {
     width: 100px;
     height: 80px;
   }
-  .student button{
+  .student button {
     font-size: 12px;
   }
-  .Instructor button{
+  .Instructor button {
     font-size: 12px;
   }
-  .Institutes button{
+  .Institutes button {
     font-size: 12px;
   }
 }
