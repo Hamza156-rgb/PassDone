@@ -44,7 +44,10 @@
                     v-for="item in courseDetail"
                     :key="item.id"
                   >
-                    <div class="card" style="background: #efefef">
+                    <div
+                      class="card"
+                      style="background: #efefef; border: 1px solid #e1e6f1"
+                    >
                       <div class="card-body course">
                         <i
                           class="fa fa-times"
@@ -69,6 +72,31 @@
                         >
                           Not-Active
                         </button>
+                      </div>
+                      <div
+                        class="card-footer course-footer"
+                        style="background-color: #ffffff"
+                      >
+                        <div class="row mb-2">
+                          <div class="col-12">
+                            <div class="d-flex course-image">
+                                <div class="col-2">
+                              <img
+                                src="../../assets/main/user.png"
+                                class="rounded-circle"
+                                style="width: 100%"
+                              />
+                                </div>
+
+                              <div class="col-10">
+                                <p class="p-1" style=" color: #707070;">
+                                  {{ item.intructor.first_name }} <br />
+                                  {{ item.intructor.jobTitle.name }}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -375,6 +403,11 @@ export default {
     width: 100%;
     font-size: 13px;
   }
+   .course-image p {
+   
+    font-size: 8px;
+  }
+
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -415,6 +448,10 @@ export default {
   .btn-addcourse {
     width: 100%;
     font-size: 13px;
+  }
+     .course-image p {
+  
+    font-size: 9px;
   }
 }
 
@@ -458,6 +495,10 @@ export default {
   .btn-addcourse {
     width: 30%;
     font-size: 14px;
+  }
+     .course-image p {
+    
+    font-size: 10px;
   }
 }
 
@@ -504,6 +545,10 @@ export default {
   .btn-addcourse {
     width: 30%;
   }
+     .course-image p {
+    
+    font-size: 11px;
+  }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -543,6 +588,10 @@ export default {
   }
   .btn-addcourse {
     width: 30%;
+  }
+   .course-image p {
+    
+    font-size: 12px;
   }
 }
 </style>

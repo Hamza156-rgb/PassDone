@@ -468,7 +468,7 @@
                   </span>
                 </div>
               </div>
-              <div v-if="reply">
+              <div v-if="reply==item.id">
                 <form @submit.prevent="commentSubmit(item.id)">
                   <div
                     class="mt-5 mb-2"
@@ -1101,10 +1101,12 @@ export default {
     },
 
     comments(id) {
-      if (this.reply == false) {
+      if (this.reply == false || this.id==false) {
         console.log(id);
-
-        this.reply = true;
+      
+        this.id=true;
+        this.reply=true;
+        // this.reply = true;
       } else {
         this.reply = false;
       }

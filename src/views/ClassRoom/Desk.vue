@@ -128,7 +128,7 @@
                   <div align="right">
                     <i
                       class="fa fa-times"
-                      style="color: red;cursor:pointer"
+                      style="color: red; cursor: pointer"
                       @click="remove(item.id)"
                     ></i>
                     <br />
@@ -440,18 +440,52 @@
               <div class="card-body">
                 <div class="row">
                   <div
-                    class="col-xs-6 col-sm-6 col-md-4 col-lg-6 mt-3"
-                    v-for="item in items"
+                    class="col-xs-12 col-sm-12 col-md-6 col-lg-6 mt-3"
+                    v-for="item in courseDetail"
                     :key="item.id"
                   >
                     <div class="card">
                       <div class="card-body course">
-                        <h3>{{ item.courseName }}</h3>
-                        <h4 class="mt-2">Addedd | {{ item.courseDate }}</h4>
-                        <button class="btn mt-2">Active</button>
+                        <h3>{{ item.name }}</h3>
+                        <h4 class="mt-2">Addedd | {{ item.created_at }}</h4>
+                        <button
+                          class="btn mt-2"
+                          v-if="item.is_active == 1"
+                          @click="Active(item.id)"
+                          id="green"
+                        >
+                          Active
+                        </button>
+                        <button
+                          class="btn red mt-2"
+                          v-if="item.is_active == 0"
+                          @click="notActive(item.id)"
+                          id="red"
+                        >
+                          Not-Active
+                        </button>
                       </div>
                       <div class="card-footer course-footer">
                         <div class="row mb-2">
+                          <div class="col-12">
+                            <div class="d-flex course-image">
+                              <div class="col-2">
+                                <img
+                                  :src="studentImage"
+                                  class="rounded-circle"
+                                  style="width: 100%"
+                                />
+                              </div>
+
+                              <div class="col-10">
+                                <p class="p-1" style=" color: #707070;">
+                                  {{ item.intructor.first_name }} <br />
+                                  {{ item.intructor.jobTitle.name }}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+
                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                             <button class="btn btn-outline-primary mt-2">
                               Colleagues
@@ -689,22 +723,7 @@ export default {
       points: "B+",
       //
 
-      // Courses
-      items: [
-        {
-          courseName: "Name Here",
-          courseDate: "15 Sep 2022",
-        },
-        {
-          courseName: "Name Here",
-          courseDate: "1 Sep 2022",
-        },
-        {
-          courseName: "Name Here",
-          courseDate: "1 Sep 2022",
-        },
-      ],
-      //
+      courseDetail: [],
 
       // Side Nav Following
       followingItems: [
@@ -723,18 +742,21 @@ export default {
       PostsData: [],
 
       url: "http://passdoneapi.codetreck.com/public/",
-         trueCheck: false,
+      trueCheck: false,
       falseCheck: false,
       highlightCheck: false,
       reply: false,
 
-      
       commentForm: {
         Post_Id: "",
         description: "",
         name: "",
       },
 
+      formStatus: {
+        id: "",
+        is_Active: "",
+      },
 
       one: true,
       two: false,
@@ -760,6 +782,7 @@ export default {
     this.getFriends();
     this.getPoint();
     this.getMyAllPosts();
+    this.getCourseDetail();
   },
 
   methods: {
@@ -802,20 +825,13 @@ export default {
       });
     },
 
-
-
- remove(id) {
+    remove(id) {
       ContentDataService.deletePost(id).then((response) => {
         console.log(response.data);
         this.$toasted.success("Deleted Successfully");
         this.getMyAllPosts();
       });
     },
-
-
-
-
-
 
     trueValue(id) {
       if (this.trueCheck == false) {
@@ -876,10 +892,7 @@ export default {
       }
     },
 
-
-
-
- comments(id) {
+    comments(id) {
       if (this.reply == false) {
         console.log(id);
 
@@ -889,8 +902,7 @@ export default {
       }
     },
 
-
-commentSubmit(Post_Id) {
+    commentSubmit(Post_Id) {
       if (this.commentForm.description == "") {
         this.$toasted.error("Please Share Something");
         return;
@@ -920,9 +932,6 @@ commentSubmit(Post_Id) {
       }
     },
 
-
-
-
     getImgUrl(pet) {
       this.img = this.url + pet;
       this.$refs.modalName1.openModal();
@@ -932,6 +941,38 @@ commentSubmit(Post_Id) {
       console.log(pet);
       return pet;
       // return require("../assets/img/photogallery/" + pet);
+    },
+
+    getCourseDetail() {
+      ContentDataService.getMajor().then((response) => {
+        console.log(response.data.data);
+        this.courseDetail = response.data.data;
+      });
+    },
+
+    Active(id) {
+      console.log(id);
+
+      this.formStatus.id = id;
+      this.formStatus.is_Active = 0;
+      ContentDataService.changeCourseStatus(this.formStatus).then(
+        (response) => {
+          console.log(response.data.data);
+          this.$toasted.success(" Status Changed Successfully");
+          this.getCourseDetail();
+        }
+      );
+    },
+    notActive(id) {
+      this.formStatus.id = id;
+      this.formStatus.is_Active = 1;
+      ContentDataService.changeCourseStatus(this.formStatus).then(
+        (response) => {
+          console.log(response.data.data);
+          this.$toasted.success(" Status Changed Successfully");
+          this.getCourseDetail();
+        }
+      );
     },
 
     div1() {
@@ -1414,18 +1455,7 @@ svg {
   border: 1px solid #d6d6d6;
 }
 
-
-
-
-
-
-
 /* Side Nav Friends  Following End Here*/
-
-
-
-
-
 
 .comment-btn {
   color: white;
@@ -1441,13 +1471,16 @@ svg {
   color: white;
 }
 
-
 input {
   border: 0px;
 }
 
-
-
+.red {
+  background-color: #ff3434 !important;
+}
+.red:hover {
+  background-color: #093 !important;
+}
 
 @media only screen and (max-width: 600px) {
   header {
@@ -1525,8 +1558,12 @@ input {
     font-size: 10px;
   }
 
-    .comment-btn {
+  .comment-btn {
     padding: 2px 7px;
+    font-size: 8px;
+  }
+    .course-image p {
+   
     font-size: 8px;
   }
 }
@@ -1611,6 +1648,10 @@ input {
   }
   .btn.post {
     font-size: 10px;
+  }
+    .course-image p {
+  
+    font-size: 9px;
   }
 }
 
@@ -1703,8 +1744,12 @@ input {
   .btn.post {
     font-size: 10px;
   }
-   .comment-btn {
+  .comment-btn {
     padding: 2px 11px;
+    font-size: 10px;
+  }
+    .course-image p {
+    
     font-size: 10px;
   }
 }
@@ -1801,10 +1846,13 @@ input {
 
   /* End Feed Css */
 
-
-   .comment-btn {
+  .comment-btn {
     padding: 2px 14px;
     font-size: 12px;
+  }
+    .course-image p {
+    
+    font-size: 11px;
   }
 }
 
@@ -1901,9 +1949,13 @@ input {
 
   /* End */
 
-   .comment-btn {
+  .comment-btn {
     padding: 2px 16px;
     font-size: 14px;
+  }
+  .course-image p {
+    
+    font-size: 12px;
   }
 }
 </style>
