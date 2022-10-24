@@ -95,6 +95,7 @@
               Friends
             </button>
             <button
+              v-if="user_type == 2"
               class="btn btn-warnings mt-4 shadow-none"
               style="width: 100%"
               id="step4"
@@ -478,7 +479,7 @@
                               </div>
 
                               <div class="col-10">
-                                <p class="p-1" style=" color: #707070;">
+                                <p class="p-1" style="color: #707070">
                                   {{ item.intructor.first_name }} <br />
                                   {{ item.intructor.jobTitle.name }}
                                 </p>
@@ -487,14 +488,18 @@
                           </div>
 
                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-                            <button class="btn btn-outline-primary mt-2">
-                              Colleagues
-                            </button>
+                            <router-link to="/institute-list">
+                              <button class="btn btn-outline-primary mt-2">
+                                Colleagues
+                              </button>
+                            </router-link>
                           </div>
                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                                  <router-link to="/student-list">
                             <button class="btn btn-outline-success mt-2">
                               All Students
                             </button>
+                                  </router-link>
                           </div>
                         </div>
                       </div>
@@ -564,7 +569,38 @@
                 v-if="Collegaues"
                 style="border-color: transparent"
               >
-                <div class="card-body">2</div>
+                <div class="card-body">
+                  <div
+                    class="Following-data mt-3"
+                    v-for="item in followingItems"
+                    :key="item.id"
+                  >
+                    <div class="row p-3">
+                      <div class="col-6">
+                        <div class="row">
+                          <div class="col-4">
+                            <img
+                              :src="item.img"
+                              class="rounded-circle"
+                              style="width: 100%"
+                            />
+                          </div>
+                          <div class="col-8 mt-lg-4">
+                            <span style="color: #0776bd"
+                              >-{{ item.universityName }}
+                            </span>
+                            <span class="text-muted">{{ item.place }}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-6" align="right">
+                        <button class="btn viewprofile mt-lg-5">
+                          View Profile
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               <div
@@ -638,12 +674,53 @@
                 v-if="Followers"
                 style="border-color: transparent"
               >
-                <div class="card-body">4</div>
+                <div class="card-body">
+                  <div
+                    class="Following-data mt-3"
+                    v-for="item in followingItems"
+                    :key="item.id"
+                  >
+                    <div class="row p-3">
+                      <div class="col-6">
+                        <div class="row">
+                          <div class="col-4">
+                            <img
+                              :src="item.img"
+                              class="rounded-circle"
+                              style="width: 100%"
+                            />
+                          </div>
+                          <div class="col-8 mt-lg-4">
+                            <span style="color: #0776bd"
+                              >-{{ item.universityName }}
+                            </span>
+                            <span class="text-muted">{{ item.place }}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-6" align="right">
+                        <button class="btn viewprofile mt-lg-5">
+                          View Profile
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          <div class="card" style="background: #f9f9f9" v-if="four">four</div>
+          <div class="custom-card p-3" v-if="four">
+            Office Hours of instructor Quzah
+            <hr />
+            <div class="card" style="border-color: transparent">
+              <div class="row office" style="background: #0776bd">
+                <div class="col-4">DAY</div>
+                <div class="col-4">FROM</div>
+                <div class="col-4">TO</div>
+              </div>
+            </div>
+          </div>
 
           <div class="custom-card p-3" v-if="five">
             Gallery
@@ -710,6 +787,7 @@ export default {
   data() {
     return {
       // Information
+      user_type: "",
       studentImage,
       studentName: "",
       type: "",
@@ -776,6 +854,7 @@ export default {
     this.universityName = localStorage.getItem("university_name");
     this.type = localStorage.getItem("degree");
     this.universityPlace = localStorage.getItem("country");
+    this.user_type = localStorage.getItem("user_type");
     this.getPost();
     this.getFollowers();
     this.getCourse();
@@ -1482,6 +1561,11 @@ input {
   background-color: #093 !important;
 }
 
+.office {
+  color: white;
+  font-size: 20px;
+}
+
 @media only screen and (max-width: 600px) {
   header {
     position: relative;
@@ -1562,8 +1646,7 @@ input {
     padding: 2px 7px;
     font-size: 8px;
   }
-    .course-image p {
-   
+  .course-image p {
     font-size: 8px;
   }
 }
@@ -1649,8 +1732,7 @@ input {
   .btn.post {
     font-size: 10px;
   }
-    .course-image p {
-  
+  .course-image p {
     font-size: 9px;
   }
 }
@@ -1748,8 +1830,7 @@ input {
     padding: 2px 11px;
     font-size: 10px;
   }
-    .course-image p {
-    
+  .course-image p {
     font-size: 10px;
   }
 }
@@ -1850,8 +1931,7 @@ input {
     padding: 2px 14px;
     font-size: 12px;
   }
-    .course-image p {
-    
+  .course-image p {
     font-size: 11px;
   }
 }
@@ -1954,7 +2034,6 @@ input {
     font-size: 14px;
   }
   .course-image p {
-    
     font-size: 12px;
   }
 }

@@ -10,7 +10,9 @@ import MyDesk from "../views/ClassRoom/Desk.vue";
 import Courses from "../views/ClassRoom/Courses.vue";
 import Instructors from "../views/ClassRoom/Instructors.vue";
 import InstituteInstructorList from "../views/InstituteInstructorList.vue";
+import InstituteList from "../views/InstituteList.vue";
 import InstituteStudentList from "../views/InstituteStudentList.vue";
+import StudentList from "../views/StudentList.vue";
 import Students from "../views/ClassRoom/Students.vue";
 import StudyRoom from "../views/ClassRoom/StudyRoom.vue";
 import Library from "../views/Library.vue";
@@ -98,6 +100,16 @@ const routes = [
         component: InstituteInstructorList,
         meta: { requiresAuth: true },
     },
+
+
+    {
+        path: "/institute-list",
+        name: "InstituteList",
+        component: InstituteList,
+        meta: { requiresAuth: true },
+    },
+
+
     {
         path: "/institute-student-list",
         name: "InstituteStudentList",
@@ -109,6 +121,12 @@ const routes = [
         path: "/students",
         name: "Students",
         component: Students,
+        meta: { requiresAuth: true },
+    },
+    {
+        path: "/student-list",
+        name: "StudentList",
+        component: StudentList,
         meta: { requiresAuth: true },
     },
     {
