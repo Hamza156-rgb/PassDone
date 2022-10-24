@@ -6,7 +6,9 @@ import SignupInstructor from "../views/SignupInstructor.vue";
 import SignupInstitute from "../views/SignupInstitute.vue";
 
 import HomePage from "../views/HomePage.vue";
-import MyDesk from "../views/ClassRoom/Desk.vue";
+import MyDesk from "../views/ClassRoom/MyDesk.vue";
+import Profile from "../views/ClassRoom/Profile.vue";
+
 import Courses from "../views/ClassRoom/Courses.vue";
 import Instructors from "../views/ClassRoom/Instructors.vue";
 import InstituteInstructorList from "../views/InstituteInstructorList.vue";
@@ -78,6 +80,12 @@ const routes = [
         path: "/my-desk",
         name: "MyDesk",
         component: MyDesk,
+        meta: { requiresAuth: true },
+    },
+    {
+        path: "/profile",
+        name: "Profile",
+        component: Profile,
         meta: { requiresAuth: true },
     },
     {
