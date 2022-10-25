@@ -469,7 +469,10 @@
                       <div class="card-footer course-footer">
                         <div class="row mb-2">
                           <div class="col-12">
-                            <div class="d-flex course-image">
+                            <div
+                              class="d-flex course-image"
+                              @click="viewPage(item.intructor.user_id)"
+                            >
                               <div class="col-2">
                                 <img
                                   :src="studentImage"
@@ -489,17 +492,20 @@
 
                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                             <router-link to="/institute-list">
-                              <button class="btn btn-outline-primary mt-2">
-                                Colleagues
+                              <button
+                                class="btn btn-outline-primary mt-2"
+                                @click="viewColleagues(item.intructor.user_id)"
+                              >
+                                Colleagues <span>{{totalColleagues}}</span>
                               </button>
                             </router-link>
                           </div>
                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
-                                  <router-link to="/student-list">
-                            <button class="btn btn-outline-success mt-2">
-                              All Students
-                            </button>
-                                  </router-link>
+                            <router-link to="/student-list">
+                              <button class="btn btn-outline-success mt-2">
+                                Other Instructors
+                              </button>
+                            </router-link>
                           </div>
                         </div>
                       </div>
@@ -845,7 +851,10 @@ export default {
       Collegaues: false,
       Following: false,
       Followers: false,
+      totalColleagues : "",
     };
+
+   
   },
 
   created() {
@@ -1024,9 +1033,22 @@ export default {
 
     getCourseDetail() {
       ContentDataService.getMajor().then((response) => {
-        console.log(response.data.data);
         this.courseDetail = response.data.data;
+        this.getColleagues();
       });
+
+      
+    },
+
+    getColleagues() {
+      console.log('aya')
+      for (var i=0 ; i < this.courseDetail.length ; i++){
+        ContentDataService.getAllColleagues(this.courseDetail[i].tarining_course_id).then((response) => {
+        console.log(response.data.data);
+        this.totalColleagues = response.data.data;
+      });
+      }
+      
     },
 
     Active(id) {
@@ -1052,6 +1074,13 @@ export default {
           this.getCourseDetail();
         }
       );
+    },
+
+    viewPage(user_id) {
+      this.$router.push({
+        name: "Profile",
+        params: { id: user_id },
+      });
     },
 
     div1() {

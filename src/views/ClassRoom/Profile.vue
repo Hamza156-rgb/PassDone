@@ -26,9 +26,13 @@
             </div>
             <div class="update mt-3">
               <button class="btn btn-about">About</button>
-              <button class="btn btn-friend">Friend</button>
+              <button class="btn btn-friend" @click="ChangeFriends()">
+                Friend
+              </button>
               <button class="btn btn-block">Block</button>
-              <button class="btn btn-following">Following</button>
+              <button class="btn btn-following" @click="ChangeFollowers()">
+                Follow
+              </button>
             </div>
           </div>
           <div class="col-lg-1 col-md-1"></div>
@@ -807,6 +811,9 @@ export default {
       points: "B+",
       //
 
+      friendStatus: "",
+      userInformation: [],
+
       courseDetail: [],
 
       // Side Nav Following
@@ -854,13 +861,23 @@ export default {
     };
   },
 
+  beforeCreate() {
+    (this.pageName = this.$route.params.id), console.log(this.pageName);
+
+    ContentDataService.getInstructorProfile(this.pageName).then((response) => {
+      console.log(response.data.data);
+      this.studentName = response.data.data.first_name;
+      this.universityName = response.data.data.institute.name;
+      this.universityName = response.data.data.institute.name;
+      this.type = response.data.data.jobTitle.name;
+      this.universityPlace = response.data.data.country.name;
+      this.user_type = response.data.data.user_type;
+    });
+  },
+
   created() {
-    this.profilePicture = localStorage.getItem("profile_pic");
-    this.studentName = localStorage.getItem("first_name");
-    this.universityName = localStorage.getItem("university_name");
-    this.type = localStorage.getItem("degree");
-    this.universityPlace = localStorage.getItem("country");
-    this.user_type = localStorage.getItem("user_type");
+    this.profilePicture = this.pageName.profile_pic;
+
     this.getPost();
     this.getFollowers();
     this.getCourse();
@@ -872,42 +889,68 @@ export default {
 
   methods: {
     getPost() {
-      ContentDataService.getInstituteFeed().then((response) => {
-        this.post = response.data.data;
-      });
+      ContentDataService.getInstituteFeedId(this.pageName).then(
+        (response) => {
+          this.post = response.data.data;
+        }
+      );
     },
 
     getFollowers() {
-      ContentDataService.getInstituteFollowers().then((response) => {
-        this.followers = response.data.data;
-      });
+      ContentDataService.getInstituteFollowersId(this.pageName).then(
+        (response) => {
+          this.followers = response.data.data;
+        }
+      );
     },
 
     getCourse() {
-      ContentDataService.getInstituteCourse().then((response) => {
-        this.course = response.data.data;
-      });
+      ContentDataService.getInstituteCourseId(this.pageName).then(
+        (response) => {
+          this.course = response.data.data;
+        }
+      );
     },
 
     getFriends() {
-      ContentDataService.getAllFriends().then((response) => {
+      ContentDataService.getFriends(this.pageName).then((response) => {
         this.friends = response.data.data;
       });
     },
     getPoint() {
-      ContentDataService.getPoints().then((response) => {
-        this.value = response.data.data;
+      ContentDataService.getPointsOne(this.pageName.user_id).then(
+        (response) => {
+          this.value = response.data.data;
+        }
+      );
+    },
+
+    ChangeFriends() {
+      ContentDataService.addFriend(this.pageName).then((response) => {
+        // this.friendStatus = response.data.data;
+        console.log(response.data);
       });
     },
 
+    ChangeFollowers() {
+      ContentDataService.changeFollower(this.pageName).then(
+        (response) => {
+          // this.friendStatus = response.data.data;
+          console.log(response.data);
+        }
+      );
+    },
+
     getMyAllPosts() {
-      ContentDataService.getMyPosts().then((response) => {
-        var a = response.data;
-        var b = Object.values(a);
-        //this.ActiveInstitutes = b[0];
-        this.PostsData = b[0];
-        console.log(this.PostsData);
-      });
+      ContentDataService.getMyPostsOne(this.pageName).then(
+        (response) => {
+          var a = response.data;
+          var b = Object.values(a);
+          //this.ActiveInstitutes = b[0];
+          this.PostsData = b[0];
+          console.log(this.PostsData);
+        }
+      );
     },
 
     remove(id) {
@@ -1824,7 +1867,7 @@ input {
     background: rgba(245, 245, 245, 0.5);
     /* background-image: linear-gradient( rgba(245, 245, 245,0.5)); */
   }
-  .profile-image img{
+  .profile-image img {
     width: 200px;
     height: 200px;
   }
@@ -1944,7 +1987,7 @@ input {
     /* background-image: linear-gradient( rgba(245, 245, 245,0.5)); */
   }
 
-  .profile-image img{
+  .profile-image img {
     width: 300px;
     height: 200px;
   }
@@ -2064,7 +2107,7 @@ input {
     /* background-image: linear-gradient( rgba(245, 245, 245,0.5)); */
   }
 
-  .profile-image img{
+  .profile-image img {
     width: 300px;
     height: 200px;
   }

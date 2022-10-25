@@ -33,12 +33,12 @@ class ContentDataService {
     return http.get('getTotalMaterials')
   }
 
-getHomeFooter(){
-  return http.get('getAllAboutPassdone')
-}
-getEmail(){
-  return http.get('getContactEmails')
-}
+  getHomeFooter() {
+    return http.get('getAllAboutPassdone')
+  }
+  getEmail() {
+    return http.get('getContactEmails')
+  }
 
 
 
@@ -189,6 +189,10 @@ getEmail(){
 
   }
 
+  getPointsOne(id) {
+    return http.get('getTotalUserPoints?user_id=' + id)
+
+  }
 
   getHomePost() {
     return http.get('getAllPosts')
@@ -199,16 +203,14 @@ getEmail(){
 
   }
 
-
-
-
   getMyPosts() {
     return http.get('getPostByUser?user_id=' + localStorage.getItem('user_id'))
-
   }
 
+  getMyPostsOne(id) {
+    return http.get('getPostByUser?user_id=' + id)
 
-
+  }
 
   postTrue(id) {
     return http.post('addTrueToPost?post_id=' + id)
@@ -433,12 +435,26 @@ getEmail(){
     return http.post('removeUserFollower?user_id=' + id);
   }
 
-
-
   getFollowingData() {
     return http.get('getAllUserFollowing?user_id=' + localStorage.getItem("user_id"))
   }
 
+  addFriend(id) {
+    return http.post('addUserFriend?user_id=' + id + '&friend_id=' + localStorage.getItem("user_id"));
+  }
+  changeFollower(id) {
+    return http.post('addUserFollower?user_id=' + id + '&following_id=' + localStorage.getItem("user_id"));
+  }
+
+
+  getInstructorProfile(id) {
+    return http.get('getInstructorById?user_id=' + id);
+
+  }
+
+  getAllColleagues(id){
+    return http.get('getAllColleaguesTrainingCourses?training_course_id=' + id);
+  }
 
 
 }
