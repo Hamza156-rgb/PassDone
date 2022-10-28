@@ -55,7 +55,9 @@
                           @click="deleteCourse(item.id)"
                         ></i>
                         <h3>{{ item.name }}</h3>
-                        <h4 class="mt-2">Addedd | {{ item.created_at .slice(0, 10) }}</h4>
+                        <h4 class="mt-2">
+                          Addedd | {{ item.created_at.slice(0, 10) }}
+                        </h4>
                         <button
                           class="btn mt-2"
                           v-if="item.is_active == 1"
@@ -79,17 +81,23 @@
                       >
                         <div class="row mb-2">
                           <div class="col-12">
-                            <div class="d-flex course-image">
-                                <div class="col-2">
-                              <img
-                                src="../../assets/main/user.png"
-                                class="rounded-circle"
-                                style="width: 100%"
-                              />
-                                </div>
+                            <div
+                              class="d-flex course-image"
+                              @click="viewPage(item.intructor.user_id)"
+                            >
+                              <div class="col-2">
+                                <img
+                                  src="../../assets/main/user.png"
+                                  class="rounded-circle"
+                                  style="width: 100%"
+                                />
+                              </div>
 
                               <div class="col-10">
-                                <p class="p-1" style=" color: #707070;">
+                                <p
+                                  class="p-1"
+                                  style="color: #707070; cursor: pointer"
+                                >
                                   {{ item.intructor.first_name }} <br />
                                   {{ item.intructor.jobTitle.name }}
                                 </p>
@@ -281,6 +289,13 @@ export default {
         this.getCourseDetail();
       });
     },
+
+    viewPage(user_id) {
+      this.$router.push({
+        name: "Profile",
+        params: { id: user_id },
+      });
+    },
   },
 };
 </script>
@@ -313,6 +328,7 @@ export default {
   border-radius: 18px;
   box-shadow: 0 8px 16px 0 rgb(162 169 204 / 24%);
   background-color: white;
+  height: 100vh;
 }
 
 .card-options {
@@ -403,11 +419,10 @@ export default {
     width: 100%;
     font-size: 13px;
   }
-   .course-image p {
-   
+  .course-image p {
     font-size: 8px;
+    margin-top: 4%;
   }
-
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -449,9 +464,9 @@ export default {
     width: 100%;
     font-size: 13px;
   }
-     .course-image p {
-  
-    font-size: 9px;
+  .course-image p {
+    font-size: 10px;
+    margin-top: 2%;
   }
 }
 
@@ -496,9 +511,9 @@ export default {
     width: 30%;
     font-size: 14px;
   }
-     .course-image p {
-    
+  .course-image p {
     font-size: 10px;
+    margin-top: 0%;
   }
 }
 
@@ -545,9 +560,9 @@ export default {
   .btn-addcourse {
     width: 30%;
   }
-     .course-image p {
-    
+  .course-image p {
     font-size: 11px;
+    margin-top: 1%;
   }
 }
 
@@ -589,9 +604,9 @@ export default {
   .btn-addcourse {
     width: 30%;
   }
-   .course-image p {
-    
+  .course-image p {
     font-size: 12px;
+    margin-top: 1%;
   }
 }
 </style>

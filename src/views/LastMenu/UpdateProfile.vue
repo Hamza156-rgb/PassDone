@@ -390,6 +390,7 @@ export default {
   border-radius: 18px;
   box-shadow: 0 8px 16px 0 rgb(162 169 204 / 24%);
   background-color: white;
+  height: 100vh;
 }
 
 .btn {

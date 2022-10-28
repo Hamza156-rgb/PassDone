@@ -478,7 +478,7 @@
                       </div>
                       <div class="card-footer course-footer">
                         <div class="row mb-2">
-                          <div class="col-12">
+                          <!-- <div class="col-12">
                             <div class="d-flex course-image">
                               <div class="col-2">
                                 <img
@@ -495,7 +495,7 @@
                                 </p>
                               </div>
                             </div>
-                          </div>
+                          </div> -->
 
                           <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
                             <router-link to="/institute-list">
@@ -1307,6 +1307,7 @@ svg {
   border-radius: 18px;
   box-shadow: 0 8px 16px 0 rgb(162 169 204 / 24%);
   background-color: white;
+  height: 100vh;
 }
 
 /* Side Nav  */

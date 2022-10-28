@@ -480,9 +480,8 @@
                                   style="width: 100%"
                                 />
                               </div>
-
-                              <div class="col-10">
-                                <p class="p-1" style="color: #707070">
+                              <div class="col-10" >
+                                <p class="p-1 " style="color: #707070; cursor:pointer">
                                   {{ item.intructor.first_name }} <br />
                                   {{ item.intructor.jobTitle.name }}
                                 </p>
@@ -1287,6 +1286,7 @@ svg {
   border-radius: 18px;
   box-shadow: 0 8px 16px 0 rgb(162 169 204 / 24%);
   background-color: white;
+  height: 100vh;
 }
 
 /* Side Nav  */
@@ -1676,7 +1676,9 @@ input {
     font-size: 8px;
   }
   .course-image p {
-    font-size: 8px;
+    font-size: 10px;
+    margin-top: 4%;
+    
   }
 }
 
@@ -1762,7 +1764,8 @@ input {
     font-size: 10px;
   }
   .course-image p {
-    font-size: 9px;
+    font-size: 12px;
+    margin-top: 2%;
   }
 }
 
@@ -1860,7 +1863,8 @@ input {
     font-size: 10px;
   }
   .course-image p {
-    font-size: 10px;
+    font-size: 8px;
+    margin-top: 0%;
   }
 }
 
@@ -1962,6 +1966,7 @@ input {
   }
   .course-image p {
     font-size: 11px;
+      margin-top: 1%;
   }
 }
 
@@ -2064,6 +2069,7 @@ input {
   }
   .course-image p {
     font-size: 12px;
+    margin-top: 1%;
   }
 }
 </style>
