@@ -33,7 +33,7 @@
                   <div
                     class="
                       form-group
-                      col-xs-12 col-sm-12 col-md-12 col-lg-4
+                      col-xs-12 col-sm-12 col-md-6 col-lg-4
                       mt-2
                     "
                   >
@@ -60,7 +60,7 @@
                   <div
                     class="
                       form-group
-                      col-xs-12 col-sm-12 col-md-12 col-lg-4
+                      col-xs-12 col-sm-12 col-md-6 col-lg-4
                       mt-2
                     "
                   >
@@ -91,7 +91,7 @@
                   </div>
                   <div class="col-xs-12 col-sm-12 col-md-12 col-lg-4 buttons">
                     <div class="row">
-                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <button
                           type="submit"
                           class="
@@ -105,7 +105,7 @@
                         </button>
                       </div>
 
-                      <div class="col-xs-12 col-sm-12 col-md-12 col-lg-6">
+                      <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <router-link to="/signup-student">
                           <button
                             type="submit"

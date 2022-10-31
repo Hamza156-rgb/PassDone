@@ -12,7 +12,7 @@
       <slide v-for="item in sliderImage" :key="item.key">
         <img :src="url + item.image" class="relative" style="width: 100%" />
 
-        <div class="centered">
+        <!-- <div class="centered">
           <svg id="more-arrows" @click="goto('div1')">
             <polygon
               class="arrow-top"
@@ -27,7 +27,7 @@
               points="37.6,64 0,36.1 5.1,32.8 37.6,56.8 70.4,32.8 75.5,36.1 "
             ></polygon>
           </svg>
-        </div>
+        </div> -->
 
         <div class="first">
           <div class="main">
@@ -144,24 +144,30 @@
         <div style="background-color: #f6f6f6">
           <h2 class="txt-blue text-center pt-4">Explore latest Materials</h2>
           <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4 p-4" v-for="item in PostsData"
-            :key="item.id">
+            <div
+              class="col-xs-12 col-sm-12 col-md-4 col-lg-4 p-4"
+              v-for="item in PostsData"
+              :key="item.id"
+            >
               <div class="card">
                 <div class="card-header">
-                  <h5 class="heading"> {{item.course.name}} </h5>
+                  <h5 class="heading">{{ item.course.name }}</h5>
 
                   <h6 class="description">
-                    {{item.course.name}} |<span class="date">
-                      posted date:{{ item.created_at .slice(0, 10) }} </span
-                    >
+                    {{ item.course.name }} |<span class="date">
+                      posted date:{{ item.created_at.slice(0, 10) }}
+                    </span>
                   </h6>
                 </div>
                 <div class="card-body">
-                  <img :src=" url +'public/'+ item.image" style="width: 100%;height:50vh" />
+                  <img
+                    :src="url + 'public/' + item.image"
+                    style="width: 100%; height: 50vh"
+                  />
                 </div>
                 <div class="card-footer p-4">
                   <p>
-                 {{ item.description .slice(0, 20) }}
+                    {{ item.description.slice(0, 20) }}
                   </p>
 
                   <button class="btn btn-primary" style="width: 100%">
@@ -170,10 +176,6 @@
                 </div>
               </div>
             </div>
-
-          
-
-           
           </div>
         </div>
       </div>
@@ -270,7 +272,7 @@ export default {
       instructor: "",
       institutes: "",
       material: "",
-        PostsData: [],
+      PostsData: [],
     };
   },
 
@@ -337,9 +339,6 @@ export default {
       });
     },
 
-
-
-
     getHomePost() {
       ContentDataService.getHomeLatestPost().then((response) => {
         var a = response.data;
@@ -349,11 +348,6 @@ export default {
         console.log(this.PostsData);
       });
     },
-
-
-
-
-
   },
 };
 </script>
@@ -798,6 +792,10 @@ polygon.arrow-top {
   .section4 img {
     width: 110px;
     height: 85px;
+  }
+
+  .main {
+    justify-content: center;
   }
 }
 
